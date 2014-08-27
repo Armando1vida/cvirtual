@@ -47,9 +47,9 @@ class DzRatyDataColumn extends CDataColumn
 		parent::init();
 
 		// Register current widget path alias.
-		if (Yii::getPathOfAlias('dzraty') === FALSE)
+		if (Yii::getPathOfAlias('dzRaty') === FALSE)
 		{
-			Yii::setPathOfAlias('dzraty', realpath(dirname(__FILE__) . '/..'));
+			Yii::setPathOfAlias('dzRaty', realpath(dirname(__FILE__) . '/'));
 		}
 
 
@@ -89,7 +89,7 @@ class DzRatyDataColumn extends CDataColumn
 	{
 		$this->_cell_id = 'raty-' .$this->id.'-'. $row;
 		$this->type = 'raw';
-		$this->value = '$this->grid->controller->widget("dzraty.DzRaty", array(
+		$this->value = '$this->grid->controller->widget("dzRaty.DzRaty", array(
 			"model" => $data,
 			"attribute" => "'. $this->name .'",
 			"htmlOptions" => array(
