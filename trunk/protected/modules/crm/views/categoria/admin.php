@@ -28,11 +28,6 @@ $this->menu = array(
             'dataProvider' => $model->search(),
             'columns' => array(
                 'nombre',
-//                'peso',
-//                array(
-//                    'name' => 'estado',
-//                    'filter' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',),
-//                ),
                 array(
                     'name' => 'peso',
                     'class' => 'ext.dzRaty.DzRatyDataColumn', // #2 - Add a jQuery Raty data column
