@@ -18,4 +18,15 @@ class Categoria extends BaseCategoria {
         return Yii::t('app', 'Categoria|Categorias', $n);
     }
 
+    public function scopes() {
+        return array(
+            'activos' => array(
+                'condition' => 't.estado = :estado',
+                'params' => array(
+                    ':estado' => self::ESTADO_ACTIVO,
+                ),
+            ),
+        );
+    }
+
 }

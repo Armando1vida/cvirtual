@@ -18,4 +18,15 @@ class Industria extends BaseIndustria {
         return Yii::t('app', 'Industria|Industrias', $n);
     }
 
+    public function scopes() {
+        return array(
+            'activos' => array(
+                'condition' => 't.estado = :estado',
+                'params' => array(
+                    ':estado' => self::ESTADO_ACTIVO,
+                ),
+            ),
+        );
+    }
+
 }
