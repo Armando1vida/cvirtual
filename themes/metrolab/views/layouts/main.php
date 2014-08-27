@@ -105,8 +105,10 @@
                     <!-- END RESPONSIVE QUICK SEARCH FORM -->
                     <!-- BEGIN SIDEBAR MENU -->
                     <?php
+//                    var_dump("",$this->admin);
                     $this->widget('zii.widgets.CMenu', array(
-                        'items' => $this->admin ? Menu::getAdminMenu($this) : Menu::getMenu($this),
+//                        'items' => $this->admin ? Menu::getAdminMenu($this) : Menu::getMenu($this),
+                        'items' => Menu::getMenu($this),
                         'encodeLabel' => false,
                         'itemCssClass' => 'sub-menu',
                         'activeCssClass' => 'active',
