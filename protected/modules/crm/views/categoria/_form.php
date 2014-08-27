@@ -27,7 +27,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             <label class="control-label required" for="Categoria_peso">Estrella <span class="required"></span></label>
             <div class="controls">
                 <?php
-                $this->widget('ext.dzRaty.dzRaty', array(
+                $this->widget('ext.dzRaty.DzRaty', array(
                     'model' => $model,
                     'attribute' => 'peso',
                 ));

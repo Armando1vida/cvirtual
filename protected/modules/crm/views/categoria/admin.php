@@ -2,7 +2,7 @@
 /** @var CategoriaController $this */
 /** @var Categoria $model */
 $this->menu = array(
-    array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'), 
+    array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'),
     //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
     ),
 );
@@ -20,19 +20,37 @@ $this->menu = array(
     </div>
     <div class="widget-body">
 
-            <?php 
-        $this->widget('bootstrap.widgets.TbGridView',array(
-        'id' => 'categoria-grid',
-        'type' => 'striped bordered hover advance',
-        'dataProvider' => $model->search(),
-        'columns' => array(
-                    'nombre',
-                        'peso',
-                        array(
-                    'name' => 'estado',
-                    'filter' => array('ACTIVO'=>'ACTIVO','INACTIVO'=>'INACTIVO',),
+        <?php
+        $this->widget('bootstrap.widgets.TbGridView', array(
+            'id' => 'categoria-grid',
+            'type' => 'striped bordered hover advance',
+            'afterAjaxUpdate' => 'js:function() { dzRatyUpdate(); }',
+            'dataProvider' => $model->search(),
+            'columns' => array(
+                'nombre',
+//                'peso',
+//                array(
+//                    'name' => 'estado',
+//                    'filter' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',),
+//                ),
+                array(
+                    'name' => 'peso',
+                    'class' => 'ext.dzRaty.DzRatyDataColumn', // #2 - Add a jQuery Raty data column
+                    'options' => array(//      Custom options for jQuery Raty data column
+                        'space' => FALSE
+                    ),
+                    'filter' => array('ext.dzRaty.DzRaty', array(// #3 - Add a jQuery Raty filter column
+                            'model' => $model,
+                            'attribute' => 'score',
+                            'options' => array(//      Custom options for jQuery Raty filter column
+                                'cancel' => TRUE,
+                                'cancelPlace' => 'right'
+                            ),
+                        ))
+                    ,
+                    'header' => 'Estrellas',
                 ),
-                    array(
+                array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',
                     'afterDelete' => 'function(link,success,data){ 
@@ -47,20 +65,21 @@ $this->menu = array(
                             'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
                             'options' => array('title' => 'Actualizar'),
                             'imageUrl' => false,
-                             //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
+                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
                         ),
                         'delete' => array(
                             'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
                             'options' => array('title' => 'Eliminar'),
                             'imageUrl' => false,
-                            //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
+                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
                         ),
                     ),
                     'htmlOptions' => array(
                         'width' => '80px'
                     )
                 ),
-        ),
-        )); ?>
+            ),
+        ));
+        ?>
     </div>
 </div>
