@@ -26,6 +26,7 @@ return array(
         'application.modules.cruge.extensions.crugemailer.*',
     ),
     'modules' => array(
+        'crm',
         // uncomment the following to enable the Gii tool
         'gii' => array(
             'class' => 'system.gii.GiiModule',
