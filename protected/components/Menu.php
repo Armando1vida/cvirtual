@@ -19,9 +19,9 @@ class Menu {
             array('label' => '<i class="icon-mail-reply"></i>  Regresar a la App', 'url' => Yii::app()->homeUrl),
             array('label' => '<i class="icon-user"></i>  Usuarios', 'url' => Yii::app()->user->ui->userManagementAdminUrl, 'access' => 'Cruge.ui.*', 'active_rules' => array('module' => 'cruge')),
             array('label' => '<i class="icon-map-marker"></i>  Catálogos', 'url' => '#', 'items' => array(
-                    array('label' => 'Provincias', 'url' => array('/crm/pais/admin'), 'access' => 'action_pais_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'pais')),
-                    array('label' => 'Ciudad', 'url' => array('/crm/provincia/admin'), 'access' => 'action_provincia_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'provincia')),
-                    array('label' => 'Parroquias', 'url' => array('/crm/ciudad/admin'), 'access' => 'action_ciudad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'ciudad')),
+                    array('label' => 'Pais', 'url' => array('/crm/pais/admin'), 'access' => 'action_pais_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'pais')),
+                    array('label' => 'Provincia', 'url' => array('/crm/provincia/admin'), 'access' => 'action_provincia_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'provincia')),
+                    array('label' => 'Ciudad', 'url' => array('/crm/ciudad/admin'), 'access' => 'action_ciudad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'ciudad')),
 //                    array('label' => 'Barrios', 'url' => array('/crm/barrio/admin'), 'access' => 'action_barrio_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'barrio')),
                 )),
 //            array('label' => '<i class="icon-dollar"></i>  Entidades', 'url' => '#', 'items' => array(
