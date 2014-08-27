@@ -32,7 +32,7 @@ class CategoriaController extends AweController {
      */
     public function actionCreate() {
         $model = new Categoria;
-
+        $model->estado = Categoria::ESTADO_ACTIVO;
         $this->performAjaxValidation($model, 'categoria-form');
 
         if (isset($_POST['Categoria'])) {
