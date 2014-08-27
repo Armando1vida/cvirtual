@@ -14,7 +14,7 @@ return array(
         'bootstrap',
         'log',
     ),
-//    'defaultController' => 'crm/dashboard/index',
+    'defaultController' => 'crm/dashboard/index',
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
@@ -61,8 +61,8 @@ return array(
             // lee mas abajo respecto a 'Encriptando las claves'
             //
             'useEncryptedPassword' => false,
-            // Algoritmo de la función hash que deseas usar
-            // Los valores admitidos están en: http://www.php.net/manual/en/function.hash-algos.php
+            // Algoritmo de la funciÃ³n hash que deseas usar
+            // Los valores admitidos estÃ¡n en: http://www.php.net/manual/en/function.hash-algos.php
             'hash' => 'md5',
             // a donde enviar al usuario tras iniciar sesion, cerrar sesion o al expirar la sesion.
             //
@@ -84,7 +84,7 @@ return array(
             'editProfileLayout' => '//layouts/column2',
             // en la siguiente puedes especificar el valor "ui" o "column2" para que use el layout
             // de fabrica, es basico pero funcional.  si pones otro valor considera que cruge
-            // requerirá de un portlet para desplegar un menu con las opciones de administrador.
+            // requerirÃ¡ de un portlet para desplegar un menu con las opciones de administrador.
             //
             'generalUserManagementLayout' => 'ui',
             // permite indicar un array con los nombres de campos personalizados, 
