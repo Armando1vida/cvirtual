@@ -9,7 +9,7 @@ class IndustriaController extends AweController {
     public $layout = '//layouts/column2';
     public $defaultAction = 'admin';
     public $admin = true;
-    
+
     public function filters() {
         return array(
             array('CrugeAccessControlFilter'),
@@ -32,6 +32,7 @@ class IndustriaController extends AweController {
      */
     public function actionCreate() {
         $model = new Industria;
+        $model->estado = Industria::ESTADO_ACTIVO;
 
         $this->performAjaxValidation($model, 'industria-form');
 
