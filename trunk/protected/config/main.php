@@ -14,7 +14,7 @@ return array(
         'bootstrap',
         'log',
     ),
-    'defaultController' => 'crm/dashboard/index',
+//    'defaultController' => 'crm/dashboard/index',
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
