@@ -25,7 +25,7 @@ $this->menu = array(
             'id' => 'categoria-grid',
             'type' => 'striped bordered hover advance',
             'afterAjaxUpdate' => 'js:function() { dzRatyUpdate(); }',
-            'dataProvider' => $model->search(),
+            'dataProvider' => $model->activos()->search(),
             'columns' => array(
                 'nombre',
                 array(
