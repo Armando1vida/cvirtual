@@ -2,7 +2,6 @@
 /** @var EmpresaController $this */
 /** @var Empresa $model */
 /** @var AweActiveForm $form */
-
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'horizontal',
     'id' => 'empresa-form',
@@ -10,7 +9,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
     'enableClientValidation' => false,
         ));
-Util::tsRegisterAssetJs('form_wizard.js');
 ?>
 <div class="row-fluid">
 
@@ -45,13 +43,13 @@ Util::tsRegisterAssetJs('form_wizard.js');
 
                 <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45)) ?>
 
-                <?php // echo $form->textFieldRow($model, 'num_item') ?>
+                <?php // echo $form->textFieldRow($model, 'num_item')  ?>
 
-                <?php // echo $form->dropDownListRow($model, 'categoria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Categoria::model()->findAll(), 'id', Categoria::representingColumn())) ?>
+                <?php // echo $form->dropDownListRow($model, 'categoria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Categoria::model()->findAll(), 'id', Categoria::representingColumn()))  ?>
 
-                <?php echo $form->dropDownListRow($model, 'industria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn())) ?>
+                <?php echo $form->dropDownListRow($model, 'industria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()), array('placeholder' => '')) ?>
 
-                <?php // echo $form->dropDownListRow($model, 'estado', array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',)) ?>
+                <?php // echo $form->dropDownListRow($model, 'estado', array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',))  ?>
                 <div class="form-actions">
                     <?php
                     $this->widget('bootstrap.widgets.TbButton', array(
