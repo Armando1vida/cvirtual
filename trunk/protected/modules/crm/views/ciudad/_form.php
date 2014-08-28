@@ -9,6 +9,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
     'enableClientValidation' => false,
         ));
+Util::tsRegisterAssetJs('_ubicacion.js');
 ?>
 <div class="widget blue">
     <div class="widget-title">
@@ -51,24 +52,22 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             <label class="control-label"> <?php echo $form->labelEx($model, 'provincia_id') ?></label>
             <div class="controls">
                 <?php
-                $provincias = Pais::model()->getInscritasPaises();
-                $lista_provincias = !(count($provincias) == 0) ? array(0 => '- Provincias -') + CHtml::listData($provincias, 'id', 'nombre') : array(0 => '- Ninguna -');
                 $this->widget(
                         'ext.bootstrap.widgets.TbSelect2', array(
                     'asDropDownList' => TRUE,
                     'model' => $model,
                     'attribute' => 'provincia_id',
-                    'data' => $lista_provincias,
+                    'data' => array(0 => '- Ninguna -'),
 //                    'events' => array("event_name" => "Javascript code for handler"),
                     'options' => array(
-                        'placeholder' => 'Seleccione Una Provincias!',
+//                        'placeholder' => 'Seleccione U',
                         'width' => '25%',
                     )
                         )
                 );
                 ?>
 
-                <?php echo $form->error($model, 'pais_id'); ?>
+                <?php echo $form->error($model, 'provincia_id'); ?>
 
             </div>
         </div>

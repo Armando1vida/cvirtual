@@ -123,4 +123,34 @@ class ProvinciaController extends AweController {
         }
     }
 
+    /**
+     * @author Miguel Alba <malba@tradesystem.com.ec>
+     * Obtener las provincias de un Pais
+     */
+    public function actionAjaxGetProvinciaPais() {
+        if (Yii::app()->request->isAjaxRequest) {
+
+            if (isset($_POST['pais_id']) && $_POST['pais_id'] > 0) {
+//                $data = Provincia::model()->findAll(array(
+//                    "condition" => "region_id =:region_id ",
+//                    "order" => "nombre",
+//                    "params" => array(':region_id' => $_POST['region_id'],)
+//                ));
+                $data = Provincia::model()->getProvinciasPais($_POST['pais_id']);
+                if ($data) {
+                    $data = CHtml::listData($data, 'id', 'nombre');
+                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- PROVINCIAS -', true);
+                    foreach ($data as $value => $name) {
+                        echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+                    }
+                } else {
+                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
+                }
+            } else {
+                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- PROVINCIA -', true);
+//                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
+            }
+        }
+    }
+
 }
