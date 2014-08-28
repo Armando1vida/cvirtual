@@ -1,4 +1,6 @@
 <?php
+Util::tsRegisterAssetJs('form_wizard.js');
+
 echo $this->renderPartial('steps/_form', array('model' => $model, 'categoria' => $categoria,
 ));
 ?>
