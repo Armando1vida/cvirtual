@@ -22,30 +22,32 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
 
 
-        <div class="control gr"
-             <!-- drop de region -->
+        <div class="control-group" >
+            <!-- drop de region -->
+            <label class="control-label"> <?php echo $form->labelEx($model, 'pais_id') ?></label>
+            <div class="controls">
+                <?php
+                $paises = Pais::model()->getInscritasPaises();
+                $lista_paises = !(count($paises) == 0) ? array(0 => '- Pais -') + CHtml::listData($paises, 'id', 'nombre') : array(0 => '- Ninguna -');
+                $this->widget(
+                        'ext.bootstrap.widgets.TbSelect2', array(
+                    'asDropDownList' => TRUE,
+                    'model' => $model,
+                    'attribute' => 'pais_id',
+                    'data' => $lista_paises,
+                    'events' => array("event_name" => "Javascript code for handler"),
+                    'options' => array(
+                        'placeholder' => 'Seleccione Un Pais!',
+                        'width' => '25%',
+                    )
+                        )
+                );
+                ?>
 
-             <label class="control-label required" for="region_ubicacion"> <?php echo $form->labelEx($model, 'pais_id') ?></label> 
-                 <?php
-                 $paises = Pais::model()->getInscritasPaises();
-                 $lista_paises = !(count($paises) == 0) ? array(0 => '- Pais -') + CHtml::listData($paises, 'id', 'nombre') : array(0 => '- Ninguna -');
-                 $this->widget(
-                         'ext.bootstrap.widgets.TbSelect2', array(
-                     'asDropDownList' => TRUE,
-                     'model' => $model,
-                     'attribute' => 'pais_id',
-                     'data' => $lista_paises,
-                     'events' => array("event_name" => "Javascript code for handler"),
-                     'options' => array(
-                         'placeholder' => 'Seleccione Un Pais!',
-                         'width' => '50%',
-                     )
-                         )
-                 );
-                 ?>
-            <br>
+                <?php echo $form->error($model, 'pais_id'); ?>
+
+            </div>
         </div>
-
         <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 45)) ?>
 
         <?php // echo $form->dropDownListRow($model, 'pais_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Pais::model()->findAll(), 'id', Pais::representingColumn()))  ?>
