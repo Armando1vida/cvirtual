@@ -6,7 +6,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 'type' => 'horizontal',
 'id' => 'ciudad-form',
 'enableAjaxValidation' => true,
-'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
+'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
 'enableClientValidation' => false,
 ));?>
 <div class="widget blue">
