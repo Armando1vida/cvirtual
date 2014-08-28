@@ -2,11 +2,13 @@
 
 class DashboardController extends Controller {
 
-    public function filters() {
-        return array(
-            array('CrugeAccessControlFilter -error'),
-        );
-    }
+//    public function filters() {
+//        return array(
+//            array('CrugeAccessControlFilter -error'),
+//        );
+//    }
+
+    public $admin = false;
 
     /**
      * This is the default 'index' action that is invoked
