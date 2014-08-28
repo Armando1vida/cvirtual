@@ -36,7 +36,7 @@ Util::tsRegisterAssetJs('_ubicacion.js');
 //                    'events' => array("event_name" => "Javascript code for handler"),
                     'options' => array(
                         'placeholder' => 'Seleccione Un Pais!',
-                        'width' => '25%',
+//                        'width' => '25%',
                     )
                         )
                 );
@@ -60,8 +60,8 @@ Util::tsRegisterAssetJs('_ubicacion.js');
                     'data' => array(0 => '- Ninguna -'),
 //                    'events' => array("event_name" => "Javascript code for handler"),
                     'options' => array(
-//                        'placeholder' => 'Seleccione U',
-                        'width' => '25%',
+                        'placeholder' => 'Seleccione Una Provincia',
+//                        'width' => '25%',  ajaxGetProvinciaPais
                     )
                         )
                 );
