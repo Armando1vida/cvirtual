@@ -115,7 +115,7 @@ return array(
         'urlManager' => array(
             'urlFormat' => 'path',
             'showScriptName' => false,
-            //'caseSensitive'=>false,
+//            'caseSensitive'=>false,
             'rules' => array(
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<module:\w+>/<controller:\w+>/<id:\d+>' => '<module:\w+>/<controller>/view',
