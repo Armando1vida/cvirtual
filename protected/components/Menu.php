@@ -7,7 +7,7 @@ class Menu {
     public static function getMenu($controller) {
         self::$_controller = $controller;
         $items = array(
-            array('label' => '<i class="icon-home"></i> Home', 'url' => Yii::app()->homeUrl ,'active_rules' => array('module' => 'crm', 'controller' => 'empresa')),
+            array('label' => '<i class="icon-home"></i> Home', 'url' => Yii::app()->homeUrl ,'active_rules' => array('module' => 'crm', 'controller' => 'dashboard')),
             array('label' => '<i class="icon-tasks"></i>  Empresa', 'url' => array('/crm/empresa/admin'), 'access' => 'action_empresa_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'empresa')),
         );
 
