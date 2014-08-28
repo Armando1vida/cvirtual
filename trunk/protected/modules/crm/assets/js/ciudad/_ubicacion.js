@@ -35,9 +35,12 @@ function actualizarInformacionTodos(pais_id, provincia_id) {
         //Provincias unicamente de la regionX Selecionada
         AjaxCargarListas(baseUrl + "crm/provincia/ajaxGetProvinciaPais",
                 {pais_id: $("#" + pais_id).val()}, function(data) {
+              
+                  
             $("#" + provincia_id).html(data);
             $('#s2id_' + provincia_id + ' a span').html($("#" + provincia_id + " option[id='p']").html());
             $("#" + provincia_id).selectBox("refresh");
+//            $('#s2id_Ciudad_provincia_id').children('a').children('.select2-chosen').append('Seleccione una Provincia');
 
         });
     }
@@ -47,175 +50,6 @@ function actualizarInformacionTodos(pais_id, provincia_id) {
 //    }
 }
 
-function actualizarInformacionCanCiu(provincia_id, canton_id, ciudad_id) {
-    $('#s2id_' + canton_id + ' a span').html('');
-    $('#s2id_' + ciudad_id + ' a span').html('');
-    if ($("#" + provincia_id).val() > 0) {
-//    //Cantones solo de aqlla PROVINCIA
-        AjaxCargarListas(baseUrl + "crm/canton/ajaxGetCantonesProvincia",
-                {provincia_id: $("#" + provincia_id).val()}, function(data) {
-            $("#" + canton_id).html(data);
-            $('#s2id_' + canton_id + ' a span').html($("#" + canton_id + " option[id='p']").html());
-            $("#" + canton_id).selectBox("refresh");
-
-        });
-//    //Ciudades solo de la PROVICIA 
-        AjaxCargarListas(baseUrl + "crm/ciudad/ajaxGetCiudadesProvincia",
-                {provincia_id: $("#" + provincia_id).val()}, function(data) {
-            $("#" + ciudad_id).html(data);
-            $('#s2id_' + ciudad_id + ' a span').html($("#" + ciudad_id + " option[id='p']").html());
-            $("#" + ciudad_id).selectBox("refresh");
-
-        });
-    }
-    else
-    {
-        AjaxListasResetProvincia(provincia_id, canton_id, ciudad_id);
-    }
-}
-
-function AjaxListaCuidades(lista, lista_actualizar)
-{
-    console.log('cuidades');
-    $('#s2id_' + lista_actualizar + ' a span').html('');
-    if ($("#" + lista).val() > 0)
-    {
-        AjaxCargarListas(baseUrl + "crm/ciudad/ajaxGetCantonProvincia",
-                {canton_id: $("#" + lista).val()}, function(data) {
-            $("#" + lista_actualizar).html(data);
-            $('#s2id_' + lista_actualizar + ' a span').html($("#" + lista_actualizar + " option[id='p']").html());
-            $("#" + lista_actualizar).selectBox("refresh");
-
-        });
-    }
-    else
-    {
-        AjaxListasResetCanton(lista, lista_actualizar);
-    }
-}
-
-
-function AjaxListasTodas(region_id, provincia_id, canton_id, ciudad_id)
-{
-    $('#s2id_' + region_id + ' a span').html('');
-    $('#s2id_' + provincia_id + ' a span').html('');
-    $('#s2id_' + canton_id + ' a span').html('');
-    $('#s2id_' + ciudad_id + ' a span').html('');
-
-    //Regiones
-    AjaxCargarListas(baseUrl + "crm/region/ajaxGetRegiones",
-            {todas: 1}, function(data) {
-        $("#" + region_id).html(data);
-        $('#s2id_' + region_id + ' a span').html($("#" + region_id + " option[id='p']").html());
-        $("#" + region_id).selectBox("refresh");
-
-    });
-    //Provincias 
-    AjaxCargarListas(baseUrl + "crm/provincia/ajaxGetProvincias",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + provincia_id).html(data);
-        $('#s2id_' + provincia_id + ' a span').html($("#" + provincia_id + " option[id='p']").html());
-        $("#" + provincia_id).selectBox("refresh");
-
-    });
-//    //Cantones
-    AjaxCargarListas(baseUrl + "crm/canton/ajaxGetCantones",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + canton_id).html(data);
-        $('#s2id_' + canton_id + ' a span').html($("#" + canton_id + " option[id='p']").html());
-        $("#" + canton_id).selectBox("refresh");
-
-    });
-//    //Ciudades solo de la region 
-    AjaxCargarListas(baseUrl + "crm/ciudad/ajaxGetCiudades",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + ciudad_id).html(data);
-        $('#s2id_' + ciudad_id + ' a span').html($("#" + ciudad_id + " option[id='p']").html());
-        $("#" + ciudad_id).selectBox("refresh");
-
-    });
-
-}
-//seleccionar de nuevo provincia cero
-function AjaxListasResetProvincia(provincia_id, canton_id, ciudad_id)
-{
-
-    $('#s2id_' + provincia_id + ' a span').html('');
-    $('#s2id_' + canton_id + ' a span').html('');
-    $('#s2id_' + ciudad_id + ' a span').html('');
-
-
-    //Provincias 
-    AjaxCargarListas(baseUrl + "crm/provincia/ajaxGetProvincias",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + provincia_id).html(data);
-        $('#s2id_' + provincia_id + ' a span').html($("#" + provincia_id + " option[id='p']").html());
-        $("#" + provincia_id).selectBox("refresh");
-
-    });
-//    //Cantones
-    AjaxCargarListas(baseUrl + "crm/canton/ajaxGetCantones",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + canton_id).html(data);
-        $('#s2id_' + canton_id + ' a span').html($("#" + canton_id + " option[id='p']").html());
-        $("#" + canton_id).selectBox("refresh");
-
-    });
-//    //Ciudades solo de la region 
-    AjaxCargarListas(baseUrl + "crm/ciudad/ajaxGetCiudades",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + ciudad_id).html(data);
-        $('#s2id_' + ciudad_id + ' a span').html($("#" + ciudad_id + " option[id='p']").html());
-        $("#" + ciudad_id).selectBox("refresh");
-
-    });
-
-}
-
-//seleccionar de nuevo canton cero
-function AjaxListasResetCanton(canton_id, ciudad_id)
-{
-
-    $('#s2id_' + canton_id + ' a span').html('');
-    $('#s2id_' + ciudad_id + ' a span').html('');
-
-//    //Cantones
-    AjaxCargarListas(baseUrl + "crm/canton/ajaxGetCantones",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + canton_id).html(data);
-        $('#s2id_' + canton_id + ' a span').html($("#" + canton_id + " option[id='p']").html());
-        $("#" + canton_id).selectBox("refresh");
-
-    });
-//    //Ciudades solo de la region 
-    AjaxCargarListas(baseUrl + "crm/ciudad/ajaxGetCiudades",
-            {todas: 1}, function(data) {
-        console.log(data);
-        $("#" + ciudad_id).html(data);
-        $('#s2id_' + ciudad_id + ' a span').html($("#" + ciudad_id + " option[id='p']").html());
-        $("#" + ciudad_id).selectBox("refresh");
-
-    });
-
-}
-function AjaxListaBarrios(lista, lista_actualizar)
-{
-    $('#s2id_' + lista_actualizar + ' a span').html('');
-    AjaxCargarListas(baseUrl + "crm/barrio/ajaxGetBarriosCiudad",
-            {ciudad_id: $("#" + lista).val()}, function(data) {
-        $("#" + lista_actualizar).html(data);
-        $('#s2id_' + lista_actualizar + ' a span').html($("#" + lista_actualizar + " option[id='p']").html());
-        $("#" + lista_actualizar).selectBox("refresh");
-
-    });
-}
 function AjaxCargarListas(url, data, callBack)
 {
     $.ajax({

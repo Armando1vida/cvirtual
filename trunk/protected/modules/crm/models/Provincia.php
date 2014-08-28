@@ -46,6 +46,7 @@ class Provincia extends BaseProvincia {
      * @author Miguel Alba <malba@tradesystem.com.ec>
      * @param type $pais_id
      * @return type Obtener todas las provincias de cada pais con su id pais
+     * Utilizacion en el script de ubicacino en form crear Ciudad
      */
     public function getProvinciasPais($pais_id) {
 
