@@ -1,19 +1,13 @@
 <?php
 /**
- *## TbRelationalColumn class file
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * @copyright Copyright &copy; Clevertech 2012-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-/**
- *## TbRelationalColumn class
+ * TbRelationalColumn class
  *
  * Displays a clickable column that will make an ajax request and display its resulting data
  * into a new row.
  *
- * @package booster.widgets.grids.columns
+ * @author: antonio ramirez <antonio@clevertech.biz>
+ * Date: 9/25/12
+ * Time: 10:05 PM
  */
 class TbRelationalColumn extends TbDataColumn
 {
@@ -61,12 +55,6 @@ class TbRelationalColumn extends TbDataColumn
 	 * error.
 	 */
 	public $ajaxErrorMessage = 'Error';
-	
-	/**
-	 * @var array $submitData allows you to merge extra data into the query string being sent to the server.
-	 * normally the row id is sent as 'id'
-	 */
-	public $submitData=array();
 
 	/**
 	 * widget initialization
@@ -85,50 +73,42 @@ class TbRelationalColumn extends TbDataColumn
 	 * Overrides CDataColumn renderDataCell in order to wrap up its content with the object that will be used as a
 	 * trigger.
 	 * Important: Making use of links as a content for this of column is an error.
-	 *
 	 * @param int $row
 	 */
 	public function renderDataCell($row)
 	{
 		$data = $this->grid->dataProvider->data[$row];
 		$options = $this->htmlOptions;
-
-		if ($this->cssClassExpression !== null) {
+		if ($this->cssClassExpression !== null)
+		{
 			$class = $this->evaluateExpression($this->cssClassExpression, array('row' => $row, 'data' => $data));
-			if (isset($options['class'])) {
+			if (isset($options['class']))
 				$options['class'] .= ' ' . $class;
-			} else {
+			else
 				$options['class'] = $class;
-			}
 		}
-
 		echo CHtml::openTag('td', $options);
 		echo CHtml::openTag('span', array('class' => $this->cssClass, 'data-rowid' => $this->getPrimaryKey($data)));
 		$this->renderDataCellContent($row, $data);
-		echo CHtml::closeTag('span');
-		echo CHtml::closeTag('td');
+		echo '</span>';
+		echo '</td>';
 	}
 
 	/**
 	 * Helper function to return the primary key of the $data
-	 *  * IMPORTANT: composite keys on CActiveDataProviders will return the keys joined by two dashes: `--`
-	 *
+	 *  * IMPORTANT: composite keys on CActiveDataProviders will return the keys joined by comma
 	 * @param CActiveRecord $data
-	 *
 	 * @return null|string
 	 */
 	protected function getPrimaryKey($data)
 	{
-		if ($this->grid->dataProvider instanceof CActiveDataProvider) {
-			$key = $this->grid->dataProvider->keyAttribute === null ? $data->getPrimaryKey()
-				: $data->{$this->grid->dataProvider->keyAttribute};
-			return is_array($key) ? implode('--', $key) : $key;
+		if ($this->grid->dataProvider instanceof CActiveDataProvider)
+		{
+			$key=$this->grid->dataProvider->keyAttribute===null ? $data->getPrimaryKey() : $data->{$this->keyAttribute};
+			return is_array($key) ? implode(',',$key) : $key;
 		}
-
-		if ($this->grid->dataProvider instanceof CArrayDataProvider || $this->grid->dataProvider instanceof CSqlDataProvider) {
-			return is_object($data) ? $data->{$this->grid->dataProvider->keyField}
-				: $data[$this->grid->dataProvider->keyField];
-		}
+		if ($this->grid->dataProvider instanceof CArrayDataProvider || $this->grid->dataProvider instanceof CSqlDataProvider)
+			return is_object($data) ? $data->{$this->grid->dataProvider->keyField} : $data[$this->grid->dataProvider->keyField];
 
 		return null;
 	}
@@ -138,30 +118,27 @@ class TbRelationalColumn extends TbDataColumn
 	 */
 	public function registerClientScript()
 	{
-        Bootstrap::getBooster()->registerAssetCss('bootstrap-relational.css');
-
+		Yii::app()->bootstrap->registerAssetCss('bootstrap-relational.css');
 		/** @var $cs CClientScript */
 		$cs = Yii::app()->getClientScript();
-		if ($this->afterAjaxUpdate !== null) {
-			if ((!$this->afterAjaxUpdate instanceof CJavaScriptExpression)
-				&& (strpos($this->afterAjaxUpdate,'js:') !== 0)
-			) {
-				$this->afterAjaxUpdate = new CJavaScriptExpression($this->afterAjaxUpdate);
-			}
-		} else {
-			$this->afterAjaxUpdate = 'js:$.noop';
+		if ($this->afterAjaxUpdate!==null)
+		{
+			if ((!$this->afterAjaxUpdate instanceof CJavaScriptExpression) && strpos($this->afterAjaxUpdate,'js:')!==0)
+				$this->afterAjaxUpdate=new CJavaScriptExpression($this->afterAjaxUpdate);
 		}
+		else
+			$this->afterAjaxUpdate = 'js:$.noop';
 
 		$this->ajaxErrorMessage = CHtml::encode($this->ajaxErrorMessage);
 		$afterAjaxUpdate = CJavaScript::encode($this->afterAjaxUpdate);
 		$span = count($this->grid->columns);
-		$loadingPic = CHtml::image(Bootstrap::getBooster()->getAssetsUrl() . '/img/loading.gif');
-		$cache = $this->cacheData ? 'true' : 'false';
-		$data = !empty($this->submitData) && is_array($this->submitData) ? $this->submitData : 'js:{}';
+		$loadingPic = CHtml::image(Yii::app()->bootstrap->getAssetsUrl().'/img/loading.gif');
+		$cache = $this->cacheData? 'true':'false';
+		$data = !empty($this->submitData) && is_array($this->submitData)? $this->submitData : 'js:{}';
 		$data = CJavascript::encode($data);
-		list($parentId) = explode('_',$this->id);
-		$js = <<<EOD
-$(document).on('click','#{$parentId} .{$this->cssClass}', function(){
+
+		$js =<<<EOD
+$(document).on('click','.{$this->cssClass}', function(){
 	var span = $span;
 	var that = $(this);
 	var status = that.data('status');
@@ -220,6 +197,6 @@ $(document).on('click','#{$parentId} .{$this->cssClass}', function(){
 	});
 });
 EOD;
-		$cs->registerScript(__CLASS__ . '#' . $this->id, $js);
+		$cs->registerScript(__CLASS__.'#'.$this->id, $js);
 	}
 }

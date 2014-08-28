@@ -162,7 +162,7 @@ class ProvinciaController extends AweController {
                 $data = Provincia::model()->getProvinciasPais($_POST['pais_id']);
                 if ($data) {
                     $data = CHtml::listData($data, 'id', 'nombre');
-                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- REGIÓN -', true);
+                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Provincia -', true);
                     foreach ($data as $value => $name) {
                         echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
                     }
@@ -170,7 +170,7 @@ class ProvinciaController extends AweController {
                     echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
                 }
             } else {
-                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- REGIÓN -', true);
+                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Pronvicia -', true);
 //                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
             }
         }

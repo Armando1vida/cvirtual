@@ -1,38 +1,28 @@
 <?php
 /**
- *## TbTotalSumColumn class file
+ * TbTotalSumColumn widget class
  *
  * @author: antonio ramirez <antonio@clevertech.biz>
  * @copyright Copyright &copy; Clevertech 2012-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package YiiBooster bootstrap.widgets
  */
-
 Yii::import('bootstrap.widgets.TbDataColumn');
 
-/**
- *## TbTotalSumColumn widget class
- *
- * @package booster.widgets.grids.columns
- */
 class TbTotalSumColumn extends TbDataColumn
 {
 	public $totalExpression;
 
 	public $totalValue;
 
-	protected $total = 0;
+	protected $total=0;
 
 	public function init()
 	{
 		parent::init();
 
-		if (!is_null($this->totalExpression)) {
-			$this->total = is_numeric($this->totalExpression)
-				? $this->totalExpression
-				: $this->evaluateExpression(
-					$this->totalExpression
-				);
-		}
+		if (!is_null($this->totalExpression))
+			$this->total = is_numeric($this->totalExpression) ? $this->totalExpression : $this->evaluateExpression($this->totalExpression);
 		$this->footer = true;
 	}
 
@@ -42,19 +32,16 @@ class TbTotalSumColumn extends TbDataColumn
 		parent::renderDataCellContent($row, $data);
 		$value = ob_get_clean();
 
-		if (is_numeric($value)) {
+		if (is_numeric($value))
 			$this->total += $value;
-		}
 		echo $value;
 	}
 
 	protected function renderFooterCellContent()
 	{
-		if (is_null($this->total)) {
-			parent::renderFooterCellContent();
-		}
+		if (is_null($this->total))
+			return parent::renderFooterCellContent();
 
-		echo $this->totalValue ? $this->evaluateExpression($this->totalValue, array('total' => $this->total))
-			: $this->grid->getFormatter()->format($this->total, $this->type);
+		echo $this->totalValue? $this->evaluateExpression($this->totalValue, array('total'=>$this->total)) : $this->grid->getFormatter()->format($this->total, $this->type);
 	}
 }

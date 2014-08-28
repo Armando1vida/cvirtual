@@ -33,10 +33,10 @@ Util::tsRegisterAssetJs('_ubicacion.js');
                     'model' => $model,
                     'attribute' => 'pais_id',
                     'data' => $lista_paises,
-//                    'events' => array("event_name" => "Javascript code for handler"),
+                    'events' => array("event_name" => "Javascript code for handler"),
                     'options' => array(
                         'placeholder' => 'Seleccione Un Pais!',
-//                        'width' => '25%',
+                        'width' => '25%',
                     )
                         )
                 );
@@ -52,19 +52,32 @@ Util::tsRegisterAssetJs('_ubicacion.js');
             <label class="control-label"> <?php echo $form->labelEx($model, 'provincia_id') ?></label>
             <div class="controls">
                 <?php
+                $lista_provincias = array(0 => '- Ninguna -');
+
                 $this->widget(
                         'ext.bootstrap.widgets.TbSelect2', array(
                     'asDropDownList' => TRUE,
                     'model' => $model,
                     'attribute' => 'provincia_id',
-                    'data' => array(0 => '- Ninguna -'),
-//                    'events' => array("event_name" => "Javascript code for handler"),
+                    'data' => $lista_provincias,
                     'options' => array(
-                        'placeholder' => 'Seleccione Una Provincia',
-//                        'width' => '25%',  ajaxGetProvinciaPais
+                        'width' => '25%',
                     )
                         )
                 );
+//                $this->widget(
+//                        'ext.bootstrap.widgets.TbSelect2', array(
+//                    'asDropDownList' => TRUE,
+//                    'model' => $model,
+//                    'attribute' => 'provincia_id',
+//                    'data' => array(0 => '- Ninguna -'),
+////                    'events' => array("event_name" => "Javascript code for handler"),
+//                    'options' => array(
+//                        'placeholder' => 'Seleccione Una Provincia',
+////                        'width' => '25%',  ajaxGetProvinciaPais
+//                    )
+//                        )
+//                );
                 ?>
 
                 <?php echo $form->error($model, 'provincia_id'); ?>
