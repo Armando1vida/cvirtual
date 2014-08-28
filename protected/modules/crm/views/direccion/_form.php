@@ -20,8 +20,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     <div class="widget-body">
         
         
-                                        <?php echo $form->textFieldRow($model, 'id') ?>
-                                
+            
                                         <?php echo $form->textFieldRow($model, 'calle_principal', array('maxlength' => 64)) ?>
                                 
                                         <?php echo $form->textFieldRow($model, 'calle_secundaria', array('maxlength' => 64)) ?>
@@ -43,7 +42,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                                         <?php echo $form->dropDownListRow($model, 'tipo_entidad', array('EMPRESA' => 'EMPRESA','CLIENTE' => 'CLIENTE',)) ?>
                                 
                                         <?php echo $form->textFieldRow($model, 'entidad_id') ?>
-                                                        <div class="form-actions">
+                                        </div>                <div class="form-actions">
                         <?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'success',

@@ -38,8 +38,8 @@ abstract class BaseItemDireccion extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('id, coord_x, coord_y', 'required'),
-            array('id, pais_id, provincia_id, ciudad_id', 'numerical', 'integerOnly'=>true),
+            array('coord_x, coord_y', 'required'),
+            array('pais_id, provincia_id, ciudad_id', 'numerical', 'integerOnly'=>true),
             array('coord_x, coord_y', 'numerical'),
             array('calle_principal, calle_secundaria, numero', 'length', 'max'=>45),
             array('referencia', 'length', 'max'=>64),
