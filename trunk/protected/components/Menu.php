@@ -8,6 +8,7 @@ class Menu {
         self::$_controller = $controller;
         $items = array(
             array('label' => '<i class="icon-home"></i> Home', 'url' => Yii::app()->homeUrl),
+            array('label' => '<i class="icon-tasks"></i>  Empresa', 'url' => array('/crm/empresa/admin'), 'access' => 'action_empresa_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'empresa')),
         );
 
         return self::generateMenu($items);
@@ -22,6 +23,8 @@ class Menu {
                     array('label' => 'Pais', 'url' => array('/crm/pais/admin'), 'access' => 'action_pais_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'pais')),
                     array('label' => 'Provincia', 'url' => array('/crm/provincia/admin'), 'access' => 'action_provincia_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'provincia')),
                     array('label' => 'Ciudad', 'url' => array('/crm/ciudad/admin'), 'access' => 'action_ciudad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'ciudad')),
+                    array('label' => 'Categoria', 'url' => array('/crm/categoria/admin'), 'access' => 'action_categoria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'categoria')),
+                    array('label' => 'Industria', 'url' => array('/crm/industria/admin'), 'access' => 'action_industria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'industria')),
                 )),
 //            array('label' => '<i class="icon-dollar"></i>  Entidades', 'url' => '#', 'items' => array(
 //                    array('label' => 'Entidad Bancaria', 'url' => array('/crm/entidadBancaria/admin'), 'access' => 'action_entidadBancaria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidadBancaria')),
