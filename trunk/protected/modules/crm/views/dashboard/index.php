@@ -1,6 +1,7 @@
 <?php
 /* @var $this SiteController */
 $this->pageTitle = Yii::app()->name;
+Util::tsRegisterAssetJs('index.js');
 ?>
 
 <h1>Bienvenido al Demo de <?php echo CHtml::encode(Yii::app()->name); ?></h1>
@@ -37,6 +38,14 @@ $this->pageTitle = Yii::app()->name;
 
                             <!-- END CLASSIC SEARCH-->
 
+                            <div class="row-fluid">
+                                <div class="span12">
+
+                                    <?php $this->renderPartial('portlets/_mapaEmpresas') ?>
+
+                                </div>
+
+                            </div>
 
                         </div>
                         <div class="tab-pane" id="portlet_tab2">

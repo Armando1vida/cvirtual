@@ -2,6 +2,7 @@
 /** @var EmpresaController $this */
 /** @var Empresa $model */
 /** @var AweActiveForm $form */
+
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'horizontal',
     'id' => 'empresa-form',
@@ -9,6 +10,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
     'enableClientValidation' => false,
         ));
+Util::tsRegisterAssetJs('form_wizard.js');
 ?>
 <div class="row-fluid">
 
