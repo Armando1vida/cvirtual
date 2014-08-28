@@ -12,7 +12,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 ?>
 <div class="row-fluid">
 
-    <div class="span8">
+    <div class="span7">
         <div class="widget blue">
             <div class="widget-title">
                 <h4><i class="icon-plus"></i><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Empresa::label(1); ?></h4>
@@ -45,46 +45,68 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
                 <?php // echo $form->textFieldRow($model, 'num_item')  ?>
 
-                <?php // echo $form->dropDownListRow($model, 'categoria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Categoria::model()->findAll(), 'id', Categoria::representingColumn()))  ?>
 
-                <?php echo $form->dropDownListRow($model, 'industria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()), array('placeholder' => '')) ?>
 
                 <?php // echo $form->dropDownListRow($model, 'estado', array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',))  ?>
-                <div class="form-actions">
-                    <?php
-                    $this->widget('bootstrap.widgets.TbButton', array(
-                        'buttonType' => 'submit',
-                        'type' => 'success',
-                        'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-                    ));
-                    ?>
-                    <?php
-                    $this->widget('bootstrap.widgets.TbButton', array(
-                        'label' => Yii::t('AweCrud.app', 'Cancel'),
-                        'htmlOptions' => array('onclick' => 'javascript:history.go(-1)')
-                    ));
-                    ?>
-                </div>
+
             </div>
         </div>
     </div>
-    <div class="span4">
-        <?php if (!empty($categoria)): ?>
-            <div class="widget green">
-                <div class="widget-title">
-                    <h4><i class="icon-archive"></i> Categoria</h4>
-                    <span class="tools">
-                        <a href="javascript:;" class="icon-chevron-down"></a>
-                        <!--a href="javascript:;" class="icon-remove"></a-->
-                    </span>
-                </div>
-                <div class="widget-body">
-                    <!--<div class="check-box-list">-->
-                    <?php echo $form->radioButtonListRow($model, 'categoria_id', CHtml::listData($categoria, 'id', 'nombre')); ?>
-                    <!--</div>-->
-                </div>
+    <div class="span5">
+        <?php // if (!empty($categoria)): ?>
+        <div class="widget green">
+            <div class="widget-title">
+                <h4><i class="icon-archive"></i> Categoria</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <!--a href="javascript:;" class="icon-remove"></a-->
+                </span>
             </div>
-        <?php endif; ?>
+            <div class="widget-body">
+                <!--<div class="check-box-list">-->
+                <?php echo $form->dropDownListRow($model, 'categoria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Categoria::model()->activos()->findAll(), 'id', Categoria::representingColumn()), array('class' => 'span12 fix',)) ?>
+
+                <!--</div>-->
+            </div>
+        </div>
+        <?php // endif; ?>
+    </div>
+    <div class="span5">
+        <?php // if (!empty($categoria)): ?>
+        <div class="widget green">
+            <div class="widget-title">
+                <h4><i class="icon-archive"></i> Industria</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <!--a href="javascript:;" class="icon-remove"></a-->
+                </span>
+            </div>
+            <div class="widget-body">
+                <!--<div class="check-box-list">-->
+                <?php echo $form->dropDownListRow($model, 'industria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()), array('class' => 'span12 fix',)) ?>
+
+                <!--</div>-->
+            </div>
+        </div>
+        <?php // endif; ?>
+    </div>
+    <div class="span5">
+        <div class="form-actions">
+            <?php
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType' => 'submit',
+                'type' => 'success',
+                'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+            ));
+            ?>
+            <?php
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'label' => Yii::t('AweCrud.app', 'Cancel'),
+                'htmlOptions' => array('onclick' => 'javascript:history.go(-1)')
+            ));
+            ?>
+        </div>
     </div>
 </div>
+
 <?php $this->endWidget(); ?>
