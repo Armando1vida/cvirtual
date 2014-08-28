@@ -1,5 +1,5 @@
 ﻿# Host: 127.0.0.1  (Version: 5.6.17)
-# Date: 2014-08-27 18:57:58
+# Date: 2014-08-27 19:40:55
 # Generator: MySQL-Front 5.3  (Build 4.156)
 
 /*!40101 SET NAMES utf8 */;
@@ -210,7 +210,7 @@ CREATE TABLE `empresa` (
 
 DROP TABLE IF EXISTS `item_direccion`;
 CREATE TABLE `item_direccion` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `coord_x` double NOT NULL,
   `coord_y` double NOT NULL,
   `pais_id` int(11) DEFAULT NULL,
@@ -245,7 +245,7 @@ CREATE TABLE `item` (
 
 DROP TABLE IF EXISTS `item_foto`;
 CREATE TABLE `item_foto` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(64) NOT NULL,
   `ruta` varchar(124) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -299,7 +299,7 @@ CREATE TABLE `ciudad` (
 
 DROP TABLE IF EXISTS `direccion`;
 CREATE TABLE `direccion` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `calle_principal` varchar(64) DEFAULT NULL,
   `calle_secundaria` varchar(64) DEFAULT NULL,
   `numero` varchar(45) DEFAULT NULL,

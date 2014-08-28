@@ -32,8 +32,8 @@ abstract class BaseItemFoto extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('id, nombre, ruta, item_id', 'required'),
-            array('id, item_id', 'numerical', 'integerOnly'=>true),
+            array('nombre, ruta, item_id', 'required'),
+            array('item_id', 'numerical', 'integerOnly'=>true),
             array('nombre', 'length', 'max'=>64),
             array('ruta', 'length', 'max'=>124),
             array('id, nombre, ruta, item_id', 'safe', 'on'=>'search'),

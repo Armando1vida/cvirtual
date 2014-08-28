@@ -40,8 +40,8 @@ abstract class BaseDireccion extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('id, ciudad_id, provincia_id, pais_id, tipo_entidad, entidad_id', 'required'),
-            array('id, ciudad_id, provincia_id, pais_id, entidad_id', 'numerical', 'integerOnly'=>true),
+            array('ciudad_id, provincia_id, pais_id, tipo_entidad, entidad_id', 'required'),
+            array('ciudad_id, provincia_id, pais_id, entidad_id', 'numerical', 'integerOnly'=>true),
             array('coord_x, coord_y', 'numerical'),
             array('calle_principal, calle_secundaria', 'length', 'max'=>64),
             array('numero, referencia', 'length', 'max'=>45),

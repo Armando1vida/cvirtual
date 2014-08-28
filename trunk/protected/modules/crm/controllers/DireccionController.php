@@ -8,7 +8,7 @@ class DireccionController extends AweController {
      */
     public $layout = '//layouts/column2';
     public $defaultAction = 'admin';
-    public $admin = false;
+    public $admin = true;
 
     public function filters() {
         return array(
