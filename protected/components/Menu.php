@@ -22,7 +22,6 @@ class Menu {
                     array('label' => 'Pais', 'url' => array('/crm/pais/admin'), 'access' => 'action_pais_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'pais')),
                     array('label' => 'Provincia', 'url' => array('/crm/provincia/admin'), 'access' => 'action_provincia_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'provincia')),
                     array('label' => 'Ciudad', 'url' => array('/crm/ciudad/admin'), 'access' => 'action_ciudad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'ciudad')),
-//                    array('label' => 'Barrios', 'url' => array('/crm/barrio/admin'), 'access' => 'action_barrio_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'barrio')),
                 )),
 //            array('label' => '<i class="icon-dollar"></i>  Entidades', 'url' => '#', 'items' => array(
 //                    array('label' => 'Entidad Bancaria', 'url' => array('/crm/entidadBancaria/admin'), 'access' => 'action_entidadBancaria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidadBancaria')),
