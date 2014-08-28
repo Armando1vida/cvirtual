@@ -47,7 +47,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
                 <?php // echo $form->dropDownListRow($model, 'categoria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Categoria::model()->findAll(), 'id', Categoria::representingColumn())) ?>
 
-                <?php echo $form->dropDownListRow($model, 'industria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn())) ?>
+                <?php echo $form->dropDownListRow($model, 'industria_id',  CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()),array('placeholder'=>"")) ?>
 
                 <?php // echo $form->dropDownListRow($model, 'estado', array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',)) ?>
                 <div class="form-actions">
