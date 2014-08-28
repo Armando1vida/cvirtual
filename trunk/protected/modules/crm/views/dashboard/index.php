@@ -63,130 +63,13 @@ $this->pageTitle = Yii::app()->name;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-                                            <strong>Manu</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
 
-                                            <strong>User Documentation.ppt</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
+
                                     <tr>
                                         <td>
                                             <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
 
                                             <strong>Price chart Table.xls</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>Linux Wallpaper.jpg</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>All Main files.zip</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>Metro Lab User Manual and Help fiule.pdf</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>Vector Lab Logo and Other stuff.ai</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>Vectorlab wallpaper.psd</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>themeforest feed.rss</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>Order and Contact.eml</strong>
-                                            C:\Users\Murat\Documents\My Dropbox
-                                        </td>
-                                        <td>01.01.2012	</td>
-                                        <td>12.05.2013</td>
-                                        <td>193 KB</td>
-                                        <td>File</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="http://cdn8.upsocl.com/wp-content/uploads/2014/08/10431442_1469983739910927_8197100455533721168_n11-372x248.jpg" alt="">
-
-                                            <strong>Metro Lab.eps</strong>
                                             C:\Users\Murat\Documents\My Dropbox
                                         </td>
                                         <td>01.01.2012	</td>
