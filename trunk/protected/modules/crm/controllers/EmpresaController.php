@@ -32,18 +32,21 @@ class EmpresaController extends AweController {
      */
     public function actionCreate() {
         $model = new Empresa;
-
+        $model->estado = Empresa::ESTADO_ACTIVO;
+        $model->num_item = 5;
         $this->performAjaxValidation($model, 'empresa-form');
-
         if (isset($_POST['Empresa'])) {
             $model->attributes = $_POST['Empresa'];
             if ($model->save()) {
                 $this->redirect(array('admin'));
             }
         }
+        $categoria = Categoria::model()->activos()->findAll();
 
+//        die(var_dump($categoria));
         $this->render('create', array(
             'model' => $model,
+            'categoria' => $categoria,
         ));
     }
 

@@ -10,15 +10,15 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'enableClientValidation' => false,
         ));
 ?>
-<div class="widget blue">
+<!--<div class="widget blue">
     <div class="widget-title">
         <h4><i class="icon-plus"></i><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Direccion::label(1); ?></h4>
         <span class="tools">
             <a href="javascript:;" class="icon-chevron-down"></a>
-            <!--a href="javascript:;" class="icon-remove"></a-->
+            a href="javascript:;" class="icon-remove"></a
         </span>
     </div>
-    <div class="widget-body">
+    <div class="widget-body">-->
 
         <?php echo $form->textFieldRow($model, 'calle_principal', array('maxlength' => 64)) ?>
 
@@ -56,6 +56,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         ));
         ?>
     </div>
-</div>
-</div>
+    <!--</div>
+    </div>-->
 <?php $this->endWidget(); ?>
