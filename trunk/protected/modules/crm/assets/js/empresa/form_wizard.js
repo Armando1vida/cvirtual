@@ -61,7 +61,6 @@ function save(form_id) {
     });
 }
 /**
- * @author Alex Yepez <ayepez@tradesystem.com.ec>
  * carga del modal para registrar direcciones
  * @param {type} isUpdate
  * @param {type} id
@@ -73,7 +72,6 @@ function formModalDireccion(isUpdate, id) {
     });
 }
 /**
- * @author Alex Yepez <ayepez@tradesystem.com.ec>
  * carga del modal de registro de emails
  * @param {type} isUpdate
  * @param {type} id
