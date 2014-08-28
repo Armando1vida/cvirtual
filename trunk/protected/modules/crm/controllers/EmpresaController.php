@@ -66,9 +66,12 @@ class EmpresaController extends AweController {
                 $this->redirect(array('admin'));
             }
         }
+        $categoria = Categoria::model()->activos()->findAll();
+
 
         $this->render('update', array(
             'model' => $model,
+            'categoria' => $categoria,
         ));
     }
 
