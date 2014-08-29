@@ -1,21 +1,21 @@
 $(function() {
-    var informacionEntidad = obtenerInformacionEmpresa();
+    obtenerInformacionEmpresa();
 //    console.log("s", informacionEntidad.longitud);
 //    $.each(informacionEntidad, function(i, item) {
 //    });
 //    console.log(informacionEntidad[0].latitud);
 
-    var latitudX = informacionEntidad;
-    alert(informacionEntidad);
-    var longitudY = informacionEntidad;
-//    initializeMap(latitudX, longitudY);
+//    var latitudX = informacionEntidad;
+//    alert(informacionEntidad);
+//    var longitudY = informacionEntidad;
+////    initializeMap(latitudX, longitudY);
 //    initialize(latitudX, longitudY);
 
 });
 function obtenerInformacionEmpresa()
 {
-    var informacionEntidad;
-    var informacionEntidad2 = new Array();
+//    var informacionEntidad;
+//    var informacionEntidad2 = new Array();
     $.ajax({
         type: "POST",
         url: baseUrl + 'crm/direccion/ajaxGetInformacionEmpresa',
@@ -26,7 +26,7 @@ function obtenerInformacionEmpresa()
         },
         success: function(data) {
 //informacionEntidad=data;
-            informacionEntidad = new Array(data[0].id, data[0].calle_principal, data[0].calle_secundaria, data[0].pais, data[0].provincia, data[0].ciudad, data[0].latitud, data[0].longitud);
+//            informacionEntidad = new Array(data[0].id, data[0].calle_principal, data[0].calle_secundaria, data[0].pais, data[0].provincia, data[0].ciudad, data[0].latitud, data[0].longitud);
 //            informacionEntidad [0] = data[0].id;
 //            informacionEntidad [1] = data[0].calle_principal;
 //            informacionEntidad [2] = data[0].calle_secundaria;
@@ -38,13 +38,32 @@ function obtenerInformacionEmpresa()
 //            alert(informacionEntidad[0]);
 //            informacionEntidad2 = informacionEntidad;
 
+            if (data.length > 0) {
+                var latitudX = data[0].latitud;
+                var longitudY = data[0].longitud;
+                initialize(latitudX, longitudY);
+            }
+            else
+            {
+                alert("no hay datos");
+                var latitudX = (0.346024);
+                var longitudY = -78.119574;
+                initialize(latitudX, longitudY);
+            }
 
+
+
+        },
+        error: function(data) {
+            var latitudX = (0.346024);
+            var longitudY = -78.119574;
+            initialize(latitudX, longitudY);
         }
 
     }
     );
-    console.log("ss", informacionEntidad);
-    return informacionEntidad;
+//    console.log("ss", informacionEntidad);
+//    return informacionEntidad;
 
 }
 function tratamiento_clic(overlay, point) {
