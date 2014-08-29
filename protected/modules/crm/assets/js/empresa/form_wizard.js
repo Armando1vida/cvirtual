@@ -37,29 +37,29 @@
 //// * @param {type} form_id
 //// * @returns {undefined}
 //// */
-    //function save(form_id) {
-    //    ajaxValidarFormulario({
-    //        formId: form_id,
-    //        beforeCall: function() {
-    //            BloquearBotonesModal(form_id);
-    //        },
-    //        successCall: function(data) {
-    //            if (!$("#Contacto_id").val()) {
-    //                entidad_id = data.guardar.id_contacto;
-    //                entidad_tipo = data.guardar.entidad_tipo;
-    //                habilitarPaneles();
-    //                $("#btn_finalizar").attr('href', baseUrl + 'crm/contacto/view/id/' + entidad_id);
-    //            }
-    //            else {
-    //                DesBloquearBotonesModal(form_id, ' Guardar', 'save');
-    //                bootbox.alert('Se actualizó correctamente la información');
-    //            }
-    //        },
-    //        errorCall: function(data) {
-    //            DesBloquearBotonesModal(form_id, ' Crear', 'save');
-    //        }
-    //    });
-    //}
+//function save(form_id) {
+//    ajaxValidarFormulario({
+//        formId: form_id,
+//        beforeCall: function() {
+//            BloquearBotonesModal(form_id);
+//        },
+//        successCall: function(data) {
+//            if (!$("#Contacto_id").val()) {
+//                entidad_id = data.guardar.id_contacto;
+//                entidad_tipo = data.guardar.entidad_tipo;
+////                habilitarPaneles();
+//                $("#btn_finalizar").attr('href', baseUrl + 'crm/contacto/view/id/' + entidad_id);
+//            }
+//            else {
+//                DesBloquearBotonesModal(form_id, ' Guardar', 'save');
+//                bootbox.alert('Se actualizó correctamente la información');
+//            }
+//        },
+//        errorCall: function(data) {
+//            DesBloquearBotonesModal(form_id, ' Crear', 'save');
+//        }
+//    });
+//}
 ///**
 // * carga del modal para registrar direcciones
 // * @param {type} isUpdate
@@ -106,13 +106,82 @@
 ////    }
 ////}
 //
-//function habilitarPaneles() {
-//    $('#dv_contacto').animate({
-//        'height': 'toggle'
-//    }, 200, function() {
-//        $('div.panel').animate({
-//            'height': 'toggle'
-//        }, 200, function() {
-//        });
-//    });
-//}
+function habilitarPaneles() {
+//    $('#dv_form').addClass('hidden');
+//    $('#dv_direccion').removeClass('hidden');
+//    
+    $('#dv_form').animate({
+        'height': 'toggle'
+    }, 200, function() {
+        $('div.panel').animate({
+            'height': 'toggle'
+        }, 200, function() {
+            $('#dv_direccion').removeClass('hidden');
+        });
+    });
+}
+
+/**
+ * @param {type} Formulario
+ * guarda los _form_modal por ajax para contacto, tarea, oportunidad, evento y cobranza
+ */
+function save(Formulario)
+{
+    BloquearBotonesModal(Formulario);
+    AjaxGestionModalFormWizard(Formulario, function(list) {
+        $(Formulario).trigger("reset");
+        DesBloquearBotonesModal(Formulario, 'Crear', 'save');
+    });
+}
+
+function AjaxGestionModalFormWizard($form, CallBack) {
+    var form = $($form);
+    var settings = form.data('settings');
+    settings.submitting = true;
+    $.fn.yiiactiveform.validate(form, function(messages) {
+
+        $.each(messages, function() {
+//            console.log(this);
+        });
+        if ($.isEmptyObject(messages)) {
+            $.each(settings.attributes, function() {
+                $.fn.yiiactiveform.updateInput(this, messages, form);
+            });
+            AjaxGuardarModalFormWizard(true, $form, CallBack);
+        }
+        else {
+            settings = form.data('settings'),
+                    $.each(settings.attributes, function() {
+                        $.fn.yiiactiveform.updateInput(this, messages, form);
+                    });
+            DesBloquearBotonesModal($form, 'Crear', 'save');
+        }
+    });
+}
+function AjaxGuardarModalFormWizard(verificador, Formulario, callBack)
+{
+    if (verificador)
+    {
+        var listaActualizar = Formulario.split('-');
+        listaActualizar = listaActualizar[0] + '-grid';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: $(Formulario).attr('action'),
+            data: $(Formulario).serialize(),
+            beforeSend: function(xhr) {
+            },
+            success: function(data) {
+                if (data.success) {
+                    habilitarPaneles();
+                } else {
+
+                    DesBloquearBotonesModal(Formulario, 'Crear', 'save');
+
+                    bootbox.alert(data.message);
+                }
+            }
+        });
+    }
+
+}

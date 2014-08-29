@@ -35,19 +35,27 @@ class EmpresaController extends AweController {
         $model->estado = Empresa::ESTADO_ACTIVO;
         $model->num_item = 5;
         $this->performAjaxValidation($model, 'empresa-form');
+        $enable_form = true;
         if (isset($_POST['Empresa'])) {
             $model->attributes = $_POST['Empresa'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
-            }
+            $result = array();
+            $result['success'] = $model->save();
+
+            if (!$result['success'])
+                $result['message'] = 'Error al registrar empresa.';
+            $enable_form = false;
+
+            echo json_encode($result);
         }
         $categoria = Categoria::model()->activos()->findAll();
 
 //        die(var_dump($categoria));
-        $this->render('create', array(
-            'model' => $model,
-            'categoria' => $categoria,
-        ));
+        if ($enable_form) {
+            $this->render('create', array(
+                'model' => $model,
+                'categoria' => $categoria,
+            ));
+        }
     }
 
     /**
@@ -82,10 +90,10 @@ class EmpresaController extends AweController {
      */
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
-            // we only allow deletion via POST request
+// we only allow deletion via POST request
             $this->loadModel($id)->delete();
 
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         } else
