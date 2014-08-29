@@ -20,7 +20,7 @@ $this->pageTitle = $model->nombre;
         <!-- BEGIN CALENDAR PORTLET-->
         <div class="widget ">
             <div class="widget-title">
-                <h4><i class="icon-calendar"></i> Ubicación</h4>
+                <h4><i class="icon-map-marker"></i> Ubicación</h4>
                 <span class="tools">
                     <a href="javascript:;" class="icon-chevron-down"></a>
                 </span>
@@ -34,6 +34,10 @@ $this->pageTitle = $model->nombre;
     </div>
     <div class="span5">
         <!-- BEGIN PROGRESS PORTLET-->
+        <div >
+
+            <?php $this->renderPartial('portlets/_informacion', array('model' => $model)); ?>
+        </div>
         <div class="widget purple">
             <div class="widget-title">
                 <h4><i class="icon-tasks"></i> Productos Agregados </h4>
@@ -42,22 +46,12 @@ $this->pageTitle = $model->nombre;
                 </span>
             </div>
             <div class="widget-body">
-           <?php $this->renderPartial('portlets/_items', array('model' => $model)); ?>
+                <?php $this->renderPartial('portlets/_items', array('model' => $model)); ?>
             </div>
         </div>
         <!-- END PROGRESS PORTLET-->
         <!-- BEGIN ALERTS PORTLET-->
-        <div class="widget orange">
-            <div class="widget-title">
-                <h4><i class="icon-bell-alt"></i> Informacion Agregada</h4>
-                <span class="tools">
-                    <a class="icon-chevron-down" href="javascript:;"></a>
-                </span>
-            </div>
-            <div class="widget-body">
-               <?php // $this->renderPartial('portlets/_mapaEmpresas', array('model' => $model)); ?>
-            </div>
-        </div>
+
         <!-- END ALERTS PORTLET-->
     </div>
 </div>

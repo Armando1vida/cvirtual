@@ -1,8 +1,8 @@
 
 
-<div class="widget">
+<div class="widget orange">
     <div class="widget-title">
-        <h4><i class="icon-rocket"></i> Informaci&oacute;n General</h4>
+        <h4><i class="icon-info"></i> Informaci&oacute;n General</h4>
         <span class="tools">
             <a href="javascript:;" class="icon-chevron-down"></a>
         </span>
@@ -43,11 +43,11 @@
         ?>
 
         <p class="entity-user-info">
-            <!--Creado por <span class="bold"><?php echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username ?></span>-->
+            <!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username ?></span>-->
             <?php // echo Util::nicetime($model->fecha_creacion) ?>
             <?php // if ($model->usuario_actualizacion_id): ?>
             <br>
-            <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username ?></span>-->
+            <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username ?></span>-->
             <?php // echo Util::nicetime($model->fecha_actualizacion) ?>
             <?php // endif; ?>
         </p>
