@@ -1,9 +1,9 @@
 <?php
-$modelDireccion = new Direccion('search');
-$modelDireccion->unsetAttributes();
+Yii::app()->clientScript->registerScriptFile('https://maps.googleapis.com/maps/api/js?sensor=true&language=es');
+$modelDireccion1 = new Direccion('search');
 //$modelDireccion->entidad_tipo = Crm_Constants::ENTIDAD_TIPO_CONTACTO;
-$modelDireccion->entidad_id = $model->id ? $model->id : 0;
-$dataProvider = $modelDireccion->search();
+//$modelDireccion->entidad_id = $model->id ? $model->id : 0;
+$dataProvider = $modelDireccion1->search();
 $fData = $dataProvider->getData();
 ?>
 <div class="widget ">
@@ -14,12 +14,75 @@ $fData = $dataProvider->getData();
         </span>
     </div>
     <div class="widget-body">
-        <div id="container_direccion" style='overflow:auto' class="<?php echo empty($fData) ? 'hidden' : ''; ?>"> 
-            <?php
-            $this->widget('ext.bootstrap.widgets.TbGridView', array(
-                'id' => 'direccion-grid',
-                'type' => 'striped bordered hover advance',
-                'dataProvider' => $dataProvider,
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span5">
+                    <?php
+                    $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+                        'type' => 'horizontal',
+                        'id' => 'direccion-form',
+                        'enableAjaxValidation' => true,
+                        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
+                        'enableClientValidation' => false,
+                    ));
+                    ?>
+                    <?php
+                    $modelDireccion = new Direccion;
+                    $modelDireccion->tipo_entidad = 'EMPRESA';
+                    $modelDireccion->entidad_id = 1;
+                    ?>
+                    <?php echo $form->textFieldRow($modelDireccion, 'calle_principal', array('maxlength' => 64)) ?>
+
+                    <?php echo $form->textFieldRow($modelDireccion, 'calle_secundaria', array('maxlength' => 64)) ?>
+
+                    <?php echo $form->textFieldRow($modelDireccion, 'numero', array('maxlength' => 45)) ?>
+
+                    <?php echo $form->dropDownListRow($modelDireccion, 'pais_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Pais::model()->findAll(), 'id', Pais::representingColumn())) ?>
+
+                    <?php echo $form->dropDownListRow($modelDireccion, 'provincia_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Provincia::model()->findAll(), 'id', Provincia::representingColumn())) ?>
+
+                    <?php echo $form->dropDownListRow($modelDireccion, 'ciudad_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Ciudad::model()->findAll(), 'id', Ciudad::representingColumn())) ?>
+
+                    <?php echo $form->textFieldRow($modelDireccion, 'referencia', array('maxlength' => 45)) ?>
+
+                    <?php echo $form->hiddenField($modelDireccion, 'coord_x') ?>
+
+                    <?php echo $form->hiddenField($modelDireccion, 'coord_y') ?>
+
+                    <?php echo $form->hiddenField($modelDireccion, 'tipo_entidad') ?>
+
+                    <?php echo $form->hiddenField($modelDireccion, 'entidad_id') ?>
+                    <?php
+                    $this->widget('bootstrap.widgets.TbButton', array(
+                        'id' => 'add-direccion',
+                        'label' => 'Agregar dirección',
+                        'encodeLabel' => false,
+                        'icon' => 'plus-sign',
+                        'htmlOptions' => array(
+                            'onClick' => 'js:formModalDireccion()',
+                            'class' => 'btn',
+                        ),
+                    ));
+                    ?>
+                    <?php $this->endWidget(); ?>
+
+                </div>
+                <div class="span7">
+                    <div id="map-container" class="">
+                        <div id="map-canvas" style="width:100%; height: 375px"></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row-fluid">
+
+
+                <div id="container_direccion" style='overflow:auto' class=""> 
+                    <?php
+                    $this->widget('ext.bootstrap.widgets.TbGridView', array(
+                        'id' => 'direccion-grid',
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $dataProvider,
 //                'columns' => array(
 //                    array(
 //                        'name' => 'Dirección',
@@ -62,21 +125,10 @@ $fData = $dataProvider->getData();
 //                        )
 //                    ),
 //                ),
-            ));
-            ?>
+                    ));
+                    ?>
+                </div>
+            </div>
         </div>
-        <?php
-        echo empty($fData) ? '' : '<br>';
-        $this->widget('bootstrap.widgets.TbButton', array(
-            'id' => 'add-direccion',
-            'label' => (!empty($fData) ? '' : '<br>') . 'Agregar dirección',
-            'encodeLabel' => false,
-            'icon' => 'plus-sign',
-            'htmlOptions' => array(
-                'onClick' => 'js:formModalDireccion()',
-                'class' => (empty($fData) == false ? 'btn' : 'empty-portlet'),
-            ),
-        ));
-        ?>
-    </div>
-</div>
+    </div>        </div>
+

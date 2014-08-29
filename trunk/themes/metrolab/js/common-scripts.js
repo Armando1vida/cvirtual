@@ -242,7 +242,7 @@ function DesBloquearBotonesModal($form, Detalle, accion)
     $(elemento).attr("disabled", false);
     $(elemento).attr('data-dismiss', 'modal');
     elemento = $form + ' a.btn-success';
-    $(elemento).html('<i class="icon-ok"></i>' + Detalle);
+    $(elemento).html(Detalle);
     $(elemento).attr("disabled", false);
     $(elemento).attr("onclick", accion + '("' + $form + '");');
 }
