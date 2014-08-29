@@ -123,4 +123,30 @@ class DireccionController extends AweController {
         }
     }
 
+    public function actionAjaxGetInformacionEmpresa() {
+//         var_dump($_POST);
+//            die();
+        if (Yii::app()->request->isAjaxRequest) {
+//`tipo_entidad` `entidad_id`
+
+            if (isset($_POST['tipo_entidad'])) {
+//                var_dump("sss");
+//                $tipo_entidad, $entidad_id)
+//                die();
+                $data = Direccion::model()->getInformacionDireccionEntidad($_POST['tipo_entidad'], $_POST['entidad_id']);
+                if ($data) {
+
+                    echo json_encode($data);
+                } else {
+                    $data = array();
+                    echo json_encode($data);
+//                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
+                }
+            } else {
+//                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Pronvicia -', true);
+//                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
+            }
+        }
+    }
+
 }
