@@ -1,8 +1,6 @@
 <?php
-$modelDireccion1 = new Direccion('search');
-//$modelDireccion->entidad_tipo = Crm_Constants::ENTIDAD_TIPO_CONTACTO;
-//$modelDireccion->entidad_id = $model->id ? $model->id : 0;
-$dataProvider = $modelDireccion1->search();
+$modelDireccion = new Direccion('search');
+$dataProvider = $modelDireccion->search();
 $fData = $dataProvider->getData();
 ?>
 <div class="widget ">
@@ -21,14 +19,16 @@ $fData = $dataProvider->getData();
                         'type' => 'horizontal',
                         'id' => 'direccion-form',
                         'enableAjaxValidation' => true,
+                        'action' => Yii::app()->createUrl('/crm/direccion/create'),
                         'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
                         'enableClientValidation' => false,
                     ));
                     ?>
                     <?php
                     $modelDireccion = new Direccion;
+
                     $modelDireccion->tipo_entidad = 'EMPRESA';
-                    $modelDireccion->entidad_id = 1;
+//                    $modelDireccion->entidad_id = 1;
                     ?>
                     <?php echo $form->textFieldRow($modelDireccion, 'calle_principal', array('maxlength' => 64)) ?>
 
@@ -51,18 +51,33 @@ $fData = $dataProvider->getData();
                     <?php echo $form->hiddenField($modelDireccion, 'tipo_entidad') ?>
 
                     <?php echo $form->hiddenField($modelDireccion, 'entidad_id') ?>
-                    <?php
-                    $this->widget('bootstrap.widgets.TbButton', array(
-                        'id' => 'add-direccion',
-                        'label' => 'Agregar dirección',
-                        'encodeLabel' => false,
-                        'icon' => 'plus-sign',
-                        'htmlOptions' => array(
-                            'onClick' => 'js:formModalDireccion()',
-                            'class' => 'btn',
-                        ),
-                    ));
-                    ?>
+
+                    <!--<a href="#" class="btn success ">Finalizar</a>-->
+                    <div class="form-actions">
+                        <?php
+                        $this->widget('bootstrap.widgets.TbButton', array(
+                            'id' => 'add-direccion',
+                            'label' => 'Agregar dirección',
+                            'encodeLabel' => false,
+                            'icon' => 'plus-sign',
+                            'htmlOptions' => array(
+                                'onClick' => 'js:saveDireccion("#direccion-form")',
+                                'class' => 'btn',
+                            ),
+                        ));
+                        ?>
+                        <?php
+                        $this->widget('ext.bootstrap.widgets.TbButton', array(
+                            'type' => 'button',
+                            'id' => 'end_button',
+                            'label' => 'Finalizar',
+                            'htmlOptions' => array(
+                                'href' => Yii::app()->createUrl('/crm/empresa/view/id/'),
+                                'class' => 'btn-info'
+                            )
+                        ));
+                        ?>
+                    </div>
                     <?php $this->endWidget(); ?>
 
                 </div>

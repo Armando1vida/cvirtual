@@ -3,8 +3,8 @@ $(function() {
 //Direccion_coord_x
 //Direccion_coord_y
 //Al inicio empieza asi por defecto
-    $("#Direccion_coord_x").val(0.346024);
-    $("#Direccion_coord_y").val(-78.119574);
+//    $("#Direccion_coord_x").val(0.346024);
+//    $("#Direccion_coord_y").val(-78.119574);
 
 });
 
@@ -49,7 +49,7 @@ function createInfoWindowContent(map, posicionLugar) {
     ].join('<br>');
 }
 function initialize(lat, long) {
-
+//    console.log('entroaaaaaaaaaaaaaaaaaaaa');
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
 
 
@@ -80,9 +80,9 @@ function initialize(lat, long) {
         var new_position = marker.getPosition();
         //asignacion de las coordenadas en cada elemento de dirrecion
         $("#Direccion_coord_x").val(new_position.lat());
-        console.log($("#Direccion_coord_x").val());
+//        console.log($("#Direccion_coord_x").val());
         $("#Direccion_coord_y").val(new_position.lng());
-        console.log($("#Direccion_coord_y").val());
+//        console.log($("#Direccion_coord_y").val());
     });
 
 //    }

@@ -1,5 +1,6 @@
 <?php
-Util::tsRegisterAssetJs('form_wizard.js');
+Util::tsRegisterAssetJs('_direccion.js');
+Util::tsRegisterAssetJs('_form.js');
 Util::tsRegisterAssetJs('gmap.js');
 Yii::app()->clientScript->registerScriptFile('https://maps.googleapis.com/maps/api/js?sensor=true&language=es');
 ?>

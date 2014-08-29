@@ -34,17 +34,21 @@ class DireccionController extends AweController {
         $model = new Direccion;
 
         $this->performAjaxValidation($model, 'direccion-form');
-
+        $enalberender = true;
         if (isset($_POST['Direccion'])) {
             $model->attributes = $_POST['Direccion'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
-            }
+            $result = array();
+            $result['success'] = $model->save();
+            if (!$result['success'])
+                $result['message'] = 'Error al registrar la direccion';
+            $enalberender = false;
+            echo json_encode($result);
         }
-
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        if ($enalberender) {
+            $this->render('create', array(
+                'model' => $model,
+            ));
+        }
     }
 
     /**
