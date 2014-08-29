@@ -20,7 +20,7 @@ $this->pageTitle = $model->nombre;
         <!-- BEGIN CALENDAR PORTLET-->
         <div class="widget ">
             <div class="widget-title">
-                <h4><i class="icon-map-marker"></i> Ubicación</h4>
+                <h4><i class="icon-screenshot"></i> Ubicación</h4>
                 <span class="tools">
                     <a href="javascript:;" class="icon-chevron-down"></a>
                 </span>
@@ -29,6 +29,14 @@ $this->pageTitle = $model->nombre;
                 <?php $this->renderPartial('portlets/_mapaEmpresas', array('model' => $model)); ?>
 
             </div>
+        </div>
+        <div>
+            <!-- BEGIN CALENDAR PORTLET-->
+
+
+            <?php $this->renderPartial('portlets/_direccion', array('model' => $model)); ?>
+
+
         </div>
         <!-- END CALENDAR PORTLET-->
     </div>
