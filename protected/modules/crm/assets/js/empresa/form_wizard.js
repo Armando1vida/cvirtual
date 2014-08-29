@@ -173,6 +173,7 @@ function AjaxGuardarModalFormWizard(verificador, Formulario, callBack)
             },
             success: function(data) {
                 if (data.success) {
+                    console.log(data);
                     habilitarPaneles();
                     setTimeout(function() {
                         var latitudX = (0.346024);

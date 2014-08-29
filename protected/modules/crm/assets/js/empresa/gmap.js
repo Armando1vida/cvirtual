@@ -1,8 +1,10 @@
 $(function() {
-//    var latitudX = (0.346024);
-//    var longitudY = -78.119574;
-////    initializeMap(latitudX, longitudY);
-//    initialize(latitudX, longitudY);
+
+//Direccion_coord_x
+//Direccion_coord_y
+//Al inicio empieza asi por defecto
+    $("#Direccion_coord_x").val(0.346024);
+    $("#Direccion_coord_y").val(-78.119574);
 
 });
 
@@ -48,22 +50,11 @@ function createInfoWindowContent(map, posicionLugar) {
 }
 function initialize(lat, long) {
 
-    var Suiton_Sushi_Bar = new google.maps.LatLng(0.355133, -78.118672);
-    var Mercado_Santo_Domingo = new google.maps.LatLng(0.355272, -78.120174);
-    var PasajeC = new google.maps.LatLng(0.341432, -78.132684);
-    var Equinorte_Comhidrobo = new google.maps.LatLng(0.347081, -78.130549);
-    var Seminuevos_Imbauto = new google.maps.LatLng(0.346837, -78.131256);
-    var Supermaxi = new google.maps.LatLng(0.346091, -78.135708);
-    var Cooperativa_de_Ahorro_y_Credito_Mujeres_Unidas = new google.maps.LatLng(0.353256, -78.116486);
-    var Mercado_Mayorista = new google.maps.LatLng(0.361120, -78.121561);
+    var coordenaEmpresa = new google.maps.LatLng(lat, long);
 
-    var locationArray = [Suiton_Sushi_Bar, Mercado_Santo_Domingo, PasajeC, Equinorte_Comhidrobo, Seminuevos_Imbauto, Supermaxi, Cooperativa_de_Ahorro_y_Credito_Mujeres_Unidas, Mercado_Mayorista];
-    var locationNameArray = ['Suiton Sushi Bar', 'Mercado Santo Domingo', 'Pasaje C', 'Equinorte Comercial hidrobo', 'Seminuevos Imbauto', 'Supermaxi', 'Cooperativa de Ahorro y Credito Mujeres Unidas', 'Mercado_Mayorista'];
-
-    var location = new google.maps.LatLng(lat, long);
 
     var mapOptions = {
-        center: location,
+        center: coordenaEmpresa,
         zoom: 14,
         panControl: true,
         zoomControl: true,
@@ -73,22 +64,28 @@ function initialize(lat, long) {
         overviewMapControl: false
     };
 
+
     var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
 
+    var position = coordenaEmpresa;
+    var marker = new google.maps.Marker({
+        position: position,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        map: map
+    });
+//accion al mover la ubicacion
+    google.maps.event.addListener(marker, 'dragend', function() {
+        var new_position = marker.getPosition();
+        //asignacion de las coordenadas en cada elemento de dirrecion
+        $("#Direccion_coord_x").val(new_position.lat());
+        console.log($("#Direccion_coord_x").val());
+        $("#Direccion_coord_y").val(new_position.lng());
+        console.log($("#Direccion_coord_y").val());
+    });
 
-
-    for (var i = 0; i < locationArray.length; i++) {
-
-        var position = locationArray[i];
-        var marker = new google.maps.Marker({
-            position: position,
-            map: map
-        });
-        var nombreEmpresa = locationNameArray[i];
-        marker.setTitle("Local :" + (i + 1).toString());
-        attachMensajeWindows(marker, nombreEmpresa);
-    }
+//    }
 }
 
 // The five markers show a secret message when clicked

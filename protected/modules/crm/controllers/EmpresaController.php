@@ -41,8 +41,12 @@ class EmpresaController extends AweController {
             $result = array();
             $result['success'] = $model->save();
 
-            if (!$result['success'])
+            if (!$result['success']) {
                 $result['message'] = 'Error al registrar empresa.';
+            }
+            if ($result['success']) {//envio del id de la empresa creada
+                $result['id'] = $model->id;
+            }
             $enable_form = false;
 
             echo json_encode($result);
