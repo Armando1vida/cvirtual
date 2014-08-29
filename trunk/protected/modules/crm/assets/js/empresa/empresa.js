@@ -62,7 +62,7 @@ function initialize(lat, long) {
         center: location,
         zoom: 14,
         panControl: true,
-        zoomControl: true,
+        zoomControl: false,
         mapTypeControl: false,
         scaleControl: false,
         streetViewControl: false,
