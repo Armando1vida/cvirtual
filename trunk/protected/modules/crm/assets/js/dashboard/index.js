@@ -4,6 +4,7 @@ $(function() {
 //    initializeMap(latitudX, longitudY);
     initialize(latitudX, longitudY);
 
+
 });
 
 function tratamiento_clic(overlay, point) {

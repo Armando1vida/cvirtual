@@ -2,7 +2,7 @@
 /** @var EmpresaController $this */
 /** @var Empresa $model */
 $this->menu = array(
-    array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'), 
+    array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'),
     //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
     ),
 );
@@ -20,37 +20,57 @@ $this->menu = array(
     </div>
     <div class="widget-body">
 
-            <?php 
-        $this->widget('bootstrap.widgets.TbGridView',array(
-        'id' => 'empresa-grid',
-        'type' => 'striped bordered hover advance',
-        'dataProvider' => $model->search(),
-        'columns' => array(
-                    'nombre',
-                        'razon_social',
-                        'documento',
-                        'website',
-                        'raking',
-                        'telefono',
-                            /*
-                        'celular',
-                        'email',
-                        'num_item',
-                        array(
-                    'name' => 'categoria_id',
-                    'value' => 'isset($data->categoria) ? $data->categoria : null',
-                    'filter' => CHtml::listData(Categoria::model()->findAll(), 'id', Categoria::representingColumn()),
+        <?php
+        $this->widget('bootstrap.widgets.TbGridView', array(
+            'id' => 'empresa-grid',
+            'type' => 'striped bordered hover advance',
+            'dataProvider' => $model->search(),
+            'columns' => array(
+                array(
+                    'name' => 'nombre',
+                    'value' => 'CHtml::link($data->nombre, Yii::app()->createUrl("crm/empresa/view",array("id"=>$data->id)))',
+                    'type' => 'raw',
                 ),
-                        array(
-                    'name' => 'industria_id',
-                    'value' => 'isset($data->industria) ? $data->industria : null',
-                    'filter' => CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()),
+                'razon_social',
+                'documento',
+                'website',
+                array(
+                    'name' => 'raking',
+                    'class' => 'ext.dzRaty.DzRatyDataColumn', // #2 - Add a jQuery Raty data column
+                    'options' => array(//      Custom options for jQuery Raty data column
+                        'space' => FALSE
+                    ),
+                    'filter' => array('ext.dzRaty.DzRaty', array(// #3 - Add a jQuery Raty filter column
+                            'model' => $model,
+                            'attribute' => 'raking',
+                            'options' => array(//      Custom options for jQuery Raty filter column
+                                'cancel' => TRUE,
+                                'cancelPlace' => 'right'
+                            ),
+                        ))
+                    ,
+                    'header' => 'Estrellas',
                 ),
-                        array(
-                    'name' => 'estado',
-                    'filter' => array('ACTIVO'=>'ACTIVO','INACTIVO'=>'INACTIVO',),
-                ),
-                        */
+                'telefono',
+                /*
+                  'celular',
+                  'email',
+                  'num_item',
+                  array(
+                  'name' => 'categoria_id',
+                  'value' => 'isset($data->categoria) ? $data->categoria : null',
+                  'filter' => CHtml::listData(Categoria::model()->findAll(), 'id', Categoria::representingColumn()),
+                  ),
+                  array(
+                  'name' => 'industria_id',
+                  'value' => 'isset($data->industria) ? $data->industria : null',
+                  'filter' => CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()),
+                  ),
+                  array(
+                  'name' => 'estado',
+                  'filter' => array('ACTIVO'=>'ACTIVO','INACTIVO'=>'INACTIVO',),
+                  ),
+                 */
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',
@@ -66,20 +86,21 @@ $this->menu = array(
                             'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
                             'options' => array('title' => 'Actualizar'),
                             'imageUrl' => false,
-                             //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
+                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
                         ),
                         'delete' => array(
                             'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
                             'options' => array('title' => 'Eliminar'),
                             'imageUrl' => false,
-                            //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
+                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
                         ),
                     ),
                     'htmlOptions' => array(
                         'width' => '80px'
                     )
                 ),
-        ),
-        )); ?>
+            ),
+        ));
+        ?>
     </div>
 </div>
