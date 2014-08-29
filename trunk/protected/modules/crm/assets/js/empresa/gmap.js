@@ -1,8 +1,8 @@
 $(function() {
-    var latitudX = (0.346024);
-    var longitudY = -78.119574;
-//    initializeMap(latitudX, longitudY);
-    initialize(latitudX, longitudY);
+//    var latitudX = (0.346024);
+//    var longitudY = -78.119574;
+////    initializeMap(latitudX, longitudY);
+//    initialize(latitudX, longitudY);
 
 });
 
@@ -26,7 +26,6 @@ function clickMarker(marker, contenido) {
 }
 
 function createInfoWindowContent(map, posicionLugar) {
-
     var numTiles = 1 << map.getZoom();
     var projection = new MercatorProjection();
     var worldCoordinate = projection.fromLatLngToPoint(posicionLugar);

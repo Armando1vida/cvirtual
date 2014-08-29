@@ -1,5 +1,4 @@
 <?php
-Yii::app()->clientScript->registerScriptFile('https://maps.googleapis.com/maps/api/js?sensor=true&language=es');
 $modelDireccion1 = new Direccion('search');
 //$modelDireccion->entidad_tipo = Crm_Constants::ENTIDAD_TIPO_CONTACTO;
 //$modelDireccion->entidad_id = $model->id ? $model->id : 0;
@@ -68,9 +67,9 @@ $fData = $dataProvider->getData();
 
                 </div>
                 <div class="span7">
-                    <div id="map-container" class="">
-                        <div id="map-canvas" style="width:100%; height: 375px"></div>
-                    </div>
+                    <!--<div id="map-container" class="">-->
+                    <div id="map-canvas" style="width:100%; height: 375px"></div>
+                    <!--</div>-->
                 </div>
             </div>
             <hr>

@@ -174,6 +174,11 @@ function AjaxGuardarModalFormWizard(verificador, Formulario, callBack)
             success: function(data) {
                 if (data.success) {
                     habilitarPaneles();
+                    setTimeout(function() {
+                        var latitudX = (0.346024);
+                        var longitudY = -78.119574;
+                        initialize(latitudX, longitudY);
+                    }, 1000);
                 } else {
 
                     DesBloquearBotonesModal(Formulario, 'Crear', 'save');
