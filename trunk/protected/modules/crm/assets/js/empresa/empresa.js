@@ -52,7 +52,7 @@ function createInfoWindowContent(map, posicionLugar) {
 }
 function initialize(lat, long) {
 
-    var Suiton_Sushi_Bar = new google.maps.LatLng(0.355133, -78.118672);
+    var Suiton_Sushi_Bar = new google.maps.LatLng(lat, long);
     var locationArray = [Suiton_Sushi_Bar];
     var locationNameArray = ['Suiton Sushi Bar'];
 
