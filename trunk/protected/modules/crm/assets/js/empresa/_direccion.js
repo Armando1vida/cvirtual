@@ -16,14 +16,15 @@ $(function() {
 //        actualizarDrop();
         provincia_id = $("#Direccion_provincia_id").val();
         actualizarDrop(provincia_id, urlCiudades, "Direccion_ciudad_id");
-        arrayLatLong = getPaisesCoordenadas(pais_id);
+        arrayLatLong = getProvinciasCoordenadas(provincia_id);
         inicializarMapa(arrayLatLong[0], arrayLatLong[1]);
     });
    //al hacer clic solo inicializar l mapa para mostrar la ciudad y asi pueda escoger la info
     $("#Direccion_ciudad_id").change(function() {
 //        actualizarDrop();
         ciudad_id = $("#Direccion_provincia_id").val();
-        arrayLatLong = getPaisesCoordenadas(ciudad_id);
+        arrayLatLong = getCiudadesCoordenadas(ciudad_id);
+        
         inicializarMapa(arrayLatLong[0], arrayLatLong[1]);
     });
 
