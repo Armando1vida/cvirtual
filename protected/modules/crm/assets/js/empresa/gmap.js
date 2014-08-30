@@ -7,7 +7,57 @@ $(function() {
 //    $("#Direccion_coord_y").val(-78.119574);
 
 });
+/**
+ * @Miguel Alba dadyalex777@hotmail.com
+ Descripcion Metodo :Inicializar en un punto especificico 
+ pais,provincia,ciudad
+ Utilizacion Metodo:En la vista portlet direccion en los drop dependientes 
+ Pais,Provincia Ciudad
+ * @returns {undefined}
+ */
 
+
+function inicializarMapa(lat, long)
+{
+
+    var coordenaEmpresa = new google.maps.LatLng(lat, long);
+
+
+    var mapOptions = {
+        center: coordenaEmpresa,
+        zoom: 14,
+        panControl: true,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        overviewMapControl: false
+    };
+
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+    var position = coordenaEmpresa;
+    var marker = new google.maps.Marker({
+        position: position,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        map: map
+    });
+//accion al mover la ubicacion
+    google.maps.event.addListener(marker, 'dragend', function() {
+        var new_position = marker.getPosition();
+        //asignacion de las coordenadas en cada elemento de dirrecion
+        $("#Direccion_coord_x").val(new_position.lat());
+//        console.log($("#Direccion_coord_x").val());
+        $("#Direccion_coord_y").val(new_position.lng());
+//        console.log($("#Direccion_coord_y").val());
+    });
+
+//    }
+
+}
 function tratamiento_clic(overlay, point) {
     alert("Hola amigo! Veo que estás ahí porque has hecho clic!");
     alert("El punto donde has hecho clic es: " + point.toString());

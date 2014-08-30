@@ -130,13 +130,13 @@ class ProvinciaController extends AweController {
     public function actionAjaxGetProvinciaPais2() {
         if (Yii::app()->request->isAjaxRequest) {
 
-            if (isset($_POST['pais_id']) && $_POST['pais_id'] > 0) {
+            if (isset($_POST['idDrop']) && $_POST['idDrop'] > 0) {
 //                $data = Provincia::model()->findAll(array(
 //                    "condition" => "region_id =:region_id ",
 //                    "order" => "nombre",
 //                    "params" => array(':region_id' => $_POST['region_id'],)
 //                ));
-                $data = Provincia::model()->getProvinciasPais($_POST['pais_id']);
+                $data = Provincia::model()->getProvinciasPais($_POST['idDrop']);
                 if ($data) {
                     $data = CHtml::listData($data, 'id', 'nombre');
 //                     echo CHtml::tag('option', array('value' => '-'), CHtml::encode('- PROVINCIAS -'), true);
@@ -157,9 +157,9 @@ class ProvinciaController extends AweController {
     public function actionAjaxGetProvinciaPais() {
         if (Yii::app()->request->isAjaxRequest) {
 
-            if (isset($_POST['pais_id']) && $_POST['pais_id'] > 0) {
+            if (isset($_POST['idDrop']) && $_POST['idDrop'] > 0) {
 
-                $data = Provincia::model()->getProvinciasPais($_POST['pais_id']);
+                $data = Provincia::model()->getProvinciasPais($_POST['idDrop']);
                 if ($data) {
                     $data = CHtml::listData($data, 'id', 'nombre');
                     echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Provincia -', true);

@@ -36,12 +36,81 @@ $fData = $dataProvider->getData();
 
                     <?php echo $form->textFieldRow($modelDireccion, 'numero', array('maxlength' => 45)) ?>
 
-                    <?php echo $form->dropDownListRow($modelDireccion, 'pais_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Pais::model()->findAll(), 'id', Pais::representingColumn())) ?>
+                    <div class="control-group" >
+                        <!-- drop de region -->
+                        <label class="control-label"> <?php echo $form->labelEx($modelDireccion, 'pais_id') ?></label>
+                        <div class="controls">
+                            <?php
+                            $paises = Pais::model()->getInscritasPaises();
+                            $lista_paises = !(count($paises) == 0) ? array(0 => '- Paises -') + CHtml::listData($paises, 'id', 'nombre') : array(0 => '- Ninguna -');
+                            $this->widget(
+                                    'ext.bootstrap.widgets.TbSelect2', array(
+                                'asDropDownList' => TRUE,
+                                'model' => $modelDireccion,
+                                'attribute' => 'pais_id',
+                                'data' => $lista_paises,
+                                'events' => array("event_name" => "Javascript code for handler"),
+                                'options' => array(
+                                    'placeholder' => 'Seleccione Un Pais!',
+//                                    'width' => '25%',
+                                )
+                                    )
+                            );
+                            ?>
 
-                    <?php echo $form->dropDownListRow($modelDireccion, 'provincia_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Provincia::model()->findAll(), 'id', Provincia::representingColumn())) ?>
+                            <?php echo $form->error($modelDireccion, 'pais_id'); ?>
 
-                    <?php echo $form->dropDownListRow($modelDireccion, 'ciudad_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Ciudad::model()->findAll(), 'id', Ciudad::representingColumn())) ?>
+                        </div>
+                    </div>
 
+                    <div class="control-group" >
+                        <!-- drop de region -->
+                        <label class="control-label"> <?php echo $form->labelEx($modelDireccion, 'provincia_id') ?></label>
+                        <div class="controls">
+                            <?php
+                            $lista_provincias = array(0 => '- Ninguna -');
+
+                            $this->widget(
+                                    'ext.bootstrap.widgets.TbSelect2', array(
+                                'asDropDownList' => TRUE,
+                                'model' => $modelDireccion,
+                                'attribute' => 'provincia_id',
+                                'data' => $lista_provincias,
+                                'options' => array(
+//                                    'width' => '25%',
+                                )
+                                    )
+                            );
+                            ?>
+
+                            <?php echo $form->error($modelDireccion, 'provincia_id'); ?>
+
+                        </div>
+                    </div>
+                    <div class="control-group" >
+                        <!-- drop de region -->
+                        <label class="control-label"> <?php echo $form->labelEx($modelDireccion, 'ciudad_id') ?></label>
+                        <div class="controls">
+                            <?php
+                            $lista_ciudades = array(0 => '- Ninguna -');
+
+                            $this->widget(
+                                    'ext.bootstrap.widgets.TbSelect2', array(
+                                'asDropDownList' => TRUE,
+                                'model' => $modelDireccion,
+                                'attribute' => 'ciudad_id',
+                                'data' => $lista_provincias,
+                                'options' => array(
+//                                    'width' => '25%',
+                                )
+                                    )
+                            );
+                            ?>
+
+                            <?php echo $form->error($modelDireccion, 'ciudad_id'); ?>
+
+                        </div>
+                    </div>
                     <?php echo $form->textFieldRow($modelDireccion, 'referencia', array('maxlength' => 45)) ?>
 
                     <?php echo $form->hiddenField($modelDireccion, 'coord_x') ?>
