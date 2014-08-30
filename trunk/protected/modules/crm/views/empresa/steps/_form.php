@@ -27,21 +27,21 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                     <?php echo Yii::t('AweCrud.app', 'Fields with') ?> <span class="required">*</span>
                     <?php echo Yii::t('AweCrud.app', 'are required') ?>.    
                 </p>
-                <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64)) ?>
+                <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64, 'class' => 'span12')) ?>
 
-                <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64)) ?>
+                <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64, 'class' => 'span12')) ?>
 
-                <?php echo $form->textFieldRow($model, 'documento', array('maxlength' => 20)) ?>
+                <?php echo $form->textFieldRow($model, 'documento', array('maxlength' => 20, 'class' => 'span5')) ?>
 
-                <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45)) ?>
+                <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45, 'class' => 'span8')) ?>
 
-                <?php echo $form->textFieldRow($model, 'raking') ?>
+                <?php echo $form->textFieldRow($model, 'raking', array('class' => 'span5')) ?>
 
-                <?php echo $form->textFieldRow($model, 'telefono', array('maxlength' => 45)) ?>
+                <?php echo $form->textFieldRow($model, 'telefono', array('maxlength' => 45, 'class' => 'span5')) ?>
 
-                <?php echo $form->textFieldRow($model, 'celular', array('maxlength' => 45)) ?>
+                <?php echo $form->textFieldRow($model, 'celular', array('maxlength' => 45, 'class' => 'span5')) ?>
 
-                <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45)) ?>
+                <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45, 'class' => 'span5')) ?>
 
                 <?php // echo $form->textFieldRow($model, 'num_item')  ?>
 
