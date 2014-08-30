@@ -122,5 +122,6 @@ class PaisController extends AweController {
             Yii::app()->end();
         }
     }
+//    public function 
 
 }
