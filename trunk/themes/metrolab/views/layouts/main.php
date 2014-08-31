@@ -9,8 +9,8 @@
         <meta charset="utf-8" />
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <!--<link rel="shortcut icon" href="<?php // echo Yii::app()->theme->baseUrl;              ?>/images/favicon.ico" type="image/x-icon">-->
-        <!--<link rel="icon" href="<?php // echo Yii::app()->theme->baseUrl;              ?>/images/favicon.ico" type="image/x-icon">-->
+        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl;              ?>/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<?php echo Yii::app()->theme->baseUrl;              ?>/images/favicon.ico" type="image/x-icon">
 
         <!-- CSS FILES -->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/fonts/font-awesome.css" />
