@@ -36,6 +36,8 @@ class DireccionController extends AweController {
         $this->performAjaxValidation($model, 'direccion-form');
         $enalberender = true;
         if (isset($_POST['Direccion'])) {
+//            var_dump("POST",$_POST['Direccion']);
+//            DIE();
             $model->attributes = $_POST['Direccion'];
             $result = array();
             $result['success'] = $model->save();

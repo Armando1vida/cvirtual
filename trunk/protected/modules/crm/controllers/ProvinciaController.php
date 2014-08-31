@@ -130,7 +130,7 @@ class ProvinciaController extends AweController {
     public function actionAjaxGetProvinciaPais2() {
         if (Yii::app()->request->isAjaxRequest) {
 
-            if (isset($_POST['idDrop']) && $_POST['idDrop'] > 0) {
+            if (isset($_POST['idDrop'])) {
 //                $data = Provincia::model()->findAll(array(
 //                    "condition" => "region_id =:region_id ",
 //                    "order" => "nombre",
@@ -148,8 +148,7 @@ class ProvinciaController extends AweController {
                     echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
                 }
             } else {
-                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- PROVINCIA -', true);
-//                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
+                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- PROVINCIAS -', true);
             }
         }
     }
@@ -157,12 +156,12 @@ class ProvinciaController extends AweController {
     public function actionAjaxGetProvinciaPais() {
         if (Yii::app()->request->isAjaxRequest) {
 
-            if (isset($_POST['idDrop']) && $_POST['idDrop'] > 0) {
+            if (isset($_POST['idDrop'])) {
 
                 $data = Provincia::model()->getProvinciasPais($_POST['idDrop']);
                 if ($data) {
                     $data = CHtml::listData($data, 'id', 'nombre');
-                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Provincia -', true);
+                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- PROVINCIAS -', true);
                     foreach ($data as $value => $name) {
                         echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
                     }
@@ -170,7 +169,7 @@ class ProvinciaController extends AweController {
                     echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
                 }
             } else {
-                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Pronvicia -', true);
+                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- PROVINCIAS -', true);
 //                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
             }
         }

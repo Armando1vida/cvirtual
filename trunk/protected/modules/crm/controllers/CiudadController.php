@@ -131,12 +131,12 @@ class CiudadController extends AweController {
     public function actionAjaxGetCiudadesProvincia() {
         if (Yii::app()->request->isAjaxRequest) {
 
-            if (isset($_POST['idDrop']) && $_POST['idDrop'] > 0) {
+            if (isset($_POST['idDrop'])) {
 
                 $data = Ciudad::model()->getCiudadesProvincias($_POST['idDrop']);
                 if ($data) {
                     $data = CHtml::listData($data, 'id', 'nombre');
-                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Ciudades -', true);
+                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- CIUDADES -', true);
                     foreach ($data as $value => $name) {
                         echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
                     }
@@ -144,7 +144,7 @@ class CiudadController extends AweController {
                     echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
                 }
             } else {
-                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Ciudades -', true);
+                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- CIUDADES -', true);
 //                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
             }
         }

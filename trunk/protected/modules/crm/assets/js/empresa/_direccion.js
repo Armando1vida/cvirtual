@@ -8,7 +8,7 @@ $(function() {
 
         pais_id = $("#Direccion_pais_id").val();
         arrayLatLong = getPaisesCoordenadas(pais_id);
-        inicializarMapa(arrayLatLong[0], arrayLatLong[1]);
+        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "pais");
         actualizarDrop(pais_id, urlProvincias, "Direccion_provincia_id");
     });
     //CIUDADES DE DICHA PROVINCIA
@@ -17,20 +17,21 @@ $(function() {
         provincia_id = $("#Direccion_provincia_id").val();
         actualizarDrop(provincia_id, urlCiudades, "Direccion_ciudad_id");
         arrayLatLong = getProvinciasCoordenadas(provincia_id);
-        inicializarMapa(arrayLatLong[0], arrayLatLong[1]);
+        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "provincia");
     });
-   //al hacer clic solo inicializar l mapa para mostrar la ciudad y asi pueda escoger la info
+    //al hacer clic solo inicializar l mapa para mostrar la ciudad y asi pueda escoger la info
     $("#Direccion_ciudad_id").change(function() {
 //        actualizarDrop();
         ciudad_id = $("#Direccion_provincia_id").val();
         arrayLatLong = getCiudadesCoordenadas(ciudad_id);
-        
-        inicializarMapa(arrayLatLong[0], arrayLatLong[1]);
+
+        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "ciudad");
     });
 
 
 
 });
+
 /**
  * @Miguel Alba dadyalex777@hotmail.com
  Descripcion Metodo: Ingresara el id pais y asi mostrar sus coordenadas 
@@ -59,6 +60,13 @@ function getProvinciasCoordenadas(id_provincia) {
 
     return arrayLatLong;
 }
+/**
+ * @Miguel Alba dadyalex777@hotmail.com
+ Descripcion Metodo: Ingresara el id ciudad y asi mostrar sus coordenadas 
+ Utilizacion Metodo :En esta vista del portelt direccion
+ * @param {type} id_provincia
+ * @returns {undefined}
+ */
 function getCiudadesCoordenadas(id_ciudad) {
 
 //0.3465822,-78.1169987 Ibarra
@@ -150,14 +158,37 @@ function actualizarDrop(idDrop, urlObtenerInfo, dropActualizar)
 
         });
     }
-    else
-    {
-        alert("S");
-//        AjaxListasResetCanton(lista, lista_actualizar);
+    else {
+        //Direccion_pais_id
+//Direccion_provincia_id
+//Direccion_ciudad_id
+        if (dropActualizar == "Direccion_provincia_id") {
+            limpiarDrop(dropActualizar);
+            limpiarDrop("Direccion_ciudad_id");
+        }
+        if (dropActualizar == "Direccion_ciudad_id") {
+            limpiarDrop(dropActualizar);
+            limpiarDrop("Direccion_ciudad_id");
+        }
+
     }
+
+
+
 }
 
-
+/**
+ * @Miguel Alba dadyalex777@hotmail.com
+ Descripcion Metodo: Limpiara a un combo box en especifico
+ Utilizacion Metodo :al exoger en la posicion 0 de cada drop Pais ,ciudad,etc y asignar datos
+ */
+function limpiarDrop(dropActualizar) {
+    datos = '<option value="0">- Ninguna -</option>';
+    $('#s2id_' + dropActualizar + ' a span').html('Ninguna Opcion');
+    $("#" + dropActualizar).html(datos);
+    $('#s2id_' + dropActualizar + ' a span').html($("#" + dropActualizar + " option[id='p']").html());
+    $("#" + dropActualizar).selectBox("refresh");
+}
 function AjaxCargarListas(url, data, callBack)
 {
     $.ajax({
