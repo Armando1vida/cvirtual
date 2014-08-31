@@ -30,22 +30,43 @@ $this->pageTitle = $model->nombre;
 
             </div>
         </div>
-        <div>
-            <!-- BEGIN CALENDAR PORTLET-->
 
+        <!-- BEGIN CALENDAR PORTLET-->
 
-            <?php $this->renderPartial('portlets/_direccion', array('model' => $model)); ?>
+        <div class="widget blue">
+            <div class="widget-title">
+                <h4><i class="icon-map-marker "></i> Direccion</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
+            <div class="widget-body">
+                <div id="portlet_direccion">
+                    <?php $this->renderPartial('portlets/_direccion', array('model' => $model)); ?>
 
-
+                </div>
+            </div>
         </div>
+
+
         <!-- END CALENDAR PORTLET-->
     </div>
     <div class="span5">
-        <!-- BEGIN PROGRESS PORTLET-->
-        <div >
+        <div class="widget orange">
+            <div class="widget-title">
+                <h4><i class="icon-info"></i> Informaci&oacute;n General</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
 
-            <?php $this->renderPartial('portlets/_informacion', array('model' => $model)); ?>
+            <div class="widget-body">
+                <div id="portlet_informacion">
+                    <?php $this->renderPartial('portlets/_informacion', array('model' => $model)); ?>
+                </div>
+            </div>
         </div>
+
         <div class="widget purple">
             <div class="widget-title">
                 <h4><i class="icon-tasks"></i> Productos Agregados </h4>

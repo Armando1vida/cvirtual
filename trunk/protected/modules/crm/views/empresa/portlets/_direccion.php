@@ -1,13 +1,6 @@
 
 
-<div class="widget blue">
-    <div class="widget-title">
-        <h4><i class="icon-map-marker "></i> Direccion</h4>
-        <span class="tools">
-            <a href="javascript:;" class="icon-chevron-down"></a>
-        </span>
-    </div>
-    <div class="widget-body">
+
         <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data' => $model,
@@ -59,9 +52,3 @@
             ),
         ));
         ?>
-    </div>
-
-
-
-
-</div>
