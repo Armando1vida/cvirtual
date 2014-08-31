@@ -21,8 +21,13 @@ class EmpresaController extends AweController {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+//             $modelDireccion = Direccion::model()->findByPk(8);
+             $modelDireccion = Direccion::model()->findByAttributes(array('tipo_entidad'=>"EMPRESA",'entidad_id'=>$id));
+//        $modelDireccion=  Direccion::model()->findAllByAttributes(array('tipo_entidad'=>"EMPRESA",'entidad_id'=>$id));
+//        var_dump($modelDireccion);
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'modelDireccion' =>$modelDireccion
         ));
     }
 
@@ -70,8 +75,8 @@ class EmpresaController extends AweController {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
         $result = array();
-           $model->estado = Empresa::ESTADO_ACTIVO;
-        $model->num_item = 5;
+//           $model->estado = Empresa::ESTADO_ACTIVO;
+//        $model->num_item = 5;
         $this->performAjaxValidation($model, 'empresa-form');
 
         if (Yii::app()->request->isAjaxRequest) {
@@ -107,7 +112,8 @@ class EmpresaController extends AweController {
 //                die();
                 $this->renderPartial('_form_modal', array('model' => $model), false, true);
             }
-        } else {
+        } 
+        else {
             if (isset($_POST['Empresa'])) {
                 $model->attributes = $_POST['Empresa'];
                 if ($model->save()) {
@@ -196,4 +202,18 @@ Descripcion Metodo:
             echo json_encode($result);
         }
     }
+        public function actionAjaxCargarInformacionDireccion($id) {
+              $modelDireccion = Direccion::model()->findByAttributes(array('tipo_entidad'=>"EMPRESA",'entidad_id'=>$id));
+     
+        $result = array();
+        if (Yii::app()->request->isAjaxRequest) {
+           
+            $result['success'] = true;
+//            $this->renderPartial('portlets/_listasVotosMatrizPorcentaje', array('model' => $model))
+            $result['html'] = $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion, 'modal' => TRUE), TRUE, false);
+     
+            echo json_encode($result);
+        }
+    }
+
 }

@@ -9,6 +9,7 @@
 //        //array('label' => Yii::t('AweCrud.app', 'Update'), 'icon' => 'pencil', 'url' => array('update', 'id' => $model->id)),
 //        //array('label' => Yii::t('AweCrud.app', 'Delete'), 'icon' => 'trash', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => Yii::t('AweCrud.app', 'Are you sure you want to delete this item?'))),
 //);
+Util::tsRegisterAssetJs('view.js');
 $this->pageTitle = $model->nombre;
 ?>
 <script>
@@ -42,7 +43,7 @@ $this->pageTitle = $model->nombre;
             </div>
             <div class="widget-body">
                 <div id="portlet_direccion">
-                    <?php $this->renderPartial('portlets/_direccion', array('model' => $model)); ?>
+                    <?php $this->renderPartial('portlets/_direccion', array('modelDireccion'=>$modelDireccion)); ?>
 
                 </div>
             </div>
