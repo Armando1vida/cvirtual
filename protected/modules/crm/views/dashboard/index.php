@@ -4,7 +4,7 @@ $this->pageTitle = Yii::app()->name;
 Util::tsRegisterAssetJs('index.js');
 ?>
 
-<h1>Bienvenido al Demo de <?php echo CHtml::encode(Yii::app()->name); ?></h1>
+<!--<h1>Bienvenido al Demo de <?php // echo CHtml::encode(Yii::app()->name);    ?></h1>-->
 <div class=row-fluid>
     <div class="span12">
         <!-- BEGIN TAB PORTLET-->
@@ -23,16 +23,16 @@ Util::tsRegisterAssetJs('index.js');
                     <div class="clearfix"></div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="portlet_tab1">
-                            <form class="form-horizontal search-result">
-                                <div class="control-group">
-                                    <label class="control-label">MeetClic</label>
-                                    <div class="controls">
-                                        <input type="text" class="input-xxlarge">
-                                        <p class="help-block">About 3,880,000 results (0.29 seconds) </p>
-                                    </div>
-                                    <button type="submit" class="btn ">SEARCH</button>
-                                </div>
-                            </form>
+                            <!--                            <form class="form-horizontal search-result">
+                                                            <div class="control-group">
+                                                                <label class="control-label">MeetClic</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="input-xxlarge">
+                                                                    <p class="help-block">About 3,880,000 results (0.29 seconds) </p>
+                                                                </div>
+                                                                <button type="submit" class="btn ">SEARCH</button>
+                                                            </div>
+                                                        </form>-->
                             <div class="space20"></div>
                             <!-- BEGIN CLASSIC SEARCH-->
 
@@ -140,7 +140,7 @@ Util::tsRegisterAssetJs('index.js');
                             <!--BEGIN PRODUCT SEARCH-->
                             <div class="row-fluid product-search">
                                 <div class="span4 product-text">
-                                    <img alt="" src="img/product1.jpg">
+                                    <!--<img alt="" src="img/product1.jpg">-->
                                     <div class="portfolio-text-info">
                                         <h4>iMac Slim</h4>
                                         <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
@@ -167,7 +167,7 @@ Util::tsRegisterAssetJs('index.js');
                             </div>
                             <div class="row-fluid product-search">
                                 <div class="span4 product-text">
-                                    <img alt="" src="img/product2.png">
+                                    <!--<img alt="" src="img/product2.png">-->
                                     <div class="portfolio-text-info">
                                         <h4>iMac Slim</h4>
                                         <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
@@ -194,7 +194,7 @@ Util::tsRegisterAssetJs('index.js');
                             </div>
                             <div class="row-fluid product-search">
                                 <div class="span4 product-text">
-                                    <img alt="" src="img/product3.png">
+                                    <!--<img alt="" src="img/product3.png">-->
                                     <div class="portfolio-text-info">
                                         <h4>iMac Slim</h4>
                                         <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
@@ -221,7 +221,7 @@ Util::tsRegisterAssetJs('index.js');
                             </div>
                             <div class="row-fluid product-search">
                                 <div class="span4 product-text">
-                                    <img alt="" src="img/product4.png">
+                                    <!--<img alt="" src="img/product4.png">-->
                                     <div class="portfolio-text-info">
                                         <h4>iMac Slim</h4>
                                         <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
@@ -248,7 +248,7 @@ Util::tsRegisterAssetJs('index.js');
                             </div>
                             <div class="row-fluid product-search">
                                 <div class="span4 product-text">
-                                    <img alt="" src="img/product5.png">
+                                    <!--<img alt="" src="img/product5.png">-->
                                     <div class="portfolio-text-info">
                                         <h4>iMac Slim</h4>
                                         <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
