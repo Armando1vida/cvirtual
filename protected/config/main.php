@@ -102,7 +102,7 @@ return array(
         'bootstrap' => array(
             'class' => 'ext.bootstrap.components.Bootstrap',
             'responsiveCss' => true,
-//            'ajaxCssImport' => false,
+            'ajaxCssImport' => false,
         ),
         'messages' => array(
             // 'class' => 'MessageSource',

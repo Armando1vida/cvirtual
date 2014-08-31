@@ -70,8 +70,10 @@ class EmpresaController extends AweController {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
         $result = array();
+           $model->estado = Empresa::ESTADO_ACTIVO;
+        $model->num_item = 5;
         $this->performAjaxValidation($model, 'empresa-form');
-//        $result = array();
+
         if (Yii::app()->request->isAjaxRequest) {
 
             $validadorPartial = false;
@@ -85,6 +87,9 @@ class EmpresaController extends AweController {
                     if (!$result['success']) {
                         $result['mensage'] = "Error al actualizar ";
                     } else {
+                          $validadorPartial = TRUE;
+                        $result['success'] = true;
+//                        var_dump("s",$result['success']);
                         //en un futuro para guardar informacion actualizada
                     }
 
@@ -98,6 +103,8 @@ class EmpresaController extends AweController {
             }
 
             if (!$validadorPartial) {
+//                var_dump("ss");
+//                die();
                 $this->renderPartial('_form_modal', array('model' => $model), false, true);
             }
         } else {
@@ -170,5 +177,23 @@ class EmpresaController extends AweController {
             Yii::app()->end();
         }
     }
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+Utilizacion Metodo:Actualizar view portlets informacinon de empresa
+Descripcion Metodo: 
 
+     * @param type $id
+     */
+    public function actionAjaxCargarInformacionEmpresa($id) {
+        $model = $this->loadModel($id);
+        $result = array();
+        if (Yii::app()->request->isAjaxRequest) {
+            $result['success'] = true;
+//            $this->renderPartial('portlets/_listasVotosMatrizPorcentaje', array('model' => $model))
+            $result['html'] = $this->renderPartial('portlets/_informacion', array('model' => $model, 'modal' => TRUE), TRUE, false);
+//            var_dump($result);
+//            die();
+            echo json_encode($result);
+        }
+    }
 }
