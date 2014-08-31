@@ -4,6 +4,9 @@ Yii::import('crm.models._base.BaseDireccion');
 
 class Direccion extends BaseDireccion {
 
+    const TIPO_EMPRESA = 'EMPRESA';
+    const TIPO_CLIENTE = 'CLIENTE';
+
     /**
      * @return Direccion
      */
