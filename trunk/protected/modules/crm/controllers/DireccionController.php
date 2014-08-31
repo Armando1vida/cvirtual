@@ -60,26 +60,60 @@ class DireccionController extends AweController {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
         $this->performAjaxValidation($model, 'direccion-form');
+        if (Yii::app()->request->isAjaxRequest) {
 
-        if (isset($_POST['Direccion'])) {
-            $model->attributes = $_POST['Direccion'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
+            $validadorPartial = false;
+
+            if (isset($_POST['Direccion'])) {
+
+                $model->attributes = $_POST['Direccion'];
+
+                if ($model->validate()) {//CAPTURAR LOS ERRRORES
+                    $result['success'] = $model->save();
+                    if (!$result['success']) {
+                        $result['mensage'] = "Error al actualizar ";
+                    } else {
+                        $validadorPartial = TRUE;
+                        $result['success'] = true;
+//                        var_dump("s",$result['success']);
+                        //en un futuro para guardar informacion actualizada
+                    }
+
+                    echo json_encode($result);
+                } else {
+                    $result['success'] = false;
+                    $result['errors'] = $model->getErrors();
+                    $validadorPartial = true;
+                    echo json_encode($result);
+                }
             }
-        }
 
-        $this->render('update', array(
-            'model' => $model,
-        ));
+            if (!$validadorPartial) {
+//                var_dump("ss");
+//                die();
+                $this->renderPartial('_form_modal', array('model' => $model), false, true);
+            }
+        } else {
+            if (isset($_POST['Direccion'])) {
+                $model->attributes = $_POST['Direccion'];
+                if ($model->save()) {
+                    $this->redirect(array('admin'));
+                }
+            }
+
+            $this->render('update', array(
+                'model' => $model,
+            ));
+        }
     }
-   /**
-    * MP    
-    * @param type $id
-    */
-    public function actionUpdateEntidad($id,$id_entidad_tipo) {
-        
+
+    /**
+     * MP    
+     * @param type $id
+     */
+    public function actionUpdateEntidad($id, $id_entidad_tipo) {
+
         $model = $this->loadModel($id);
 
         $this->performAjaxValidation($model, 'direccion-form');
@@ -95,6 +129,7 @@ class DireccionController extends AweController {
             'model' => $model,
         ));
     }
+
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -174,5 +209,12 @@ class DireccionController extends AweController {
             }
         }
     }
+
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:Actualizacion d datos en el modal d la vista de Empresa
+      Descripcion Metodo:
+
+     */
 
 }
