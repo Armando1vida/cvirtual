@@ -74,7 +74,27 @@ class DireccionController extends AweController {
             'model' => $model,
         ));
     }
+   /**
+    * MP    
+    * @param type $id
+    */
+    public function actionUpdateEntidad($id,$id_entidad_tipo) {
+        
+        $model = $this->loadModel($id);
 
+        $this->performAjaxValidation($model, 'direccion-form');
+
+        if (isset($_POST['Direccion'])) {
+            $model->attributes = $_POST['Direccion'];
+            if ($model->save()) {
+                $this->redirect(array('admin'));
+            }
+        }
+
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.

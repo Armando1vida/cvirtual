@@ -60,7 +60,7 @@
             'htmlOptions' => array(
 //                'onClick' => 'js:viewModal("campanias/campania/create/id_cuenta/' . $model->cuenta->id . '/id_contacto/' . $model->id . '",function(){'
 //                . 'maskAttributes();})',
-                'onClick' => 'js:viewModal("campanias/campania/update/id/' . $model->id . '",function(){'
+                'onClick' => 'js:viewModal("crm/empresa/update/id/' . $model->id . '",function(){'
                 . 'maskAttributes();})',
 //                'class' => $model ? '' : 'empty-portlet',
             ),
