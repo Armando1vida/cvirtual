@@ -17,15 +17,27 @@ $(function() {
  */
 
 
-function inicializarMapa(lat, long)
+function inicializarMapa(lat, long,tipo)
 {
+    console.log("gmap Inicializar las ubicaciones al realizar clic en los drop PAIS,provincia,ciudad");
+    console.log(lat);
+    console.log(long);
 
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
-
+    var zoomTipo=14;
+    if(tipo=="pais"){
+       zoomTipo=6;
+    }
+    if(tipo=="provincia"){
+          zoomTipo=9;
+    }
+    if(tipo=="ciudad"){
+          zoomTipo=13;
+    }
 
     var mapOptions = {
         center: coordenaEmpresa,
-        zoom: 14,
+        zoom: zoomTipo,
         panControl: true,
         zoomControl: true,
         mapTypeControl: false,

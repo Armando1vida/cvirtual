@@ -26,7 +26,7 @@ $this->pageTitle = $model->nombre;
                 </span>
             </div>
             <div class="widget-body">
-                <?php $this->renderPartial('portlets/_mapaEmpresas', array('model' => $model)); ?>
+                <?php $this->renderPartial('portlets/_ubicacion', array('model' => $model)); ?>
 
             </div>
         </div>

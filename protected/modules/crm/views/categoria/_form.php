@@ -53,3 +53,14 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 </div>
 </div>
 <?php $this->endWidget(); ?>
+<div class="controls">
+    <div class="select2-container select2-container-active select2-dropdown-open" id="s2id_Direccion_pais_id">    <a href="#" onclick="return false;" class="select2-choice" tabindex="-1">   <span>- Paises -</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    </div><select name="Direccion[pais_id]" id="Direccion_pais_id" style="display: none;">
+        <option value="0">- Paises -</option>
+        <option value="1">Ecuador</option>
+    </select>
+    <span class="help-inline error" id="Direccion_pais_id_em_" style="display: none"></span>
+</div>
+<div class="controls">
+    <div class="select2-container select2-container-active select2-dropdown-open" id="s2id_Direccion_provincia_id">    <a href="#" onclick="return false;" class="select2-choice" tabindex="-1">   <span></span><abbr class="select2-search-choice-close" style="display:none;"></abbr> <div><b></b></div></a>  </div><select name="Direccion[provincia_id]" id="Direccion_provincia_id" style="display: none;"><option value="0">- Ninguna -</option></select>
+    <span class="help-inline error" id="Direccion_provincia_id_em_" style="display: none"></span>
+</div>
