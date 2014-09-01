@@ -41,4 +41,55 @@ class Direccion extends BaseDireccion {
         return ($result);
     }
 
+    public function rules() {
+        return array_merge(parent::rules(), array(
+//            array('ciudad_id', 'length',
+//                'min' => 1,
+//                'tooSmall' => 'You must enter minimum 20 characters',
+//            ),
+//            array('provincia_id', 'type', 'type' => 'integer',
+//                'message' => '{attribute}: is not a date!', 'min' => 1),
+            array('provincia_id', 'my_required'),
+            array('pais_id', 'my_required'),
+            array('ciudad_id', 'my_required'),
+//            array('provincia_id', 'length',
+////                'min' => 1,
+//                'max' => 45,
+//                'tooBig' => 'You cannot enter more than 45 characters',
+////                'tooSmall' => 'You must enter minimum 20 characters',}
+//            ),
+//            array('pais_id', 'length',
+//                'min' => 1,
+////                'tooSmall' => 'You must enter minimum 20 characters',
+//            ),
+        ));
+    }
+
+    public function my_required($attribute_name, $params) {
+//        var_dump($this->provincia_id<=0);
+//        die();
+
+
+        switch ($attribute_name) {
+            case "provincia_id":
+                if (empty($this->provincia_id) && ($this->provincia_id <= 0)) {
+
+                    $this->addError($attribute_name, 'Seleccione la informacion');
+                }
+                break;
+            case "pais_id":
+                if (empty($this->pais_id) && ($this->pais_id <= 0)) {
+
+                    $this->addError($attribute_name, 'Seleccione la informacion');
+                }
+                break;
+            case "ciudad_id":
+                if (empty($this->ciudad_id) && ($this->ciudad_id <= 0)) {
+
+                    $this->addError($attribute_name, 'Seleccione la informacion');
+                }
+                break;
+        }
+    }
+
 }
