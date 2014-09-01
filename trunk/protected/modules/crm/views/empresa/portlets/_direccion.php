@@ -2,7 +2,6 @@
 
 
 <?php
-
 //var_dump($modelDireccion);
 $this->widget('bootstrap.widgets.TbDetailView', array(
     'data' => $modelDireccion,
@@ -28,16 +27,15 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
 ?>
 
 <p class="entity-user-info">
-<!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username        ?></span>-->
-    <?php // echo Util::nicetime($model->fecha_creacion)   ?>
+<!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username         ?></span>-->
+    <?php // echo Util::nicetime($model->fecha_creacion)    ?>
     <?php // if ($model->usuario_actualizacion_id):   ?>
     <br>
-    <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username       ?></span>-->
-    <?php // echo Util::nicetime($model->fecha_actualizacion)   ?>
+    <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username        ?></span>-->
+    <?php // echo Util::nicetime($model->fecha_actualizacion)    ?>
     <?php // endif;  ?>
 </p>
 <?php
-
 $this->widget('bootstrap.widgets.TbButton', array(
     'id' => 'add-direccion',
     'label' => ($modelDireccion ? '' : '<br>') . 'Actualizar',

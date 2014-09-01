@@ -22,7 +22,7 @@ function obtenerInformacionEmpresa()
         dataType: 'json',
         data: {
 //            $tipo_entidad, $entidad_id
-            tipo_entidad: "EMPRESA", entidad_id: entidad_id,
+            tipo_entidad: "EMPRESA", entidad_id: entidad_id
         },
         success: function(data) {
 //informacionEntidad=data;
@@ -41,14 +41,14 @@ function obtenerInformacionEmpresa()
             if (data.length > 0) {
                 var latitudX = data[0].latitud;
                 var longitudY = data[0].longitud;
-                initialize(latitudX, longitudY);
+                initialize(latitudX, longitudY,'map-canvas');
             }
             else
             {
                 alert("no hay datos");
                 var latitudX = (0.346024);
                 var longitudY = -78.119574;
-                initialize(latitudX, longitudY);
+                initialize(latitudX, longitudY,'map-canvas');
             }
 
 
@@ -57,7 +57,7 @@ function obtenerInformacionEmpresa()
         error: function(data) {
             var latitudX = (0.346024);
             var longitudY = -78.119574;
-            initialize(latitudX, longitudY);
+            initialize(latitudX, longitudY,'map-canvas');
         }
 
     }
@@ -107,7 +107,7 @@ function createInfoWindowContent(map, posicionLugar) {
                 tileCoordinate.y + ' at Zoom Level: ' + map.getZoom()
     ].join('<br>');
 }
-function initialize(lat, long) {
+function initialize(lat, long,nombre_map_cambas) {
 
     var Suiton_Sushi_Bar = new google.maps.LatLng(lat, long);
     var locationArray = [Suiton_Sushi_Bar];
@@ -126,7 +126,7 @@ function initialize(lat, long) {
         overviewMapControl: false
     };
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+    var map = new google.maps.Map(document.getElementById(nombre_map_cambas),
             mapOptions);
 
 

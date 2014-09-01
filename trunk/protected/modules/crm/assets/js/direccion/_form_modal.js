@@ -9,7 +9,7 @@ function actualizarDireccion(Formulario) {
         success: function(data) {
             if (data.success)
             {
-                ActualizarInformacion("crm/empresa/ajaxCargarInformacionDireccion/id/","#portlet_direccion");
+                ActualizarInformacion("crm/empresa/ajaxCargarInformacionDireccion/id/", "#portlet_direccion");
                 $("#mainModal").modal("hide");
             }
             else

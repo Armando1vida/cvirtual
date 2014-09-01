@@ -17,22 +17,22 @@ $(function() {
  */
 
 
-function inicializarMapa(lat, long,tipo)
+function inicializarMapa(lat, long, tipo, nombre_map_cambas)
 {
     console.log("gmap Inicializar las ubicaciones al realizar clic en los drop PAIS,provincia,ciudad");
     console.log(lat);
     console.log(long);
 
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
-    var zoomTipo=14;
-    if(tipo=="pais"){
-       zoomTipo=6;
+    var zoomTipo = 14;
+    if (tipo == "pais") {
+        zoomTipo = 6;
     }
-    if(tipo=="provincia"){
-          zoomTipo=9;
+    if (tipo == "provincia") {
+        zoomTipo = 9;
     }
-    if(tipo=="ciudad"){
-          zoomTipo=13;
+    if (tipo == "ciudad") {
+        zoomTipo = 13;
     }
 
     var mapOptions = {
@@ -47,7 +47,7 @@ function inicializarMapa(lat, long,tipo)
     };
 
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+    var map = new google.maps.Map(document.getElementById(nombre_map_cambas),
             mapOptions);
 
     var position = coordenaEmpresa;
@@ -110,7 +110,7 @@ function createInfoWindowContent(map, posicionLugar) {
                 tileCoordinate.y + ' at Zoom Level: ' + map.getZoom()
     ].join('<br>');
 }
-function initialize(lat, long) {
+function initialize(lat, long,nombre_map_cambas) {
 //    console.log('entroaaaaaaaaaaaaaaaaaaaa');
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
 
@@ -127,7 +127,7 @@ function initialize(lat, long) {
     };
 
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+    var map = new google.maps.Map(document.getElementById(nombre_map_cambas),
             mapOptions);
 
     var position = coordenaEmpresa;

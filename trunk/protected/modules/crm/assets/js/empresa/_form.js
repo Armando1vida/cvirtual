@@ -73,7 +73,7 @@ function AjaxGuardarModalFormWizard(verificador, Formulario, callBack)
                     setTimeout(function() {
                         var latitudX = (0.346024);
                         var longitudY = -78.119574;
-                        initialize(latitudX, longitudY);
+                        initialize(latitudX, longitudY,"map-canvas");
                     }, 1000);
                 } else {
 
