@@ -8,7 +8,7 @@ $(function() {
 
         pais_id = $("#Direccion_pais_id").val();
         arrayLatLong = getPaisesCoordenadas(pais_id);
-        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "pais");
+//        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "pais","map-camvas");
         actualizarDrop(pais_id, urlProvincias, "Direccion_provincia_id");
     });
     //CIUDADES DE DICHA PROVINCIA
@@ -17,7 +17,7 @@ $(function() {
         provincia_id = $("#Direccion_provincia_id").val();
         actualizarDrop(provincia_id, urlCiudades, "Direccion_ciudad_id");
         arrayLatLong = getProvinciasCoordenadas(provincia_id);
-        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "provincia");
+//        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "provincia","map-camvas");
     });
     //al hacer clic solo inicializar l mapa para mostrar la ciudad y asi pueda escoger la info
     $("#Direccion_ciudad_id").change(function() {
@@ -25,7 +25,9 @@ $(function() {
         ciudad_id = $("#Direccion_provincia_id").val();
         arrayLatLong = getCiudadesCoordenadas(ciudad_id);
 
-        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "ciudad");
+//        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "ciudad","map-camvas");
+        
+        
     });
 
 

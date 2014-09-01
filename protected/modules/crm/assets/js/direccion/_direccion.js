@@ -8,7 +8,6 @@ $(function() {
 //alert("ss");
         pais_id = $("#Direccion_pais_id").val();
 //        arrayLatLong = getPaisesCoordenadas(pais_id);
-//        inicializarMapa(arrayLatLong[0], arrayLatLong[1], "pais");
         actualizarDrop(pais_id, urlProvincias, "Direccion_provincia_id");
     });
     //CIUDADES DE DICHA PROVINCIA
