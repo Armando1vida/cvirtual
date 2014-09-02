@@ -22,6 +22,7 @@ function inicializarMapa(lat, long, tipo, nombre_map_cambas)
     console.log("gmap Inicializar las ubicaciones al realizar clic en los drop PAIS,provincia,ciudad");
     console.log(lat);
     console.log(long);
+    console.log(nombre_map_cambas);
 
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
     var zoomTipo = 14;
