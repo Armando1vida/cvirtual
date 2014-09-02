@@ -589,9 +589,9 @@ a,a:focus, a:hover, a:active {
 }
 /*Li Activo */
 #sidebar > ul > li.active > a{
-    //border: none; Antes solo Asi
+    /*border: none; Antes solo Asi*/
     background-color: #1e2025;
-    border-left: 1px solid #2494F2;
+    border-left:   2px solid #2494F2;
 }
 
 #sidebar > ul > li.active > a .arrow {
