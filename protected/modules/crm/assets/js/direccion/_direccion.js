@@ -1,6 +1,9 @@
 var urlProvincias = "crm/provincia/ajaxGetProvinciaPais";
 var urlCiudades = "crm/ciudad/ajaxGetCiudadesProvincia";
 $(function() {
+//lat, long, tipo, nombre_map_cambas)
+
+    inicializarMapa(coord_x,coord_y,"ciudad","map-canvas_actualizacion_direccion");
     //Direccion_pais_id
 //Direccion_provincia_id
 //Direccion_ciudad_id

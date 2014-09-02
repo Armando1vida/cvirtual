@@ -17,6 +17,8 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 ?>
 <script>
     var entidad_id_direccion = "<?php print $model->id; ?>";
+    var coord_x = "<?php print $model->coord_x; ?>";
+    var coord_y = "<?php print $model->coord_y; ?>";
 </script>
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
