@@ -1,3 +1,11 @@
+/**
+ * @Miguel Alba dadyalex777@hotmail.com
+ Descripcion Metodo: Actualiza la informacion de un detalview en un portlet
+ Utilizacion Metodo : Al realizar las respectivas actualizaciones de la empresa:Direccion,Informacion empres
+ * @param {type} urlaccion : acepta la url en la q esta ubicada la accion para la renderizacion del portle
+ * @param {type} portlet_name 
+ * @returns {undefined}
+ */
 function ActualizarInformacion(urlaccion, portlet_name)
 {
 
