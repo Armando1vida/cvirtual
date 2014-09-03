@@ -10,11 +10,11 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'calle_secundaria',
         'numero',
         'ciudad_id',
-        array(
-            'name' => 'ciudad_id',
-            'value' => ($modelDireccion->ciudad !== null) ? CHtml::link($modelDireccion->ciudad, array('/ciudad/view', 'id' => $modelDireccion->ciudad->id)) . ' ' : null,
-            'type' => 'html',
-        ),
+//        array(
+//            'name' => 'ciudad_id',
+////            'value' => ($modelDireccion->ciudad !== null) ? CHtml::link($modelDireccion->ciudad, array('/ciudad/view', 'id' => $modelDireccion->ciudad->id)) . ' ' : null,
+//            'type' => 'html',
+//        ),
         'provincia_id',
         'pais_id',
         'coord_x',
