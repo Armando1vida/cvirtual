@@ -34,7 +34,13 @@ $this->pageTitle = $model->nombre;
             </div>
             <div class="widget-body">
                 <div id="portlet_direccion">
-                    <?php $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion)); ?>
+
+                    <?php
+
+                    if (!empty($modelDireccion)) {//cuando no hay datos o.O
+                        $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion));
+                    }
+                    ?>
 
                 </div>
             </div>
