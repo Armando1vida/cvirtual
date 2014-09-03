@@ -23,6 +23,7 @@ $this->menu = array(
         <?php
         $this->widget('bootstrap.widgets.TbGridView', array(
             'id' => 'empresa-grid',
+            'afterAjaxUpdate' => 'function(id,data){ $(\'span.star-rating > input\').rating(); $(\'div .rating-cancel\').hide(); ratingA();}',
             'type' => 'striped bordered hover advance',
             'dataProvider' => $model->search(),
             'columns' => array(
