@@ -22,12 +22,12 @@ class EmpresaController extends AweController {
      */
     public function actionView($id) {
 //             $modelDireccion = Direccion::model()->findByPk(8);
-             $modelDireccion = Direccion::model()->findByAttributes(array('tipo_entidad'=>"EMPRESA",'entidad_id'=>$id));
+        $modelDireccion = Direccion::model()->findByAttributes(array('tipo_entidad' => "EMPRESA", 'entidad_id' => $id));
 //        $modelDireccion=  Direccion::model()->findAllByAttributes(array('tipo_entidad'=>"EMPRESA",'entidad_id'=>$id));
 //        var_dump($modelDireccion);
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'modelDireccion' =>$modelDireccion
+            'modelDireccion' => $modelDireccion
         ));
     }
 
@@ -84,20 +84,18 @@ class EmpresaController extends AweController {
             $validadorPartial = false;
 
             if (isset($_POST['Empresa'])) {
-
                 $model->attributes = $_POST['Empresa'];
 
                 if ($model->validate()) {//CAPTURAR LOS ERRRORES
                     $result['success'] = $model->save();
                     if (!$result['success']) {
                         $result['mensage'] = "Error al actualizar ";
-                    } else {
-                          $validadorPartial = TRUE;
-                        $result['success'] = true;
-//                        var_dump("s",$result['success']);
-                        //en un futuro para guardar informacion actualizada
                     }
-
+                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
+                        $result['id'] = $model->id;
+                        $validadorPartial = TRUE;
+                        $result['success'] = true;
+                    }
                     echo json_encode($result);
                 } else {
                     $result['success'] = false;
@@ -108,12 +106,9 @@ class EmpresaController extends AweController {
             }
 
             if (!$validadorPartial) {
-//                var_dump("ss");
-//                die();
                 $this->renderPartial('_form_modal', array('model' => $model), false, true);
             }
-        } 
-        else {
+        } else {
             if (isset($_POST['Empresa'])) {
                 $model->attributes = $_POST['Empresa'];
                 if ($model->save()) {
@@ -183,10 +178,11 @@ class EmpresaController extends AweController {
             Yii::app()->end();
         }
     }
+
     /**
      * @Miguel Alba dadyalex777@hotmail.com
-Utilizacion Metodo:Actualizar view portlets informacinon de empresa
-Descripcion Metodo: 
+      Utilizacion Metodo:Actualizar view portlets informacinon de empresa
+      Descripcion Metodo:
 
      * @param type $id
      */
@@ -202,16 +198,17 @@ Descripcion Metodo:
             echo json_encode($result);
         }
     }
-        public function actionAjaxCargarInformacionDireccion($id) {
-              $modelDireccion = Direccion::model()->findByAttributes(array('tipo_entidad'=>"EMPRESA",'entidad_id'=>$id));
-     
+
+    public function actionAjaxCargarInformacionDireccion($id) {
+        $modelDireccion = Direccion::model()->findByAttributes(array('tipo_entidad' => "EMPRESA", 'entidad_id' => $id));
+
         $result = array();
         if (Yii::app()->request->isAjaxRequest) {
-           
+
             $result['success'] = true;
 //            $this->renderPartial('portlets/_listasVotosMatrizPorcentaje', array('model' => $model))
             $result['html'] = $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion, 'modal' => TRUE), TRUE, false);
-     
+
             echo json_encode($result);
         }
     }

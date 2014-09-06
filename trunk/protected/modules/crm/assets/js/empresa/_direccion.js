@@ -1,5 +1,6 @@
 var urlProvincias = "crm/provincia/ajaxGetProvinciaPais";
 var urlCiudades = "crm/ciudad/ajaxGetCiudadesProvincia";
+var urlDireccion;
 $(function() {
     //Direccion_pais_id
 //Direccion_provincia_id
@@ -80,6 +81,7 @@ function getCiudadesCoordenadas(id_ciudad) {
 
 function saveDireccion(Formulario)
 {
+    alert("sss");
     BloquearBotonesModal(Formulario);
     AjaxGestionModalFormWizardDireccion(Formulario, function(list) {
         $(Formulario).trigger("reset");
@@ -161,9 +163,7 @@ function actualizarDrop(idDrop, urlObtenerInfo, dropActualizar)
         });
     }
     else {
-        //Direccion_pais_id
-//Direccion_provincia_id
-//Direccion_ciudad_id
+
         if (dropActualizar == "Direccion_provincia_id") {
             limpiarDrop(dropActualizar);
             limpiarDrop("Direccion_ciudad_id");
