@@ -79,7 +79,6 @@ class DireccionController extends AweController {
 //                        var_dump("s",$result['success']);
                         //en un futuro para guardar informacion actualizada
                     }
-
                     echo json_encode($result);
                 } else {
                     $result['success'] = false;
@@ -184,28 +183,58 @@ class DireccionController extends AweController {
         }
     }
 
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:En los views para poder mostrar la informacion en google maps
+      Descripcion Metodo:Obtener la informacion completa de dicha empresa para poder  mostrar datos
+     */
     public function actionAjaxGetInformacionEmpresa() {
-//         var_dump($_POST);
-//            die();
         if (Yii::app()->request->isAjaxRequest) {
-//`tipo_entidad` `entidad_id`
 
             if (isset($_POST['tipo_entidad'])) {
-//                var_dump("sss");
-//                $tipo_entidad, $entidad_id)
-//                die();
                 $data = Direccion::model()->getInformacionDireccionEntidad($_POST['tipo_entidad'], $_POST['entidad_id']);
+//Si hay datos
                 if ($data) {
-
                     echo json_encode($data);
                 } else {
+//Enviar un arreglo vacio
                     $data = array();
                     echo json_encode($data);
-//                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
                 }
             } else {
-//                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Pronvicia -', true);
-//                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
+                //surgio un errorF
+                $data = array("error" => false);
+                echo json_encode($data);
+            }
+        }
+    }
+
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:En el js _form d actulizar empresa .
+      Descripcion Metodo:Retorna un arreglo en l cual retorna verdadero y la informacion de dicho modelo
+     * y falso si no tiene informacion
+
+     */
+    public function actionAjaxGetInformacioModelo() {
+        $data = array();
+        if (Yii::app()->request->isAjaxRequest) {
+
+            if (isset($_POST['empresa_id'])) {
+                $datos = Direccion::model()->getInformacionModelo(Direccion::TIPO_EMPRESA, $_POST['empresa_id']);
+//Si hay datos
+                if ($datos) {
+                    $data['existe'] = true;
+                    $data['datos'] = $datos[0];
+                    echo json_encode($data);
+                } else {
+                    $data['existe'] = false;
+                    echo json_encode($data);
+                }
+            } else {
+                //surgio un errorF
+                $data["error"] = true;
+                echo json_encode($data);
             }
         }
     }
@@ -216,5 +245,4 @@ class DireccionController extends AweController {
       Descripcion Metodo:
 
      */
-
 }

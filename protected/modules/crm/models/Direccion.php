@@ -15,9 +15,15 @@ class Direccion extends BaseDireccion {
     }
 
     public static function label($n = 1) {
-        return Yii::t('app', 'Direccion|Direccions', $n);
+        return Yii::t('app', 'Direccion|Direcciones', $n);
     }
 
+    /**
+     * Obtiene la informacion de dicha entidad para mostrar en el google map de las view d empresas
+     * @param type $tipo_entidad 
+     * @param type $entidad_id
+     * @return type
+     */
     public function getInformacionDireccionEntidad($tipo_entidad, $entidad_id) {
 
 //        SELECT dir.id, dir.calle_principal, dir.calle_secundaria, pa.nombre, pro.nombre, ciu.nombre FROM direccion dir
@@ -32,6 +38,30 @@ class Direccion extends BaseDireccion {
                 ->join('pais pa', '(dir.pais_id = pa.id)')
                 ->join('provincia pro', '(dir.provincia_id = pro.id)')
                 ->join('ciudad ciu', '(dir.ciudad_id = ciu.id)')
+                ->where("dir.tipo_entidad = :tipo_entidad AND dir.entidad_id = :entidad_id ");
+        $command->bindValues(array(
+            ':tipo_entidad' => $tipo_entidad,
+            ':entidad_id' => $entidad_id,
+        ));
+        $result = $command->queryAll();
+        return ($result);
+    }
+
+    /**
+     * Obtener informacion de un modelo ya creado en este caso empresa ya creada para asi saber si 
+     * aql modelo tiene informacion agregada de direccion para actualizar o no 
+     * @param type $tipo_entidad
+     * @param type $entidad_id
+     * @return type
+     */
+    public function getInformacionModelo($tipo_entidad, $entidad_id) {
+
+//        SELECT mbre FROM direccion dir
+//        where dir.tipo_entidad = 1 and dir.tipo_entidad = "EMPRESA"
+//        ;
+        $command = Yii::app()->db->createCommand()
+                ->select("*")
+                ->from("direccion dir")
                 ->where("dir.tipo_entidad = :tipo_entidad AND dir.entidad_id = :entidad_id ");
         $command->bindValues(array(
             ':tipo_entidad' => $tipo_entidad,
@@ -66,9 +96,6 @@ class Direccion extends BaseDireccion {
     }
 
     public function my_required($attribute_name, $params) {
-//        var_dump($this->provincia_id<=0);
-//        die();
-
 
         switch ($attribute_name) {
             case "provincia_id":
