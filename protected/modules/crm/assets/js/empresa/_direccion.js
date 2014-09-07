@@ -81,7 +81,7 @@ function getCiudadesCoordenadas(id_ciudad) {
 
 function saveDireccion(Formulario)
 {
-    alert("sss");
+ 
     BloquearBotonesModal(Formulario);
     AjaxGestionModalFormWizardDireccion(Formulario, function(list) {
         $(Formulario).trigger("reset");

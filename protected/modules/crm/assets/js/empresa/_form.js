@@ -111,9 +111,10 @@ function getInfoEmpresa(empresa_id, urlObtenerInfo) {
             $('#direccion-form').attr('action', url_direccionUpdate + "/id/" + data.datos.id);
 //            Direccion_referencia
         }
+        //Informacion de Direccion para este modelo no hay 
         else
         {
-            alert("entro");
+
             $('#direccion-form').attr('action', url_direccionCreate);
 
         }

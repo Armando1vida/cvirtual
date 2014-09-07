@@ -26,7 +26,6 @@ $fData = $dataProvider->getData();
                     ?>
                     <?php
                     $modelDireccion = new Direccion;
-
                     $modelDireccion->tipo_entidad = 'EMPRESA';
 //                    $modelDireccion->entidad_id = 1;
                     ?>
@@ -93,7 +92,6 @@ $fData = $dataProvider->getData();
                         <div class="controls">
                             <?php
                             $lista_ciudades = array(0 => '- Ninguna -');
-
                             $this->widget(
                                     'ext.bootstrap.widgets.TbSelect2', array(
                                 'asDropDownList' => TRUE,
