@@ -19,6 +19,20 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     <h4><i class="icon-tag"></i> Actualizar Informacion </h4>
 </div>
 <div class="modal-body">
+    <div class="control-group" >
+        <label class="control-label"> <?php echo $form->labelEx($model, 'raking') ?></label>
+        <div class="controls">
+
+            <?php
+            $this->widget('ext.DzRaty.DzRaty', array(
+                'model' => $model,
+                'attribute' => 'raking',
+            ));
+            ?>
+            <?php echo $form->error($model, 'raking'); ?>
+        </div>
+    </div>
+
     <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64, 'class' => 'span12')) ?>
 
     <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64, 'class' => 'span12')) ?>
@@ -27,7 +41,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
     <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45, 'class' => 'span8')) ?>
 
-    <?php echo $form->textFieldRow($model, 'raking', array('class' => 'span5')) ?>
 
     <?php echo $form->textFieldRow($model, 'telefono', array('maxlength' => 45, 'class' => 'span5')) ?>
 

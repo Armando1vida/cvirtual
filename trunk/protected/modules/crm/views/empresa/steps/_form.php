@@ -27,6 +27,21 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                     <?php echo Yii::t('AweCrud.app', 'Fields with') ?> <span class="required">*</span>
                     <?php echo Yii::t('AweCrud.app', 'are required') ?>.    
                 </p>
+                <div class="control-group" >
+                    <label class="control-label"> <?php echo $form->labelEx($model, 'raking') ?></label>
+                    <div class="controls">
+
+                        <?php
+                        $this->widget('ext.DzRaty.DzRaty', array(
+                            'model' => $model,
+                            'attribute' => 'raking',
+                        ));
+                        ?>
+                        <?php echo $form->error($model, 'raking'); ?>
+                    </div>
+                </div>
+
+
                 <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64, 'class' => 'span12')) ?>
 
                 <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64, 'class' => 'span12')) ?>
@@ -35,7 +50,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
                 <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45, 'class' => 'span8')) ?>
 
-                <?php echo $form->textFieldRow($model, 'raking', array('class' => 'span5')) ?>
 
                 <?php echo $form->textFieldRow($model, 'telefono', array('maxlength' => 45, 'class' => 'span5')) ?>
 
@@ -43,17 +57,17 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
                 <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45, 'class' => 'span5')) ?>
 
-                <?php // echo $form->textFieldRow($model, 'num_item')  ?>
+                <?php // echo $form->textFieldRow($model, 'num_item')   ?>
 
 
 
-                <?php // echo $form->dropDownListRow($model, 'estado', array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',))  ?>
+                <?php // echo $form->dropDownListRow($model, 'estado', array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',))   ?>
 
             </div>
         </div>
     </div>
     <div class="span5">
-        <?php // if (!empty($categoria)): ?>
+        <?php // if (!empty($categoria)):  ?>
         <div class="widget green">
             <div class="widget-title">
                 <h4><i class="icon-archive"></i> Categoria</h4>
@@ -69,10 +83,10 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                 <!--</div>-->
             </div>
         </div>
-        <?php // endif; ?>
+        <?php // endif;  ?>
     </div>
     <div class="span5">
-        <?php // if (!empty($categoria)): ?>
+        <?php // if (!empty($categoria)):  ?>
         <div class="widget green">
             <div class="widget-title">
                 <h4><i class="icon-archive"></i> Industria</h4>
@@ -88,7 +102,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                 <!--</div>-->
             </div>
         </div>
-        <?php // endif; ?>
+        <?php // endif;  ?>
     </div>
     <div class="span5">
         <div class="form-actions">
