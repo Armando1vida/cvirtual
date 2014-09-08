@@ -155,61 +155,7 @@ $fData = $dataProvider->getData();
                 </div>
             </div>
             <hr>
-            <div class="row-fluid">
 
-
-                <div id="container_direccion" style='overflow:auto' class=""> 
-                    <?php
-                    $this->widget('ext.bootstrap.widgets.TbGridView', array(
-                        'id' => 'direccion-grid',
-                        'type' => 'striped bordered hover advance',
-                        'dataProvider' => $dataProvider,
-//                'columns' => array(
-//                    array(
-//                        'name' => 'Dirección',
-//                        'value' => '$data->direccionGoogle',
-//                        'type' => 'raw',
-//                    ),
-//                    array(
-//                        'header' => 'Fact.',
-//                        'name' => 'facturacion',
-//                        'value' => '$data->facturacion==1?"<i class=\"icon-check\"></i>":""',
-//                        'type' => 'raw',
-//                    ), array(
-//                        'header' => 'Ent.',
-//                        'name' => 'entrega',
-//                        'value' => '$data->entrega==1?"<i class=\"icon-check\"></i>":""',
-//                        'type' => 'raw',
-//                    ),
-//                    array(
-//                        'class' => 'CButtonColumn',
-//                        'template' => '{update} {delete}',
-//                        'buttons' => array(
-//                            'update' => array(
-//                                'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
-//                                'options' => array('title' => 'Actualizar'),
-//                                'imageUrl' => false,
-//                                'url' => '$data->id',
-//                                'click' => 'function() {formModalDireccion(true, $(this).attr("href")); return false;}',
-//                                'visible' => 'Util::checkAccess(array("action_direccion_quickUpdate"))',
-//                            ),
-//                            'delete' => array(
-//                                'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
-//                                'options' => array('title' => 'Eliminar'),
-//                                'url' => 'Yii::app()->createUrl("crm/direccion/delete", array("id"=>$data->id))',
-//                                'imageUrl' => false,
-//                                'visible' => 'Util::checkAccess(array("action_direccion_delete"))',
-//                            ),
-//                        ),
-//                        'htmlOptions' => array(
-//                            'width' => '80px'
-//                        )
-//                    ),
-//                ),
-                    ));
-                    ?>
-                </div>
-            </div>
         </div>
     </div>        </div>
 
