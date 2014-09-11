@@ -39,16 +39,4 @@
         </div>
 
         <?php endif; ?>
-                
-        <?php if (!empty($data->itemDireccion->coord_x)): ?>
-        <div class="field">
-            <div class="field_name">
-                <b><?php echo CHtml::encode($data->getAttributeLabel('item_direccion_id')); ?>:</b>
-            </div>
-            <div class="field_value">
-                <?php echo CHtml::encode($data->itemDireccion->coord_x); ?>
-            </div>
-        </div>
-
-        <?php endif; ?>
     </div>

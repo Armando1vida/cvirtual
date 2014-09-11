@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('item.models._base.BaseItemFoto');
+Yii::import('items.models._base.BaseItemFoto');
 
 class ItemFoto extends BaseItemFoto
 {

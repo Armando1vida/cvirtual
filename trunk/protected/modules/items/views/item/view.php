@@ -1,9 +1,9 @@
 <?php
-/** @var ItemDireccionController $this */
-/** @var ItemDireccion $model */
+/** @var ItemController $this */
+/** @var Item $model */
 
 $this->menu=array(
-    //array('label' => Yii::t('AweCrud.app', 'List') . ' ' . ItemDireccion::label(2), 'icon' => 'list', 'url' => array('index')),
+    //array('label' => Yii::t('AweCrud.app', 'List') . ' ' . Item::label(2), 'icon' => 'list', 'url' => array('index')),
     array('label' => "<div>" . CHtml::image(Yii::app()->baseUrl . "/images/topbar/administrar.png") . "</div>" . Yii::t('AweCrud.app', 'Manage'), 'url' => array('admin')),
     array('label' => "<div>" . CHtml::image(Yii::app()->baseUrl . "/images/topbar/nuevo.png") . "</div>" .  Yii::t('AweCrud.app', 'Create'), 'url' => array('create')),
     //array('label' => Yii::t('AweCrud.app', 'View'), 'icon' => 'eye-open', 'itemOptions'=>array('class'=>'active')),
@@ -19,15 +19,9 @@ $this->menu=array(
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data' => $model,
 	'attributes' => array(
-                  'coord_x',
-             'coord_y',
-             'pais_id',
-             'provincia_id',
-             'ciudad_id',
-             'calle_principal',
-             'calle_secundaria',
-             'numero',
-             'referencia',
+                  'num_foto',
+             'entidad_id',
+             'descripcion',
 	),
 )); ?>
 </fieldset>

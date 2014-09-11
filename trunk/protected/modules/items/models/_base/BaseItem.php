@@ -13,9 +13,7 @@
  * @property integer $num_foto
  * @property integer $entidad_id
  * @property string $descripcion
- * @property integer $item_direccion_id
  *
- * @property ItemDireccion $itemDireccion
  * @property ItemFoto[] $itemFotos
  */
 abstract class BaseItem extends AweActiveRecord {
@@ -34,16 +32,15 @@ abstract class BaseItem extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('num_foto, entidad_id, descripcion, item_direccion_id', 'required'),
-            array('num_foto, entidad_id, item_direccion_id', 'numerical', 'integerOnly'=>true),
+            array('num_foto, entidad_id, descripcion', 'required'),
+            array('num_foto, entidad_id', 'numerical', 'integerOnly'=>true),
             array('descripcion', 'length', 'max'=>45),
-            array('id, num_foto, entidad_id, descripcion, item_direccion_id', 'safe', 'on'=>'search'),
+            array('id, num_foto, entidad_id, descripcion', 'safe', 'on'=>'search'),
         );
     }
 
     public function relations() {
         return array(
-            'itemDireccion' => array(self::BELONGS_TO, 'ItemDireccion', 'item_direccion_id'),
             'itemFotos' => array(self::HAS_MANY, 'ItemFoto', 'item_id'),
         );
     }
@@ -57,8 +54,6 @@ abstract class BaseItem extends AweActiveRecord {
                 'num_foto' => Yii::t('app', 'Num Foto'),
                 'entidad_id' => Yii::t('app', 'Entidad'),
                 'descripcion' => Yii::t('app', 'Descripcion'),
-                'item_direccion_id' => Yii::t('app', 'Item Direccion'),
-                'itemDireccion' => null,
                 'itemFotos' => null,
         );
     }
@@ -70,7 +65,6 @@ abstract class BaseItem extends AweActiveRecord {
         $criteria->compare('num_foto', $this->num_foto);
         $criteria->compare('entidad_id', $this->entidad_id);
         $criteria->compare('descripcion', $this->descripcion, true);
-        $criteria->compare('item_direccion_id', $this->item_direccion_id);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

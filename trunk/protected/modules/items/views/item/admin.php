@@ -1,6 +1,6 @@
 <?php
-/** @var ItemDireccionController $this */
-/** @var ItemDireccion $model */
+/** @var ItemController $this */
+/** @var Item $model */
 $this->menu = array(
     array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'), 
     //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
@@ -12,7 +12,7 @@ $this->menu = array(
 </div> 
 <div class="widget blue">
     <div class="widget-title">
-        <h4> <i class="icon-fire-extinguisher"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo ItemDireccion::label(2) ?> </h4>
+        <h4> <i class="icon-fire-extinguisher"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo Item::label(2) ?> </h4>
         <span class="tools">
             <a href="javascript:;" class="icon-chevron-down"></a>
             <!--a href="javascript:;" class="icon-remove"></a-->
@@ -22,22 +22,13 @@ $this->menu = array(
 
             <?php 
         $this->widget('bootstrap.widgets.TbGridView',array(
-        'id' => 'item-direccion-grid',
+        'id' => 'item-grid',
         'type' => 'striped bordered hover advance',
         'dataProvider' => $model->search(),
         'columns' => array(
-                    'coord_x',
-                        'coord_y',
-                        'pais_id',
-                        'provincia_id',
-                        'ciudad_id',
-                        'calle_principal',
-                            /*
-                        'calle_secundaria',
-                        'numero',
-                        'referencia',
-                        */
-                array(
+                    'num_foto',
+                        'entidad_id',
+                    array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',
                     'afterDelete' => 'function(link,success,data){ 

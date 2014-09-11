@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('item.models._base.BaseItem');
+Yii::import('items.models._base.BaseItem');
 
 class Item extends BaseItem
 {
