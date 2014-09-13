@@ -46,7 +46,7 @@ $mensaje = $model->isNewRecord ? "Nueva" . " " . $model->label(1) : "Actualizar"
         'icon' => 'ok',
         'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
         'htmlOptions' => array(
-            'onClick' => 'js:actualizarEmpresa("#entidad-form")')
+            'onClick' => 'js:agregarEntidad("#entidad-form")')
     ));
     ?>
     <?php

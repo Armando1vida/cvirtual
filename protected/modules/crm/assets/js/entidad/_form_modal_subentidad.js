@@ -1,5 +1,5 @@
 
-function actualizarEmpresa(Formulario) {
+function agregarEntidad(Formulario) {
     $.ajax({
         type: "POST",
         url: $(Formulario).attr('action'),
@@ -8,8 +8,24 @@ function actualizarEmpresa(Formulario) {
         success: function(data) {
             if (data.success)
             {
+                $.fn.yiiGridView.update("subentidad-grid");
 //                ActualizarInformacion("crm/entidad/ajaxCargarInformacionEmpresa/id/", "#portlet_informacion");
                 $("#mainModal").modal("hide");
+                if ($("#informacion_subentidad").hasClass("hidden"))
+                {
+                    $("#informacion_subentidad").removeClass("hidden");
+                    $("#informacion_subentidad").addClass("");
+                }
+                if ($("#add-subentidad").hasClass("empty-portlet")) {
+                    $("#add-subentidad.empty-portlet >br").remove();
+//                    $("#add-subentidad.empty-portlet").remove();
+                    if ($("a#add-subentidad").hasClass("empty-portlet"))
+                    {
+                        $("a#add-subentidad").removeClass("empty-portlet");
+                    }
+
+                }
+
             }
             else
             {
