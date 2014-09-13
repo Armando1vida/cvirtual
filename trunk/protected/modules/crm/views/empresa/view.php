@@ -36,9 +36,10 @@ $this->pageTitle = $model->nombre;
                 <div id="portlet_direccion">
 
                     <?php
-
                     if (!empty($modelDireccion)) {//cuando no hay datos o.O
                         $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion));
+                    } else {
+                        echo "ss";
                     }
                     ?>
 
@@ -60,7 +61,7 @@ $this->pageTitle = $model->nombre;
 
             <div class="widget-body">
                 <div id="portlet_informacion">
-                    <?php $this->renderPartial('portlets/_informacion', array('model' => $model)); ?>
+<?php $this->renderPartial('portlets/_informacion', array('model' => $model)); ?>
                 </div>
             </div>
         </div>
@@ -73,7 +74,7 @@ $this->pageTitle = $model->nombre;
                 </span>
             </div>
             <div class="widget-body">
-                <?php $this->renderPartial('portlets/_items', array('model' => $model)); ?>
+<?php $this->renderPartial('portlets/_items', array('model' => $model)); ?>
             </div>
         </div>
         <!-- END PROGRESS PORTLET-->
