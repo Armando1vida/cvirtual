@@ -19,12 +19,8 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         </span>
     </div>
     <div class="widget-body">
-
-
-
-        <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 45)) ?>
         <div class="control-group">
-            <label class="control-label required" for="Categoria_peso">Estrella <span class="required"></span></label>
+            <label class="control-label required" for="Categoria_peso">Categoria <span class="required"></span></label>
             <div class="controls">
                 <?php
                 $this->widget('ext.dzRaty.DzRaty', array(
@@ -33,7 +29,15 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                 ));
                 ?>
             </div>
+
         </div>
+        <!-- $max_entidad
+         * @property integer $max_foto-->
+
+        <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 45)) ?>
+        <?php echo $form->textFieldRow($model, 'max_entidad', array('maxlength' => 45)) ?>
+        <?php echo $form->textFieldRow($model, 'max_foto', array('maxlength' => 45)) ?>
+
     </div>             
     <div class="form-actions">
         <?php
@@ -53,7 +57,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 </div>
 </div>
 <?php $this->endWidget(); ?>
-<div class="controls">
+<!--<div class="controls">
     <div class="select2-container select2-container-active select2-dropdown-open" id="s2id_Direccion_pais_id">    <a href="#" onclick="return false;" class="select2-choice" tabindex="-1">   <span>- Paises -</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    </div><select name="Direccion[pais_id]" id="Direccion_pais_id" style="display: none;">
         <option value="0">- Paises -</option>
         <option value="1">Ecuador</option>
@@ -63,4 +67,4 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 <div class="controls">
     <div class="select2-container select2-container-active select2-dropdown-open" id="s2id_Direccion_provincia_id">    <a href="#" onclick="return false;" class="select2-choice" tabindex="-1">   <span></span><abbr class="select2-search-choice-close" style="display:none;"></abbr> <div><b></b></div></a>  </div><select name="Direccion[provincia_id]" id="Direccion_provincia_id" style="display: none;"><option value="0">- Ninguna -</option></select>
     <span class="help-inline error" id="Direccion_provincia_id_em_" style="display: none"></span>
-</div>
+</div>-->
