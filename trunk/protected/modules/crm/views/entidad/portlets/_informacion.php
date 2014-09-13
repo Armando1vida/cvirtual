@@ -5,7 +5,7 @@ $this->widget('ext.DzRaty.DzRaty', array(
     'model' => $model,
     'attribute' => 'raking',
     'value' => $model->raking,
-    'data' => array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'),
+    'data' => array('1', '2', '3', '4', '5'),
     'options' => array(
         'width' => 400,
         'readOnly' => true,
@@ -44,55 +44,25 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
 ));
 if ($modelDireccion != null):
     ?>
-    <details style="text-align: right">
-        <summary id="summary_direccion">Detalles Direccion</summary>
+    <?php $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion)); ?>
 
-    </details>
-    <div style="display:none" id="detalle_direccion">
-        <h4 style="display: inline-block ; padding-right: 15px"><i class="icon-youtube-play"></i><?php echo ' Detalles' ?> </h4>
-
-
-        <?php
-        $this->widget('bootstrap.widgets.TbDetailView', array(
-            'data' => $modelDireccion,
-            'attributes' => array(
-                'calle_principal',
-                'calle_secundaria',
-                'numero',
-//        'ciudad_id',
-                array(
-                    'name' => 'ciudad_id',
-                    'value' => ($modelDireccion->ciudad !== null) ? $modelDireccion->ciudad : null,
-//            'type' => 'html',
-                ),
-                'provincia_id',
-                'pais_id',
-                'coord_x',
-                'coord_y',
-                'referencia',
-                'tipo_entidad',
-                'entidad_id',
-            ),
-        ));
-        ?>
-    </div>
 <?php endif; ?>
 
 
 
 <p class="entity-user-info">
-    <!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username       ?></span>-->
+    <!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username           ?></span>-->
     <?php // echo Util::nicetime($model->fecha_creacion)  ?>
     <?php // if ($model->usuario_actualizacion_id):  ?>
     <br>
-    <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username       ?></span>-->
+    <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username           ?></span>-->
     <?php // echo Util::nicetime($model->fecha_actualizacion)  ?>
     <?php // endif;  ?>
 </p>
 <?php
 $this->widget('bootstrap.widgets.TbButton', array(
     'id' => 'add-actualizar',
-    'label' => ($model ? '' : '<br>') . 'Actualizar',
+    'label' => ($model ? '' : '<br>') . 'Actualizar Informacion',
     'encodeLabel' => false,
     'icon' => $model ? 'icon-edit-sign' : 'tag',
     'htmlOptions' => array(

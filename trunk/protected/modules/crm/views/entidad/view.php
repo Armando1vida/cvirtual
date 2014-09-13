@@ -27,7 +27,7 @@ $this->pageTitle = $model->nombre;
 
         <div class="widget blue">
             <div class="widget-title">
-                <h4><i class="icon-map-marker "></i> Direccion</h4>
+                <h4><i class="icon-map-marker "></i> Sucursales</h4>
                 <span class="tools">
                     <a href="javascript:;" class="icon-chevron-down"></a>
                 </span>
@@ -36,9 +36,8 @@ $this->pageTitle = $model->nombre;
                 <div id="portlet_direccion">
 
                     <?php
-
 //                    if (!empty($modelDireccion)) {//cuando  hay datos o.O
-//                        $this->renderPartial('portlets/_direccion', array('modelDireccion' => ));
+                    $this->renderPartial('portlets/_sucursales', array('model' => $model));
 //                    }
 //                    else {
 //                        echo "ss";
@@ -63,7 +62,7 @@ $this->pageTitle = $model->nombre;
 
             <div class="widget-body">
                 <div id="portlet_informacion">
-                    <?php $this->renderPartial('portlets/_informacion', array('model' => $model,'modelDireccion'=>$modelDireccion)); ?>
+                    <?php $this->renderPartial('portlets/_informacion', array('model' => $model, 'modelDireccion' => $modelDireccion)); ?>
                 </div>
             </div>
         </div>
