@@ -63,7 +63,6 @@ class DireccionController extends AweController {
         $model = $this->loadModel($id);
         $this->performAjaxValidation($model, 'direccion-form');
         if (Yii::app()->request->isAjaxRequest) {
-            var_dump("esntro");
             $validadorPartial = false;
 
             if (isset($_POST['Direccion'])) {
@@ -193,7 +192,7 @@ class DireccionController extends AweController {
         if (Yii::app()->request->isAjaxRequest) {
 
             if (isset($_POST['tipo_entidad'])) {
-                $data = Direccion::model()->getInformacionDireccionEntidad( $_POST['entidad_id']);
+                $data = Direccion::model()->getInformacionDireccionEntidad($_POST['entidad_id']);
 //Si hay datos
                 if ($data) {
                     echo json_encode($data);
