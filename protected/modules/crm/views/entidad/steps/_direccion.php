@@ -96,7 +96,7 @@
                         <?php
                         $this->widget('bootstrap.widgets.TbButton', array(
                             'id' => 'add-direccion',
-                            'label' => 'Agregar dirección',
+                            'label' => 'Guardar dirección',
                             'encodeLabel' => false,
                             'icon' => 'plus-sign',
                             'htmlOptions' => array(

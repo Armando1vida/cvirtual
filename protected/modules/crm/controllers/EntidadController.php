@@ -68,7 +68,7 @@ class EntidadController extends AweController {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-        $model->direccion=$model->direccion ? $model->direccion : New Direccion;
+        $model->direccion = $model->direccion ? $model->direccion : New Direccion;
         $this->performAjaxValidation($model, 'entidad-form');
 
         $enable_form = true;
