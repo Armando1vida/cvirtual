@@ -12,6 +12,7 @@
  * @property integer $id
  * @property string $nombre
  * @property integer $provincia_id
+ * @property integer $pais_id
  *
  * @property Provincia $provincia
  * @property Direccion[] $direccions
@@ -32,10 +33,10 @@ abstract class BaseCiudad extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('nombre, provincia_id', 'required'),
-            array('provincia_id', 'numerical', 'integerOnly'=>true),
+            array('nombre, provincia_id, pais_id', 'required'),
+            array('provincia_id, pais_id', 'numerical', 'integerOnly'=>true),
             array('nombre', 'length', 'max'=>45),
-            array('id, nombre, provincia_id', 'safe', 'on'=>'search'),
+            array('id, nombre, provincia_id, pais_id', 'safe', 'on'=>'search'),
         );
     }
 
@@ -54,6 +55,7 @@ abstract class BaseCiudad extends AweActiveRecord {
                 'id' => Yii::t('app', 'ID'),
                 'nombre' => Yii::t('app', 'Nombre'),
                 'provincia_id' => Yii::t('app', 'Provincia'),
+                'pais_id' => Yii::t('app', 'Pais'),
                 'provincia' => null,
                 'direccions' => null,
         );
@@ -65,6 +67,7 @@ abstract class BaseCiudad extends AweActiveRecord {
         $criteria->compare('id', $this->id);
         $criteria->compare('nombre', $this->nombre, true);
         $criteria->compare('provincia_id', $this->provincia_id);
+        $criteria->compare('pais_id', $this->pais_id);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

@@ -1,6 +1,6 @@
 <?php
 
-class ProvinciaController extends AweController {
+class EntidadController extends AweController {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -8,7 +8,7 @@ class ProvinciaController extends AweController {
      */
     public $layout = '//layouts/column2';
     public $defaultAction = 'admin';
-    public $admin = true;
+    public $admin = false;
 
     public function filters() {
         return array(
@@ -31,20 +31,34 @@ class ProvinciaController extends AweController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Provincia;
+        $model = new Entidad;
+        $model->direccion = New Direccion;
+//        die(var_dump($model->direccion));
+        $model->estado = Empresa::ESTADO_ACTIVO;
+        $this->performAjaxValidation($model, 'entidad-form');
+        $enable_form = true;
 
-        $this->performAjaxValidation($model, 'provincia-form');
+        if (isset($_POST['Entidad'])) {
+            $model->attributes = $_POST['Entidad'];
+            $result = array();
+            $result['success'] = $model->save();
 
-        if (isset($_POST['Provincia'])) {
-            $model->attributes = $_POST['Provincia'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
+            if (!$result['success']) {
+                $result['message'] = 'Error al registrar empresa.';
             }
-        }
+            if ($result['success']) {//envio del id de la empresa creada
+                $result['id'] = $model->id;
+            }
+            $enable_form = false;
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+            echo json_encode($result);
+        }
+        if ($enable_form) {
+            $this->render('create', array(
+                'model' => $model,
+//                'categoria' => $categoria,
+            ));
+        }
     }
 
     /**
@@ -55,10 +69,10 @@ class ProvinciaController extends AweController {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
-        $this->performAjaxValidation($model, 'provincia-form');
+        $this->performAjaxValidation($model, 'entidad-form');
 
-        if (isset($_POST['Provincia'])) {
-            $model->attributes = $_POST['Provincia'];
+        if (isset($_POST['Entidad'])) {
+            $model->attributes = $_POST['Entidad'];
             if ($model->save()) {
                 $this->redirect(array('admin'));
             }
@@ -90,10 +104,10 @@ class ProvinciaController extends AweController {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new Provincia('search');
+        $model = new Entidad('search');
         $model->unsetAttributes(); // clear any default values
-        if (isset($_GET['Provincia']))
-            $model->attributes = $_GET['Provincia'];
+        if (isset($_GET['Entidad']))
+            $model->attributes = $_GET['Entidad'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -106,7 +120,7 @@ class ProvinciaController extends AweController {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id, $modelClass = __CLASS__) {
-        $model = Provincia::model()->findByPk($id);
+        $model = Entidad::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -117,36 +131,9 @@ class ProvinciaController extends AweController {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model, $form = null) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'provincia-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'entidad-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
-        }
-    }
-
-    /**
-     * Obtiene la lista de provincias filtrada por un pais
-     * 
-     */
-    public function actionAjaxGetProvinciaPais() {
-        if (Yii::app()->request->isAjaxRequest) {
-            if (isset($_POST['pais_id']) && $_POST['pais_id'] != '') {
-                $data = Provincia::model()->findAll(array(
-                    "condition" => "pais_id =:pais_id",
-                    "order" => "nombre",
-                    "params" => array(':pais_id' => $_POST['pais_id'],)
-                ));
-                if ($data) {
-                    $data = CHtml::listData($data, 'id', 'nombre');
-                    echo CHtml::tag('option', array('value' => null, 'em' => 'p'), '- Provincias -', true);
-                    foreach ($data as $value => $name) {
-                        echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
-                    }
-                } else {
-                    echo CHtml::tag('option', array('value' => null), '- No existen opciones -', true);
-                }
-            } else {
-                echo CHtml::tag('option', array('value' => null, 'em' => 'p'), '- Seleccione un pais -', true);
-            }
         }
     }
 

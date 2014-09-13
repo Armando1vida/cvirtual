@@ -9,7 +9,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
     'enableClientValidation' => false,
         ));
-Util::tsRegisterAssetJs('_ubicacion.js');
+Util::tsRegisterAssetJs('_form.js');
 ?>
 <div class="widget blue">
     <div class="widget-title">
@@ -20,71 +20,44 @@ Util::tsRegisterAssetJs('_ubicacion.js');
         </span>
     </div>
     <div class="widget-body">
-        <div class="control-group" >
-            <!-- drop de region -->
-            <label class="control-label"> <?php echo $form->labelEx($model, 'pais_id') ?></label>
-            <div class="controls">
-                <?php
-                $paises = Pais::model()->getInscritasPaises();
-                $lista_paises = !(count($paises) == 0) ? array(0 => '- Paises -') + CHtml::listData($paises, 'id', 'nombre') : array(0 => '- Ninguna -');
-                $this->widget(
-                        'ext.bootstrap.widgets.TbSelect2', array(
-                    'asDropDownList' => TRUE,
-                    'model' => $model,
-                    'attribute' => 'pais_id',
-                    'data' => $lista_paises,
-                    'events' => array("event_name" => "Javascript code for handler"),
-                    'options' => array(
-                        'placeholder' => 'Seleccione Un Pais!',
-                        'width' => '25%',
-                    )
-                        )
-                );
-                ?>
-
-                <?php echo $form->error($model, 'pais_id'); ?>
-
-            </div>
-        </div>
-
-        <div class="control-group" >
-            <!-- drop de region -->
-            <label class="control-label"> <?php echo $form->labelEx($model, 'provincia_id') ?></label>
-            <div class="controls">
-                <?php
-                $lista_provincias = array(0 => '- Ninguna -');
-
-                $this->widget(
-                        'ext.bootstrap.widgets.TbSelect2', array(
-                    'asDropDownList' => TRUE,
-                    'model' => $model,
-                    'attribute' => 'provincia_id',
-                    'data' => $lista_provincias,
-                    'options' => array(
-                        'width' => '25%',
-                    )
-                        )
-                );
-//                $this->widget(
-//                        'ext.bootstrap.widgets.TbSelect2', array(
-//                    'asDropDownList' => TRUE,
-//                    'model' => $model,
-//                    'attribute' => 'provincia_id',
-//                    'data' => array(0 => '- Ninguna -'),
-////                    'events' => array("event_name" => "Javascript code for handler"),
-//                    'options' => array(
-//                        'placeholder' => 'Seleccione Una Provincia',
-////                        'width' => '25%',  ajaxGetProvinciaPais
-//                    )
-//                        )
-//                );
-                ?>
-
-                <?php echo $form->error($model, 'provincia_id'); ?>
-
-            </div>
-        </div>
         <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 45)) ?>
+
+        <?php
+        if ($model->isNewRecord) {
+            $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
+            $data_provincia = array();
+        } else {
+            $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
+            $data_provincia = CHtml::listData(Provincia::model()->findAll(array(
+                                "condition" => "pais_id =:pais_id",
+                                "order" => "nombre",
+                                "params" => array(':pais_id' => $model->pais_id,)
+                            )), 'id', 'nombre');
+        }
+        ?>
+
+        <?php
+        echo $form->select2Row(
+                $model, 'pais_id', array(
+            'asDropDownList' => true,
+            'data' => !empty($data_pais) ? array(null => ' -- Seleccione Pais -- ') + $data_pais : array(null => ' - Ninguno -'),
+            'options' => array(
+                'width' => '40%',
+            )
+                )
+        );
+        ?>
+        <?php
+        echo $form->select2Row(
+                $model, 'provincia_id', array(
+            'asDropDownList' => true,
+            'data' => !empty($data_provincia) ? array(null => ' -- Seleccione Pais -- ') + $data_provincia : array(null => ' - Ninguno -'),
+            'options' => array(
+                'width' => '40%',
+            )
+                )
+        );
+        ?>
 
         <div class="form-actions">
             <?php
