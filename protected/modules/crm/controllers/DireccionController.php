@@ -41,8 +41,9 @@ class DireccionController extends AweController {
             $model->attributes = $_POST['Direccion'];
             $result = array();
             $result['success'] = $model->save();
-            if (!$result['success'])
+            if (!$result['success']) {
                 $result['message'] = 'Error al registrar la direccion';
+            }
             $enalberender = false;
             echo json_encode($result);
         }

@@ -16,7 +16,6 @@ function saveDireccion(Formulario)
         DesBloquearBotonesModal(Formulario, 'Agregar dirección', 'saveDireccion');
     });
 }
-//
 function AjaxGestionModalFormWizardDireccion($form, CallBack) {
     var form = $($form);
     var settings = form.data('settings');
@@ -56,8 +55,11 @@ function AjaxGuardarModalFormWizardDireccion(verificador, Formulario, callBack)
                 if (data.success) {
                     $(Formulario).trigger("reset");
                     $('#Direccion_entidad_id').val($entidad_id);
-                    bootbox.alert('Dirección registrada correctamente');
-                    $('#add-direccion').remove();
+                    document.location.href = baseUrl + 'crm/entidad/view/id/' + $entidad_id;
+
+                    //                    bootbox.alert('Dirección registrada correctamente');
+                    //                    $('#add-direccion').remove();
+
                 } else {
 
                     DesBloquearBotonesModal(Formulario, 'Agregar dirección', 'saveDireccion');
