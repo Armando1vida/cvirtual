@@ -91,8 +91,9 @@ class EntidadController extends AweController {
         if (Yii::app()->request->isAjaxRequest) {
 
             $validadorPartial = false;
-
+//            var_dump($_POST);
             if (isset($_POST['Entidad'])) {
+               
                 $model->attributes = $_POST['Entidad'];
 
                 if ($model->validate()) {//CAPTURAR LOS ERRRORES
@@ -185,6 +186,26 @@ class EntidadController extends AweController {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'entidad-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:Actualizar view portlets informacinon de empresa
+      Descripcion Metodo:
+
+     * @param type $id
+     */
+    public function actionAjaxCargarInformacionEmpresa($id) {
+        $model = $this->loadModel($id);
+        $result = array();
+        if (Yii::app()->request->isAjaxRequest) {
+            $result['success'] = true;
+//            $this->renderPartial('portlets/_listasVotosMatrizPorcentaje', array('model' => $model))
+            $result['html'] = $this->renderPartial('portlets/_informacion', array('model' => $model, 'modal' => TRUE), TRUE, false);
+//            var_dump($result);
+//            die();
+            echo json_encode($result);
         }
     }
 

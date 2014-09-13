@@ -6,7 +6,7 @@
 Yii::app()->clientScript->scriptMap['jquery.js'] = false;
 Util::tsRegisterAssetJs('_form_modal.js');
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
-    'id' => 'empresa-form',
+    'id' => 'entidad-form',
     'type' => 'horizontal',
 //    'action' => $model->isNewRecord ? Yii::app()->createUrl('/crm/empresa/create') : Yii::app()->createUrl('/crm/empresa/update', array('id' => $model->id)),
     'enableAjaxValidation' => true,
@@ -32,22 +32,26 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             <?php echo $form->error($model, 'raking'); ?>
         </div>
     </div>
+    <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64)) ?>
 
-    <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64, 'class' => 'span12')) ?>
+    <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64)) ?>
 
-    <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64, 'class' => 'span12')) ?>
+    <?php echo $form->textFieldRow($model, 'documento', array('maxlength' => 20)) ?>
 
-    <?php echo $form->textFieldRow($model, 'documento', array('maxlength' => 20, 'class' => 'span5')) ?>
+    <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45)) ?>
 
-    <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45, 'class' => 'span8')) ?>
+    <?php echo $form->textFieldRow($model, 'telefono', array('maxlength' => 45)) ?>
+
+    <?php echo $form->textFieldRow($model, 'celular', array('maxlength' => 45)) ?>
+
+    <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45)) ?>
+
+    <?php echo $form->textFieldRow($model, 'max_entidad') ?>
 
 
-    <?php echo $form->textFieldRow($model, 'telefono', array('maxlength' => 45, 'class' => 'span5')) ?>
+    <?php echo $form->textFieldRow($model, 'max_foto') ?>
 
-    <?php echo $form->textFieldRow($model, 'celular', array('maxlength' => 45, 'class' => 'span5')) ?>
-
-    <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45, 'class' => 'span5')) ?>
-
+    <?php echo $form->hiddenField($model, 'id') ?>
 </div>
 
 <div class="modal-footer">
@@ -57,7 +61,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         'icon' => 'ok',
         'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
         'htmlOptions' => array(
-            'onClick' => 'js:actualizarEmpresa("#empresa-form")')
+            'onClick' => 'js:actualizarEmpresa("#entidad-form")')
     ));
     ?>
     <?php
