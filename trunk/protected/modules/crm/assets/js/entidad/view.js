@@ -6,6 +6,9 @@
  * @param {type} portlet_name 
  * @returns {undefined}
  */
+$(function() {
+    MostrarDetalleDireccion();
+});
 function ActualizarInformacion(urlaccion, portlet_name)
 {
 
@@ -19,4 +22,14 @@ function ActualizarInformacion(urlaccion, portlet_name)
 //    $('#calendar').fullCalendar('refetchEvents');
 
 
+}
+function MostrarDetalleDireccion() {
+    $('#summary_direccion').click(function(event) {
+        $('#detalle_direccion').animate({
+            'height': 'toggle'
+        }, 1000, function() {
+        });
+        ;
+        event.preventDefault();
+    });
 }
