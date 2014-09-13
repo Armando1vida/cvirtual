@@ -17,9 +17,10 @@ class DashboardController extends Controller {
     public function actionIndex() {
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
-        $points = Empresa::model()->getPointEmpresa();
+//        $points = Empresa::model()->getPointEmpresa();
 //        die(var_dump($points));
-        $this->render('index', array('points' => $points));
+//        $this->render('index', array('points' => $points));
+        $this->render('index');
     }
 
     /**
