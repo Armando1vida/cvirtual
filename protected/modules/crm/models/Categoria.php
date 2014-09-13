@@ -29,4 +29,11 @@ class Categoria extends BaseCategoria {
         );
     }
 
+    public function attributeLabels() {
+        return array_merge(parent::attributeLabels(), array(
+            'max_entidad' => Yii::t('app', 'Número de Items'),
+            'max_foto' => Yii::t('app', 'Número de Fotos'),
+        ));
+    }
+
 }

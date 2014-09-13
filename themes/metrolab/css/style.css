@@ -1188,6 +1188,7 @@ form legend {
     margin: 2px 0 0;
     list-style: none;
     text-shadow: none;
+    /**Barra inferior azul  */
     background-color: #fcfcfc;
     border: 1px solid rgba(0, 2, 1, 0.2);
     -webkit-box-shadow: 0 0px 0px rgba(0, 2, 1, 0.4);
