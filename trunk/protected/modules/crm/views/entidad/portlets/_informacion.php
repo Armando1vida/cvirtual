@@ -20,26 +20,24 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'documento',
         array(
             'name' => 'website',
-            'type' => 'url'
         ),
         'telefono',
         'celular',
         array(
             'name' => 'email',
-            'type' => 'email'
         ),
-        'num_item',
+//        'num_item',
         array(
             'name' => 'categoria_id',
-            'value' => ($model->categoria !== null) ? CHtml::link($model->categoria, array('/categoria/view', 'id' => $model->categoria->id)) . ' ' : null,
+            'value' => ($model->categoria !== null) ? $model->categoria : null,
             'type' => 'html',
         ),
         array(
             'name' => 'industria_id',
-            'value' => ($model->industria !== null) ? CHtml::link($model->industria, array('/industria/view', 'id' => $model->industria->id)) . ' ' : null,
+            'value' => ($model->industria !== null) ? $model->industria : null,
             'type' => 'html',
         ),
-        'estado',
+//        'estado',
     ),
 ));
 if ($modelDireccion != null):
@@ -51,11 +49,11 @@ if ($modelDireccion != null):
 
 
 <p class="entity-user-info">
-    <!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username           ?></span>-->
+    <!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username              ?></span>-->
     <?php // echo Util::nicetime($model->fecha_creacion)  ?>
     <?php // if ($model->usuario_actualizacion_id):  ?>
     <br>
-    <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username           ?></span>-->
+    <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username              ?></span>-->
     <?php // echo Util::nicetime($model->fecha_actualizacion)  ?>
     <?php // endif;  ?>
 </p>
