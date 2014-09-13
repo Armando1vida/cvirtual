@@ -1,6 +1,5 @@
 
 function actualizarEmpresa(Formulario) {
-boto
     $.ajax({
         type: "POST",
         url: baseUrl + 'crm/entidad/update/id/' + entidad_id,
