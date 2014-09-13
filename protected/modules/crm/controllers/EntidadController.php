@@ -21,10 +21,8 @@ class EntidadController extends AweController {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
-        $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'modelDireccion' => $modelDireccion
         ));
     }
 
@@ -70,67 +68,29 @@ class EntidadController extends AweController {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
-//        $this->performAjaxValidation($model, 'entidad-form');
-//
-//        if (isset($_POST['Entidad'])) {
-//            $model->attributes = $_POST['Entidad'];
-//            if ($model->save()) {
-//                $this->redirect(array('admin'));
-//            }
-//        }
-//
-//        $this->render('update', array(
-//            'model' => $model,
-//        ));
-        $result = array();
-//           $model->estado = Empresa::ESTADO_ACTIVO;
-//        $model->num_item = 5;
+        $model->direccion=$model->direccion ? $model->direccion : New Direccion;
         $this->performAjaxValidation($model, 'entidad-form');
 
-        if (Yii::app()->request->isAjaxRequest) {
+        $enable_form = true;
 
-            $validadorPartial = false;
-//            var_dump($_POST);
-            if (isset($_POST['Entidad'])) {
-               
-                $model->attributes = $_POST['Entidad'];
+        if (isset($_POST['Entidad'])) {
+            $model->attributes = $_POST['Entidad'];
+            $result = array();
+            $result['success'] = $model->save();
 
-                if ($model->validate()) {//CAPTURAR LOS ERRRORES
-                    $result['success'] = $model->save();
-                    if (!$result['success']) {
-                        $result['mensage'] = "Error al actualizar ";
-                    }
-                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
-                        $result['id'] = $model->id;
-                        $validadorPartial = TRUE;
-                        $result['success'] = true;
-                    }
-                    echo json_encode($result);
-                } else {
-                    $result['success'] = false;
-                    $result['errors'] = $model->getErrors();
-                    $validadorPartial = true;
-                    echo json_encode($result);
-                }
+            if (!$result['success']) {
+                $result['message'] = 'Error al actualizar empresa.';
             }
-
-            if (!$validadorPartial) {
-                $this->renderPartial('_form_modal', array('model' => $model), false, true);
+            if ($result['success']) {//envio del id de la empresa creada
+                $result['id'] = $model->id;
             }
-        } else {
-            if (isset($_POST['Entidad'])) {
-                $model->attributes = $_POST['Entidad'];
-                if ($model->save()) {
-                    $this->redirect(array('admin'));
-                }
-            }
-            $categoria = Categoria::model()->activos()->findAll();
+            $enable_form = false;
 
-
+            echo json_encode($result);
+        }
+        if ($enable_form) {
             $this->render('update', array(
                 'model' => $model,
-                'categoria' => $categoria,
             ));
         }
     }
@@ -186,26 +146,6 @@ class EntidadController extends AweController {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'entidad-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
-        }
-    }
-
-    /**
-     * @Miguel Alba dadyalex777@hotmail.com
-      Utilizacion Metodo:Actualizar view portlets informacinon de empresa
-      Descripcion Metodo:
-
-     * @param type $id
-     */
-    public function actionAjaxCargarInformacionEmpresa($id) {
-        $model = $this->loadModel($id);
-        $result = array();
-        if (Yii::app()->request->isAjaxRequest) {
-            $result['success'] = true;
-//            $this->renderPartial('portlets/_listasVotosMatrizPorcentaje', array('model' => $model))
-            $result['html'] = $this->renderPartial('portlets/_informacion', array('model' => $model, 'modal' => TRUE), TRUE, false);
-//            var_dump($result);
-//            die();
-            echo json_encode($result);
         }
     }
 

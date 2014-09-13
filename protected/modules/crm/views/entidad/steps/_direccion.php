@@ -37,22 +37,16 @@
                         $data_ciudad = array();
                     } else {
                         $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
-                        $data_provincia = array();
-                        $data_ciudad = array();
-                        if ($modelDireccion->pais_id) {
-                            $data_provincia = CHtml::listData(Provincia::model()->findAll(array(
-                                                "condition" => "pais_id =:pais_id",
-                                                "order" => "nombre",
-                                                "params" => array(':pais_id' => $modelDireccion->pais_id,)
-                                            )), 'id', 'nombre');
-                        }
-                        if ($modelDireccion->provincia_id) {
-                            $data_provincia = CHtml::listData(Ciudad::model()->findAll(array(
-                                                "condition" => "provincia_id =:provincia_id",
-                                                "order" => "nombre",
-                                                "params" => array(':provincia_id' => $modelDireccion->provincia_id,)
-                                            )), 'id', 'nombre');
-                        }
+                        $data_provincia = CHtml::listData(Provincia::model()->findAll(array(
+                                            "condition" => "pais_id =:pais_id",
+                                            "order" => "nombre",
+                                            "params" => array(':pais_id' => $modelDireccion->pais_id,)
+                                        )), 'id', 'nombre');
+                        $data_ciudad = CHtml::listData(Ciudad::model()->findAll(array(
+                                            "condition" => "provincia_id =:provincia_id",
+                                            "order" => "nombre",
+                                            "params" => array(':provincia_id' => $modelDireccion->provincia_id,)
+                                        )), 'id', 'nombre');
                     }
                     ?>
 
