@@ -19,7 +19,6 @@
  * @property double $coord_x
  * @property double $coord_y
  * @property string $referencia
- * @property string $tipo_entidad
  * @property integer $entidad_id
  *
  * @property Ciudad $ciudad
@@ -35,20 +34,19 @@ abstract class BaseDireccion extends AweActiveRecord {
     }
 
     public static function representingColumn() {
-        return 'tipo_entidad';
+        return 'calle_principal';
     }
 
     public function rules() {
         return array(
-            array('ciudad_id, provincia_id, pais_id, tipo_entidad, entidad_id', 'required'),
+            array('entidad_id', 'required'),
             array('ciudad_id, provincia_id, pais_id, entidad_id', 'numerical', 'integerOnly'=>true),
             array('coord_x, coord_y', 'numerical'),
             array('calle_principal, calle_secundaria', 'length', 'max'=>64),
-            array('numero, referencia', 'length', 'max'=>45),
-            array('tipo_entidad', 'length', 'max'=>7),
-            array('tipo_entidad', 'in', 'range' => array('EMPRESA','CLIENTE')), // enum,
-            array('calle_principal, calle_secundaria, numero, coord_x, coord_y, referencia', 'default', 'setOnEmpty' => true, 'value' => null),
-            array('id, calle_principal, calle_secundaria, numero, ciudad_id, provincia_id, pais_id, coord_x, coord_y, referencia, tipo_entidad, entidad_id', 'safe', 'on'=>'search'),
+            array('numero', 'length', 'max'=>20),
+            array('referencia', 'length', 'max'=>45),
+            array('calle_principal, calle_secundaria, numero, ciudad_id, provincia_id, pais_id, coord_x, coord_y, referencia', 'default', 'setOnEmpty' => true, 'value' => null),
+            array('id, calle_principal, calle_secundaria, numero, ciudad_id, provincia_id, pais_id, coord_x, coord_y, referencia, entidad_id', 'safe', 'on'=>'search'),
         );
     }
 
@@ -73,7 +71,6 @@ abstract class BaseDireccion extends AweActiveRecord {
                 'coord_x' => Yii::t('app', 'Coord X'),
                 'coord_y' => Yii::t('app', 'Coord Y'),
                 'referencia' => Yii::t('app', 'Referencia'),
-                'tipo_entidad' => Yii::t('app', 'Tipo Entidad'),
                 'entidad_id' => Yii::t('app', 'Entidad'),
                 'ciudad' => null,
         );
@@ -92,7 +89,6 @@ abstract class BaseDireccion extends AweActiveRecord {
         $criteria->compare('coord_x', $this->coord_x);
         $criteria->compare('coord_y', $this->coord_y);
         $criteria->compare('referencia', $this->referencia, true);
-        $criteria->compare('tipo_entidad', $this->tipo_entidad, true);
         $criteria->compare('entidad_id', $this->entidad_id);
 
         return new CActiveDataProvider($this, array(
