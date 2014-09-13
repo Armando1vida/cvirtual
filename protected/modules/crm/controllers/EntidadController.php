@@ -21,8 +21,8 @@ class EntidadController extends AweController {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        //Modelo de la 
         $modelDireccion = Direccion::model()->findByAttributes(array( 'entidad_id' => $id));
-
         $this->render('view', array(
             'model' => $this->loadModel($id),
             'modelDireccion' => $modelDireccion
