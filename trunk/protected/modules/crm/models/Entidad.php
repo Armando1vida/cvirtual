@@ -72,4 +72,37 @@ class Entidad extends BaseEntidad {
         return $command->queryAll();
     }
 
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:Portlet view.entidad._sucursales
+      Descripcion Metodo:Un dataprovider para mostrar unicamente los datos de subentidaddes de dicha entidad
+
+     */
+    public function searchSubendidad($entidad_id) {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $this->id);
+        $criteria->compare('nombre', $this->nombre, true);
+        $criteria->compare('razon_social', $this->razon_social, true);
+        $criteria->compare('documento', $this->documento, true);
+        $criteria->compare('website', $this->website, true);
+        $criteria->compare('raking', $this->raking);
+        $criteria->compare('telefono', $this->telefono, true);
+        $criteria->compare('celular', $this->celular, true);
+        $criteria->compare('email', $this->email, true);
+        $criteria->compare('max_entidad', $this->max_entidad);
+        $criteria->compare('estado', $this->estado, true);
+        $criteria->compare('matriz', $this->matriz);
+        $criteria->compare('categoria_id', $this->categoria_id);
+        $criteria->compare('industria_id', $this->industria_id);
+        $criteria->compare('entidad_id', $this->entidad_id);
+        $criteria->addCondition('entidad_id=:entidad_id AND estado=:estado', 'AND');
+        $Params = array(':entidad_id' => $entidad_id, ':estado' => 'ACTIVO');
+        $criteria->params = array_merge($criteria->params, $Params);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
 }
