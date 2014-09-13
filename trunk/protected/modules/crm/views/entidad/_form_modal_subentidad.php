@@ -4,7 +4,7 @@
 /** @var AweActiveForm $form */
 // Prevenir que jquery se cargue dos veces
 Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-Util::tsRegisterAssetJs('_form_modal.js');
+Util::tsRegisterAssetJs('_form_modal_subentidad.js');
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'id' => 'entidad-form',
     'type' => 'horizontal',
@@ -13,26 +13,14 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => false,),
     'enableClientValidation' => false,
         ));
-$mensaje = $model->isNewRecord ? "Nueva" ." ".$model->label(1) : "Actualizar" ." ".$model->label(1) ;
+$mensaje = $model->isNewRecord ? "Nueva" . " " . $model->label(1) : "Actualizar" . " " . $model->label(1);
 ?>
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
     <h4><i class="icon-tag"></i> <?php echo $mensaje ?> </h4>
 </div>
 <div class="modal-body">
-    <div class="control-group" >
-        <label class="control-label"> <?php echo $form->labelEx($model, 'raking') ?></label>
-        <div class="controls">
 
-            <?php
-            $this->widget('ext.DzRaty.DzRaty', array(
-                'model' => $model,
-                'attribute' => 'raking',
-            ));
-            ?>
-            <?php echo $form->error($model, 'raking'); ?>
-        </div>
-    </div>
     <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64)) ?>
 
     <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64)) ?>
@@ -46,6 +34,8 @@ $mensaje = $model->isNewRecord ? "Nueva" ." ".$model->label(1) : "Actualizar" ."
     <?php echo $form->textFieldRow($model, 'celular', array('maxlength' => 45)) ?>
 
     <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45)) ?>
+    <?php echo $form->dropDownListRow($model, 'categoria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Categoria::model()->activos()->findAll(), 'id', Categoria::representingColumn()), array('class' => 'span12 fix',)) ?>
+    <?php echo $form->dropDownListRow($model, 'industria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()), array('class' => 'span12 fix',)) ?>
 
 </div>
 

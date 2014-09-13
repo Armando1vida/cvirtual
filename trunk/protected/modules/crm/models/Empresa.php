@@ -56,7 +56,7 @@ class Empresa extends BaseEmpresa {
         if ($id) {
             $command->andWhere('t.id=:id', array(':id' => $id));
         }
-        $command->params = array(':tipo_empresa' => Direccion::TIPO_EMPRESA, ':estado' => self::ESTADO_ACTIVO);
+        $command->params = array('estado' => self::ESTADO_ACTIVO);
         return $command->queryAll();
     }
 

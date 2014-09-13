@@ -2,13 +2,14 @@
 function actualizarEmpresa(Formulario) {
     $.ajax({
         type: "POST",
-        url: baseUrl + 'crm/entidad/update/id/' + entidad_id,
+//        url: baseUrl + 'crm/entidad/update/id/' + entidad_id,
+        url: $(Formulario).attr('action'),
         dataType: 'json',
         data: $(Formulario).serialize(),
         success: function(data) {
             if (data.success)
             {
-                ActualizarInformacion("crm/entidad/ajaxCargarInformacionEmpresa/id/","#portlet_informacion");
+                ActualizarInformacion("crm/entidad/ajaxCargarInformacionEmpresa/id/", "#portlet_informacion");
                 $("#mainModal").modal("hide");
             }
             else
