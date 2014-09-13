@@ -184,4 +184,85 @@ class EntidadController extends AweController {
         }
     }
 
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:Actualizar view portlets informacinon de empresa
+      Descripcion Metodo:
+
+     * @param type $id
+     */
+    public function actionAjaxCargarInformacionEmpresa($id) {
+        $model = $this->loadModel($id);
+        $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
+
+        $result = array();
+        if (Yii::app()->request->isAjaxRequest) {
+            $result['success'] = true;
+//            $this->renderPartial('portlets/_listasVotosMatrizPorcentaje', array('model' => $model))
+            $result['html'] = $this->renderPartial('portlets/_informacion', array('model' => $model, 'modelDireccion' => $modelDireccion, 'modal' => TRUE), TRUE, false);
+//            var_dump($result);
+//            die();
+            echo json_encode($result);
+        }
+    }
+
+    public function actionAjaxCargarInformacionDireccion($id) {
+//        $modelDireccion = Direccion::model()->findByAttributes(array('tipo_entidad' => "EMPRESA", 'entidad_id' => $id));
+//
+//        $result = array();
+//        if (Yii::app()->request->isAjaxRequest) {
+//
+//            $result['success'] = true;
+////            $this->renderPartial('portlets/_listasVotosMatrizPorcentaje', array('model' => $model))
+//            $result['html'] = $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion, 'modal' => TRUE), TRUE, false);
+//
+//            echo json_encode($result);
+//        }
+    }
+
+    public function actionCreateSubentidad($id) {
+        $model = new Entidad;
+        $model->direccion = New Direccion;
+//        die(var_dump($model->direccion));
+        $model->estado = Entidad::ESTADO_ACTIVO;
+        $model->matriz = 0;
+        $model->entidad_id = $id;
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'entidad-form') {
+            echo CActiveForm::validate($model);
+            
+            Yii::app()->end();
+        }
+//        $this->performAjaxValidation($model, 'entidad-form');
+        if (Yii::app()->request->isAjaxRequest) {
+
+            $validadorPartial = false;
+            $result = array();
+            if (isset($_POST['Entidad'])) {
+                $model->attributes = $_POST['Entidad'];
+
+                if ($model->validate()) {//CAPTURAR LOS ERRRORES
+                    $result['success'] = $model->save();
+                    if (!$result['success']) {
+                        $result['mensage'] = "Error al actualizar ";
+                    }
+                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
+                        $result['id'] = $model->id;
+                        $validadorPartial = TRUE;
+                        $result['success'] = true;
+                    }
+                    echo json_encode($result);
+                } else {
+                    $result['success'] = false;
+                    $result['errors'] = $model->getErrors();
+                    $validadorPartial = true;
+                    echo json_encode($result);
+                }
+            }
+
+            if (!$validadorPartial) {
+                $this->renderPartial('_form_modal_subentidad', array('model' => $model), false, true);
+            }
+        }
+    }
+
 }

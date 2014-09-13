@@ -25,28 +25,10 @@ $this->pageTitle = $model->nombre;
 
         <!-- BEGIN CALENDAR PORTLET-->
 
-        <div class="widget blue">
-            <div class="widget-title">
-                <h4><i class="icon-tasks"></i> Sucursales</h4>
-                <span class="tools">
-                    <a href="javascript:;" class="icon-chevron-down"></a>
-                </span>
-            </div>
-            <div class="widget-body">
-                <div id="portlet_direccion">
+        <!--<div class="widget blue">-->
+            <?php $this->renderPartial('portlets/_sucursales', array('model' => $model,)); ?>
 
-                    <?php
-//                    if (!empty($modelDireccion)) {//cuando  hay datos o.O
-                    $this->renderPartial('portlets/_sucursales', array('model' => $model));
-//                    }
-//                    else {
-//                        echo "ss";
-//                    }
-                    ?>
-
-                </div>
-            </div>
-        </div>
+        <!--</div>-->
 
 
         <!-- END CALENDAR PORTLET-->
