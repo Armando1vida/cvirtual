@@ -37,7 +37,7 @@ $this->pageTitle = $model->nombre;
 
                     <?php
 
-                    if (!empty($modelDireccion)) {//cuando no hay datos o.O
+                    if (!empty($modelDireccion)) {//cuando  hay datos o.O
                         $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion));
                     }
                     ?>

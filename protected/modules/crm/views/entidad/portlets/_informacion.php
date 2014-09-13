@@ -61,14 +61,14 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
 </p>
 <?php
 $this->widget('bootstrap.widgets.TbButton', array(
-    'id' => 'add-Oportunidad',
+    'id' => 'add-actualizar',
     'label' => ($model ? '' : '<br>') . 'Actualizar',
     'encodeLabel' => false,
     'icon' => $model ? 'icon-edit-sign' : 'tag',
     'htmlOptions' => array(
 //                'onClick' => 'js:viewModal("campanias/campania/create/id_cuenta/' . $model->cuenta->id . '/id_contacto/' . $model->id . '",function(){'
 //                . 'maskAttributes();})',
-        'onClick' => 'js:viewModal("crm/empresa/update/id/' . $model->id . '",function(){'
+        'onClick' => 'js:viewModal("crm/entidad/update/id/' . $model->id . '",function(){'
         . 'maskAttributes();})',
 //                'class' => $model ? '' : 'empty-portlet',
     ),

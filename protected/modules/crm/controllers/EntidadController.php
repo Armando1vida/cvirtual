@@ -21,8 +21,10 @@ class EntidadController extends AweController {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'modelDireccion' => $modelDireccion
         ));
     }
 
@@ -69,18 +71,67 @@ class EntidadController extends AweController {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
+//        $this->performAjaxValidation($model, 'entidad-form');
+//
+//        if (isset($_POST['Entidad'])) {
+//            $model->attributes = $_POST['Entidad'];
+//            if ($model->save()) {
+//                $this->redirect(array('admin'));
+//            }
+//        }
+//
+//        $this->render('update', array(
+//            'model' => $model,
+//        ));
+        $result = array();
+//           $model->estado = Empresa::ESTADO_ACTIVO;
+//        $model->num_item = 5;
         $this->performAjaxValidation($model, 'entidad-form');
 
-        if (isset($_POST['Entidad'])) {
-            $model->attributes = $_POST['Entidad'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
-            }
-        }
+        if (Yii::app()->request->isAjaxRequest) {
 
-        $this->render('update', array(
-            'model' => $model,
-        ));
+            $validadorPartial = false;
+
+            if (isset($_POST['Entidad'])) {
+                $model->attributes = $_POST['Entidad'];
+
+                if ($model->validate()) {//CAPTURAR LOS ERRRORES
+                    $result['success'] = $model->save();
+                    if (!$result['success']) {
+                        $result['mensage'] = "Error al actualizar ";
+                    }
+                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
+                        $result['id'] = $model->id;
+                        $validadorPartial = TRUE;
+                        $result['success'] = true;
+                    }
+                    echo json_encode($result);
+                } else {
+                    $result['success'] = false;
+                    $result['errors'] = $model->getErrors();
+                    $validadorPartial = true;
+                    echo json_encode($result);
+                }
+            }
+
+            if (!$validadorPartial) {
+                $this->renderPartial('_form_modal', array('model' => $model), false, true);
+            }
+        } else {
+            if (isset($_POST['Entidad'])) {
+                $model->attributes = $_POST['Entidad'];
+                if ($model->save()) {
+                    $this->redirect(array('admin'));
+                }
+            }
+            $categoria = Categoria::model()->activos()->findAll();
+
+
+            $this->render('update', array(
+                'model' => $model,
+                'categoria' => $categoria,
+            ));
+        }
     }
 
     /**
