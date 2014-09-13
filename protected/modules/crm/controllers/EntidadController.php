@@ -22,7 +22,7 @@ class EntidadController extends AweController {
      */
     public function actionView($id) {
         //Modelo de la 
-        $modelDireccion = Direccion::model()->findByAttributes(array( 'entidad_id' => $id));
+        $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
             'modelDireccion' => $modelDireccion
@@ -76,25 +76,57 @@ class EntidadController extends AweController {
 
         $enable_form = true;
 
-        if (isset($_POST['Entidad'])) {
-            $model->attributes = $_POST['Entidad'];
+
+        if (Yii::app()->request->isAjaxRequest) {
+
+            $validadorPartial = false;
             $result = array();
-            $result['success'] = $model->save();
+            if (isset($_POST['Entidad'])) {
+                $model->attributes = $_POST['Entidad'];
 
-            if (!$result['success']) {
-                $result['message'] = 'Error al actualizar empresa.';
+                if ($model->validate()) {//CAPTURAR LOS ERRRORES
+                    $result['success'] = $model->save();
+                    if (!$result['success']) {
+                        $result['mensage'] = "Error al actualizar ";
+                    }
+                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
+                        $result['id'] = $model->id;
+                        $validadorPartial = TRUE;
+                        $result['success'] = true;
+                    }
+                    echo json_encode($result);
+                } else {
+                    $result['success'] = false;
+                    $result['errors'] = $model->getErrors();
+                    $validadorPartial = true;
+                    echo json_encode($result);
+                }
             }
-            if ($result['success']) {//envio del id de la empresa creada
-                $result['id'] = $model->id;
-            }
-            $enable_form = false;
 
-            echo json_encode($result);
-        }
-        if ($enable_form) {
-            $this->render('update', array(
-                'model' => $model,
-            ));
+            if (!$validadorPartial) {
+                $this->renderPartial('_form_modal', array('model' => $model), false, true);
+            }
+        } else {
+            if (isset($_POST['Entidad'])) {
+                $model->attributes = $_POST['Entidad'];
+                $result = array();
+                $result['success'] = $model->save();
+
+                if (!$result['success']) {
+                    $result['message'] = 'Error al actualizar empresa.';
+                }
+                if ($result['success']) {//envio del id de la empresa creada
+                    $result['id'] = $model->id;
+                }
+                $enable_form = false;
+
+                echo json_encode($result);
+            }
+            if ($enable_form) {
+                $this->render('update', array(
+                    'model' => $model,
+                ));
+            }
         }
     }
 
