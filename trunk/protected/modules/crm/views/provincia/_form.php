@@ -19,41 +19,23 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         </span>
     </div>
     <div class="widget-body">
-
-
-
-        <div class="control-group" >
-            <!-- drop de region -->
-            <label class="control-label"> <?php echo $form->labelEx($model, 'pais_id') ?></label>
-            <div class="controls">
-                <?php
-                $paises = Pais::model()->getInscritasPaises();
-                $lista_paises = !(count($paises) == 0) ? array(0 => '- Pais -') + CHtml::listData($paises, 'id', 'nombre') : array(0 => '- Ninguna -');
-                $this->widget(
-                        'ext.bootstrap.widgets.TbSelect2', array(
-                    'asDropDownList' => TRUE,
-                    'model' => $model,
-                    'attribute' => 'pais_id',
-                    'data' => $lista_paises,
-                    'events' => array("event_name" => "Javascript code for handler"),
-                    'options' => array(
-                        'placeholder' => 'Seleccione Un Pais!',
-                        'width' => '25%',
-                    )
-                        )
-                );
-                ?>
-
-                <?php echo $form->error($model, 'pais_id'); ?>
-
-            </div>
-        </div>
         <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 45)) ?>
 
-        <?php // echo $form->dropDownListRow($model, 'pais_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Pais::model()->findAll(), 'id', Pais::representingColumn()))  ?>
 
+        <?php $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
+        ?>
 
-
+        <?php
+        echo $form->select2Row(
+                $model, 'pais_id', array(
+            'asDropDownList' => true,
+            'data' => !empty($data_pais) ? array(null => ' -- Seleccione Pais -- ') + $data_pais : array(null => ' - Ninguno -'),
+            'options' => array(
+                'width' => '40%',
+            )
+                )
+        );
+        ?>
 
         <div class="form-actions">
             <?php

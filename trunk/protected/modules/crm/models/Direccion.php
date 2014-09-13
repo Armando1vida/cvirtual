@@ -4,9 +4,6 @@ Yii::import('crm.models._base.BaseDireccion');
 
 class Direccion extends BaseDireccion {
 
-    const TIPO_EMPRESA = 'EMPRESA';
-    const TIPO_CLIENTE = 'CLIENTE';
-
     /**
      * @return Direccion
      */
@@ -16,6 +13,14 @@ class Direccion extends BaseDireccion {
 
     public static function label($n = 1) {
         return Yii::t('app', 'Direccion|Direcciones', $n);
+    }
+
+    public function relations() {
+        return array(
+            'ciudad' => array(self::BELONGS_TO, 'Ciudad', 'ciudad_id'),
+            'provincia' => array(self::BELONGS_TO, 'Provincia', 'provincia_id'),
+            'pais' => array(self::BELONGS_TO, 'Pais', 'pais_id'),
+        );
     }
 
     /**
@@ -73,50 +78,8 @@ class Direccion extends BaseDireccion {
 
     public function rules() {
         return array_merge(parent::rules(), array(
-//            array('ciudad_id', 'length',
-//                'min' => 1,
-//                'tooSmall' => 'You must enter minimum 20 characters',
-//            ),
-//            array('provincia_id', 'type', 'type' => 'integer',
-//                'message' => '{attribute}: is not a date!', 'min' => 1),
-            array('provincia_id', 'my_required'),
-            array('pais_id', 'my_required'),
-            array('ciudad_id', 'my_required'),
-//            array('provincia_id', 'length',
-////                'min' => 1,
-//                'max' => 45,
-//                'tooBig' => 'You cannot enter more than 45 characters',
-////                'tooSmall' => 'You must enter minimum 20 characters',}
-//            ),
-//            array('pais_id', 'length',
-//                'min' => 1,
-////                'tooSmall' => 'You must enter minimum 20 characters',
-//            ),
+            array('provincia_id, pais_id, ciudad_id', 'required'),
         ));
-    }
-
-    public function my_required($attribute_name, $params) {
-
-        switch ($attribute_name) {
-            case "provincia_id":
-                if (empty($this->provincia_id) && ($this->provincia_id <= 0)) {
-
-                    $this->addError($attribute_name, 'Seleccione la informacion');
-                }
-                break;
-            case "pais_id":
-                if (empty($this->pais_id) && ($this->pais_id <= 0)) {
-
-                    $this->addError($attribute_name, 'Seleccione la informacion');
-                }
-                break;
-            case "ciudad_id":
-                if (empty($this->ciudad_id) && ($this->ciudad_id <= 0)) {
-
-                    $this->addError($attribute_name, 'Seleccione la informacion');
-                }
-                break;
-        }
     }
 
 }

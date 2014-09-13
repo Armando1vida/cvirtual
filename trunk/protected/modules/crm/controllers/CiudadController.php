@@ -124,28 +124,28 @@ class CiudadController extends AweController {
     }
 
     /**
-     * @Miguel Alba dadyalex777@hotmail.com
-      Descripcion Metodo:Obtiene la informacion de todas ciuades de un determinada provincia
-     * Utilizacion: Para el formulario FormEmpresa en Portlet Direccion
+     * Obtiene la lista de ciudades filtrada por una provincia
+     * 
      */
     public function actionAjaxGetCiudadesProvincia() {
         if (Yii::app()->request->isAjaxRequest) {
-
-            if (isset($_POST['idDrop'])) {
-
-                $data = Ciudad::model()->getCiudadesProvincias($_POST['idDrop']);
+            if (isset($_POST['provincia_id']) && $_POST['provincia_id'] != '') {
+                $data = Ciudad::model()->findAll(array(
+                    "condition" => "provincia_id =:provincia_id",
+                    "order" => "nombre",
+                    "params" => array(':provincia_id' => $_POST['provincia_id'],)
+                ));
                 if ($data) {
                     $data = CHtml::listData($data, 'id', 'nombre');
-                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- CIUDADES -', true);
+                    echo CHtml::tag('option', array('value' => null, 'em' => 'p'), '- Ciudades -', true);
                     foreach ($data as $value => $name) {
                         echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
                     }
                 } else {
-                    echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- NO EXISTEN OPCIONES -', true);
+                    echo CHtml::tag('option', array('value' => null), '- No existen opciones -', true);
                 }
             } else {
-                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- CIUDADES -', true);
-//                echo CHtml::tag('option', array('value' => 0, 'id' => 'p'), '- Seleccione una region -', true);                
+                echo CHtml::tag('option', array('value' => null, 'em' => 'p'), '- Seleccione una provincia -', true);
             }
         }
     }
