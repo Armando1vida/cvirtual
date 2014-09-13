@@ -40,6 +40,9 @@ $this->pageTitle = $model->nombre;
                     if (!empty($modelDireccion)) {//cuando  hay datos o.O
                         $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion));
                     }
+                    else {
+                        echo "ss";
+                    }
                     ?>
 
                 </div>
