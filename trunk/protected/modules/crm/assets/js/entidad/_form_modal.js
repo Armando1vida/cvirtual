@@ -1,15 +1,15 @@
 
 function actualizarEmpresa(Formulario) {
-
+boto
     $.ajax({
         type: "POST",
-        url: baseUrl + 'crm/empresa/update/id/' + entidad_id,
+        url: baseUrl + 'crm/entidad/update/id/' + entidad_id,
         dataType: 'json',
         data: $(Formulario).serialize(),
         success: function(data) {
             if (data.success)
             {
-                ActualizarInformacion("crm/empresa/ajaxCargarInformacionEmpresa/id/","#portlet_informacion");
+                ActualizarInformacion("crm/entidad/ajaxCargarInformacionEmpresa/id/","#portlet_informacion");
                 $("#mainModal").modal("hide");
             }
             else
@@ -19,7 +19,7 @@ function actualizarEmpresa(Formulario) {
                 encerarErrores(Formulario);
                 $.each(data.errors, function(parametro, mensaje) {
 
-                    desplegarerror(parametro, mensaje, false, '#Empresa');
+                    desplegarerror(parametro, mensaje, false, '#Entidad');
                 });
             }
         },

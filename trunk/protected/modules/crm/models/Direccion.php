@@ -29,7 +29,7 @@ class Direccion extends BaseDireccion {
      * @param type $entidad_id
      * @return type
      */
-    public function getInformacionDireccionEntidad($tipo_entidad, $entidad_id) {
+    public function getInformacionDireccionEntidad( $entidad_id) {
 
 //        SELECT dir.id, dir.calle_principal, dir.calle_secundaria, pa.nombre, pro.nombre, ciu.nombre FROM direccion dir
 //        inner join pais pa on dir.pais_id = pa.id
@@ -43,9 +43,9 @@ class Direccion extends BaseDireccion {
                 ->join('pais pa', '(dir.pais_id = pa.id)')
                 ->join('provincia pro', '(dir.provincia_id = pro.id)')
                 ->join('ciudad ciu', '(dir.ciudad_id = ciu.id)')
-                ->where("dir.tipo_entidad = :tipo_entidad AND dir.entidad_id = :entidad_id ");
+                ->where("dir.entidad_id = :entidad_id ");
         $command->bindValues(array(
-            ':tipo_entidad' => $tipo_entidad,
+//            ':tipo_entidad' => $tipo_entidad,
             ':entidad_id' => $entidad_id,
         ));
         $result = $command->queryAll();

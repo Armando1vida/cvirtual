@@ -129,7 +129,9 @@ class ProvinciaController extends AweController {
      */
     public function actionAjaxGetProvinciaPais() {
         if (Yii::app()->request->isAjaxRequest) {
+            die(var_dump("post", $_POST));
             if (isset($_POST['pais_id']) && $_POST['pais_id'] != '') {
+
                 $data = Provincia::model()->findAll(array(
                     "condition" => "pais_id =:pais_id",
                     "order" => "nombre",

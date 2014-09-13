@@ -114,7 +114,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
     <?php echo $form->hiddenField($model, 'coord_y') ?>
 
-    <?php echo $form->hiddenField($model, 'tipo_entidad') ?>
 
     <?php echo $form->hiddenField($model, 'entidad_id') ?>
     <div id="map-canvas_actualizacion_direccion" style="width:100%; height: 375px"></div>
