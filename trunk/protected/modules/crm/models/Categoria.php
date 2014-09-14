@@ -36,4 +36,21 @@ class Categoria extends BaseCategoria {
         ));
     }
 
+    public function getCategoria($id_categoria) {
+
+//        SELECT pr.id,pr.nombre FROM provincia pr
+//where pr.region_id=7
+//order by pr.nombre
+//;
+        $command = Yii::app()->db->createCommand()
+                ->select("ca.max_entidad as items, ca.max_foto")
+                ->from("categoria ca")
+                ->where("ca.id = :id_categoria");
+        $command->bindValues(array(
+            ':id_categoria' => $id_categoria,
+        ));
+        $result = $command->queryAll();
+        return ($result[0]);
+    }
+
 }
