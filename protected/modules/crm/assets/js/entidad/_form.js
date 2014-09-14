@@ -2,14 +2,23 @@ var $entidad_id;
 var url_direccion = "crm/direccion/ajaxGetInformacioModelo";
 var url_direccionUpdate = "/cvirtual/crm/direccion/update";
 var url_direccionCreate = "/cvirtual/crm/direccion/create";
+
+$(function() {
+
+    $("#Entidad_categoria_id").change(function() {
+        AjaxLoadData('crm/categoria/ajaxGetCategoria', {id_categoria: $(this).val()});
+
+    });
+});
+
 function habilitarPaneles() {
 
     $('#dv_form').animate({
         'height': 'toggle'
-    }, 200, function () {
+    }, 200, function() {
         $('div.panel').animate({
             'height': 'toggle'
-        }, 200, function () {
+        }, 200, function() {
             $('#dv_direccion').removeClass('hidden');
         });
     });
@@ -22,7 +31,7 @@ function habilitarPaneles() {
 function save(Formulario)
 {
     BloquearBotonesModal(Formulario);
-    AjaxGestionModalFormWizard(Formulario, function (list) {
+    AjaxGestionModalFormWizard(Formulario, function(list) {
         $(Formulario).trigger("reset");
         DesBloquearBotonesModal(Formulario, 'Crear', 'save');
     });
@@ -32,20 +41,20 @@ function AjaxGestionModalFormWizard($form, CallBack) {
     var form = $($form);
     var settings = form.data('settings');
     settings.submitting = true;
-    $.fn.yiiactiveform.validate(form, function (messages) {
+    $.fn.yiiactiveform.validate(form, function(messages) {
 
-        $.each(messages, function () {
+        $.each(messages, function() {
 //            console.log(this);
         });
         if ($.isEmptyObject(messages)) {
-            $.each(settings.attributes, function () {
+            $.each(settings.attributes, function() {
                 $.fn.yiiactiveform.updateInput(this, messages, form);
             });
             AjaxGuardarModalFormWizard(true, $form, CallBack);
         }
         else {
             settings = form.data('settings'),
-                    $.each(settings.attributes, function () {
+                    $.each(settings.attributes, function() {
                         $.fn.yiiactiveform.updateInput(this, messages, form);
                     });
             DesBloquearBotonesModal($form, 'Crear', 'save');
@@ -63,10 +72,10 @@ function AjaxGuardarModalFormWizard(verificador, Formulario, callBack)
             dataType: 'json',
             url: $(Formulario).attr('action'),
             data: $(Formulario).serialize(),
-            beforeSend: function (xhr) {
+            beforeSend: function(xhr) {
 
             },
-            success: function (data) {
+            success: function(data) {
                 if (data.success) {
                     $('#Direccion_entidad_id').val(data.id);
                     $entidad_id = data.id;
@@ -74,7 +83,7 @@ function AjaxGuardarModalFormWizard(verificador, Formulario, callBack)
 
                     $('#end_button').attr('href', $('#end_button').attr('href') + '/' + data.id);
                     habilitarPaneles();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         var latitudX = (0.346024);
                         var longitudY = -78.119574;
                         initialize(latitudX, longitudY, "map-canvas");
@@ -93,7 +102,7 @@ function AjaxGuardarModalFormWizard(verificador, Formulario, callBack)
 function getInfoEmpresa(empresa_id, urlObtenerInfo) {
 
     AjaxObtenerInformacion(baseUrl + urlObtenerInfo,
-            {empresa_id: empresa_id}, function (data) {
+            {empresa_id: empresa_id}, function(data) {
         if (data.existe) {//solo si existe informacion se asignaria los valores a los reespectivos valores n l formulario Direccionf
             console.log(data.datos);
             $('#Direccion_calle_principal').val(data.datos.calle_principal);
@@ -119,6 +128,28 @@ function getInfoEmpresa(empresa_id, urlObtenerInfo) {
 
     });
 }
+function AjaxLoadData(url, params)
+{
+
+    AjaxGetData(baseUrl + url,
+            params, function(data) {
+
+                $('#Entidad_max_entidad').val(data.items);
+                $('#Entidad_max_foto').val(data.max_foto);
+            });
+}
+function AjaxGetData(url, data, callBack)
+{
+    $.ajax({
+        type: 'POST',
+        url: url,
+        dataType: 'json',
+        data: data,
+        success: function(data) {
+            callBack(data);
+        }
+    });
+}
 
 function AjaxObtenerInformacion(url, data, callBack)
 {
@@ -127,7 +158,7 @@ function AjaxObtenerInformacion(url, data, callBack)
         dataType: 'json',
         url: url,
         data: data,
-        success: function (data) {
+        success: function(data) {
             callBack(data);
         }
     });

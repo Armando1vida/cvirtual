@@ -123,4 +123,22 @@ class CategoriaController extends AweController {
         }
     }
 
+    public function actionAjaxGetCategoria() {
+        $data = array();
+        if (Yii::app()->request->isAjaxRequest) {
+            if (isset($_POST['id_categoria']) && $_POST['id_categoria'] != '') {
+
+                $data = Categoria::model()->getCategoria($_POST['id_categoria']);
+
+                if ($data) {
+                    echo json_encode($data);
+                } else {
+                    echo json_encode($data);
+                }
+            } else {
+                echo json_encode($data);
+            }
+        }
+    }
+
 }
