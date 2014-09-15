@@ -21,19 +21,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             </span>
         </div>
         <div class="widget-body">
-            <div class="control-group" >
-                <label class="control-label"> <?php echo $form->labelEx($model, 'raking') ?></label>
-                <div class="controls">
-
-                    <?php
-                    $this->widget('ext.DzRaty.DzRaty', array(
-                        'model' => $model,
-                        'attribute' => 'raking',
-                    ));
-                    ?>
-                    <?php echo $form->error($model, 'raking'); ?>
-                </div>
-            </div>
             <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64)) ?>
 
             <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64)) ?>
@@ -48,10 +35,10 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
             <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45)) ?>
 
-            <?php echo $form->textFieldRow($model, 'max_entidad') ?>
+            <?php // echo $form->textFieldRow($model, 'max_entidad') ?>
 
 
-            <?php echo $form->textFieldRow($model, 'max_foto') ?>
+            <?php // echo $form->textFieldRow($model, 'max_foto') ?>
 
             <?php echo $form->hiddenField($model, 'id') ?>
             <label class="control-label required" for="Entidad_matriz">

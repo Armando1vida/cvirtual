@@ -11,6 +11,6 @@ Util::tsRegisterAssetJs('gmap.js');
     ));
     ?>
 </div>
-<div class="row-fluid panel hidden " id="dv_direccion" >
+<div class="row-fluid panel hidden" id="dv_direccion" >
     <?php $this->renderPartial('steps/_direccion', array('modelDireccion' => $model->direccion)) ?>
 </div>

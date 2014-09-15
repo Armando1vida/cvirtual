@@ -43,6 +43,10 @@ class EntidadController extends AweController {
 
         if (isset($_POST['Entidad'])) {
             $model->attributes = $_POST['Entidad'];
+            $modelCategoria = Categoria::model()->findByPk($_POST['Entidad']['categoria_id']);
+            $model->max_entidad = $modelCategoria->max_entidad;
+            $model->max_foto = $modelCategoria->max_foto;
+//            die(var_dump($_POST));
             $result = array();
             $result['success'] = $model->save();
 
@@ -229,7 +233,7 @@ class EntidadController extends AweController {
         $model->entidad_id = $id;
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'entidad-form') {
             echo CActiveForm::validate($model);
-            
+
             Yii::app()->end();
         }
 //        $this->performAjaxValidation($model, 'entidad-form');

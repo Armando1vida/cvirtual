@@ -1,7 +1,6 @@
 $(function () {
     $("#Direccion_pais_id").change(function () {
         AjaxLoadData("Direccion_pais_id", "Direccion_provincia_id", 'crm/provincia/ajaxGetProvinciaPais', {pais_id: $(this).val()});
-
     });
     $("#Direccion_provincia_id").change(function () {
         AjaxLoadData("Direccion_provincia_id", "Direccion_ciudad_id", 'crm/ciudad/ajaxGetCiudadesProvincia', {provincia_id: $(this).val()});
@@ -9,7 +8,6 @@ $(function () {
 });
 function saveDireccion(Formulario)
 {
-
     BloquearBotonesModal(Formulario);
     AjaxGestionModalFormWizardDireccion(Formulario, function (list) {
         $(Formulario).trigger("reset");
@@ -23,7 +21,6 @@ function AjaxGestionModalFormWizardDireccion($form, CallBack) {
     $.fn.yiiactiveform.validate(form, function (messages) {
 
         $.each(messages, function () {
-//            console.log(this);
         });
         if ($.isEmptyObject(messages)) {
             $.each(settings.attributes, function () {
@@ -53,15 +50,8 @@ function AjaxGuardarModalFormWizardDireccion(verificador, Formulario, callBack)
             },
             success: function (data) {
                 if (data.success) {
-                    $(Formulario).trigger("reset");
-                    $('#Direccion_entidad_id').val($entidad_id);
-                    document.location.href = baseUrl + 'crm/entidad/view/id/' + $entidad_id;
-
-                    //                    bootbox.alert('Dirección registrada correctamente');
-                    //                    $('#add-direccion').remove();
-
+                    document.location.href = baseUrl + 'crm/entidad/view/id/' + $('#Direccion_entidad_id').val();
                 } else {
-
                     DesBloquearBotonesModal(Formulario, 'Agregar dirección', 'saveDireccion');
                     bootbox.alert(data.message);
                 }
