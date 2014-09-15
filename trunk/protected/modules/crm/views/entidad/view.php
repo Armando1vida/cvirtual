@@ -23,15 +23,7 @@ $this->pageTitle = $model->nombre;
             </div>
         </div>
 
-        <!-- BEGIN CALENDAR PORTLET-->
-
-        <!--<div class="widget blue">-->
-            <?php $this->renderPartial('portlets/_sucursales', array('model' => $model,)); ?>
-
-        <!--</div>-->
-
-
-        <!-- END CALENDAR PORTLET-->
+        <?php $model->matriz? '' : $this->renderPartial('portlets/_sucursales', array('model' => $model,)); ?>
     </div>
     <div class="span5">
         <div class="widget orange">

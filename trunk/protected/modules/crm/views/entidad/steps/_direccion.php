@@ -1,3 +1,17 @@
+<?php if ($modelDireccion->isNewRecord): ?>
+    <script>
+
+        var cord_x = (0.346024);
+        var cord_y = -78.119574;
+    </script>
+<?php else: ?>
+    <script>
+
+        var cord_x = <?php echo $modelDireccion->coord_x;?>;
+        var cord_y = <?php echo $modelDireccion->coord_y;?>;
+    </script>
+<?php endif; ?>
+
 <div class="widget ">
     <div class="widget-title">
         <h4><i class="icon-map-marker"></i> Direcciones</h4>
@@ -23,11 +37,11 @@
 //                    $modelDireccion->tipo_entidad = 'EMPRESA';
 //                    $modelDireccion->entidad_id = 1;
                     ?>
-                    <?php echo $form->textFieldRow($modelDireccion, 'calle_principal', array('maxlength' => 64)) ?>
+                    <?php echo $form->textFieldRow($modelDireccion, 'calle_principal', array('maxlength' => 64,'class'=>'span12')) ?>
 
-                    <?php echo $form->textFieldRow($modelDireccion, 'calle_secundaria', array('maxlength' => 64)) ?>
+                    <?php echo $form->textFieldRow($modelDireccion, 'calle_secundaria', array('maxlength' => 64,'class'=>'span12')) ?>
 
-                    <?php echo $form->textFieldRow($modelDireccion, 'numero', array('maxlength' => 45)) ?>
+                    <?php echo $form->textFieldRow($modelDireccion, 'numero', array('maxlength' => 45,'class'=>'span5')) ?>
 
 
                     <?php

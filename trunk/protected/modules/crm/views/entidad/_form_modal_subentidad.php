@@ -20,7 +20,6 @@ $mensaje = $model->isNewRecord ? "Nueva" . " " . $model->label(1) : "Actualizar"
     <h4><i class="icon-tag"></i> <?php echo $mensaje ?> </h4>
 </div>
 <div class="modal-body">
-
     <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 64)) ?>
 
     <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64)) ?>
@@ -35,7 +34,9 @@ $mensaje = $model->isNewRecord ? "Nueva" . " " . $model->label(1) : "Actualizar"
 
     <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45)) ?>
     <?php echo $form->dropDownListRow($model, 'categoria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Categoria::model()->activos()->findAll(), 'id', Categoria::representingColumn()), array('class' => 'span12 fix',)) ?>
+
     <?php echo $form->dropDownListRow($model, 'industria_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Industria::model()->findAll(), 'id', Industria::representingColumn()), array('class' => 'span12 fix',)) ?>
+
 
 </div>
 
