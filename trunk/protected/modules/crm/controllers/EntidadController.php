@@ -44,8 +44,8 @@ class EntidadController extends AweController {
         if (isset($_POST['Entidad'])) {
             $model->attributes = $_POST['Entidad'];
             $modelCategoria = Categoria::model()->findByPk($_POST['Entidad']['categoria_id']);
-            $model->max_entidad = $modelCategoria->max_entidad;
-            $model->max_foto = $modelCategoria->max_foto;
+            $model->max_entidad = $modelCategoria->max_entidad - 1;
+            $model->max_foto = $modelCategoria->max_foto - 1;
 //            die(var_dump($_POST));
             $result = array();
             $result['success'] = $model->save();
@@ -231,6 +231,9 @@ class EntidadController extends AweController {
         $model->estado = Entidad::ESTADO_ACTIVO;
         $model->matriz = 0;
         $model->entidad_id = $id;
+        $modelEntidad = Entidad::model()->findByPk($id);
+        $modelEntidad->max_entidad = $modelEntidad->max_entidad - 1;
+        $modelEntidad->max_foto = $modelEntidad->max_foto - 1;
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'entidad-form') {
             echo CActiveForm::validate($model);
 
@@ -251,6 +254,7 @@ class EntidadController extends AweController {
                     }
                     if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
                         $result['id'] = $model->id;
+                        $modelEntidad->save();
                         $validadorPartial = TRUE;
                         $result['success'] = true;
                     }
