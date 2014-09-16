@@ -89,8 +89,6 @@ class DireccionController extends AweController {
             }
 
             if (!$validadorPartial) {
-//                var_dump("ss");
-//                die();
                 $this->renderPartial('_form_modal', array('model' => $model), false, true);
             }
         } else {
