@@ -22,10 +22,13 @@ class EntidadController extends AweController {
      */
     public function actionView($id) {
         //Modelo de la 
+        Yii::import("xupload.models.XUploadForm");
+        $archivos = new XUploadForm;
         $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'modelDireccion' => $modelDireccion
+            'modelDireccion' => $modelDireccion,
+             'archivos'=> $archivos
         ));
     }
 

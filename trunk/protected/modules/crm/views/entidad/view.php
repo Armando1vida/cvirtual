@@ -22,8 +22,20 @@ $this->pageTitle = $model->nombre;
 
             </div>
         </div>
+        <div class="widget ">
+            <div class="widget-title">
+                <h4><i class="icon-info"></i> Imagenes</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
 
-        <?php $model->matriz ? $this->renderPartial('portlets/_sucursales', array('model' => $model,)) : ''; ?>
+            <div class="widget-body">
+                <div id="portlet_foto">
+                    <?php $this->renderPartial('portlets/_entidad_foto', array('model' => $model, 'archivos' => $archivos)); ?>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="span5">
         <div class="widget orange">
@@ -40,6 +52,9 @@ $this->pageTitle = $model->nombre;
                 </div>
             </div>
         </div>
+        <?php $model->matriz ? $this->renderPartial('portlets/_sucursales', array('model' => $model,)) : ''; ?>
+
     </div>
 </div>
+
 
