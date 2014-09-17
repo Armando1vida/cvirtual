@@ -29,6 +29,9 @@ return array(
 //        item
         'application.modules.item.models.*',
     ),
+    'aliases' => array(
+        'xupload' => 'ext.xupload'
+    ),
     'modules' => array(
         'crm',
         'items',
