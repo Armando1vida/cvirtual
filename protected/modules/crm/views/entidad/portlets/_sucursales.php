@@ -25,8 +25,6 @@ $data = $modelsucursales->getdata();
                     'nombre',
                     'razon_social',
                     'documento',
-                    'website',
-                    'raking',
                     'telefono',
                     array(
                         'class' => 'CButtonColumn',
