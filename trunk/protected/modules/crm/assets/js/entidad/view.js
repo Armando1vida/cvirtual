@@ -33,3 +33,42 @@ function MostrarDetalleDireccion() {
         event.preventDefault();
     });
 }
+function guardarImagen() {
+//    $('#inmueble-form').submit(function(e) {
+//        e.preventDefault();
+//    });
+//    $('#inmueble-form').submit();
+    url = s;
+    var $archivos = [];
+    $('.archivosNota').each(function(index) {
+        $archivos.push(
+                {
+                    nombreArchivo: $(this).attr('title'),
+                    url: $(this).attr('url'),
+                    filename: $(this).attr('filename'),
+                });
+    });
+    console.log(JSON.stringify($archivos));
+    $('#archivosData').val(JSON.stringify($archivos));
+
+//
+////    console.log(url, $archivos);
+//    $.ajax({
+//        type: "POST",
+//        url: url,
+////        dataType: 'json',
+//        data: {Inmueble: $('#inmueble-form').serialize(), Imagenes: $archivos},
+//        success: function(data) {
+////            if (data.success) {
+////                $('#Nota_contenido').val('');
+////                $('#Nota_id').val('');
+////                $('.files').empty();
+////                $.fn.yiiGridView.update('notas-grid');
+////                AjaxActualizarActividades();
+////            } else {
+////                bootbox.alert(data.error);
+////            }
+//        }
+//    });
+}
+
