@@ -4,6 +4,7 @@
 /** @var AweActiveForm $form */
 // Prevenir que jquery se cargue dos veces
 Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
 Util::tsRegisterAssetJs('_form_modal.js');
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'id' => 'entidad-form',

@@ -68,3 +68,38 @@ function  desplegarerror($parametro, $mensaje, $valido, $formulario) {
         $($formulario + "_" + $parametro + '_em_').parent().parent('.control-group ').addClass('error')
     }
 }
+
+function actualizarContactoCampania(Formulario) {
+    ajaxValidarFormulario({
+        formId: Formulario,
+        successCall: function(data) {
+
+            /**
+             * @author Miguel Alba <malba@tradesystem.com.ec>
+             * @type String
+             * Agrega la informacion actualizada enviando el id del contacto y el id de la campania
+             */
+            var url = "campanias/campaniaActualizacion/ajaxCreateActualizacion";
+            $.ajax({
+                type: "POST",
+                url: baseUrl + url,
+                dataType: 'json',
+                data: {CampaniaActualizacion: {contacto_id: contacto_id, campania_id: entidad_id}},
+                success: function(data) {
+                    if (data.success)
+                    {
+                        $.fn.yiiGridView.update("cuenta-grid");
+                    }
+
+
+                }
+            }
+            );
+            $("#mainModal").modal("hide");
+            bootbox.alert('Datos guardados con exito!');
+
+        }
+
+    });
+
+}
