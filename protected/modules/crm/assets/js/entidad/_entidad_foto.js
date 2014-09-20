@@ -33,19 +33,18 @@ function guardarImagen(url) {
                 }
         );
     });
-    alert("s",$archivos);
 //    envio los datos a guardar
     $.ajax({
         type: "POST",
         url: url,
         dataType: 'json',
-        data: {id: entidad_id, tipo: "EMPRESA", archivos: $archivos, },
+        data: {id: entidad_id, tipo: "EMPRESA", archivos: $archivos},
         success: function(data) {
             if (data.success) {
 //                $('#Nota_contenido').val('');c
 //                $('#Nota_id').val('');
                 $('.files').empty();
-//                $.fn.yiiGridView.update('notas-grid');
+                $.fn.yiiGridView.update('imagenes-grid');
             } else {
                 bootbox.alert(data.error);
             }

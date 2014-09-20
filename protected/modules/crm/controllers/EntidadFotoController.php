@@ -31,42 +31,6 @@ class EntidadFotoController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
-//        $model = new EntidadFoto;
-//        $this->performAjaxValidation($model, 'entidad-foto-form');
-//        if (isset($_POST['EntidadFoto'])) {
-//            $model->attributes = $_POST['EntidadFoto'];
-//            if ($model->save()) {
-//                $this->redirect(array('admin'));
-//            }
-//        }
-//
-//        $this->render('create', array(
-//            'model' => $model,
-//        ));
-        if (isset($_POST['EntidadFoto'])) {
-            $imagenes = $_POST['Imagenes'];
-            die(var_dump("", $imagenes));
-            if ($imagenes != '[]') {
-                $imagenes = CJSON::decode($imagenes);
-                if (!file_exists('/uploads/imagenes/' . $id)) {
-                    mkdir('/uploads/imagenes/' . $id, 0777, true);
-                }
-                $path = realpath(Yii::app()->getBasePath() . "/../uploads/imagen/" . $id) . "/";
-                $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
-                $publicPath = Yii::app()->getBaseUrl() . "/uploads/inmueble/" . $id . '/';
-                foreach ($imagenes as $value) {
-                    $archivo_model = new EntidadFoto();
-                    $archivo_model->nombre = $value['nombreArchivo'];
-                    $archivo_model->ruta = $publicPath . $value['filename'];
-                    $archivo_model->entidad_id = $id;
-                    if (rename($pathorigen . $value['filename'], $path . $value['filename'])) {
-                        $archivo_model->save();
-                    }
-                }
-            }
-        }
-    }
 
     /**
      * @Miguel Alba dadyalex777@hotmail.com
@@ -74,33 +38,6 @@ class EntidadFotoController extends AweController {
       Descripcion Metodo:  Guarda imagen/s para dicha entidad
 
      */
-    public function actionCreateImagen($id) {
-
-
-        if (isset($_POST['EntidadFoto'])) {
-            $imagenes = $_POST['Imagenes'];
-            die(var_dump("", $imagenes));
-            if ($imagenes != '[]') {
-                $imagenes = CJSON::decode($imagenes);
-                if (!file_exists('/uploads/imagenes/' . $id)) {
-                    mkdir('/uploads/imagenes/' . $id, 0777, true);
-                }
-                $path = realpath(Yii::app()->getBasePath() . "/../uploads/imagen/" . $id) . "/";
-                $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
-                $publicPath = Yii::app()->getBaseUrl() . "/uploads/inmueble/" . $id . '/';
-                foreach ($imagenes as $value) {
-                    $archivo_model = new EntidadFoto();
-                    $archivo_model->nombre = $value['nombreArchivo'];
-                    $archivo_model->ruta = $publicPath . $value['filename'];
-                    $archivo_model->entidad_id = $id;
-                    if (rename($pathorigen . $value['filename'], $path . $value['filename'])) {
-                        $archivo_model->save();
-                    }
-                }
-            }
-        }
-    }
-
     public function actionGuardarImagenes() {
 //        die(var_dump("post", $_POST));
         $result = array();

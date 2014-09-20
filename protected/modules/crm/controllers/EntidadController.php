@@ -28,7 +28,7 @@ class EntidadController extends AweController {
         $this->render('view', array(
             'model' => $this->loadModel($id),
             'modelDireccion' => $modelDireccion,
-             'archivos'=> $archivos
+            'archivos' => $archivos
         ));
     }
 
