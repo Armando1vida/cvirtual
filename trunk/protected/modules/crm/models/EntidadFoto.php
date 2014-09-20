@@ -29,4 +29,32 @@ class EntidadFoto extends BaseEntidadFoto {
         ;
     }
 
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:Portlet _entidad_foto
+      Descripcion Metodo:Obtener los archivos subidos para cada entidad
+
+     * @param type $id
+     * @param type $tipo
+     * @return \CActiveDataProvider
+     */
+    public function searchArchivosByEntidad($id = null) {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $this->id);
+        $criteria->compare('nombre', $this->nombre, true);
+        $criteria->compare('ruta', $this->ruta, true);
+        $criteria->compare('entidad_id', $this->entidad_id);
+
+        $criteria->compare('t.entidad_id', $id);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 3
+            )
+                )
+        );
+    }
+
 }
