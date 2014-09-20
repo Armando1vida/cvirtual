@@ -7,9 +7,12 @@ class EntidadFoto extends BaseEntidadFoto {
     /**
      * @return EntidadFoto
      */
-    
     public $picture;
     public $foto;
+
+    const TIPO_EMPRESA = 'EMPRESA';
+    const TIPO_USUARIO = 'USUARIO';
+
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }

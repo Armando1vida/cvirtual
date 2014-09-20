@@ -5,7 +5,7 @@
  */
 
 
-function guardarImagen() {
+function guardarImagen2() {
 
     var $archivos = [];
     $('.archivosNota').each(function(index) {
@@ -21,4 +21,37 @@ function guardarImagen() {
     $("#entidad-foto-form").submit();
 
 }
+function guardarImagen(url) {
+    $archivos = [];
+//    construyo los datos de los archivo para guardar en la base
+    $('.archivosNota').each(function(index) {
+        $archivos.push(
+                {
+                    nombreArchivo: $(this).attr('title'),
+                    url: $(this).attr('url'),
+                    filename: $(this).attr('filename'),
+                }
+        );
+    });
+    alert("s",$archivos);
+//    envio los datos a guardar
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: 'json',
+        data: {id: entidad_id, tipo: "EMPRESA", archivos: $archivos, },
+        success: function(data) {
+            if (data.success) {
+//                $('#Nota_contenido').val('');c
+//                $('#Nota_id').val('');
+                $('.files').empty();
+//                $.fn.yiiGridView.update('notas-grid');
+            } else {
+                bootbox.alert(data.error);
+            }
+        }
+    });
+}
+
+
 

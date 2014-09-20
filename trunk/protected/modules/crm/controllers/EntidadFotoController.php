@@ -7,8 +7,9 @@ class EntidadFotoController extends AweController {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '//layouts/column2';
-public $defaultAction = 'admin';
+    public $defaultAction = 'admin';
     public $admin = false;
+
     public function filters() {
         return array(
             array('CrugeAccessControlFilter'),
@@ -32,9 +33,7 @@ public $defaultAction = 'admin';
      */
     public function actionCreate() {
 //        $model = new EntidadFoto;
-
 //        $this->performAjaxValidation($model, 'entidad-foto-form');
-
 //        if (isset($_POST['EntidadFoto'])) {
 //            $model->attributes = $_POST['EntidadFoto'];
 //            if ($model->save()) {
@@ -45,7 +44,7 @@ public $defaultAction = 'admin';
 //        $this->render('create', array(
 //            'model' => $model,
 //        ));
-         if (isset($_POST['EntidadFoto'])) {
+        if (isset($_POST['EntidadFoto'])) {
             $imagenes = $_POST['Imagenes'];
             die(var_dump("", $imagenes));
             if ($imagenes != '[]') {
@@ -76,7 +75,7 @@ public $defaultAction = 'admin';
 
      */
     public function actionCreateImagen($id) {
-    
+
 
         if (isset($_POST['EntidadFoto'])) {
             $imagenes = $_POST['Imagenes'];
@@ -100,6 +99,59 @@ public $defaultAction = 'admin';
                 }
             }
         }
+    }
+
+    public function actionGuardarImagenes() {
+//        die(var_dump("post", $_POST));
+        $result = array();
+        if (!empty($_POST['archivos'])) {
+
+            // Crear registro de actividad
+//                Actividad::registrarActividad($model, Actividad::TIPO_CREATE);
+            $result['success'] = true;
+            $result['texto'] = 'Nota creada Satisfactoriamente.';
+            if (!empty($_POST['archivos'])) {
+//                var_dump("entro si existe archivos");
+                if ($_POST['tipo'] == EntidadFoto::TIPO_EMPRESA) {
+//                    var_dump("entro tipo empresa");
+
+                    if (!file_exists('uploads/crm/' . EntidadFoto::TIPO_EMPRESA . '/' . $_POST['id'])) {
+                        mkdir('uploads/crm/' . EntidadFoto::TIPO_EMPRESA . '/' . $_POST['id'], 0777, true);
+//                        var_dump("entro creo la carpeta");
+                    }
+
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id']) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id'] . '/';
+                    foreach ($_POST['archivos'] as $value) {
+
+//                        var_dump("entro creo foreach arhivos:", $value['nombreArchivo']);
+
+                        $archivo_model = new EntidadFoto();
+                        $archivo_model->nombre = $value['nombreArchivo'];
+                        $archivo_model->ruta = $publicPath . $value['filename'];
+                        $archivo_model->entidad_id = $_POST['id'];
+                        if (rename($pathorigen . $value['filename'], $path . $value['filename'])) {
+                            $result['success'] = $archivo_model->save();
+//                            var_dump("entro guardo el modelo:", $result['success']);
+                            $result['success'] = $result['success'] ? true : false;
+                        }
+                    }
+//                    die("sss");
+                    if ($result['success']) {
+                        $result['success'] = true;
+                    } else {
+                        $result['success'] = false;
+                        $result['informacion'] = "Error al guardar un archivo.";
+                    }
+                }
+            }
+        } else {
+            $result['success'] = false;
+            $result['error'] = 'Agrege una imagen por lo menos.';
+        }
+
+        echo json_encode($result);
     }
 
     /**
@@ -220,7 +272,7 @@ public $defaultAction = 'admin';
 
                     $file = $path . $_GET["file"];
                     if (is_file($file)) {
-                        die(var_dump($file));
+//                        die(var_dump($file));
                         // borrar el archivo del path correspondiente
                         unlink($file);
                     }
