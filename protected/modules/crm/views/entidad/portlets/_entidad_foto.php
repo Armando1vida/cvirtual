@@ -25,7 +25,7 @@ Util::tsRegisterAssetJs('_entidad_foto.js');
                         $formA->widget('xupload.XUpload', array(
                             'model' => $archivos,
                             'url' => CController::createUrl('/crm/entidadFoto/uploadTmp'),
-                            'htmlOptions' => array('id' => 'archivo-form'),
+                            'htmlOptions' => array('id' => 'archivo-form', 'icon' => 'ok',),
                             'attribute' => 'file',
                             'multiple' => true,
                             'autoUpload' => true,
@@ -42,9 +42,9 @@ Util::tsRegisterAssetJs('_entidad_foto.js');
         Util::checkAccess(array("action_entidadFoto_guardarImagenes")) ?
                         $this->widget('bootstrap.widgets.TbButton', array(
                             'type' => 'success',
-                            'icon' => 'ok',
+                            'icon' => 'icon-cloud',
 //                            'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-                            'label' => Yii::t('AweCrud.app', 'Agregar'),
+                            'label' => Yii::t('AweCrud.app', 'Subir Imagenes'),
                             'htmlOptions' => array(
                                 'onclick' => 'js:guardarImagen("' . CController::createUrl('/crm/entidadFoto/guardarImagenes') . '")',
                             ),
@@ -79,10 +79,11 @@ Util::tsRegisterAssetJs('_entidad_foto.js');
                     'template' => '{delete}',
                     'buttons' => array(
                         'delete' => array(
-                            'url' => 'Yii::app()->createUrl("/notas/nota/delete", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("/crm/entidadFoto/delete", array("id"=>$data->id))',
                             'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
                             'htmlOptions' => array(
-                                'onClick' => 'js:AjaxActualizarActividades()'),
+//                                'onClick' => 'js:AjaxActualizarActividades()'
+                            ),
                             'options' => array('title' => 'Eliminar'),
                             'imageUrl' => false,
                             'visible' => 'Util::checkAccess(array("action_nota_delete"))'
