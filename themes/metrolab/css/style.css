@@ -1032,7 +1032,15 @@ form legend {
 .widget.redblack .widget-title {
     background: #8b140f;
 }
+/*gray full*/
 
+.widget.gray-full {
+    border: 1px solid #575757;
+}
+.widget.gray-full .widget-title, .widget.gray-full .widget-body {
+    background: #575757;
+    color: #fff;
+}
 .widget-title > h4 {
     float: left;
     font-size: 14px;
