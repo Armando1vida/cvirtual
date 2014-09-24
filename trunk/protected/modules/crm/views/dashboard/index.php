@@ -5,7 +5,7 @@ Util::tsRegisterAssetJs('index.js');
 //die(var_dump($points));
 ?>
 
-<!--<h1>Bienvenido al Demo de <?php // echo CHtml::encode(Yii::app()->name);        ?></h1>-->
+<!--<h1>Bienvenido al Demo de <?php // echo CHtml::encode(Yii::app()->name);         ?></h1>-->
 <div class=row-fluid>
     <div class="span12">
         <!-- BEGIN TAB PORTLET-->
