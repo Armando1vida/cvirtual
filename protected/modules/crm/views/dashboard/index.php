@@ -5,18 +5,18 @@ Util::tsRegisterAssetJs('index.js');
 //die(var_dump($points));
 ?>
 
-<!--<h1>Bienvenido al Demo de <?php // echo CHtml::encode(Yii::app()->name);          ?></h1>-->
+<!--<h1>Bienvenido al Demo de <?php // echo CHtml::encode(Yii::app()->name);                ?></h1>-->
 <div class=row-fluid>
     <div class="span12">
         <!-- BEGIN TAB PORTLET-->
-        <div class="widget widget-tabs red">
+        <div class="widget widget-tabs ">
             <div class="widget-title">
                 <!--<h4><i class=" icon-search"></i>Search Result</h4>-->
             </div>
             <div class="widget-body">
                 <div class="tabbable portlet-tabs">
                     <ul class="nav nav-tabs pull-left">
-                        <li class=""><a href="#portlet_tab4" data-toggle="tab">BU</a></li>
+                        <li class=""><a href="#portlet_tab4" data-toggle="tab">Preguntas Frecuentes</a></li>
                         <li class=""><a href="#portlet_tab3" data-toggle="tab">Busqueda Empresa</a></li>
                         <li class=""><a href="#portlet_tab2" data-toggle="tab">Busqueda Productos</a></li>
                         <li class="active"><a href="#portlet_tab1" data-toggle="tab">MeetClic</a></li>
@@ -127,167 +127,75 @@ Util::tsRegisterAssetJs('index.js');
 
                         </div>
                         <div class="tab-pane" id="portlet_tab4">
-                            <form class="form-horizontal search-result">
-                                <div class="control-group">
-                                    <label class="control-label">Search</label>
-                                    <div class="controls">
-                                        <input type="text" class="input-xxlarge">
-                                        <p class="help-block">About 3,880,000 results (0.29 seconds) </p>
-                                    </div>
-                                    <button type="submit" class="btn ">SEARCH</button>
-                                </div>
-                            </form>
-                            <div class="space20"></div>
-                            <!--BEGIN PRODUCT SEARCH-->
-                            <div class="row-fluid product-search">
-                                <div class="span4 product-text">
-                                    <!--<img alt="" src="img/product1.jpg">-->
-                                    <div class="portfolio-text-info">
-                                        <h4>iMac Slim</h4>
-                                        <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
-                                    </div>
-                                </div>
-                                <div class="span8">
-                                    <div class="product-info">
-                                        Today Sold
-                                        <span>190</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Today's Earning
-                                        <span>1,970</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Sold
-                                        <span>$12.300</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Earnings
-                                        <span>$12.300</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid product-search">
-                                <div class="span4 product-text">
-                                    <!--<img alt="" src="img/product2.png">-->
-                                    <div class="portfolio-text-info">
-                                        <h4>iMac Slim</h4>
-                                        <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
-                                    </div>
-                                </div>
-                                <div class="span8">
-                                    <div class="product-info">
-                                        Today Sold
-                                        <span>190</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Today's Earning
-                                        <span>1,970</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Sold
-                                        <span>$12.300</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Earnings
-                                        <span>$12.300</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid product-search">
-                                <div class="span4 product-text">
-                                    <!--<img alt="" src="img/product3.png">-->
-                                    <div class="portfolio-text-info">
-                                        <h4>iMac Slim</h4>
-                                        <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
-                                    </div>
-                                </div>
-                                <div class="span8">
-                                    <div class="product-info">
-                                        Today Sold
-                                        <span>190</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Today's Earning
-                                        <span>1,970</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Sold
-                                        <span>$12.300</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Earnings
-                                        <span>$12.300</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid product-search">
-                                <div class="span4 product-text">
-                                    <!--<img alt="" src="img/product4.png">-->
-                                    <div class="portfolio-text-info">
-                                        <h4>iMac Slim</h4>
-                                        <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
-                                    </div>
-                                </div>
-                                <div class="span8">
-                                    <div class="product-info">
-                                        Today Sold
-                                        <span>190</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Today's Earning
-                                        <span>1,970</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Sold
-                                        <span>$12.300</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Earnings
-                                        <span>$12.300</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid product-search">
-                                <div class="span4 product-text">
-                                    <!--<img alt="" src="img/product5.png">-->
-                                    <div class="portfolio-text-info">
-                                        <h4>iMac Slim</h4>
-                                        <p>21 inch Display, 1.8 GHz Processor, 8 GB Memory</p>
-                                    </div>
-                                </div>
-                                <div class="span8">
-                                    <div class="product-info">
-                                        Today Sold
-                                        <span>190</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Today's Earning
-                                        <span>1,970</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Sold
-                                        <span>$12.300</span>
-                                    </div>
-                                    <div class="product-info">
-                                        Total Earnings
-                                        <span>$12.300</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--END PRODUCT SEARCH-->
-                            <div class="space20"></div>
 
-                            <div class="pagination pagination-centered">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
+                            <div class="control-group">
+
+                                <div class="timeline-messages">
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <a class="message-img" href="#"><img alt="" src="<?php echo Yii::app()->theme->baseUrl; ?>/img/avatar1.jpg" class="avatar"></a>
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <p class="attribution"><a href="#">Jhon Doe</a> at 1:55pm, 13th April 2013</p>
+                                                <p>Hello, How are you brother?</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <a class="message-img" href="#"><img alt="" src="<?php echo Yii::app()->theme->baseUrl; ?>/img/avatar2.jpg" class="avatar"></a>
+                                        <div class="message-body msg-out">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <p class="attribution"> <a href="#">Jonathan Smith</a> at 2:01pm, 13th April 2013</p>
+                                                <p>I'm Fine, Thank you. What about you? How is going on?</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <a class="message-img" href="#"><img alt="" src="<?php echo Yii::app()->theme->baseUrl; ?>/img/avatar1.jpg" class="avatar"></a>
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <p class="attribution"><a href="#">Jhon Doe</a> at 2:03pm, 13th April 2013</p>
+                                                <p>Yeah I'm fine too. Everything is going fine here.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <a class="message-img" href="#"><img alt="" src="<?php echo Yii::app()->theme->baseUrl; ?>/img/avatar2.jpg" class="avatar"></a>
+                                        <div class="message-body msg-out">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <p class="attribution"><a href="#">Jonathan Smith</a> at 2:05pm, 13th April 2013</p>
+                                                <p>well good to know that. anyway how much time you need to done your task?</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+                                </div>
+                                <div class="chat-form">
+                                    <div class="input-cont">
+                                        <input type="text" placeholder="Type a message here...">
+                                    </div>
+                                    <div class="btn-cont">
+                                        <a href="javascript:;" class="btn btn-primary">Send</a>
+                                    </div>
+                                </div>
+
                             </div>
+
+
+
 
                         </div>
 
