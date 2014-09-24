@@ -43,6 +43,7 @@ function guardarImagen(url) {
             if (data.success) {
 //                $('#Nota_contenido').val('');c
 //                $('#Nota_id').val('');
+                bootbox.alert(data.informacion);
                 $('.files').empty();
                 $.fn.yiiGridView.update('imagenes-grid');
             } else {
