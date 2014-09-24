@@ -18,7 +18,7 @@ $this->pageTitle = $model->nombre;
                 </span>
             </div>
             <div class="widget-body">
-                <?php $this->renderPartial('portlets/_ubicacion', array('model' => $model,)); ?>
+                <?php $this->renderPartial('portlets/_ubicacion', array('model' => $model,'modelDireccion' => $modelDireccion)); ?>
 
             </div>
         </div>
@@ -39,7 +39,7 @@ $this->pageTitle = $model->nombre;
 
             <div class="widget-body">
                 <div id="portlet_informacion">
-                    <?php $this->renderPartial('portlets/_informacion', array('model' => $model, 'modelDireccion' => $modelDireccion)); ?>
+                    <?php $this->renderPartial('portlets/_informacion', array('model' => $model)); ?>
                 </div>
             </div>
         </div>
