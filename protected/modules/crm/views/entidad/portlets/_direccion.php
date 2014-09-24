@@ -25,7 +25,6 @@
             'coord_y',
             'referencia',
             'tipo_entidad',
-            'entidad_id',
         ),
     ));
     ?>
