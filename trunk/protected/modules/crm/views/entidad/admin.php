@@ -12,7 +12,7 @@ $this->menu = array(
 </div> 
 <div class="widget blue">
     <div class="widget-title">
-        <h4> <i class="icon-fire-extinguisher"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo Entidad::label(2) ?> </h4>
+        <h4> <i class="icon-fire-extinguisher"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo "Empresas" ?> </h4>
         <span class="tools">
             <a href="javascript:;" class="icon-chevron-down"></a>
             <!--a href="javascript:;" class="icon-remove"></a-->
