@@ -50,49 +50,63 @@ Util::tsRegisterAssetJs('_entidad_foto.js');
                             ),
                         )) : '';
         ?>
-    </div>
-    <div style='overflow-x:auto'> 
+        <div class="space10"></div>
+        <ul class="unstyled">
+           
+            <li>
+                <span class="btn btn-inverse"> <i class="icon-circle-arrow-up"></i></span>  Fotos Subidas <strong class="label label-success"> 85%</strong>
+                <div class="space10"></div>
+                <div class="progress progress-success">
+                    <div style="width: 85%;" class="bar"></div>
+                </div>
+            </li>
+     
 
-        <?php
-        $modelImagen = new EntidadFoto('search');
-        $modelImagen->unsetAttributes();
-        $this->widget('bootstrap.widgets.TbGridView', array(
-            'id' => 'imagenes-grid',
-            'type' => 'striped bordered hover advance',
-            'showTableOnEmpty' => false,
-            'emptyText' => '',
+        </ul>
+        <div style='overflow-x:auto'> 
+
+            <?php
+            $modelImagen = new EntidadFoto('search');
+            $modelImagen->unsetAttributes();
+            $this->widget('bootstrap.widgets.TbGridView', array(
+                'id' => 'imagenes-grid',
+                'type' => 'striped bordered hover advance',
+                'showTableOnEmpty' => false,
+                'emptyText' => '',
 //            'afterAjaxUpdate' => "function(id,data){AjaxActualizarActividades();}",
-            'dataProvider' => $modelImagen->searchArchivosByEntidad($model->id),
-            'columns' => array(
+                'dataProvider' => $modelImagen->searchArchivosByEntidad($model->id),
+                'columns' => array(
 //                array(
 //                    'header' => 'Notas', // give new column a header
 //                    'type' => 'raw', // set it to manual HTML
 //                    'value' => '$data->archivosToString()' // here is where you call the new function
 //                ),
-                array(
-                    'header' => 'Imagens Nombre', // give new column a header
-                    'type' => 'raw', // set it to manual HTML
-                    'value' => '$data->nombre' // here is where you call the new function
-                ),
-                array(
-                    'class' => 'CButtonColumn',
-                    'template' => '{delete}',
-                    'buttons' => array(
-                        'delete' => array(
-                            'url' => 'Yii::app()->createUrl("/crm/entidadFoto/delete", array("id"=>$data->id))',
-                            'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
-                            'htmlOptions' => array(
+                    array(
+                        'header' => 'Imagens Nombre', // give new column a header
+                        'type' => 'raw', // set it to manual HTML
+                        'value' => '$data->nombre' // here is where you call the new function
+                    ),
+                    array(
+                        'class' => 'CButtonColumn',
+                        'template' => '{delete}',
+                        'buttons' => array(
+                            'delete' => array(
+                                'url' => 'Yii::app()->createUrl("/crm/entidadFoto/delete", array("id"=>$data->id))',
+                                'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
+                                'htmlOptions' => array(
 //                                'onClick' => 'js:AjaxActualizarActividades()'
+                                ),
+                                'options' => array('title' => 'Eliminar'),
+                                'imageUrl' => false,
+                                'visible' => 'Util::checkAccess(array("action_nota_delete"))'
                             ),
-                            'options' => array('title' => 'Eliminar'),
-                            'imageUrl' => false,
-                            'visible' => 'Util::checkAccess(array("action_nota_delete"))'
                         ),
                     ),
-                ),
-            )
                 )
-        );
-        ?>
+                    )
+            );
+            ?>
+        </div>
     </div>
+
 </div>
