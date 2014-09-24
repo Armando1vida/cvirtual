@@ -1,4 +1,12 @@
-
+/**
+ * 
+ * @author Miguel Alba <malba@tradesystem.com.ec>
+ * @returns {undefined}
+ */
+/**
+ * gg   
+ * @returns {undefined}
+ */
 $(function () {
     $("#Ciudad_pais_id").change(function () {
         AjaxLoadData("Ciudad_pais_id", "Ciudad_provincia_id", 'crm/provincia/ajaxGetProvinciaPais', {pais_id: $(this).val()});
