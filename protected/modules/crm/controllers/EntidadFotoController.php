@@ -48,39 +48,50 @@ class EntidadFotoController extends AweController {
             $result['success'] = true;
             $result['texto'] = 'Nota creada Satisfactoriamente.';
             if (!empty($_POST['archivos'])) {
+                $modelEntidad = Entidad::model()->findByPk($_POST['id']); //Recuperar informacion modelo  Entidad: fotos  agregadas 
+                $num_picsEntidad = $modelEntidad->max_foto; //Numero de fotos ya actualmente disponibles x subir
+                $num_picsArchivos = count($_POST['archivos']); //Numero de archivos q vienen del post
+                if ($num_picsArchivos <= $num_picsEntidad) {//Controlar l numero de datos segun su categoria
 //                var_dump("entro si existe archivos");
-                if ($_POST['tipo'] == EntidadFoto::TIPO_EMPRESA) {
+                    if ($_POST['tipo'] == EntidadFoto::TIPO_EMPRESA) {
 //                    var_dump("entro tipo empresa");
 
-                    if (!file_exists('uploads/crm/' . EntidadFoto::TIPO_EMPRESA . '/' . $_POST['id'])) {
-                        mkdir('uploads/crm/' . EntidadFoto::TIPO_EMPRESA . '/' . $_POST['id'], 0777, true);
+                        if (!file_exists('uploads/crm/' . EntidadFoto::TIPO_EMPRESA . '/' . $_POST['id'])) {
+                            mkdir('uploads/crm/' . EntidadFoto::TIPO_EMPRESA . '/' . $_POST['id'], 0777, true);
 //                        var_dump("entro creo la carpeta");
-                    }
+                        }
 
-                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id']) . "/";
-                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
-                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id'] . '/';
-                    foreach ($_POST['archivos'] as $value) {
+                        $path = realpath(Yii::app()->getBasePath() . "/../uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id']) . "/";
+                        $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                        $publicPath = Yii::app()->getBaseUrl() . "/uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id'] . '/';
+                        foreach ($_POST['archivos'] as $value) {
 
 //                        var_dump("entro creo foreach arhivos:", $value['nombreArchivo']);
 
-                        $archivo_model = new EntidadFoto();
-                        $archivo_model->nombre = $value['nombreArchivo'];
-                        $archivo_model->ruta = $publicPath . $value['filename'];
-                        $archivo_model->entidad_id = $_POST['id'];
-                        if (rename($pathorigen . $value['filename'], $path . $value['filename'])) {
-                            $result['success'] = $archivo_model->save();
+                            $archivo_model = new EntidadFoto();
+                            $archivo_model->nombre = $value['nombreArchivo'];
+                            $archivo_model->ruta = $publicPath . $value['filename'];
+                            $archivo_model->entidad_id = $_POST['id'];
+                            if (rename($pathorigen . $value['filename'], $path . $value['filename'])) {
+                                $result['success'] = $archivo_model->save();
 //                            var_dump("entro guardo el modelo:", $result['success']);
-                            $result['success'] = $result['success'] ? true : false;
+                                $result['success'] = $result['success'] ? true : false;
+                            }
+                        }
+//                    die("sss");
+                        if ($result['success']) {
+                            $max_foto_actual = $num_picsEntidad - $num_picsArchivos;
+                            Entidad::model()->updateByPk($_POST['id'], array('max_foto' => $max_foto_actual));
+                            $result['success'] = true;
+                            $result['informacion'] = "Se agregaron :".$max_foto_actual." foto/s.";
+                        } else {
+                            $result['success'] = false;
+                            $result['error'] = "Error al guardar un archivo.";
                         }
                     }
-//                    die("sss");
-                    if ($result['success']) {
-                        $result['success'] = true;
-                    } else {
-                        $result['success'] = false;
-                        $result['informacion'] = "Error al guardar un archivo.";
-                    }
+                } else {
+                    $result['success'] = false;
+                    $result['error'] = "El Numero de fotos excede.";
                 }
             }
         } else {
