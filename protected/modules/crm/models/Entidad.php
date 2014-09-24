@@ -61,8 +61,8 @@ class Entidad extends BaseEntidad {
                     d.coord_x,
                     d.coord_y,
                     d.referencia')
-                ->from('empresa t')
-                ->join('direccion d', "t.id=d.entidad_id  AND d.coord_x is not null AND d.coord_y is not null AND d.tipo_entidad=:tipo_empresa")
+                ->from('entidad t')
+                ->join('direccion d', "t.id=d.entidad_id  AND d.coord_x is not null AND d.coord_y is not null")
                 ->where('t.estado=:estado')
         ;
         if ($id) {
