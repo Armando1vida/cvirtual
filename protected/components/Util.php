@@ -13,6 +13,17 @@ class Util {
      * @param type $tableName
      * @return type
      */
+    public static function truncateTwo($string, $limit, $break = ".", $pad = "...") {
+
+        if (strlen($string) <= $limit) {
+            return $string;
+        } else {
+            $string = substr($string, 0, $limit) . $pad;
+        }
+
+        return $string;
+    }
+
     public static function saveBulk($inserValues, $tableName) {
         try {
             $builder = Yii::app()->db->getSchema()->getCommandBuilder();
@@ -585,4 +596,5 @@ class Util {
     }
 
 }
+
 ?>

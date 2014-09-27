@@ -41,14 +41,14 @@ function obtenerInformacionEmpresa()
             if (data.length > 0) {
                 var latitudX = data[0].latitud;
                 var longitudY = data[0].longitud;
-                initialize(latitudX, longitudY,'map-canvas');
+                initialize(latitudX, longitudY, 'map-canvas');
             }
             else
             {
-                alert("no hay datos");
+                console.log("no hay datos");
                 var latitudX = (0.346024);
                 var longitudY = -78.119574;
-                initialize(latitudX, longitudY,'map-canvas');
+                initialize(latitudX, longitudY, 'map-canvas');
             }
 
 
@@ -57,7 +57,7 @@ function obtenerInformacionEmpresa()
         error: function(data) {
             var latitudX = (0.346024);
             var longitudY = -78.119574;
-            initialize(latitudX, longitudY,'map-canvas');
+            initialize(latitudX, longitudY, 'map-canvas');
         }
 
     }
@@ -107,7 +107,7 @@ function createInfoWindowContent(map, posicionLugar) {
                 tileCoordinate.y + ' at Zoom Level: ' + map.getZoom()
     ].join('<br>');
 }
-function initialize(lat, long,nombre_map_cambas) {
+function initialize(lat, long, nombre_map_cambas) {
 
     var Suiton_Sushi_Bar = new google.maps.LatLng(lat, long);
     var locationArray = [Suiton_Sushi_Bar];

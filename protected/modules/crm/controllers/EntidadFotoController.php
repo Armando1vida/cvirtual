@@ -83,7 +83,8 @@ class EntidadFotoController extends AweController {
                             $max_foto_actual = $num_picsEntidad - $num_picsArchivos;
                             Entidad::model()->updateByPk($_POST['id'], array('max_foto' => $max_foto_actual));
                             $result['success'] = true;
-                            $result['informacion'] = "Se agregaron :" . $max_foto_actual . " foto/s.";
+                            $mensaje = $max_foto_actual > 1 ? " fotos" : " foto";
+                            $result['informacion'] = "Se agrego:" . $num_picsArchivos . $mensaje;
                         } else {
                             $result['success'] = false;
                             $result['error'] = "Error al guardar un archivo.";
@@ -324,7 +325,7 @@ class EntidadFotoController extends AweController {
 
                 if ($data) {
                     $cien_porciento = 100;
-                    $num_pic_uploads = $data[0]['max_foto_actual_ca'] - $data[0]['max_foto_actual'];
+                    $num_pic_uploads = ($data[0]['max_foto_actual_ca'] - ($data[0]['max_foto_actual'] ? $data[0]['max_foto_actual'] : 0));
                     $porcentaje = ($num_pic_uploads * $cien_porciento) / $data[0]['max_foto_actual_ca'];
                     $result['porcentaje'] = $porcentaje . "%";
                     $result['success'] = true;
