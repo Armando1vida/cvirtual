@@ -77,15 +77,10 @@ Util::tsRegisterAssetJs('_entidad_foto.js');
 //            'afterAjaxUpdate' => "function(id,data){AjaxActualizarActividades();}",
                 'dataProvider' => $modelImagen->searchArchivosByEntidad($model->id),
                 'columns' => array(
-//                array(
-//                    'header' => 'Notas', // give new column a header
-//                    'type' => 'raw', // set it to manual HTML
-//                    'value' => '$data->archivosToString()' // here is where you call the new function
-//                ),
                     array(
-                        'header' => 'Imagens Nombre', // give new column a header
-                        'type' => 'raw', // set it to manual HTML
-                        'value' => '$data->nombre' // here is where you call the new function
+                        'header' => 'Información',
+                        'value' => '$data->generateview()',
+                        'type' => 'raw',
                     ),
                     array(
                         'class' => 'CButtonColumn',

@@ -19,7 +19,7 @@ function getInfoPicture() {
 //            width: 48 % ;
             $("#porcentaje_progress").attr("style", "width:" + data.porcentaje);
             $("#porcentaje_subidas").html(data.porcentaje);
-            $("#num_pic_uploads").html(data.num_pic_uploads);
+            $("#num_pic_uploads").html(" "+data.num_pic_uploads);
         } else {
             alert();
         }
