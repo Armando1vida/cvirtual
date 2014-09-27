@@ -24,6 +24,7 @@ $this->menu = array(
         $this->widget('bootstrap.widgets.TbGridView', array(
             'id' => 'entidad-grid',
             'type' => 'striped bordered hover advance',
+            'afterAjaxUpdate' => 'js:function() { dzRatyUpdate(); }',
             'dataProvider' => $model->search(),
             'columns' => array(
                 array(
@@ -34,7 +35,23 @@ $this->menu = array(
                 'razon_social',
                 'documento',
                 'website',
-                'raking',
+                array(
+                    'name' => 'raking',
+                    'class' => 'ext.dzRaty.DzRatyDataColumn', // #2 - Add a jQuery Raty data column
+                    'options' => array(//      Custom options for jQuery Raty data column
+                        'space' => FALSE
+                    ),
+                    'filter' => array('ext.dzRaty.DzRaty', array(// #3 - Add a jQuery Raty filter column
+                            'model' => $model,
+                            'attribute' => 'raking',
+                            'options' => array(//      Custom options for jQuery Raty filter column
+                                'cancel' => TRUE,
+                                'cancelPlace' => 'right'
+                            ),
+                        ))
+                    ,
+                    'header' => 'Valoracion',
+                ),
                 'telefono',
                 /*
                   'celular',
