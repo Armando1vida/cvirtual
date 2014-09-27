@@ -83,7 +83,7 @@ class EntidadFotoController extends AweController {
                             $max_foto_actual = $num_picsEntidad - $num_picsArchivos;
                             Entidad::model()->updateByPk($_POST['id'], array('max_foto' => $max_foto_actual));
                             $result['success'] = true;
-                            $result['informacion'] = "Se agregaron :".$max_foto_actual." foto/s.";
+                            $result['informacion'] = "Se agregaron :" . $max_foto_actual . " foto/s.";
                         } else {
                             $result['success'] = false;
                             $result['error'] = "Error al guardar un archivo.";
@@ -303,6 +303,50 @@ class EntidadFotoController extends AweController {
                 }
             } else {
                 throw new CHttpException(500, "Could not upload file");
+            }
+        }
+    }
+
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:Portlet entidad_foto
+      Descripcion Metodo: Muestra la informacion actual de las fotos subidas de cada entidad
+     * retornara la informacion en porcenje y fotos por subir
+
+     */
+    public function actionAjaxGeInfoPicActual() {
+        $result = array();
+
+        if (Yii::app()->request->isAjaxRequest) {
+            if (isset($_POST['entidad_id']) && $_POST['entidad_id'] != '') {
+
+                $data = Entidad::model()->getEntidadPicActual($_POST['entidad_id']);
+
+                if ($data) {
+                    $cien_porciento = 100;
+                    $num_pic_uploads = $data[0]['max_foto_actual_ca'] - $data[0]['max_foto_actual'];
+                    $porcentaje = ($num_pic_uploads * $cien_porciento) / $data[0]['max_foto_actual_ca'];
+                    $result['porcentaje'] = $porcentaje . "%";
+                    $result['success'] = true;
+                    $result['max_foto_actual_ca'] = $data[0]['max_foto_actual_ca'];
+                    $result['max_foto_actual'] = $data[0]['max_foto_actual'];
+                    $result['num_pic_uploads'] = $num_pic_uploads;
+//                    die(var_dump($result));
+                    echo json_encode($result);
+                } else {
+
+                    $result['succes'] = false;
+
+//                    max_foto_actual_ca
+//                    100 max_foto_actual_ca
+//                    xporcentaje 
+
+                    echo json_encode($result);
+                }
+            } else {
+
+                $result['succes'] = false;
+                echo json_encode($result);
             }
         }
     }
