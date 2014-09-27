@@ -46,21 +46,22 @@ Util::tsRegisterAssetJs('_entidad_foto.js');
 //                            'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
                             'label' => Yii::t('AweCrud.app', 'Subir Imagenes'),
                             'htmlOptions' => array(
-                                'onclick' => 'js:guardarImagen("' . CController::createUrl('/crm/entidadFoto/guardarImagenes') . '")',
+//                                'onclick' => 'js:guardarImgetAjaxData(type, url, dataType, data, callback)agen("' . CController::createUrl('/crm/entidadFoto/guardarImagenes') . '")',
+                                'onclick' => 'js:guardarImagen()',
                             ),
                         )) : '';
         ?>
         <div class="space10"></div>
         <ul class="unstyled">
-           
+
             <li>
-                <span class="btn btn-inverse"> <i class="icon-circle-arrow-up"></i></span>  Fotos Subidas <strong class="label label-success"> 85%</strong>
+                <span class="btn btn-inverse"> <i id="num_pic_uploads" class="icon-circle-arrow-up"></i></span>  Fotos Subidas <strong id="porcentaje_subidas" class="label label-success"></strong>
                 <div class="space10"></div>
                 <div class="progress progress-success">
-                    <div style="width: 85%;" class="bar"></div>
+                    <div id="porcentaje_progress" style="" class="bar"></div>
                 </div>
             </li>
-     
+
 
         </ul>
         <div style='overflow-x:auto'> 

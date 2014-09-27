@@ -108,4 +108,34 @@ class Entidad extends BaseEntidad {
         ));
     }
 
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:Vista
+      Descripcion Metodo:
+
+     * @param type $entidad_id
+     * @return type
+     */
+    public function getEntidadPicActual($entidad_id) {
+//     SELECT e.id,e.max_foto as max_foto_actual,ca.max_foto as  max_foto_actual_ca
+//FROM entidad e 
+//inner join categoria ca on e.categoria_id=ca.id
+//where e.id=28 
+//;
+        $result = array();
+        $command = Yii::app()->db->createCommand()
+                ->select('e.id,e.max_foto as max_foto_actual,ca.max_foto as  max_foto_actual_ca')
+                ->from('entidad e')
+                ->join('categoria ca', "e.categoria_id=ca.id")
+                ->where('e.estado=:estado AND e.id=:id')
+        ;
+//        $command->andWhere('t.id=:id', array(':id' => $entidad_id));
+        $command->params = array(
+            ':estado' => self::ESTADO_ACTIVO,
+            ':id' => $entidad_id,
+        );
+        $result = $command->queryAll();
+        return $result;
+    }
+
 }
