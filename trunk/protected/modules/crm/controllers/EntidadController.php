@@ -71,6 +71,17 @@ class EntidadController extends AweController {
         }
     }
 
+    public function actionGetPerfilEntidad($id) {
+        $model = $this->loadModel($id);
+        $points = Entidad::model()->getPointEmpresa($id);
+//        die(var_dump($points));
+        $this->render('_perfil_entidad', array(
+            'model' => $model,
+            'points' => $points
+//                'categoria' => $categoria,
+        ));
+    }
+
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -273,6 +284,20 @@ class EntidadController extends AweController {
             if (!$validadorPartial) {
                 $this->renderPartial('_form_modal_subentidad', array('model' => $model), false, true);
             }
+        }
+    }
+
+    /**
+     * @Miguel Alba dadyalex777@hotmail.com
+      Utilizacion Metodo:P
+      Descripcion Metodo: Muestra la informacion detallada de dicha entidad
+     * @param type $id
+     */
+    public function actionAjaxGetInformacionEntidad($id) {
+        $model = $this->loadModel($id);
+//        $this->performAjaxValidation($model, 'entidad-foto-form');
+        if (Yii::app()->request->isAjaxRequest) {
+            $this->renderPartial('_form_modal_Informacion', array('model' => $model), false, true);
         }
     }
 

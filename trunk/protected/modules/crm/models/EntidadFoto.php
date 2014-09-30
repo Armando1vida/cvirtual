@@ -58,31 +58,36 @@ class EntidadFoto extends BaseEntidadFoto {
     }
 
     public function generateview() {
-        $resultado = '<div>';
-        $resultado.='<div class="span2">';
+
+//        <div class = "green-box-blog">
+//        <div class = "span3">
+//        <img alt = "" src = "img/blog/blog-thumb-3.jpg">
+//        </div>
+//        <div class = "span9">
+//        <h5>
+//        <a href = "javascript:;">02 MAY 2013</a>
+//        </h5>
+//        <p>Nam sed arcu non tellus
+//        fringilla fringilla ut vel ipsum.</p>
+//        </div>
+//        </div >
+        $resultado = '<div class = "green-box-blog">';
+
         if (!empty($this->id)) {
+            $resultado.='<div class="span2">';
             $resultado.='<img  src="' . $this->ruta . '" alt="">';
+            $resultado.='</div>'; //div span2
         } else {
             $resultado.='<div class=" hero-unit">';
-            $resultado.=' <h2 class="text-center">Sin Im&aacute;gen </h2>';
+            $resultado.=' <h5 class="text-center">Sin Im&aacute;gen </h5>';
             $resultado.='</div>';
         }
-        $resultado.='  </div>'; //Div del span de la imagen
+
         $resultado.='<div class="span10">';
         //div informacion imagen
-        $resultado.='<div class="date" style="width:110px;>';
-        $resultado.='<p class="day"> $ ' . $this->nombre . '</p>';
-        $resultado.=' <p class="month">  Precio  </p>';
-        $resultado.=' </div>';
-        $resultado.=' <h2>';
-        $resultado.='<a href="/SistemaInmobiliario/inmuebles/inmueble/view?id=' . $this->id . '">' . Util::truncateTwo($this->nombre, 50) . '</a>';
-        $resultado.='</h2>';
-        $resultado.=' <p>';
-        $resultado.='Propietario <a href="javascript:;">' . $this->nombre . '</a>';
-        $resultado.=' </p>';
-
-        $resultado.='<p>';
-        $resultado.=' </p>';
+        $resultado.=' <h5>';
+        $resultado.= Util::truncateTwo($this->nombre, 50);
+        $resultado.='</h5>';
 
 //        if ((!Yii::app()->user->isSuperAdmin) && ( Yii::app()->user->checkAccess('cliente'))) {
 //            $resultado.=' <button  class="btn btn-info" onclick="js:comprar(' . $this->id . ')">Comprar</button>';
@@ -90,9 +95,8 @@ class EntidadFoto extends BaseEntidadFoto {
 //            $resultado.=' <button  class="btn btn-info" onclick="js:reservar(' . $this->id . ')">Reservar</button>';
 //        }
 
-        $resultado.='  </div>';
-        $resultado.='  </div>';
-        $resultado.='<div class="span2">';
+        $resultado.='  </div>'; //div span10F
+        $resultado.='  </div>'; //div contenedor blog
         echo $resultado;
     }
 

@@ -21,19 +21,16 @@
             ),
             'provincia_id',
             'pais_id',
-            'coord_x',
-            'coord_y',
             'referencia',
-            'tipo_entidad',
         ),
     ));
     ?>
     <p class="entity-user-info">
-<!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username             ?></span>-->
+<!--Creado por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_creacion_id)->username              ?></span>-->
         <?php // echo Util::nicetime($model->fecha_creacion)    ?>
         <?php // if ($model->usuario_actualizacion_id):   ?>
         <br>
-        <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username            ?></span>-->
+        <!--Actualizado por &uacute;ltima vez por <span class="bold"><?php // echo Yii::app()->user->um->loadUserById($model->usuario_actualizacion_id)->username             ?></span>-->
         <?php // echo Util::nicetime($model->fecha_actualizacion)    ?>
         <?php // endif;  ?>
     </p>

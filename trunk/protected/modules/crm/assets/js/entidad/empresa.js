@@ -45,7 +45,7 @@ function obtenerInformacionEmpresa()
             }
             else
             {
-                alert("no hay datos");
+//                alert("no hay datos");
                 var latitudX = (0.346024);
                 var longitudY = -78.119574;
                 initialize(latitudX, longitudY,'map-canvas');
