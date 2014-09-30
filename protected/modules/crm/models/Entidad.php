@@ -66,9 +66,24 @@ class Entidad extends BaseEntidad {
                 ->where('t.estado=:estado')
         ;
         if ($id) {
-            $command->andWhere('t.id=:id', array(':id' => $id));
+            $command->andWhere('t.id=:entidad_id');
+
+            $command->params = array(
+                'estado' => self::ESTADO_ACTIVO,
+                'entidad_id' => $id
+                    )
+
+            ;
+//            die();
+        } else {
+            $command->params = array(
+                'estado' => self::ESTADO_ACTIVO
+                    )
+            ;
         }
-        $command->params = array('estado' => self::ESTADO_ACTIVO);
+
+//        die(var_dump("s", $command->queryAll()));
+
         return $command->queryAll();
     }
 

@@ -1,6 +1,12 @@
+function loadScript() {
+    var url = "http://maps.googleapis.com/maps/api/js?sensor=TRUE&callback=initialize";
+    $.getScript(url);
+}
+$(function() {
+    loadScript();
 
-//// The five markers show a secret message when clicked
-//// but that message is not within the marker's instance data
+//load();
+});
 function attachMensajeWindows(marker, empresa) {
 
     var mensaje = crearVentanaInformacion(empresa);
@@ -15,14 +21,6 @@ function attachMensajeWindows(marker, empresa) {
 
     });
 }
-function getInformacionDetallada(empresa_id) {
-    var url = 'crm/entidad/getPerfilEntidad/id/' + empresa_id;
-    viewModal(url);
-    var url = 'crm/entidad/getPerfilEntidad/id/' + empresa_id;
-
-    document.location.href = baseUrl + url;
-}
-
 function crearVentanaInformacion(empresa)
 {
     var telefono = empresa.celular ? empresa.celular : "Sin Informacion.";
@@ -31,34 +29,7 @@ function crearVentanaInformacion(empresa)
     var calles = empresa.calle_principal + calle_secundaria;
     var correo = empresa.email ? empresa.email : "Sin Informacion.";
     var info = "Informacion";
-//<div class="profile-side-box green">
-//    <h1>Experience</h1>
-//    <div class="desk">
-//        <div class="row-fluid experience">
-//            <h4>Envato</h4>
-//            <p>Duration: 4 years as Senior Designer from June 2033 to June 2007</p>
-//            <a href="#">www.abccompany.com</a>
-//        </div>
-//        <div class="space10"></div>
-//        <div class="row-fluid experience">
-//            <h4>Themeforest</h4>
-//            <p>Duration: 4 years as Senior Designer from June 2033 to June 2007</p>
-//            <a href="#">www.abccompany.com</a>
-//        </div>
-//        <div class="space10"></div>
-//        <div class="row-fluid experience">
-//            <h4>Vector Lab</h4>
-//            <p>Duration: 4 years as Senior Designer from June 2033 to June 2007</p>
-//            <a href="#">www.abccompany.com</a>
-//        </div>
-//    </div>
-//</div>
-//   <div class="profile-photo">
-//            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/lock-thumb.jpg" alt="">
-//            <!--<a href="javascript:;" class="edit" title="Edit Photo">-->
-//                <!--<i class="icon-pencil"></i>-->
-//            <!--</a>-->
-//        </div>
+
     var informacion =
             '<div class="profile-side-box green">' +
             '<h1 align="center"><strong>' + empresa.nombre + '</strong></h1>' +
@@ -70,8 +41,7 @@ function crearVentanaInformacion(empresa)
             '<strong>Telefonos :</strong>' + telefono + '<br>' +
             '</h6>' +
             ' <div class="space10"></div>' +
-            '<a onclick="js:getInformacionDetallada(' + empresa.id + ')" class="btn btn-info" id="view-empresa"><i class="icon-eye-open"></i> Informacion Detallada</a>'
-    '</div>'   //div desk
+            '</div>'   //div desk
     '</div>'   //div about us
             ;
     return informacion;
@@ -82,9 +52,10 @@ function crearVentanaInformacion(empresa)
 //
 var map = null;
 function initialize() {
+    console.log(empresas.coord_x);
     var mapOptions = {
-        center: new google.maps.LatLng(0.346024, -78.119574),
-        zoom: 14,
+        center: new google.maps.LatLng(empresas[0].coord_x, empresas[0].coord_y),
+        zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         panControl: true,
         zoomControl: true,
@@ -105,19 +76,10 @@ function loadPoints(json) {
             map: map,
             title: point.nombre
         });
-        attachMensajeWindows(marker, point);
     }
 }
 
-function loadScript() {
-    var url = "http://maps.googleapis.com/maps/api/js?sensor=TRUE&callback=initialize";
-    $.getScript(url);
-}
-$(function() {
-    loadScript();
 
-//load();
-});
 
 //var map;
 //var gdir;

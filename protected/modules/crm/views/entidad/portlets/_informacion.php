@@ -1,6 +1,7 @@
 
 
 <?php
+
 $this->widget('bootstrap.widgets.TbDetailView', array(
     'data' => $model,
     'attributes' => array(
@@ -30,18 +31,19 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
     ),
 ));
 ?>
-   <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'id' => 'add-actualizar',
-        'label' => ($model ? '' : '<br>') . 'Actualizar Informacion',
-        'encodeLabel' => false,
-        'icon' => $model ? 'icon-edit-sign' : 'tag',
-        'htmlOptions' => array(
+<?php
+
+$this->widget('bootstrap.widgets.TbButton', array(
+    'id' => 'add-actualizar',
+    'label' => ($model ? '' : '<br>') . 'Actualizar Informacion',
+    'encodeLabel' => false,
+    'icon' => $model ? 'icon-edit-sign' : 'tag',
+    'htmlOptions' => array(
 //                'onClick' => 'js:viewModal("campanias/campania/create/id_cuenta/' . $model->cuenta->id . '/id_contacto/' . $model->id . '",function(){'
 //                . 'maskAttributes();})',
-            'onClick' => 'js:viewModal("crm/entidad/update/id/' . $model->id . '",function(){'
-            . 'maskAttributes();})',
+        'onClick' => 'js:viewModal("crm/entidad/update/id/' . $model->id . '",function(){'
+        . 'maskAttributes();})',
 //                'class' => $model ? '' : 'empty-portlet',
-        ),
-    ));
-    ?>
+    ),
+));
+?>

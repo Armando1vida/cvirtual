@@ -18,8 +18,7 @@ $this->pageTitle = $model->nombre;
                 </span>
             </div>
             <div class="widget-body">
-                <?php $this->renderPartial('portlets/_ubicacion', array('model' => $model, 'modelDireccion' => $modelDireccion)); ?>
-
+                <?php $this->renderPartial('portlets/_ubicacion', array('model' => $model,'modelDireccion'=>$modelDireccion)); ?>
             </div>
         </div>
 
