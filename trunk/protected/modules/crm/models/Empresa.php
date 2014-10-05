@@ -28,6 +28,11 @@ class Empresa extends BaseEmpresa {
             ),
         );
     }
+   public function relations() {
+        return array_merge(parent::relations(), array(
+            'eventos' => array(self::HAS_MANY, 'Evento', 'entidad_id', 'condition' => 'entidad_tipo = "empresa"'),
+        ));
+    }
 
     public function getPointEmpresa($id = null) {
         //select t.id,t.nombre,t.razon_social,t.website,t.telefono,t.celular,t.email,d.calle_principal,d.calle_secundaria,d.numero,d.coord_x,d.coord_y,d.referencia 
