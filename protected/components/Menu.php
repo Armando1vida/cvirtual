@@ -27,6 +27,9 @@ class Menu {
                     array('label' => 'Categoria', 'url' => array('/crm/categoria/admin'), 'access' => 'action_categoria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'categoria')),
                     array('label' => 'Industria', 'url' => array('/crm/industria/admin'), 'access' => 'action_industria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'industria')),
                 )),
+            array('label' => '<i class="icon-calendar"></i>  Eventos', 'url' => '#', 'items' => array(
+                    array('label' => 'Prioridad', 'url' => array('/eventos/eventoPrioridad/admin'), 'access' => 'action_eventoPrioridad_admin', 'active_rules' => array('module' => 'eventos', 'controller' => 'eventoPrioridad')),
+                )),
 //            array('label' => '<i class="icon-dollar"></i>  Entidades', 'url' => '#', 'items' => array(
 //                    array('label' => 'Entidad Bancaria', 'url' => array('/crm/entidadBancaria/admin'), 'access' => 'action_entidadBancaria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidadBancaria')),
 //                    array('label' => 'Sucursal', 'url' => array('/crm/sucursal/admin'), 'access' => 'action_sucursal_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'sucursal')),
