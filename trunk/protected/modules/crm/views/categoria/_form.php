@@ -35,8 +35,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
          * @property integer $max_foto-->
 
         <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 45)) ?>
-        <?php echo $form->textFieldRow($model, 'max_entidad', array('maxlength' => 45)) ?>
-        <?php echo $form->textFieldRow($model, 'max_foto', array('maxlength' => 45)) ?>
 
     </div>             
     <div class="form-actions">

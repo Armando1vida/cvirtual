@@ -23,11 +23,27 @@ $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
             'enableClientValidation' => true,
         ));
         ?>
-    
-    <?php echo $form->textFieldRow($model, 'nombre', array('class' => 'span4')) ?>
+
+        <?php echo $form->textFieldRow($model, 'nombre', array('class' => 'span4')) ?>
         <?php echo $form->textFieldRow($model, 'apellido', array('class' => 'span4')) ?>
-        <?php echo $form->textFieldRow($model, 'fecha_nacimiento', array('class' => 'span4')) ?>
+        <?php // echo $form->textFieldRow($model, 'fecha_nacimiento', array('class' => 'span4')) ?>
+        <?php
+        echo $form->datepickerRow($model, 'fecha_nacimiento', array(
+            'options' => array(
+                'format' => 'dd/mm/yyyy',
+                'startView' => 2,
+                'endDate' => 'thisYear',
+                'language' => 'es',
+                'autoclose' => 'true',
+                'keyboardNavigation' => true,
+                'forceParse' => false,
+            ),
+            'class' => 'span4 hasDatepicker',
+            'readOnly' => 'true',
+        ));
+        ?>
         <?php echo $form->textFieldRow($model, 'documento', array('class' => 'span4')) ?>
+        <?php echo $form->textFieldRow($model, 'codigo', array('class' => 'span4')) ?>
 
         <?php echo $form->textFieldRow($model, 'username', array('class' => 'span4')) ?>
         <?php echo $form->textFieldRow($model, 'email', array('class' => 'span4')) ?>
