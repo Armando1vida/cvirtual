@@ -35,21 +35,7 @@
         <?php // endif;  ?>
     </p>
 
-    <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'id' => 'add-direccion',
-        'label' => ($modelDireccion ? '' : '<br>') . 'Actualizar Direccion',
-        'encodeLabel' => false,
-        'icon' => $modelDireccion ? 'icon-edit-sign' : 'tag',
-        'htmlOptions' => array(
-//                'onClick' => 'js:viewModal("campanias/campania/create/id_cuenta/' . $model->cuenta->id . '/id_contacto/' . $model->id . '",function(){'
-//                . 'maskAttributes();})',
-            'onClick' => 'js:viewModal("crm/direccion/update/id/' . $modelDireccion->id . '",function(){'
-            . 'maskAttributes();})',
-//                'class' => $model ? '' : 'empty-portlet',
-        ),
-    ));
-    ?>
+
 </div>
 
 
