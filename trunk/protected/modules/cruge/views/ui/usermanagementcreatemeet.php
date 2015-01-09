@@ -23,13 +23,22 @@ $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
             'enableClientValidation' => true,
         ));
         ?>
-        <?php echo $form->textFieldRow($model, 'nombre', array('class' => 'span4')) ?>
-        <?php echo $form->textFieldRow($model, 'apellido', array('class' => 'span4')) ?>
-        <?php echo $form->textFieldRow($model, 'fecha_nacimiento', array('class' => 'span4')) ?>
-        <?php echo $form->textFieldRow($model, 'documento', array('class' => 'span4')) ?>
+        <div class="control-group">
+            <label class="control-label" for="CrugeStoredUser_nombre"> Nombres</label>
+
+            <div class="controls">
+                <input type="text" id="CrugeStoredUser_nombre" name="CrugeStoredUser[nombre]" class="span5">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="CrugeStoredUser_apellido"> Apellidos</label>
+
+            <div class="controls">
+                <input type="text" id="CrugeStoredUser_apellido" name="CrugeStoredUser[apellido]" class="span5">
+            </div>
+        </div>
 
         <?php echo $form->textFieldRow($model, 'username', array('class' => 'span4')) ?>
-
         <?php echo $form->textFieldRow($model, 'email', array('class' => 'span4')) ?>
         <?php
         echo $form->textFieldRow($model, 'newPassword', array(
