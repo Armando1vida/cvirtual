@@ -15,7 +15,7 @@ class Entidad extends BaseEntidad {
     }
 
     public static function label($n = 1) {
-        return Yii::t('app', 'Entidad|Entidads', $n);
+        return Yii::t('app', 'Empresa|Empresas', $n);
     }
 
     public function scopes() {
@@ -74,15 +74,12 @@ class Entidad extends BaseEntidad {
                     )
 
             ;
-//            die();
         } else {
             $command->params = array(
                 'estado' => self::ESTADO_ACTIVO
                     )
             ;
         }
-
-//        die(var_dump("s", $command->queryAll()));
 
         return $command->queryAll();
     }

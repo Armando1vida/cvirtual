@@ -13,8 +13,6 @@
  * @property string $nombre
  * @property integer $peso
  * @property string $estado
- * @property integer $max_entidad
- * @property integer $max_foto
  *
  * @property Entidad[] $entidads
  */
@@ -34,13 +32,13 @@ abstract class BaseCategoria extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('nombre, estado, max_entidad, max_foto', 'required'),
-            array('peso, max_entidad, max_foto', 'numerical', 'integerOnly'=>true),
+            array('nombre, estado', 'required'),
+            array('peso', 'numerical', 'integerOnly'=>true),
             array('nombre', 'length', 'max'=>45),
             array('estado', 'length', 'max'=>8),
             array('estado', 'in', 'range' => array('ACTIVO','INACTIVO')), // enum,
             array('peso', 'default', 'setOnEmpty' => true, 'value' => null),
-            array('id, nombre, peso, estado, max_entidad, max_foto', 'safe', 'on'=>'search'),
+            array('id, nombre, peso, estado', 'safe', 'on'=>'search'),
         );
     }
 
@@ -59,8 +57,6 @@ abstract class BaseCategoria extends AweActiveRecord {
                 'nombre' => Yii::t('app', 'Nombre'),
                 'peso' => Yii::t('app', 'Peso'),
                 'estado' => Yii::t('app', 'Estado'),
-                'max_entidad' => Yii::t('app', 'Max Entidad'),
-                'max_foto' => Yii::t('app', 'Max Foto'),
                 'entidads' => null,
         );
     }
@@ -72,8 +68,6 @@ abstract class BaseCategoria extends AweActiveRecord {
         $criteria->compare('nombre', $this->nombre, true);
         $criteria->compare('peso', $this->peso);
         $criteria->compare('estado', $this->estado, true);
-        $criteria->compare('max_entidad', $this->max_entidad);
-        $criteria->compare('max_foto', $this->max_foto);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
