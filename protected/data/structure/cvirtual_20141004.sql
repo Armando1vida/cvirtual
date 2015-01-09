@@ -120,7 +120,8 @@ CREATE TABLE `cruge_system` (
 
 DROP TABLE IF EXISTS `cruge_user`;
 CREATE TABLE `cruge_user` (
-  `iduser` int(11) NOT NULL AUTO_INCREMENT,
+
+ `iduser` int(11) NOT NULL AUTO_INCREMENT,
   `regdate` bigint(30) DEFAULT NULL,
   `actdate` bigint(30) DEFAULT NULL,
   `logondate` bigint(30) DEFAULT NULL,
@@ -131,6 +132,8 @@ CREATE TABLE `cruge_user` (
   `state` int(11) DEFAULT '0',
   `totalsessioncounter` int(11) DEFAULT '0',
   `currentsessioncounter` int(11) DEFAULT '0',
+  
+
   PRIMARY KEY (`iduser`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
