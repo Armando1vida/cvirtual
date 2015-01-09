@@ -15,14 +15,10 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'enableClientValidation' => false,
         ));
 ?>
-<script>
-    var entidad_id_direccion = "<?php print $model->id; ?>";
-    var coord_x = "<?php print $model->coord_x; ?>";
-    var coord_y = "<?php print $model->coord_y; ?>";
-</script>
+
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
-    <h4><i class="icon-tag"></i> Actualizar Informacion </h4>
+    <h4><i class="icon-tag"></i> Agregar Informacion </h4>
 </div>
 <div class="modal-body">
 
@@ -104,7 +100,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         'icon' => 'ok',
         'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
         'htmlOptions' => array(
-            'onClick' => 'js:actualizarDireccion("#direccion-form")')
+            'onClick' => 'js:createDireccion("#direccion-form")')
     ));
     ?>
     <?php

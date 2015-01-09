@@ -5,7 +5,6 @@ Util::tsRegisterAssetJs('empresa.js');
 
 <div class="contact-us">
 
-
     <div id="map-container" class="control-group">
         <div id="map-canvas" style="width: 100%; height: 320px"></div>
     </div>
@@ -26,8 +25,22 @@ Util::tsRegisterAssetJs('empresa.js');
         <?php $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion)); ?>
 
     <?php endif; ?>
- 
 
+    <?php
+    $this->widget('bootstrap.widgets.TbButton', array(
+        'id' => 'add-direccion',
+        'label' => ($modelDireccion ? '' : '<br>') . 'Actualizar Direccion',
+        'encodeLabel' => false,
+        'icon' => $modelDireccion ? 'icon-edit-sign' : 'tag',
+        'htmlOptions' => array(
+//                'onClick' => 'js:viewModal("campanias/campania/create/id_cuenta/' . $model->cuenta->id . '/id_contacto/' . $model->id . '",function(){'
+//                . 'maskAttributes();})',
+            'onClick' => 'js:viewModal("crm/direccion/update/id/' . $modelDireccion->id . '",function(){'
+            . 'maskAttributes();})',
+//                'class' => $model ? '' : 'empty-portlet',
+        ),
+    ));
+    ?>
 
 </div>
 

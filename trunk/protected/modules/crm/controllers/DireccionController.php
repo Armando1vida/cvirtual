@@ -54,6 +54,29 @@ class DireccionController extends AweController {
         }
     }
 
+    public function actionCreateDireccionEmpresa($entidad_id) {
+        $model = new Direccion;
+        $this->performAjaxValidation($model, 'direccion-form');
+        $enalberender = true;
+        if (Yii::app()->request->isAjaxRequest) {
+            if (isset($_POST['Direccion'])) {
+                $model->attributes = $_POST['Direccion'];
+                $result = array();
+                $result['success'] = $model->save();
+                if (!$result['success']) {
+                    $result['message'] = 'Error al registrar la direccion';
+                } else {
+                    $enalberender = false;
+                }
+
+                echo json_encode($result);
+            }
+        }
+        if (!$enalberender) {
+            $this->renderPartial('_form_modal_Empresa', array('model' => $model), false, true);
+        }
+    }
+
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
