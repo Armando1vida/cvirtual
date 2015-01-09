@@ -18,6 +18,12 @@
  * @property string $logondate    ultimo login exitoso
  * @author: Christian Salazar H. <christiansalazarh@gmail.com> @salazarchris74
  * @license protected/modules/cruge/LICENSE
+ * Agregado estos campos del nuevo usuario
+ * @property string $apellido
+ * @property string $nombre
+ * @property string $fecha_nacimiento
+ * @property string $documento
+
  */
 class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
 
@@ -242,7 +248,7 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
                 ,
                 'message' => CrugeTranslator::t('logon', 'Invalid username')
             ),
-            array('username,email', 'required'),
+            array('username,email,documento,apellido,fecha_nacimiento', 'required'),
             array('newPassword', 'safe', 'on' => 'update'),
             array('newPassword', 'required', 'on' => 'insert, manualcreate'),
             array('newPassword', 'length', 'min' => 6, 'max' => 20),

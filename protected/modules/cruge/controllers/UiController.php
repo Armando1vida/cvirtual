@@ -289,6 +289,35 @@ class UiController extends Controller {
         }
         $this->render("usermanagementcreate", array('model' => $model));
     }
+    public function actionUserManagementCreateMeet() {
+        $model = Yii::app()->user->um->createBlankUser();
+//        var_dump($model);
+//        die();
+        Yii::app()->user->um->loadUserFields($model);
+        if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
+            $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
+
+            $model->terminosYCondiciones = true;
+
+            $model->scenario = 'manualcreate';
+
+            if ($model->validate()) {
+
+                $newPwd = trim($model->newPassword);
+                Yii::app()->user->um->changePassword($model, $newPwd);
+
+                Yii::app()->user->um->generateAuthenticationKey($model);
+
+                if (Yii::app()->user->um->save($model, 'insert')) {
+
+                    $this->onNewUser($model, $newPwd);
+
+                    $this->redirect(array('usermanagementadmin'));
+                }
+            }
+        }
+        $this->render("usermanagementcreatemeet", array('model' => $model));
+    }
 
     public function actionRegistration($datakey = '') {
 
