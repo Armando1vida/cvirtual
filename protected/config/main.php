@@ -30,6 +30,8 @@ return array(
         'application.modules.item.models.*',
         //Eventos
         'application.modules.eventos.models.*',
+        //Productos
+        'application.modules.productos.models.*',
     ),
     'aliases' => array(
         'xupload' => 'ext.xupload'
@@ -38,6 +40,7 @@ return array(
         'crm',
         'items',
         'eventos',
+        'productos',
         // uncomment the following to enable the Gii tool
         'gii' => array(
             'class' => 'system.gii.GiiModule',
