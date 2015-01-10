@@ -292,11 +292,16 @@ class UiController extends Controller {
 
     public function actionUserManagementCreateMeet() {
         $model = Yii::app()->user->um->createBlankUser();
-//        var_dump($model);
+        $owner_id = Yii::app()->user->id;
+        $rolname = Util::getRolUser($owner_id);
+//        var_dump($rolname);
+        $rolAsignar = Cruge_Constants::getAsignarRolUsuario($rolname);
+//        var_dump($rolAsignar);
 //        die();
         Yii::app()->user->um->loadUserFields($model);
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
+            $model->fecha_nacimiento = $model->fecha_nacimiento ? Util::FormatDate($model->fecha_nacimiento, 'Y-m-d') : null;
 
             $model->terminosYCondiciones = true;
 
