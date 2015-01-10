@@ -43,6 +43,9 @@ class Util {
         }
     }
 
+    public static function number_pad($number, $n) {
+        return str_pad((int) $number, $n, "0", STR_PAD_LEFT);
+    }
     /**
      * Retorna la lista de usuarios con el mismo rol
      * @param type $Rol

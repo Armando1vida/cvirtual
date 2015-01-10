@@ -10,6 +10,9 @@ class Menu {
             array('label' => '<i class="icon-home"></i> Home', 'url' => Yii::app()->homeUrl, 'active_rules' => array('module' => 'crm', 'controller' => 'dashboard')),
             array('label' => '<i class="icon-tasks"></i>  Empresas', 'url' => array('/crm/entidad/admin'), 'access' => 'action_entidad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidad')),
 //            array('label' => '<i class="icon-tasks"></i>  Empresa', 'url' => array('/crm/empresa/admin'), 'access' => 'action_empresa_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'empresa')),
+            array('label' => '<i class="icon-shopping-cart"></i>  Ingreso', 'url' => '#', 'items' => array(
+                    array('label' => '<i class="icon-qrcode"></i> Productos', 'url' => array('/productos/producto/admin'), 'access' => 'action_producto_admin', 'active_rules' => array('module' => 'prodcutos', 'controller' => 'producto')),
+                )),
         );
 
         return self::generateMenu($items);
@@ -20,15 +23,23 @@ class Menu {
         $items = array(
             array('label' => '<i class="icon-mail-reply"></i>  Regresar a la App', 'url' => Yii::app()->homeUrl),
             array('label' => '<i class="icon-user"></i>  Usuarios', 'url' => Yii::app()->user->ui->userManagementAdminUrl, 'access' => 'Cruge.ui.*', 'active_rules' => array('module' => 'cruge')),
-            array('label' => '<i class="icon-map-marker"></i>  Catálogos', 'url' => '#', 'items' => array(
+            array('label' => '<i class="icon-map-marker"></i>Catalogo Ubicacion', 'url' => '#', 'items' => array(
                     array('label' => 'Pais', 'url' => array('/crm/pais/admin'), 'access' => 'action_pais_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'pais')),
                     array('label' => 'Provincia', 'url' => array('/crm/provincia/admin'), 'access' => 'action_provincia_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'provincia')),
                     array('label' => 'Ciudad', 'url' => array('/crm/ciudad/admin'), 'access' => 'action_ciudad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'ciudad')),
+                )),
+            array('label' => '<i class="icon-map-marker"></i>Catalogo Empresa', 'url' => '#', 'items' => array(
                     array('label' => 'Categoria', 'url' => array('/crm/categoria/admin'), 'access' => 'action_categoria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'categoria')),
                     array('label' => 'Industria', 'url' => array('/crm/industria/admin'), 'access' => 'action_industria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'industria')),
                 )),
             array('label' => '<i class="icon-calendar"></i>  Eventos', 'url' => '#', 'items' => array(
                     array('label' => 'Prioridad', 'url' => array('/eventos/eventoPrioridad/admin'), 'access' => 'action_eventoPrioridad_admin', 'active_rules' => array('module' => 'eventos', 'controller' => 'eventoPrioridad')),
+                )),
+            array('label' => '<i class="icon-qrcode"></i>  Productos', 'url' => '#', 'items' => array(
+                    array('label' => 'Categoria', 'url' => array('/productos/productoCategoria/admin'), 'access' => 'action_productoCategoria_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoCategoria')),
+                    array('label' => 'Subcategoria', 'url' => array('/productos/productoSubcategoria/admin'), 'access' => 'action_productoSubcategoria_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoSubcategoria')),
+                    array('label' => 'Unidad', 'url' => array('/productos/productoUnidad/admin'), 'access' => 'action_oportunidad_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoUnidad')),
+                //    array('label' => 'Producto', 'url' => array('/productos/producto/admin'), 'access' => 'action_producto_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'producto')),
                 )),
 //            array('label' => '<i class="icon-dollar"></i>  Entidades', 'url' => '#', 'items' => array(
 //                    array('label' => 'Entidad Bancaria', 'url' => array('/crm/entidadBancaria/admin'), 'access' => 'action_entidadBancaria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidadBancaria')),
