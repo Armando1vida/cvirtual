@@ -289,6 +289,7 @@ class UiController extends Controller {
         }
         $this->render("usermanagementcreate", array('model' => $model));
     }
+
     public function actionUserManagementCreateMeet() {
         $model = Yii::app()->user->um->createBlankUser();
 //        var_dump($model);
@@ -316,7 +317,8 @@ class UiController extends Controller {
                 }
             }
         }
-        $this->render("usermanagementcreatemeet", array('model' => $model));
+        $rolesCruge = Util::getRolesCreados();
+        $this->render("usermanagementcreatemeet", array('model' => $model, 'rolesCruge' => $rolesCruge));
     }
 
     public function actionRegistration($datakey = '') {
@@ -678,7 +680,7 @@ class UiController extends Controller {
         $this->render('rbacauthitemupdate', array('model' => $editor));
     }
 
-     /**
+    /**
      * Obtiene los usuarios con el rol antiguoy tambien los elimina de cruge_authassignment usuario en la tabla de roles
      * @author Mauricio Chamorro <mchamorro@tradesystem.com.ec>
      * @param String $oldName
@@ -1055,7 +1057,8 @@ class UiController extends Controller {
         $pageSize = 20;
         $rbac = Yii::app()->user->rbac;
         $um = Yii::app()->user->um;
-
+//        var_dump($rbac);
+//        die();
         $debug = "";
         if (Yii::app()->request->isAjaxRequest && isset($_GET['mode'])) {
 
@@ -1101,6 +1104,7 @@ class UiController extends Controller {
         $roleUsersDataProvider = $um->listUsersDataProviderFromArray(
                 $rbac->getUsersAssigned($authItemName), $pageSize, $boolLoadCustomFields
         );
+
         $allUsersDataProvider = $um->listAllUsersDataProvider(
                 array(), $pageSize, $boolLoadCustomFields);
 

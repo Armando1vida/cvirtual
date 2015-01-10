@@ -9,6 +9,7 @@
 	$loaderImg = "<img src='{$loaderSrc}'>";
 
 	$selectedUserGetter = 'userdescription';
+      
 ?>
 
 <div class="widget blue">
