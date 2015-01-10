@@ -4,7 +4,7 @@
  * Constantes del modulo cruge
  * @author Miguel Alba <malba@tradesystem.com.ec>
  */
-class Crm_Constants {
+class Cruge_Constants {
 
     //constantes para roles
     const administradores_master = "administradores_master";
@@ -22,7 +22,13 @@ class Crm_Constants {
             self::administradores_master => self::administradores_master,
         );
     }
-
+/**
+ * Metodo en el cual de acuerdo al nombre del rol se asignara
+ * el rol de registro para el usuario a registrar
+ * @author Miguel Alba <malba@tradesystem.com.ec>
+ * @param String type $nameRol
+ * @return String type
+ */
     public static function getAsignarRolUsuario($nameRol) {
         $rolAsignado = "";
         switch ($nameRol) {
