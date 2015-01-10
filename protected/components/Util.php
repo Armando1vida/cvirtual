@@ -24,6 +24,18 @@ class Util {
         return $string;
     }
 
+    /**
+     * Obtener Todos los roles creados en el modulo Cruge
+     */
+    public static function getRolesCreados() {
+        $rbac = Yii::app()->user->rbac;
+        $rolesTotal = array();
+        foreach ($rbac->roles as $rol) {
+            $rolesTotal[$rol->name] = $rol->name;
+        }
+        return $rolesTotal;
+    }
+
     public static function saveBulk($inserValues, $tableName) {
         try {
             $builder = Yii::app()->db->getSchema()->getCommandBuilder();

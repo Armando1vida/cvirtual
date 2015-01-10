@@ -3,6 +3,7 @@
 /** @var Form $model es una instancia que implementa a ICrugeStoredUser */
 /** @var Boolean $boolIsUserManagement true o false.  si es true indica que esta operandose bajo el action de adminstracion de usuarios, si es false indica que se esta operando bajo 'editar tu perfil' */
 $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
+var_dump($rolesCruge);
 ?>
 
 <div class="widget blue">
