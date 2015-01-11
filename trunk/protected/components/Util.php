@@ -58,6 +58,7 @@ class Util {
     public static function number_pad($number, $n) {
         return str_pad((int) $number, $n, "0", STR_PAD_LEFT);
     }
+
     /**
      * Retorna la lista de usuarios con el mismo rol
      * @param type $Rol
@@ -127,6 +128,17 @@ class Util {
             $texto = $texto . '...';
         }
         return $texto;
+    }
+
+    public static function getFirstRolUser($user_id) {
+        $consulta = Yii::app()->db->createCommand()
+                ->select('as.itemname')
+                ->from('cruge_authassignment as')
+                ->where('(as.userid =:userid)', array(':userid' => $user_id))
+                ->andWhere('as.itemname != "" and as.itemname is not null')
+                ->limit(1)
+                ->queryScalar();
+        return $consulta ? $consulta : null;
     }
 
     /**

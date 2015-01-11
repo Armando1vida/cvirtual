@@ -166,12 +166,19 @@ return array(
         'authManager' => array(
             'class' => 'application.modules.cruge.components.CrugeAuthManager',
         ),
-        'crugemailer' => array(
+        
+          'crugemailer' => array(
             'class' => 'application.modules.cruge.components.CrugeMailer',
-            'mailfrom' => 'armand1live@gmail.com',
-            'subjectprefix' => 'MeetClic - ',
+            'mailfrom' => 'dadyalex777@hotmail.com',
+            'subjectprefix' => 'Tu Encabezado del asunto - ',
             'debug' => true,
         ),
+        'mailer' => array(
+            'class' => 'application.extensions.mailer.EMailer',
+            'pathViews' => 'application.views.email',
+            'pathLayouts' => 'application.views.email.layouts'
+        ),
+        
         'format' => array(
             'datetimeFormat' => "d M, Y h:m:s a",
         ),
