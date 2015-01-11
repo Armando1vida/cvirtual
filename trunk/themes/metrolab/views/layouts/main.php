@@ -66,7 +66,6 @@
                                     <span class="username"><?php echo Yii::app()->user->name ? Yii::app()->user->name : "Guest" ?></span>
                                     <b class="caret"></b>
                                 </a>
-
                                 <ul class="dropdown-menu extended logout">
                                     <?php if (!Yii::app()->user->isGuest): ?>
                                         <li><?php echo CHtml::link('<i class="icon-user"></i>&nbsp;&nbsp;Mi Cuenta', array('/cruge/ui/editprofile')) ?></a></li>

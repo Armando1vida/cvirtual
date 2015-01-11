@@ -79,7 +79,7 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
     /* entrega un array con los nombres de los atributos clave para orden, de primero el userid */
 
     public static function getSortFieldNames() {
-        return array('iduser', 'username', 'email', 'state', 'logondate');
+        return array('iduser', 'username', 'email', 'state', 'logondate','nombre','apellido','documento');
     }
 
     public function getStateName() {
@@ -263,6 +263,8 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
                 )
             ),
             array('username, password', 'length', 'max' => 64),
+            array('nombre', 'length', 'max' => 64),
+//            array('apellido', 'length', 'max' => 64),
             array('state', 'numerical', 'integerOnly' => true),
             array('authkey', 'length', 'max' => 100),
             array('email', 'email'),
@@ -385,10 +387,11 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
     public function search() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
-
         $criteria = new CDbCriteria;
-
         $criteria->compare('iduser', $this->iduser);
+        $criteria->compare('nombre', $this->nombre);
+        $criteria->compare('documento', $this->documento);
+        $criteria->compare('apellido', $this->apellido);
         $criteria->compare('username', $this->username, true);
         $criteria->compare('email', $this->email, true);
         $criteria->compare('state', $this->state);
