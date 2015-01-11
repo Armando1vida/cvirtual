@@ -278,9 +278,12 @@ class UiController extends Controller {
         // carga los campos definidos por el administrador
         // trayendo consigo el atributo "value" accesible mediante $xx->fieldvalue
         Yii::app()->user->um->loadUserFields($model);
+        $renderAdmi = false;
         $this->performAjaxValidation('crugestoreduser-form', $model);
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
+            $model->fecha_nacimiento = $model->fecha_nacimiento ? Util::FormatDate($model->fecha_nacimiento, 'Y-m-d') : null;
+
             if ($model->validate()) {
                 // el modelo ICrugeStoredUser ha validado bien, incluso cada uno de sus campos extra
 
@@ -298,18 +301,25 @@ class UiController extends Controller {
                 }
 
                 if (Yii::app()->user->um->save($model, 'update')) {
-                    Yii::app()->user->setFlash('success', "Actualizacion exitosa!");
+//                    Yii::app()->user->setFlash('success', "Actualizacion exitosa!");
+                    $renderAdmi = true;
                 } else {
                     Yii::app()->user->setFlash('success', "Actualizacion fallida!");
                 }
             }
         }
-
-        $this->render("usermanagementupdateroles", array(
-            'model' => $model,
-            'boolIsUserManagement' => $boolIsUserManagement,
-                )
-        );
+        if (!$renderAdmi) {
+            $this->render("usermanagementupdateroles", array(
+                'model' => $model,
+                'boolIsUserManagement' => $boolIsUserManagement,
+                    )
+            );
+        } else {
+            $model = Yii::app()->user->um->getSearchModelICrugeStoredUser();
+            $model->unsetAttributes();
+            $dataProvider = $model->search();
+            $this->redirect("usermanagementadminroles", array('model' => $model, 'dataProvider' => $dataProvider));
+        }
     }
 
     /*
@@ -318,6 +328,7 @@ class UiController extends Controller {
 
     public function actionUserManagementCreate() {
         $model = Yii::app()->user->um->createBlankUser();
+        $rbac = Yii::app()->user->rbac;
         Yii::app()->user->um->loadUserFields($model);
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
@@ -346,11 +357,14 @@ class UiController extends Controller {
 
     public function actionUserManagementCreateRoles() {
         $model = Yii::app()->user->um->createBlankUser();
+        $msj = "";
         $owner_id = Yii::app()->user->id;
-        $rolname = Util::getRolUser($owner_id);
-//        var_dump($rolname);
+//        $rolname = Util::getRolUser($owner_id);
+        $rolname = Util::getFirstRolUser($owner_id);
+        $rbac = Yii::app()->user->rbac;
+//        var_dump("rol",$rolname);
         $rolAsignar = Cruge_Constants::getAsignarRolUsuario($rolname);
-//        var_dump($rolAsignar);
+//        var_dump("rol asig",$rolAsignar);
 //        die();
         Yii::app()->user->um->loadUserFields($model);
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
@@ -369,13 +383,25 @@ class UiController extends Controller {
 
                 if (Yii::app()->user->um->save($model, 'insert')) {
                     $this->onNewUser($model, $newPwd);
-
+                    $userId = $model->getPrimaryKey();
+//                    var_dump($model->username);
+                    //Asignar el rol luego de crear el usuario con su respectivo rol
+//                    var_dump($userId);
+//                    var_dump($rolAsignar);
+//                    $rbac->assign($authitemName, $userId)
+                    if (!$rbac->assign($rolAsignar, $userId)) {
+                        $msj = "No se agrego al rol";
+                    } else {
+                        $msj = "Se agrego al rol";
+                    }
+//                    die();
+//                    Mailer::enviarEmail($model->email, "Bienvenido: " . $model->username, "<b>HOLA</b>");
+//                    die();
                     $this->redirect(array('usermanagementadminroles'));
                 }
             }
         }
-        $rolesCruge = Util::getRolesCreados();
-        $this->render("usermanagementcreateroles", array('model' => $model, 'rolesCruge' => $rolesCruge));
+        $this->render("usermanagementcreateroles", array('model' => $model));
     }
 
     public function actionRegistration($datakey = '') {
