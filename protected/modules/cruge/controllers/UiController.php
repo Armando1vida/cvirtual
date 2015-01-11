@@ -204,6 +204,17 @@ class UiController extends Controller {
         $this->render("usermanagementadmin", array('model' => $model, 'dataProvider' => $dataProvider));
     }
 
+    public function actionUserManagementAdminRoles() {
+//        $this->admin=false;
+        $model = Yii::app()->user->um->getSearchModelICrugeStoredUser();
+        $model->unsetAttributes();
+        if (isset($_GET[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
+            $model->attributes = $_GET[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
+        }
+        $dataProvider = $model->search();
+        $this->render("usermanagementadminroles", array('model' => $model, 'dataProvider' => $dataProvider));
+    }
+
     public function actionEditProfile() {
 
         $this->layout = CrugeUtil::config()->editProfileLayout;
@@ -217,6 +228,10 @@ class UiController extends Controller {
 
     public function actionUserManagementUpdate($id) {
         $this->_editUserProfile(Yii::app()->user->um->loadUserById($id), true);
+    }
+
+    public function actionUserManagementUpdateRoles($id) {
+        $this->_editUserProfileRoles(Yii::app()->user->um->loadUserById($id), true);
     }
 
     public function _editUserProfile(ICrugeStoredUser $model, $boolIsUserManagement) {
@@ -258,6 +273,45 @@ class UiController extends Controller {
         );
     }
 
+    public function _editUserProfileRoles(ICrugeStoredUser $model, $boolIsUserManagement) {
+
+        // carga los campos definidos por el administrador
+        // trayendo consigo el atributo "value" accesible mediante $xx->fieldvalue
+        Yii::app()->user->um->loadUserFields($model);
+        $this->performAjaxValidation('crugestoreduser-form', $model);
+        if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
+            $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
+            if ($model->validate()) {
+                // el modelo ICrugeStoredUser ha validado bien, incluso cada uno de sus campos extra
+
+                /*
+                  si se ha especificado algun valor en $model->newPassword se asume
+                  que se quiere cambiar la clave:
+                 */
+
+                $newPwd = trim($model->newPassword);
+                Yii::log("deteccion de nueva clave: newPassword: [" . $newPwd . "]", "info");
+                if ($newPwd != '') {
+                    Yii::log("\n\n***NUEVA CLAVE***\n\n", "info");
+                    Yii::app()->user->um->changePassword($model, $newPwd);
+                    Yii::app()->crugemailer->sendPasswordTo($model, $newPwd);
+                }
+
+                if (Yii::app()->user->um->save($model, 'update')) {
+                    Yii::app()->user->setFlash('success', "Actualizacion exitosa!");
+                } else {
+                    Yii::app()->user->setFlash('success', "Actualizacion fallida!");
+                }
+            }
+        }
+
+        $this->render("usermanagementupdateroles", array(
+            'model' => $model,
+            'boolIsUserManagement' => $boolIsUserManagement,
+                )
+        );
+    }
+
     /*
       solo se crea el ICrugeStoredUser, no todo el perfil.
      */
@@ -290,7 +344,7 @@ class UiController extends Controller {
         $this->render("usermanagementcreate", array('model' => $model));
     }
 
-    public function actionUserManagementCreateMeet() {
+    public function actionUserManagementCreateRoles() {
         $model = Yii::app()->user->um->createBlankUser();
         $owner_id = Yii::app()->user->id;
         $rolname = Util::getRolUser($owner_id);
@@ -304,7 +358,6 @@ class UiController extends Controller {
             $model->fecha_nacimiento = $model->fecha_nacimiento ? Util::FormatDate($model->fecha_nacimiento, 'Y-m-d') : null;
 
             $model->terminosYCondiciones = true;
-
             $model->scenario = 'manualcreate';
 
             if ($model->validate()) {
@@ -315,15 +368,14 @@ class UiController extends Controller {
                 Yii::app()->user->um->generateAuthenticationKey($model);
 
                 if (Yii::app()->user->um->save($model, 'insert')) {
-
                     $this->onNewUser($model, $newPwd);
 
-                    $this->redirect(array('usermanagementadmin'));
+                    $this->redirect(array('usermanagementadminroles'));
                 }
             }
         }
         $rolesCruge = Util::getRolesCreados();
-        $this->render("usermanagementcreatemeet", array('model' => $model, 'rolesCruge' => $rolesCruge));
+        $this->render("usermanagementcreateroles", array('model' => $model, 'rolesCruge' => $rolesCruge));
     }
 
     public function actionRegistration($datakey = '') {

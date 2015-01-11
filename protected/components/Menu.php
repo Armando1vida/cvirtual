@@ -8,7 +8,6 @@ class Menu {
         self::$_controller = $controller;
         $items = array(
             array('label' => '<i class="icon-home"></i> Home', 'url' => Yii::app()->homeUrl, 'active_rules' => array('module' => 'crm', 'controller' => 'dashboard')),
-            array('label' => '<i class="icon-tasks"></i>  Empresas', 'url' => array('/crm/entidad/admin'), 'access' => 'action_entidad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidad')),
 //            array('label' => '<i class="icon-tasks"></i>  Empresa', 'url' => array('/crm/empresa/admin'), 'access' => 'action_empresa_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'empresa')),
             array('label' => '<i class="icon-shopping-cart"></i>  Ingreso', 'url' => '#', 'items' => array(
                     array('label' => '<i class="icon-qrcode"></i> Productos', 'url' => array('/productos/producto/admin'), 'access' => 'action_producto_admin', 'active_rules' => array('module' => 'prodcutos', 'controller' => 'producto')),
@@ -22,7 +21,7 @@ class Menu {
         self::$_controller = $controller;
         $items = array(
             array('label' => '<i class="icon-mail-reply"></i>  Regresar a la App', 'url' => Yii::app()->homeUrl),
-            array('label' => '<i class="icon-user"></i>  Usuarios', 'url' => Yii::app()->user->ui->userManagementAdminUrl, 'access' => 'Cruge.ui.*', 'active_rules' => array('module' => 'cruge')),
+            array('label' => '<i class="icon-user"></i>  Usuarios', 'url' => Yii::app()->user->ui->userManagementAdminRolesUrl, 'access' => 'Cruge.ui.*', 'active_rules' => array('module' => 'cruge')),
             array('label' => '<i class="icon-map-marker"></i>Catalogo Ubicacion', 'url' => '#', 'items' => array(
                     array('label' => 'Pais', 'url' => array('/crm/pais/admin'), 'access' => 'action_pais_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'pais')),
                     array('label' => 'Provincia', 'url' => array('/crm/provincia/admin'), 'access' => 'action_provincia_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'provincia')),

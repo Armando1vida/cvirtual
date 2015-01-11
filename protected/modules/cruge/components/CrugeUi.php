@@ -65,20 +65,36 @@ class CrugeUi extends CComponent
     {
         return CrugeUtil::uiaction('usermanagementadmin');
     }
+    public function getUserManagementAdminRolesUrl()
+    {
+        return CrugeUtil::uiaction('usermanagementadminroles');
+    }
 
     public function getUserManagementCreateUrl()
     {
         return CrugeUtil::uiaction('usermanagementcreate');
+    }
+    public function getUserManagementCreateRolesUrl()
+    {
+        return CrugeUtil::uiaction('usermanagementcreateroles');
     }
 
     public function getEditProfileUrl()
     {
         return CrugeUtil::uiaction('editprofile');
     }
+    public function getEditProfileRolesUrl()
+    {
+        return CrugeUtil::uiaction('editprofileroles');
+    }
 
     public function getUserManagementDeleteUrl()
     {
         return CrugeUtil::uiaction('usermanagementdelete');
+    }
+    public function getUserManagementDeleteRolesUrl()
+    {
+        return CrugeUtil::uiaction('usermanagementdeleteroles');
     }
 
     public function getRegistrationUrl()
@@ -340,7 +356,7 @@ class CrugeUi extends CComponent
 
         actualmente este metodo se invoca desde /cruge/layouts/ui.php
     */
-    public function getTradeAdminItems()
+    public function getUsuariosAdminItems()
     {
         return array(
             array('label' => CrugeTranslator::t('admin', 'User Manager'), 'items' => array(
@@ -404,6 +420,28 @@ class CrugeUi extends CComponent
                     'label' => CrugeTranslator::t('admin', 'System Variables')
                 ,
                     'url' => $this->getSystemUpdateUrl()
+                ),
+            )),
+        );
+    }
+    public function getUsuariosAdminItemsRoles()
+    {
+        return array(
+            array('label' => CrugeTranslator::t('admin', 'User Manager'), 'items' => array(
+//                array(
+//                    'label' => CrugeTranslator::t('admin', 'Update Profile')
+//                ,
+//                    'url' => $this->getEditProfileUrl()
+//                ),
+                array(
+                    'label' => CrugeTranslator::t('admin', 'Create User')
+                ,
+                    'url' => $this->getUserManagementCreateRolesUrl()
+                ),
+                array(
+                    'label' => CrugeTranslator::t('admin', 'Manage Users')
+                ,
+                    'url' => $this->getUserManagementAdminRolesUrl()
                 ),
             )),
         );

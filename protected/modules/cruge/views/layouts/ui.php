@@ -21,21 +21,36 @@ if (Yii::app()->user->isSuperAdmin) {
     echo Yii::app()->user->ui->superAdminNote();
 }
 ?>
+<?php if (Yii::app()->user->isSuperAdmin) { ?>
     <div class="top-controlls">
-        <?php foreach(Yii::app()->user->ui->tradeAdminItems as $menu) :?>
-        <?php $this->widget(
-            'bootstrap.widgets.TbButtonGroup',
-            array(
+        <?php foreach (Yii::app()->user->ui->UsuariosAdminItems as $menu) : ?>
+            <?php
+            $this->widget(
+                    'bootstrap.widgets.TbButtonGroup', array(
                 'buttons' => array($menu),
-            )
-        ); ?>
+                    )
+            );
+            ?>
         <?php endforeach; ?>
     </div>
+<?php }else { ?>
+    <div class="top-controlls">
+        <?php foreach (Yii::app()->user->ui->UsuariosAdminItemsRoles as $menu) : ?>
+            <?php
+            $this->widget(
+                    'bootstrap.widgets.TbButtonGroup', array(
+                'buttons' => array($menu),
+                    )
+            );
+            ?>
+        <?php endforeach; ?>
+    </div>
+<?php }; ?>
 
-    <div id="content">
-        <?php echo $content; ?>
-    </div><!-- content -->
-    <?php if (Yii::app()->user->checkAccess('admin')) { ?>	
+<div id="content">
+    <?php echo $content; ?>
+</div><!-- content -->
+<?php if (Yii::app()->user->checkAccess('admin')) { ?>	
 <?php } ?>
 
 <?php $this->endContent(); ?>
