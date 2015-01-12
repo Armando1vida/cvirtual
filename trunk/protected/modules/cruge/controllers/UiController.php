@@ -346,7 +346,8 @@ class UiController extends Controller {
 
                 if (Yii::app()->user->um->save($model, 'insert')) {
 
-                    $this->onNewUser($model, $newPwd);
+//                    $this->onNewUser($model, $newPwd);
+                    Mailer::enviarEmail($model->email, "Bienvenido: " . $model->username, "<b>HOLA</b>");
 
                     $this->redirect(array('usermanagementadmin'));
                 }
