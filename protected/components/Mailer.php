@@ -22,7 +22,7 @@ class Mailer {
     const FROM_NAME = "Miguel Alba";
 
     public static function enviarEmail($to, $subject, $body, $from = self::FROM, $fromName = self::FROM_NAME) {
-        if (Constants::SEND_MAILS) {
+//            var_dump("entro envio");
             if (self::EMAIL) {
                 Yii::app()->mailer->Host = self::HOST;
                 Yii::app()->mailer->IsSMTP();
@@ -47,14 +47,13 @@ class Mailer {
                 if (!Yii::app()->mailer->Send()) {
                     throw new Exception('Error enviando el correo');
                 } else {
-                    
+                    var_dump("nvio l correo");
+                    die();
                 }
             } else {
                 
             }
-        } else {
-            echo "Activar Envio de email";
-        }
+         
     }
 
 }
