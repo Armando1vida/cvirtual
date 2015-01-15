@@ -79,7 +79,7 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
     /* entrega un array con los nombres de los atributos clave para orden, de primero el userid */
 
     public static function getSortFieldNames() {
-        return array('iduser', 'username', 'email', 'state', 'logondate','nombre','apellido','documento');
+        return array('iduser', 'username', 'email', 'state', 'logondate', 'nombre', 'apellido', 'documento');
     }
 
     public function getStateName() {
@@ -355,6 +355,7 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
         // class name for the relations automatically generated below.
         return array(
             'sessions' => array(self::HAS_MANY, 'crugesession', 'iduser'),
+            'usersasign' => array(self::MANY_MANY, 'crugestoreduser', 'usuarios_asignados(iduser, iduser_asignado)'),
         );
     }
 
@@ -382,12 +383,34 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
      * Retrieves a list of models based on the current search/filter conditions.
      * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
      */
-  
-
     public function search() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
         $criteria = new CDbCriteria;
+        $criteria->compare('iduser', $this->iduser);
+        $criteria->compare('nombre', $this->nombre);
+        $criteria->compare('documento', $this->documento);
+        $criteria->compare('apellido', $this->apellido);
+        $criteria->compare('username', $this->username, true);
+        $criteria->compare('email', $this->email, true);
+        $criteria->compare('state', $this->state);
+        $criteria->compare('logondate', $this->logondate);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+            'sort' => array(
+                'defaultOrder' => array('iduser' => true),
+            ),
+        ));
+    }
+
+    public function searchCuentasAssign() {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+        $criteria = new CDbCriteria;
+        $criteria->with = array(
+            'industria',
+        );
         $criteria->compare('iduser', $this->iduser);
         $criteria->compare('nombre', $this->nombre);
         $criteria->compare('documento', $this->documento);

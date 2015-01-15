@@ -328,7 +328,11 @@ class UiController extends Controller {
 
     public function actionUserManagementCreate() {
         $model = Yii::app()->user->um->createBlankUser();
-        $rbac = Yii::app()->user->rbac;
+        $owner_id = Yii::app()->user->id;
+        $error = false;
+//        $rolname = Util::getRolUser($owner_id);
+//        var_dump("rol",$rolname);
+//        $rolAsignar = Cruge_Constants::getAsignarRolUsuario($rolname);
         Yii::app()->user->um->loadUserFields($model);
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
@@ -345,10 +349,14 @@ class UiController extends Controller {
                 Yii::app()->user->um->generateAuthenticationKey($model);
 
                 if (Yii::app()->user->um->save($model, 'insert')) {
-
-//                    $this->onNewUser($model, $newPwd);
+                    $userId = $model->getPrimaryKey();
+                    $modelUsuarioAsignado = new UsuariosAsignados;
+                    $modelUsuarioAsignado->iduser = $owner_id;
+                    $modelUsuarioAsignado->iduser_asignado = $userId;
+                    if (!$modelUsuarioAsignado->save()) {
+                        $error = true;
+                    }
                     Mailer::enviarEmail($model->email, "Bienvenido: " . $model->username, "<b>HOLA</b>");
-
                     $this->redirect(array('usermanagementadmin'));
                 }
             }
@@ -385,11 +393,21 @@ class UiController extends Controller {
                 if (Yii::app()->user->um->save($model, 'insert')) {
                     $this->onNewUser($model, $newPwd);
                     $userId = $model->getPrimaryKey();
+//                    $owner_id
 //                    var_dump($model->username);
                     //Asignar el rol luego de crear el usuario con su respectivo rol
 //                    var_dump($userId);
 //                    var_dump($rolAsignar);
 //                    $rbac->assign($authitemName, $userId)
+                    $model = new UsuariosAsignados;
+                    $model->iduser0 = $owner_id;
+                    $model->iduser_asignado = $userId;
+                    $model->validate();
+                    $save = $model->save();
+//                    UsuariosAsignados::model()->saveManyMany($relationName, $data);
+//                    var_dump("sasd");        $model = new Cuenta;
+                    var_dump($save);
+                    die();
                     if (!$rbac->assign($rolAsignar, $userId)) {
                         $msj = "No se agrego al rol";
                     } else {
