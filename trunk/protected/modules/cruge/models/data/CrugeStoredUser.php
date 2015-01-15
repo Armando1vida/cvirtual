@@ -405,19 +405,30 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
         ));
     }
 
+    public function de_cuenta($iduser) {
+        $this->getDbCriteria()->mergeWith(
+                array(
+                    'condition' => 't.iduser = :iduser',
+                    'params' => array(
+                        ':iduser' => $iduser
+                    ),
+                )
+        );
+        return $this;
+    }
+
     public function searchCuentasAssign() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
         $criteria = new CDbCriteria;
         $criteria->join = 'inner join usuarios_asignados  uasi on t.iduser=uasi.iduser';
         $criteria->compare('usuario_asignado', $this->iduser);
-        $criteria->compare('i', $this->nombre);
         $criteria->compare('documento', $this->documento);
         $criteria->compare('apellido', $this->apellido);
         $criteria->compare('username', $this->username, true);
         $criteria->compare('email', $this->email, true);
-        $criteria->compare('state', $this->state);
-        $criteria->compare('usuario_asignado',$this->usuario_asignado, true);
+//        $criteria->compare('state', $this->state);
+//        $criteria->compare('usuario_asignado',$this->usuario_asignado, true);
         $criteria->compare('logondate', $this->logondate);
 
         return new CActiveDataProvider($this, array(
