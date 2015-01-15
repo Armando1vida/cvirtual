@@ -33,6 +33,7 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
     // terminos y condiciones, caso registration,
     public $terminosYCondiciones;
     public $verifyCode;
+    public $usuario_asignado;
     // establecer a true si se quiere saltar la validacion de captcha.
     // ver acerca de: cruge\components\CrugeUserManager.php::createBlankUser
     public $bypassCaptcha;
@@ -408,16 +409,15 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
         $criteria = new CDbCriteria;
-        $criteria->with = array(
-            'industria',
-        );
-        $criteria->compare('iduser', $this->iduser);
-        $criteria->compare('nombre', $this->nombre);
+        $criteria->join = 'inner join usuarios_asignados  uasi on t.iduser=uasi.iduser';
+        $criteria->compare('usuario_asignado', $this->iduser);
+        $criteria->compare('i', $this->nombre);
         $criteria->compare('documento', $this->documento);
         $criteria->compare('apellido', $this->apellido);
         $criteria->compare('username', $this->username, true);
         $criteria->compare('email', $this->email, true);
         $criteria->compare('state', $this->state);
+        $criteria->compare('usuario_asignado',$this->usuario_asignado, true);
         $criteria->compare('logondate', $this->logondate);
 
         return new CActiveDataProvider($this, array(

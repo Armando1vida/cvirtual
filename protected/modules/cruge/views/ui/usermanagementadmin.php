@@ -56,7 +56,7 @@ $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
         $this->widget('bootstrap.widgets.TbGridView', array(
             'id' => 'llamada-grid',
             'type' => 'striped condensed',
-            'dataProvider' => $model->search(),
+            'dataProvider' => $model->searchCuentasAssign(),
             'filter' => $model,
             'columns' => $cols
         ));
