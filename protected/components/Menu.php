@@ -31,15 +31,15 @@ class Menu {
                     array('label' => 'Categoria', 'url' => array('/crm/categoria/admin'), 'access' => 'action_categoria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'categoria')),
                     array('label' => 'Industria', 'url' => array('/crm/industria/admin'), 'access' => 'action_industria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'industria')),
                 )),
-            array('label' => '<i class="icon-calendar"></i>  Eventos', 'url' => '#', 'items' => array(
-                    array('label' => 'Prioridad', 'url' => array('/eventos/eventoPrioridad/admin'), 'access' => 'action_eventoPrioridad_admin', 'active_rules' => array('module' => 'eventos', 'controller' => 'eventoPrioridad')),
-                )),
-            array('label' => '<i class="icon-qrcode"></i>  Productos', 'url' => '#', 'items' => array(
-                    array('label' => 'Categoria', 'url' => array('/productos/productoCategoria/admin'), 'access' => 'action_productoCategoria_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoCategoria')),
-                    array('label' => 'Subcategoria', 'url' => array('/productos/productoSubcategoria/admin'), 'access' => 'action_productoSubcategoria_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoSubcategoria')),
-                    array('label' => 'Unidad', 'url' => array('/productos/productoUnidad/admin'), 'access' => 'action_oportunidad_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoUnidad')),
-                //    array('label' => 'Producto', 'url' => array('/productos/producto/admin'), 'access' => 'action_producto_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'producto')),
-                )),
+//            array('label' => '<i class="icon-calendar"></i>  Eventos', 'url' => '#', 'items' => array(
+//                    array('label' => 'Prioridad', 'url' => array('/eventos/eventoPrioridad/admin'), 'access' => 'action_eventoPrioridad_admin', 'active_rules' => array('module' => 'eventos', 'controller' => 'eventoPrioridad')),
+//                )),
+//            array('label' => '<i class="icon-qrcode"></i>  Productos', 'url' => '#', 'items' => array(
+//                    array('label' => 'Categoria', 'url' => array('/productos/productoCategoria/admin'), 'access' => 'action_productoCategoria_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoCategoria')),
+//                    array('label' => 'Subcategoria', 'url' => array('/productos/productoSubcategoria/admin'), 'access' => 'action_productoSubcategoria_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoSubcategoria')),
+//                    array('label' => 'Unidad', 'url' => array('/productos/productoUnidad/admin'), 'access' => 'action_oportunidad_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'productoUnidad')),
+//                //    array('label' => 'Producto', 'url' => array('/productos/producto/admin'), 'access' => 'action_producto_admin', 'active_rules' => array('module' => 'productos', 'controller' => 'producto')),
+//                )),
 //            array('label' => '<i class="icon-dollar"></i>  Entidades', 'url' => '#', 'items' => array(
 //                    array('label' => 'Entidad Bancaria', 'url' => array('/crm/entidadBancaria/admin'), 'access' => 'action_entidadBancaria_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidadBancaria')),
 //                    array('label' => 'Sucursal', 'url' => array('/crm/sucursal/admin'), 'access' => 'action_sucursal_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'sucursal')),
