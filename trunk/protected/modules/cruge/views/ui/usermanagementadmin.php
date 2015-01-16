@@ -1,8 +1,8 @@
 <?php
 /** @var FormController $this */
 /** @var Form $model */
-
 $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
+var_dump($owner_id);
 ?>
 
 <div class="widget blue">
@@ -12,7 +12,7 @@ $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
             <a href="javascript:;" class="icon-chevron-down"></a>
             <!--a href="javascript:;" class="icon-remove"></a-->
         </span>
-     </div>
+    </div>
     <div class="widget-body form">
         <?php
         /*
@@ -23,7 +23,7 @@ $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
          */
         $cols = array();
 
-    // presenta los campos de ICrugeStoredUser
+        // presenta los campos de ICrugeStoredUser
         foreach (Yii::app()->user->um->getSortFieldNamesForICrugeStoredUser() as $key => $fieldName) {
             $value = null; // default
             $filter = null; // default, textbox
@@ -46,21 +46,21 @@ $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
             'deleteConfirmation' => CrugeTranslator::t('admin', 'Are you sure you want to delete this user'),
             'buttons' => array(
                 'update' => array(
-                    'label'=>'<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
-                    'options'=>array('title'=>CrugeTranslator::t('admin', 'Update User')),
+                    'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
+                    'options' => array('title' => CrugeTranslator::t('admin', 'Update User')),
                     'url' => 'array("usermanagementupdate","id"=>$data->getPrimaryKey())',
-                    'imageUrl'=>false,
+                    'imageUrl' => false,
                 ),
             ),
         );
         $this->widget('bootstrap.widgets.TbGridView', array(
             'id' => 'llamada-grid',
             'type' => 'striped condensed',
-            'dataProvider' => $model->de_cuenta($model->iduser)->searchCuentasAssign(),
+            'dataProvider' => $model->search(),
             'filter' => $model,
             'columns' => $cols
         ));
         ?>
-        
+
     </div>
 </div>

@@ -133,7 +133,7 @@ return array(
             ),
         ),
         // uncomment the following to use a MySQL database
-        'db' => array(
+       'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=cvirtual',
             'emulatePrepare' => true,
             'username' => 'root',
