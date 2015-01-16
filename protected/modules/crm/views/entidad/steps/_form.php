@@ -34,6 +34,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             <?php echo $form->textFieldRow($model, 'celular', array('maxlength' => 45)) ?>
 
             <?php echo $form->textFieldRow($model, 'email', array('maxlength' => 45)) ?>
+            <?php echo $form->textAreaRow($model, 'descripcion', array('rows' => 3, 'class' => 'span10')) ?>
 
             <?php // echo $form->textFieldRow($model, 'max_entidad') ?>
 
@@ -41,10 +42,11 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             <?php // echo $form->textFieldRow($model, 'max_foto') ?>
 
             <?php echo $form->hiddenField($model, 'id') ?>
+
             <!--<label class="control-label required" for="Entidad_matriz">-->
-                <?php // echo $form->labelEx($model, 'matriz') ?></label>
+            <?php // echo $form->labelEx($model, 'matriz') ?></label>
             <!--<div class="controls">-->
-                <?php
+            <?php
 //                $this->widget(
 //                        'ext.bootstrap.widgets.TbToggleButton', array(
 //                    'model' => $model,
@@ -54,7 +56,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 //                    'attribute' => 'matriz',
 //                        )
 //                );
-                ?>
+            ?>
             <!--</div>-->
         </div>               
     </div>

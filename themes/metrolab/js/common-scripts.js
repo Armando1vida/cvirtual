@@ -137,7 +137,7 @@ function showModalLoading() {
 function showModalData(html) {
 
     $("#mainModal").html(html);
-    $('select.fix').selectBox();
+//    $('select.fix').selectBox();
 }
 /**
  * 

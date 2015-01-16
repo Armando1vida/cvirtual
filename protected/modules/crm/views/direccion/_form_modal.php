@@ -6,7 +6,6 @@
 Yii::app()->clientScript->scriptMap['jquery.js'] = false;
 Util::tsRegisterAssetJs('_form_modal.js');
 Util::tsRegisterAssetJs('_direccion.js');
-Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'id' => 'direccion-form',
     'type' => 'horizontal',
