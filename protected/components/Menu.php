@@ -8,10 +8,10 @@ class Menu {
         self::$_controller = $controller;
         $items = array(
             array('label' => '<i class="icon-home"></i> Home', 'url' => Yii::app()->homeUrl, 'active_rules' => array('module' => 'crm', 'controller' => 'dashboard')),
-//            array('label' => '<i class="icon-tasks"></i>  Empresa', 'url' => array('/crm/empresa/admin'), 'access' => 'action_empresa_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'empresa')),
-            array('label' => '<i class="icon-shopping-cart"></i>  Ingreso', 'url' => '#', 'items' => array(
-                    array('label' => '<i class="icon-qrcode"></i> Productos', 'url' => array('/productos/producto/admin'), 'access' => 'action_producto_admin', 'active_rules' => array('module' => 'prodcutos', 'controller' => 'producto')),
-                )),
+            array('label' => '<i class="icon-tasks"></i>  Empresa', 'url' => array('/crm/entidad/admin'), 'access' => 'action_entidad_admin', 'active_rules' => array('module' => 'crm', 'controller' => 'entidad')),
+//            array('label' => '<i class="icon-shopping-cart"></i>  Ingreso', 'url' => '#', 'items' => array(
+//                    array('label' => '<i class="icon-qrcode"></i> Productos', 'url' => array('/productos/producto/admin'), 'access' => 'action_producto_admin', 'active_rules' => array('module' => 'prodcutos', 'controller' => 'producto')),
+//                )),
         );
 
         return self::generateMenu($items);

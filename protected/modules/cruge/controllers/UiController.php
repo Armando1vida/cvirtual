@@ -201,7 +201,7 @@ class UiController extends Controller {
             $model->attributes = $_GET[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
         }
         $dataProvider = $model->search();
-        $this->render("usermanagementadmin", array('model' => $model, 'dataProvider' => $dataProvider));
+        $this->render("usermanagementadmin", array('model' => $model, 'dataProvider' => $dataProvider, 'owner_id' => Yii::app()->user->id));
     }
 
     public function actionUserManagementAdminRoles() {
@@ -212,7 +212,7 @@ class UiController extends Controller {
             $model->attributes = $_GET[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
         }
         $dataProvider = $model->search();
-        $this->render("usermanagementadminroles", array('model' => $model, 'dataProvider' => $dataProvider));
+        $this->render("usermanagementadminroles", array('model' => $model, 'dataProvider' => $dataProvider, 'owner_id' => Yii::app()->user->id));
     }
 
     public function actionEditProfile() {
@@ -235,6 +235,7 @@ class UiController extends Controller {
     }
 
     public function _editUserProfile(ICrugeStoredUser $model, $boolIsUserManagement) {
+        $renderAdmi = false;
 
         // carga los campos definidos por el administrador
         // trayendo consigo el atributo "value" accesible mediante $xx->fieldvalue
@@ -259,18 +260,25 @@ class UiController extends Controller {
                 }
 
                 if (Yii::app()->user->um->save($model, 'update')) {
-                    Yii::app()->user->setFlash('success', "Actualizacion exitosa!");
+//                    Yii::app()->user->setFlash('success', "Actualizacion exitosa!");
+                    $renderAdmi = true;
                 } else {
-                    Yii::app()->user->setFlash('success', "Actualizacion fallida!");
+//                    Yii::app()->user->setFlash('success', "Actualizacion fallida!");
                 }
             }
         }
-
-        $this->render("usermanagementupdate", array(
-            'model' => $model,
-            'boolIsUserManagement' => $boolIsUserManagement,
-                )
-        );
+        if (!$renderAdmi) {
+            $this->render("usermanagementupdate", array(
+                'model' => $model,
+                'boolIsUserManagement' => $boolIsUserManagement,
+                    )
+            );
+        } else {
+            $model = Yii::app()->user->um->getSearchModelICrugeStoredUser();
+            $model->unsetAttributes();
+            $dataProvider = $model->search();
+            $this->redirect("usermanagementadminroles", array('model' => $model, 'dataProvider' => $dataProvider));
+        }
     }
 
     public function _editUserProfileRoles(ICrugeStoredUser $model, $boolIsUserManagement) {
@@ -351,13 +359,15 @@ class UiController extends Controller {
                 if (Yii::app()->user->um->save($model, 'insert')) {
                     $userId = $model->getPrimaryKey();
                     $modelUsuarioAsignado = new UsuariosAsignados;
+                    $newPwd = trim($model->newPassword);
+                    $this->onNewUser($model, $newPwd);
                     $modelUsuarioAsignado->iduser = $owner_id;
                     $modelUsuarioAsignado->iduser_asignado = $userId;
                     if (!$modelUsuarioAsignado->save()) {
                         $error = true;
                     }
                     Mailer::enviarEmail($model->email, "Bienvenido: " . $model->username, "<b>HOLA</b>");
-                    $this->redirect(array('usermanagementadmin'));
+                    $this->redirect(array('usermanagementadmin', 'owner_id' => Yii::app()->user->id));
                 }
             }
         }
@@ -400,27 +410,30 @@ class UiController extends Controller {
 //                    var_dump($rolAsignar);
 //                    $rbac->assign($authitemName, $userId)
                     $model = new UsuariosAsignados;
-                    $model->iduser0 = $owner_id;
+                    $model->iduser = $owner_id;
                     $model->iduser_asignado = $userId;
                     $model->validate();
                     $save = $model->save();
 //                    UsuariosAsignados::model()->saveManyMany($relationName, $data);
 //                    var_dump("sasd");        $model = new Cuenta;
-                    var_dump($save);
-                    die();
+
                     if (!$rbac->assign($rolAsignar, $userId)) {
                         $msj = "No se agrego al rol";
                     } else {
                         $msj = "Se agrego al rol";
                     }
+                    if (!$save) {
+                        $msj+="Error";
+                    }
 //                    die();
 //                    Mailer::enviarEmail($model->email, "Bienvenido: " . $model->username, "<b>HOLA</b>");
 //                    die();
-                    $this->redirect(array('usermanagementadminroles'));
+                    $this->redirect(array('usermanagementadminroles', 'owner_id' => Yii::app()->user->id));
                 }
             }
         }
-        $this->render("usermanagementcreateroles", array('model' => $model));
+        $this->render("usermanagementcreateroles", array('model' => $model,
+        ));
     }
 
     public function actionRegistration($datakey = '') {
