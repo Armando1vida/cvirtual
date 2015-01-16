@@ -56,17 +56,18 @@ class DireccionController extends AweController {
 
     public function actionCreateDireccionEmpresa($entidad_id) {
         $model = new Direccion;
+        $model->entidad_id = $entidad_id;
+        $result = array();
         $this->performAjaxValidation($model, 'direccion-form');
-        $enalberender = true;
+        $enalberender = false;
         if (Yii::app()->request->isAjaxRequest) {
             if (isset($_POST['Direccion'])) {
                 $model->attributes = $_POST['Direccion'];
-                $result = array();
                 $result['success'] = $model->save();
                 if (!$result['success']) {
                     $result['message'] = 'Error al registrar la direccion';
                 } else {
-                    $enalberender = false;
+                    $enalberender = true;
                 }
 
                 echo json_encode($result);

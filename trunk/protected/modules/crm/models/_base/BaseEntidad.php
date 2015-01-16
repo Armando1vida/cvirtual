@@ -25,11 +25,12 @@
  * @property integer $industria_id
  * @property integer $entidad_id
  * @property integer $max_foto
+ * @property string $descripcion
  *
  * @property Categoria $categoria
- * @property Industria $industria
  * @property Entidad $entidad
  * @property Entidad[] $entidads
+ * @property Industria $industria
  * @property EntidadFoto[] $entidadFotos
  */
 abstract class BaseEntidad extends AweActiveRecord {
@@ -55,18 +56,19 @@ abstract class BaseEntidad extends AweActiveRecord {
             array('documento', 'length', 'max'=>20),
             array('website, telefono, celular, email', 'length', 'max'=>45),
             array('estado', 'length', 'max'=>8),
+            array('descripcion', 'safe'),
             array('estado', 'in', 'range' => array('ACTIVO','INACTIVO')), // enum,
-            array('razon_social, documento, website, raking, telefono, email, max_entidad, matriz, categoria_id, industria_id, entidad_id, max_foto', 'default', 'setOnEmpty' => true, 'value' => null),
-            array('id, nombre, razon_social, documento, website, raking, telefono, celular, email, max_entidad, estado, matriz, categoria_id, industria_id, entidad_id, max_foto', 'safe', 'on'=>'search'),
+            array('razon_social, documento, website, raking, telefono, email, max_entidad, matriz, categoria_id, industria_id, entidad_id, max_foto, descripcion', 'default', 'setOnEmpty' => true, 'value' => null),
+            array('id, nombre, razon_social, documento, website, raking, telefono, celular, email, max_entidad, estado, matriz, categoria_id, industria_id, entidad_id, max_foto, descripcion', 'safe', 'on'=>'search'),
         );
     }
 
     public function relations() {
         return array(
             'categoria' => array(self::BELONGS_TO, 'Categoria', 'categoria_id'),
-            'industria' => array(self::BELONGS_TO, 'Industria', 'industria_id'),
             'entidad' => array(self::BELONGS_TO, 'Entidad', 'entidad_id'),
             'entidads' => array(self::HAS_MANY, 'Entidad', 'entidad_id'),
+            'industria' => array(self::BELONGS_TO, 'Industria', 'industria_id'),
             'entidadFotos' => array(self::HAS_MANY, 'EntidadFoto', 'entidad_id'),
         );
     }
@@ -92,10 +94,11 @@ abstract class BaseEntidad extends AweActiveRecord {
                 'industria_id' => Yii::t('app', 'Industria'),
                 'entidad_id' => Yii::t('app', 'Entidad'),
                 'max_foto' => Yii::t('app', 'Max Foto'),
+                'descripcion' => Yii::t('app', 'Descripcion'),
                 'categoria' => null,
-                'industria' => null,
                 'entidad' => null,
                 'entidads' => null,
+                'industria' => null,
                 'entidadFotos' => null,
         );
     }
@@ -119,6 +122,7 @@ abstract class BaseEntidad extends AweActiveRecord {
         $criteria->compare('industria_id', $this->industria_id);
         $criteria->compare('entidad_id', $this->entidad_id);
         $criteria->compare('max_foto', $this->max_foto);
+        $criteria->compare('descripcion', $this->descripcion, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

@@ -4,9 +4,8 @@
 /** @var AweActiveForm $form */
 // Prevenir que jquery se cargue dos veces
 Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-Util::tsRegisterAssetJs('_form_modal.js');
-Util::tsRegisterAssetJs('_direccion.js');
-Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
+//Util::tsRegisterAssetJs('_form_modal.js');
+//Util::tsRegisterAssetJs('_direccion.js');
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'id' => 'direccion-form',
     'type' => 'horizontal',
@@ -29,57 +28,57 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     <?php echo $form->textFieldRow($model, 'numero', array('maxlength' => 45)) ?>
 
     <?php
-    if ($model->isNewRecord) {
-        $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
-        $data_provincia = array();
-        $data_ciudad = array();
-    } else {
-        $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
-        $data_provincia = CHtml::listData(Provincia::model()->findAll(array(
-                            "condition" => "pais_id =:pais_id",
-                            "order" => "nombre",
-                            "params" => array(':pais_id' => $model->pais_id,)
-                        )), 'id', 'nombre');
-        $data_ciudad = CHtml::listData(Ciudad::model()->findAll(array(
-                            "condition" => "provincia_id =:provincia_id",
-                            "order" => "nombre",
-                            "params" => array(':provincia_id' => $model->provincia_id,)
-                        )), 'id', 'nombre');
-    }
+//    if ($model->isNewRecord) {
+//        $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
+//        $data_provincia = array();
+//        $data_ciudad = array();
+//    } else {
+//        $data_pais = CHtml::listData(Pais::model()->findAll(), 'id', 'nombre');
+//        $data_provincia = CHtml::listData(Provincia::model()->findAll(array(
+//                            "condition" => "pais_id =:pais_id",
+//                            "order" => "nombre",
+//                            "params" => array(':pais_id' => $model->pais_id,)
+//                        )), 'id', 'nombre');
+//        $data_ciudad = CHtml::listData(Ciudad::model()->findAll(array(
+//                            "condition" => "provincia_id =:provincia_id",
+//                            "order" => "nombre",
+//                            "params" => array(':provincia_id' => $model->provincia_id,)
+//                        )), 'id', 'nombre');
+//    }
     ?>
 
     <?php
-    echo $form->select2Row(
-            $model, 'pais_id', array(
-        'asDropDownList' => true,
-        'data' => !empty($data_pais) ? array(null => ' -- Seleccione Pais -- ') + $data_pais : array(null => ' - Ninguno -'),
-        'options' => array(
-            'width' => '100%',
-        )
-            )
-    );
+//    echo $form->select2Row(
+//            $model, 'pais_id', array(
+//        'asDropDownList' => true,
+//        'data' => !empty($data_pais) ? array(null => ' -- Seleccione Pais -- ') + $data_pais : array(null => ' - Ninguno -'),
+//        'options' => array(
+//            'width' => '100%',
+//        )
+//            )
+//    );
     ?>
     <?php
-    echo $form->select2Row(
-            $model, 'provincia_id', array(
-        'asDropDownList' => true,
-        'data' => !empty($data_provincia) ? array(null => ' -- Seleccione Provincia -- ') + $data_provincia : array(null => ' - Ninguno -'),
-        'options' => array(
-            'width' => '100%',
-        )
-            )
-    );
+//    echo $form->select2Row(
+//            $model, 'provincia_id', array(
+//        'asDropDownList' => true,
+//        'data' => !empty($data_provincia) ? array(null => ' -- Seleccione Provincia -- ') + $data_provincia : array(null => ' - Ninguno -'),
+//        'options' => array(
+//            'width' => '100%',
+//        )
+//            )
+//    );
     ?>
     <?php
-    echo $form->select2Row(
-            $model, 'ciudad_id', array(
-        'asDropDownList' => true,
-        'data' => !empty($data_ciudad) ? array(null => ' -- Seleccione Ciudad -- ') + $data_ciudad : array(null => ' - Ninguno -'),
-        'options' => array(
-            'width' => '100%',
-        )
-            )
-    );
+//    echo $form->select2Row(
+//            $model, 'ciudad_id', array(
+//        'asDropDownList' => true,
+//        'data' => !empty($data_ciudad) ? array(null => ' -- Seleccione Ciudad -- ') + $data_ciudad : array(null => ' - Ninguno -'),
+//        'options' => array(
+//            'width' => '100%',
+//        )
+//            )
+//    );
     ?>
 
     <?php echo $form->textFieldRow($model, 'referencia', array('maxlength' => 45)) ?>
