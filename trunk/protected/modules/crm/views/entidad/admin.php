@@ -19,7 +19,6 @@ $this->menu = array(
         </span>
     </div>
     <div class="widget-body">
-
         <?php
         $this->widget('bootstrap.widgets.TbGridView', array(
             'id' => 'entidad-grid',

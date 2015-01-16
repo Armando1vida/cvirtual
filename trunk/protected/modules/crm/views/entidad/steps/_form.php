@@ -41,21 +41,21 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             <?php // echo $form->textFieldRow($model, 'max_foto') ?>
 
             <?php echo $form->hiddenField($model, 'id') ?>
-            <label class="control-label required" for="Entidad_matriz">
-                <?php echo $form->labelEx($model, 'matriz') ?></label>
-            <div class="controls">
+            <!--<label class="control-label required" for="Entidad_matriz">-->
+                <?php // echo $form->labelEx($model, 'matriz') ?></label>
+            <!--<div class="controls">-->
                 <?php
-                $this->widget(
-                        'ext.bootstrap.widgets.TbToggleButton', array(
-                    'model' => $model,
-                    'disabledLabel' => 'NO',
-                    'enabledLabel' => 'SI',
-                    'width' => 100,
-                    'attribute' => 'matriz',
-                        )
-                );
+//                $this->widget(
+//                        'ext.bootstrap.widgets.TbToggleButton', array(
+//                    'model' => $model,
+//                    'disabledLabel' => 'NO',
+//                    'enabledLabel' => 'SI',
+//                    'width' => 100,
+//                    'attribute' => 'matriz',
+//                        )
+//                );
                 ?>
-            </div>
+            <!--</div>-->
         </div>               
     </div>
 </div>

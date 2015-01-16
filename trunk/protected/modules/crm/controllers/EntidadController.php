@@ -46,13 +46,9 @@ class EntidadController extends AweController {
 
         if (isset($_POST['Entidad'])) {
             $model->attributes = $_POST['Entidad'];
-            $modelCategoria = Categoria::model()->findByPk($_POST['Entidad']['categoria_id']);
-//            $model->max_entidad = $modelCategoria->max_entidad - 1;
-//            $model->max_foto = $modelCategoria->max_foto;
-//            die(var_dump($_POST));
+            $model->matriz = 1;
             $result = array();
             $result['success'] = $model->save();
-
             if (!$result['success']) {
                 $result['message'] = 'Error al registrar empresa.';
             }
