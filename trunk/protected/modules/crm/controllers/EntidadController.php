@@ -24,11 +24,18 @@ class EntidadController extends AweController {
         //Modelo de la 
         Yii::import("xupload.models.XUploadForm");
         $archivos = new XUploadForm;
+        $tipoMostrar = false;
         $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
+        if ($modelDireccion == NULL) {
+            $tipoMostrar = false;
+        } else {
+            $tipoMostrar = true;
+        }
         $this->render('view', array(
             'model' => $this->loadModel($id),
             'modelDireccion' => $modelDireccion,
-            'archivos' => $archivos
+            'archivos' => $archivos,
+            'tipoMostrar' => $tipoMostrar
         ));
     }
 
