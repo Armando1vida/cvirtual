@@ -24,9 +24,9 @@ class Cruge_Constants {
         );
     }
 
-    public static function getUrlAdministracion($tipo) {
-        if ($tipo) {
-            if (in_array($tipo, getGrupoTipoArray())) {
+    public static function getUrlAdministracion($rol_name) {
+        if ($rol_name) {//Admin no tiene un rol
+            if (in_array($rol_name, Cruge_Constants::getGrupoTipoArray())) {
                 return "usermanagementadminroles";
             } else {
                 return null;
