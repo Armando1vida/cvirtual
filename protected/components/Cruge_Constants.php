@@ -25,8 +25,12 @@ class Cruge_Constants {
     }
 
     public static function getUrlAdministracion($tipo) {
-        if (in_array($tipo, getGrupoTipoArray())) {
-            return "usermanagementadminroles";
+        if ($tipo) {
+            if (in_array($tipo, getGrupoTipoArray())) {
+                return "usermanagementadminroles";
+            } else {
+                return null;
+            }
         } else {
             return null;
         }

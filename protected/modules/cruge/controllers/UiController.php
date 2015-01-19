@@ -143,8 +143,10 @@ class UiController extends Controller {
                     // preFilter llama a accessDenied quien a su vez llama a
                     // CWebUser::loginRequired que es donde finalmente se llama a setReturnUrl
 //                    $this->redirect(Yii::app()->user->returnUrl);
-                    $url = Cruge_Constants::getUrlAdministracion($tipo);
-                    if ($url) {
+                    $owner_id = Yii::app()->user->id;
+                    $rolname = Util::getFirstRolUser($owner_id);
+                    $url = Cruge_Constants::getUrlAdministracion($rolname);
+                    if ($url != null) {
                         $this->redirect($url);
                     } else {
                         $this->redirect(Yii::app()->user->returnUrl);
