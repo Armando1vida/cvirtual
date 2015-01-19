@@ -1,5 +1,5 @@
 <?php /* @var $this Controller */ ?>
-<?php $this->beginContent('//layouts/main'); ?>
+<?php $this->beginContent('//layouts/main_administrador'); ?>
 
 <?php if($this->menu): ?>
 <div class="top-controlls">

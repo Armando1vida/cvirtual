@@ -1,10 +1,12 @@
 <?php
 //Util::tsRegisterAssetJs('view.js');
 //Util::tsRegisterAssetJs('gmap.js');
+//Util::tsRegisterAssetJs('empresa.js');
 $this->pageTitle = $model->nombre;
 ?>
 <script>
     var entidad_id = "<?php print $model->id; ?>";
+    var tipoMostrar = <?php echo $tipoMostrar; ?>;
 </script>
 <div class="row-fluid">
 
@@ -71,8 +73,7 @@ $this->pageTitle = $model->nombre;
                             'encodeLabel' => false,
                             'icon' => 'tag',
                             'htmlOptions' => array(
-                                'onClick' => 'js:viewModal("crm/direccion/createDireccionEmpresa/entidad_id/' . $model->id . '",function(){'
-                                . 'maskAttributes();})',
+                                'onClick' => 'js:getModal();',
                                 'class' => 'empty-portlet',
                             ),
                         ))
