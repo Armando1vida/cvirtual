@@ -142,7 +142,13 @@ class UiController extends Controller {
                     // establecida automaticamente por CAccessControlFilter cuando
                     // preFilter llama a accessDenied quien a su vez llama a
                     // CWebUser::loginRequired que es donde finalmente se llama a setReturnUrl
-                    $this->redirect(Yii::app()->user->returnUrl);
+//                    $this->redirect(Yii::app()->user->returnUrl);
+                    $url = Cruge_Constants::getUrlAdministracion($tipo);
+                    if ($url) {
+                        $this->redirect($url);
+                    } else {
+                        $this->redirect(Yii::app()->user->returnUrl);
+                    }
                 } else {
                     Yii::app()->user->setFlash('loginflash', Yii::app()->user->getLastError());
                 }

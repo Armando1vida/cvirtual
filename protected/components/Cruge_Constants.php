@@ -25,8 +25,10 @@ class Cruge_Constants {
     }
 
     public static function getUrlAdministracion($tipo) {
-        if (self::administradores_master == $tipo) {
-            
+        if (in_array($tipo, getGrupoTipoArray())) {
+            return "usermanagementadminroles";
+        } else {
+            return null;
         }
     }
 
