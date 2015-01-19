@@ -112,7 +112,7 @@ function createInfoWindowContent(map, posicionLugar) {
     ].join('<br>');
 }
 function initialize(lat, long,nombre_map_cambas) {
-//    console.log('entroaaaaaaaaaaaaaaaaaaaa');
+    console.log('g maps');
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
 
 

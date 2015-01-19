@@ -1,44 +1,21 @@
-$(function() {
-
-//Direccion_coord_x
-//Direccion_coord_y
-//Al inicio empieza asi por defecto
-//    $("#Direccion_coord_x").val(0.346024);
-//    $("#Direccion_coord_y").val(-78.119574);
-
-});
 /**
- * @Miguel Alba dadyalex777@hotmail.com
- Descripcion Metodo :Inicializar en un punto especificico 
- pais,provincia,ciudad
- Utilizacion Metodo:En la vista portlet direccion en los drop dependientes 
- Pais,Provincia Ciudad
+ * Funcion q muestra en un div un mapa del api}
+ * 
+ * @param double {type} lat latitud dond se encuentra
+ * @param double {type} long longitud a mostrar
+ * @param string {type} map_div_id dond mostrar el mapa
+ * @param string {type} elementXid asignar informacion de lat
+ * @param string  elementYid asignar informacion longi
+ * @param  boolean draggable cuando se mueva l puntor del googlemap 
  * @returns {undefined}
  */
-
-
-function inicializarMapa(lat, long, tipo, nombre_map_cambas)
-{
-    console.log("gmap Inicializar las ubicaciones al realizar clic en los drop PAIS,provincia,ciudad");
-    console.log(lat);
-    console.log(long);
-    console.log(nombre_map_cambas);
-
+var latitudX = (0.346024);
+var longitudY = -78.119574;
+function initializeMap(lat, long, map_div_id, elementXid, elementYid, draggable) {
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
-    var zoomTipo = 14;
-    if (tipo == "pais") {
-        zoomTipo = 6;
-    }
-    if (tipo == "provincia") {
-        zoomTipo = 9;
-    }
-    if (tipo == "ciudad") {
-        zoomTipo = 13;
-    }
-
     var mapOptions = {
         center: coordenaEmpresa,
-        zoom: zoomTipo,
+        zoom: 14,
         panControl: true,
         zoomControl: true,
         mapTypeControl: false,
@@ -47,30 +24,31 @@ function inicializarMapa(lat, long, tipo, nombre_map_cambas)
         overviewMapControl: false
     };
 
-
-    var map = new google.maps.Map(document.getElementById(nombre_map_cambas),
+    var map = new google.maps.Map(document.getElementById(map_div_id),
             mapOptions);
-
     var position = coordenaEmpresa;
     var marker = new google.maps.Marker({
         position: position,
-        draggable: true,
+        draggable: draggable,
         animation: google.maps.Animation.DROP,
         map: map
     });
 //accion al mover la ubicacion
-    google.maps.event.addListener(marker, 'dragend', function() {
-        var new_position = marker.getPosition();
-        //asignacion de las coordenadas en cada elemento de dirrecion
-        $("#Direccion_coord_x").val(new_position.lat());
+    if (draggable) {
+        google.maps.event.addListener(marker, 'dragend', function() {
+            var new_position = marker.getPosition();
+            //asignacion de las coordenadas en cada elemento de dirrecion
+            $(elementXid).val(new_position.lat());
 //        console.log($("#Direccion_coord_x").val());
-        $("#Direccion_coord_y").val(new_position.lng());
+            $(elementYid).val(new_position.lng());
 //        console.log($("#Direccion_coord_y").val());
-    });
+        });
+    }
+
 
 //    }
-
 }
+
 function tratamiento_clic(overlay, point) {
     alert("Hola amigo! Veo que estás ahí porque has hecho clic!");
     alert("El punto donde has hecho clic es: " + point.toString());
@@ -91,6 +69,7 @@ function clickMarker(marker, contenido) {
 }
 
 function createInfoWindowContent(map, posicionLugar) {
+
     var numTiles = 1 << map.getZoom();
     var projection = new MercatorProjection();
     var worldCoordinate = projection.fromLatLngToPoint(posicionLugar);
@@ -111,44 +90,41 @@ function createInfoWindowContent(map, posicionLugar) {
                 tileCoordinate.y + ' at Zoom Level: ' + map.getZoom()
     ].join('<br>');
 }
-function initialize(lat, long,nombre_map_cambas) {
-//    console.log('entroaaaaaaaaaaaaaaaaaaaa');
-    var coordenaEmpresa = new google.maps.LatLng(lat, long);
+function initializez(lat, long, nombre_map_cambas) {
 
+    var Suiton_Sushi_Bar = new google.maps.LatLng(lat, long);
+    var locationArray = [Suiton_Sushi_Bar];
+    var locationNameArray = ['Suiton Sushi Bar'];
+
+    var location = new google.maps.LatLng(lat, long);
 
     var mapOptions = {
-        center: coordenaEmpresa,
+        center: location,
         zoom: 14,
         panControl: true,
-        zoomControl: true,
+        zoomControl: false,
         mapTypeControl: false,
         scaleControl: false,
         streetViewControl: false,
         overviewMapControl: false
     };
 
-
     var map = new google.maps.Map(document.getElementById(nombre_map_cambas),
             mapOptions);
 
-    var position = coordenaEmpresa;
-    var marker = new google.maps.Marker({
-        position: position,
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        map: map
-    });
-//accion al mover la ubicacion
-    google.maps.event.addListener(marker, 'dragend', function() {
-        var new_position = marker.getPosition();
-        //asignacion de las coordenadas en cada elemento de dirrecion
-        $("#Direccion_coord_x").val(new_position.lat());
-//        console.log($("#Direccion_coord_x").val());
-        $("#Direccion_coord_y").val(new_position.lng());
-//        console.log($("#Direccion_coord_y").val());
-    });
 
-//    }
+
+    for (var i = 0; i < locationArray.length; i++) {
+
+        var position = locationArray[i];
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map
+        });
+        var nombreEmpresa = locationNameArray[i];
+        marker.setTitle("Local :" + (i + 1).toString());
+//        attachMensajeWindows(marker, nombreEmpresa);
+    }
 }
 
 // The five markers show a secret message when clicked
@@ -239,3 +215,5 @@ function crearVentanaInformacion(nombreEmpresa)
             '</div>';
     return infornacion;
 }
+
+

@@ -1,6 +1,6 @@
 <?php
-Util::tsRegisterAssetJs('view.js');
-Util::tsRegisterAssetJs('gmap.js');
+//Util::tsRegisterAssetJs('view.js');
+//Util::tsRegisterAssetJs('gmap.js');
 $this->pageTitle = $model->nombre;
 ?>
 <script>

@@ -19,8 +19,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/jquery.selectBox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/kanban.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/custom-fixes.css" />
-        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;       ?>/css/bootstrap-modal.css" />-->
-        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;                  ?>/css/reports.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;        ?>/css/bootstrap-modal.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;                   ?>/css/reports.css" />-->
 
         <script>
             var baseUrl = "<?php print Yii::app()->baseUrl . '/'; ?>";
@@ -183,14 +183,15 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.nicescroll.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.selectBox.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.mask.min.js" type="text/javascript"></script>
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;       ?>/js/bootstrap-modal.js" type="text/javascript"></script>-->
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;        ?>/js/bootstrap-modalmanager.js" type="text/javascript"></script>-->
+        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;        ?>/js/bootstrap-modal.js" type="text/javascript"></script>-->
+        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;         ?>/js/bootstrap-modalmanager.js" type="text/javascript"></script>-->
         <!--scroll infinito-->
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;                  ?>/js/jquery-ias.min.js" type="text/javascript"></script>--> 
+        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;                   ?>/js/jquery-ias.min.js" type="text/javascript"></script>--> 
 
         <!--//        common script for all pages-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/common-scripts.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.validateAjax.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/googlemaps.js"></script>
         <!--Asignadas--> 
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
         <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>-->
