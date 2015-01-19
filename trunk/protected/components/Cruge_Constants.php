@@ -23,13 +23,20 @@ class Cruge_Constants {
             self::administradores_master => self::administradores_master,
         );
     }
-/**
- * Metodo en el cual de acuerdo al nombre del rol se asignara
- * el rol de registro para el usuario a registrar
- * @author Miguel Alba <malba@tradesystem.com.ec>
- * @param String type $nameRol
- * @return String type
- */
+
+    public static function getUrlAdministracion($tipo) {
+        if (self::administradores_master == $tipo) {
+            
+        }
+    }
+
+    /**
+     * Metodo en el cual de acuerdo al nombre del rol se asignara
+     * el rol de registro para el usuario a registrar
+     * @author Miguel Alba <malba@tradesystem.com.ec>
+     * @param String type $nameRol
+     * @return String type
+     */
     public static function getAsignarRolUsuario($nameRol) {
         $rolAsignado = "";
         switch ($nameRol) {
@@ -48,6 +55,7 @@ class Cruge_Constants {
         }
         return $rolAsignado;
     }
+
     public static function getNameLabelRolUsuario($nameRol) {
         $rolAsignado = "";
         switch ($nameRol) {
