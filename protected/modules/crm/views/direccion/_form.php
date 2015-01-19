@@ -37,9 +37,6 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         <?php echo $form->textFieldRow($model, 'coord_y') ?>
 
         <?php echo $form->textFieldRow($model, 'referencia', array('maxlength' => 45)) ?>
-
-        <?php echo $form->dropDownListRow($model, 'tipo_entidad', array('EMPRESA' => 'EMPRESA', 'CLIENTE' => 'CLIENTE',)) ?>
-
         <?php echo $form->textFieldRow($model, 'entidad_id') ?>
     </div>                <div class="form-actions">
         <?php
