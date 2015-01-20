@@ -39,9 +39,9 @@
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <!--BEGIN SIDEBAR TOGGLE-->
-                    <div class="sidebar-toggle-box hidden-phone">
+<!--                    <div class="sidebar-toggle-box hidden-phone">
                         <div class="icon-reorder"></div>
-                    </div>
+                    </div>-->
                     <!--END SIDEBAR TOGGLE-->
                     <!-- BEGIN LOGO -->
                     <a class="brand" href="<?php echo Yii::app()->homeUrl ?>">

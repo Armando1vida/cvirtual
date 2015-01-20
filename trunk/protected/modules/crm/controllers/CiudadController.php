@@ -150,4 +150,12 @@ class CiudadController extends AweController {
         }
     }
 
+    public function actionAjaxListSelect2Ciudades($search_value = null, $provincia_id = null) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new Ciudad;
+            $resultado = $model->getListSelect2Ciudades($search_value, $provincia_id);
+            echo CJSON::encode($resultado);
+        }
+    }
+
 }
