@@ -29,4 +29,18 @@ class Pais extends BasePais {
         return ($result);
     }
 
+    public function getListSelect2Pais($search_value = null) {
+        $command = New CDbCommand(Yii::app()->db);
+        $command->select(array(
+            "t.id as id",
+            "t.nombre as text",
+        ));
+        $command->from("{$this->tableName()} as t");
+        if ($search_value) {
+            $command->andWhere("t.nombre like '$search_value%'");
+        }
+        $command->limit(10);
+        return $command->queryAll();
+    }
+
 }

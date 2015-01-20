@@ -21,7 +21,7 @@ function init() {
             }
         },
         ajax: {// instead of writing the function to execute the request we use Select2's convenient helper
-            url: baseUrl + "productos/productoCategoria/ajaxlistCategorias",
+            url: baseUrl + "crm/pais/ajaxListSelect2Pais",
             type: "get",
             dataType: 'json',
             data: function(term, page) {
@@ -45,12 +45,13 @@ function init() {
             }
         },
         ajax: {// instead of writing the function to execute the request we use Select2's convenient helper
-            url: baseUrl + "productos/productoCategoria/ajaxlistCategorias",
+            url: baseUrl + "crm/provincia/ajaxListSelect2Provincias",
             type: "get",
             dataType: 'json',
             data: function(term, page) {
                 return {
                     search_value: term, // search term
+                    pais_id: pais_id.val() ? pais_id.val() : 0
                 };
             },
             results: function(data, page) { // parse the results into the format expected by Select2.
@@ -69,12 +70,13 @@ function init() {
             }
         },
         ajax: {// instead of writing the function to execute the request we use Select2's convenient helper
-            url: baseUrl + "productos/productoCategoria/ajaxlistCategorias",
+            url: baseUrl + "crm/ciudad/ajaxListSelect2Ciudades",
             type: "get",
             dataType: 'json',
             data: function(term, page) {
                 return {
                     search_value: term, // search term
+                    provincia_id: provincia_id.val() ? provincia_id.val() : 0
                 };
             },
             results: function(data, page) { // parse the results into the format expected by Select2.

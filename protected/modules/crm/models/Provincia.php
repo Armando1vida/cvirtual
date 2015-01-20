@@ -66,4 +66,20 @@ class Provincia extends BaseProvincia {
         return ($result);
     }
 
+    public function getListSelect2Provincia($search_value = null, $pais_id) {
+        $command = New CDbCommand(Yii::app()->db);
+        $command->select(array(
+            "t.id as id",
+            "t.nombre as text",
+        ));
+        $command->from("{$this->tableName()} as t");
+        $command->join("pais p", "p.id=t.pais_id");
+         $command->andWhere("p.id = '$pais_id'");
+        if ($search_value) {
+            $command->andWhere("t.nombre like '$search_value%'");
+        }
+        $command->limit(10);
+        return $command->queryAll();
+    }
+
 }

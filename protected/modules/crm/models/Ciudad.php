@@ -7,6 +7,8 @@ class Ciudad extends BaseCiudad {
     /**
      * @return Ciudad
      */
+    public $pais_id;
+
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
@@ -43,6 +45,26 @@ class Ciudad extends BaseCiudad {
         $command->order("ci.nombre");
         $result = $command->queryAll();
         return ($result);
+    }
+
+    public function getListSelect2Ciudades($search_value = null, $provincia_id) {
+        $command = New CDbCommand(Yii::app()->db);
+        $command->select(array(
+            "t.id as id",
+            "t.nombre as text",
+        ));
+        $command->from("{$this->tableName()} as t");
+        $command->join("provincia pr", "pr.id=t.provincia_id");
+        $command->andWhere("pr.id = '$provincia_id'");
+        if ($search_value) {
+            $command->andWhere("t.nombre like '$search_value%'");
+        }
+//        if ($provincia_id) {
+//            die("s");
+//            $command->andWhere("p.id = '$provincia_id'");
+//        }
+        $command->limit(10);
+        return $command->queryAll();
     }
 
 }

@@ -151,4 +151,12 @@ class ProvinciaController extends AweController {
         }
     }
 
+    public function actionAjaxListSelect2Provincias($search_value = null, $pais_id) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new Provincia;
+            $resultado = $model->getListSelect2Provincia($search_value, $pais_id);
+            echo CJSON::encode($resultado);
+        }
+    }
+
 }

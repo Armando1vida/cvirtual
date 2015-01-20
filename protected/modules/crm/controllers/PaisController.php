@@ -122,6 +122,14 @@ class PaisController extends AweController {
             Yii::app()->end();
         }
     }
+
 //    public function 
+    public function actionAjaxListSelect2Pais($search_value = null) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new Pais;
+            $resultado = $model->getListSelect2Pais($search_value);
+            echo CJSON::encode($resultado);
+        }
+    }
 
 }
