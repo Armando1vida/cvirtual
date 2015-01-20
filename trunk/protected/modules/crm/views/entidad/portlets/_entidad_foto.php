@@ -10,6 +10,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
     'enableClientValidation' => false,
         ));
+Util::tsRegisterAssetJs('_entidad_foto.js');
 ?>
 
 <?php echo $form->textFieldRow($modelEntidadFoto, 'nombre', array('maxlength' => 256)) ?>
@@ -39,14 +40,13 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         </div>
     </div>
 </div>
-<?php echo $form->dropDownListRow($modelEntidadFoto, 'entidad_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Entidad::model()->findAll(), 'id', Entidad::representingColumn())) ?>
+<?php echo $form->hiddenField($modelEntidadFoto, 'entidad_id') ?>
 
 <?php
 $this->widget('bootstrap.widgets.TbButton', array(
-    'buttonType' => 'submit',
+//    'buttonType' => 'submit',
     'type' => 'success',
     'label' => "Agregar Imagen",
 ));
 ?>
-
 <?php $this->endWidget(); ?>
