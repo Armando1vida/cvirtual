@@ -111,7 +111,7 @@ $this->pageTitle = $model->nombre;
                 </span>
             </div>
             <div class="widget-body">
-                <?php $this->renderPartial('portlets/_entidad_foto', array('model' => $model, 'archivos' => $archivos)); ?>
+                <?php $this->renderPartial('portlets/_entidad_foto', array('model' => $model)); ?>
             </div>
         </div>
 
