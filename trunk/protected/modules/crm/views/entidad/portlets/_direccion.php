@@ -7,6 +7,7 @@
 
 
     <?php
+
     $this->widget('bootstrap.widgets.TbDetailView', array(
         'data' => $modelDireccion,
         'attributes' => array(

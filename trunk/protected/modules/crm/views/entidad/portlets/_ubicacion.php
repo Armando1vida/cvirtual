@@ -20,11 +20,11 @@ Util::tsRegisterAssetJs('empresa.js');
     `telefono`, `celular`, `email`, `num_item`, 
     `categoria_id`, `industria_id`, `estado`-->
     <?php
-    if ($modelDireccion != null):
-        ?>
-        <?php $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion)); ?>
+//    if ($modelDireccion != null):
+//        ?>
+        <?php // $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion)); ?>
 
-    <?php endif; ?>
+    <?php // endif; ?>
 
 
 </div>

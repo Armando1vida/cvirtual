@@ -103,6 +103,7 @@ function ajaxSaveDireccion($form_id) {
         },
         successCall: function(data) {
             if (data.success) {
+                $("#" + $('.modal.fade.in').attr('id')).modal("hide");
                 direccion_id = data.model.id;
                 tipoModal = 1;
             }

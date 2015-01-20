@@ -36,7 +36,7 @@ Util::tsRegisterAssetJs('_form_modal_entidad.js');
             $htmlOptionsPais = array('class' => "span12");
             if ($model->pais_id) {
                 $modelPais = Pais::model()->findByPk($model->pais_id);
-                $htmlOptionsPais = array_merge($htmlOptionsCategoria, array(
+                $htmlOptionsPais = array_merge($htmlOptionsPais, array(
                     'selected-text' => $modelPais->nombre
                 ));
             }

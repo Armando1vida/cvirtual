@@ -70,7 +70,22 @@ $this->pageTitle = $model->nombre;
                         <?php
                         $this->widget('bootstrap.widgets.TbButton', array(
                             'id' => 'add-subentidad',
-                            'label' => "Agregar Sucursal",
+                            'label' => "Agregar Direccion",
+                            'encodeLabel' => false,
+                            'icon' => 'tag',
+                            'htmlOptions' => array(
+                                'onClick' => 'js:getModalDireccion();',
+                                'class' => 'empty-portlet',
+                            ),
+                        ))
+                        ?>
+
+                    <?php endif; ?>
+                    <?php
+                    if ($modelDireccion != null):
+                        $this->widget('bootstrap.widgets.TbButton', array(
+                            'id' => 'add-subentidad',
+                            'label' => "Actualizar Direccion",
                             'encodeLabel' => false,
                             'icon' => 'tag',
                             'htmlOptions' => array(
