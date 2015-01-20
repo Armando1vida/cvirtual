@@ -23,7 +23,6 @@ function initializeMap(lat, long, map_div_id, elementXid, elementYid, draggable)
         streetViewControl: false,
         overviewMapControl: false
     };
-
     var map = new google.maps.Map(document.getElementById(map_div_id),
             mapOptions);
     var position = coordenaEmpresa;

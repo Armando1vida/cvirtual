@@ -1,12 +1,13 @@
 <?php
-//Util::tsRegisterAssetJs('view.js');
+Util::tsRegisterAssetJs('view.js');
 //Util::tsRegisterAssetJs('gmap.js');
 //Util::tsRegisterAssetJs('empresa.js');
 $this->pageTitle = $model->nombre;
 ?>
 <script>
     var entidad_id = "<?php print $model->id; ?>";
-    var tipoMostrar = <?php echo $tipoMostrar; ?>;
+    var tipoModal = <?php echo $tipoModal; ?>;
+    var direccion_id = <?php echo $direccion_id; ?>;
 </script>
 <div class="row-fluid">
 
@@ -73,7 +74,7 @@ $this->pageTitle = $model->nombre;
                             'encodeLabel' => false,
                             'icon' => 'tag',
                             'htmlOptions' => array(
-                                'onClick' => 'js:getModal();',
+                                'onClick' => 'js:getModalDireccion();',
                                 'class' => 'empty-portlet',
                             ),
                         ))

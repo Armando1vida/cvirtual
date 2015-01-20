@@ -28,10 +28,55 @@ Util::tsRegisterAssetJs('_form_modal_entidad.js');
     <h4><i class="icon-tag"></i> <?php echo $msj ?> </h4>
 </div>
 <div class="modal-body">
-    <?php echo $form->textFieldRow($model, 'pais_id') ?>
-    <?php echo $form->textFieldRow($model, 'provincia_id') ?>
-    <?php echo $form->dropDownListRow($model, 'ciudad_id', array('' => ' -- Seleccione -- ') + CHtml::listData(Ciudad::model()->findAll(), 'id', Ciudad::representingColumn())) ?>
 
+    <div class="control-group ">
+        <label class="control-label required" for="Direccion_pais_id">Pais <span class="required">*</span></label>
+        <div class="controls">
+            <?php
+            $htmlOptionsPais = array('class' => "span12");
+            if ($model->pais_id) {
+                $modelPais = Pais::model()->findByPk($model->pais_id);
+                $htmlOptionsPais = array_merge($htmlOptionsCategoria, array(
+                    'selected-text' => $modelPais->nombre
+                ));
+            }
+            ?>
+            <?php echo $form->hiddenField($model, 'pais_id',$htmlOptionsPais) ?>
+            <?php echo $form->error($model, 'pais_id'); ?>
+        </div>
+    </div>
+    <div class="control-group ">
+        <label class="control-label required" for="Direccion_provincia_id">Provincia <span class="required">*</span></label>
+        <div class="controls">
+            <?php
+            $htmlOptionsProvincia = array('class' => "span12");
+            if ($model->provincia_id) {
+                $modelProvincia = Provincia::model()->findByPk($model->provincia_id);
+                $htmlOptionsProvincia = array_merge($htmlOptionsProvincia, array(
+                    'selected-text' => $modelProvincia->nombre
+                ));
+            }
+            ?>
+            <?php echo $form->hiddenField($model, 'provincia_id',$htmlOptionsProvincia) ?>
+            <?php echo $form->error($model, 'provincia_id'); ?>
+        </div>
+    </div>
+    <div class="control-group ">
+        <label class="control-label required" for="Direccion_ciudad_id">Ciudad <span class="required">*</span></label>
+        <div class="controls">
+            <?php
+            $htmlOptionsCiudad = array('class' => "span12");
+            if ($model->ciudad_id) {
+                $modelCiudad = Ciudad::model()->findByPk($model->ciudad_id);
+                $htmlOptionsCiudad = array_merge($htmlOptionsCiudad, array(
+                    'selected-text' => $modelCiudad->nombre
+                ));
+            }
+            ?>
+            <?php echo $form->hiddenField($model, 'ciudad_id',$htmlOptionsCiudad) ?>
+            <?php echo $form->error($model, 'ciudad_id'); ?>
+        </div>
+    </div>
     <?php echo $form->textFieldRow($model, 'calle_principal', array('maxlength' => 64)) ?>
 
     <?php echo $form->textFieldRow($model, 'calle_secundaria', array('maxlength' => 64)) ?>
