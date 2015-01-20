@@ -22,9 +22,10 @@ class EntidadController extends AweController {
      */
     public function actionView($id) {
         //Modelo de la 
-        Yii::import("xupload.models.XUploadForm");
-        $archivos = new XUploadForm;
+//        Yii::import("xupload.models.XUploadForm");
+//        $archivos = new XUploadForm;
         $tipoModal = false;
+        
         $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
         if ($modelDireccion == NULL) {
             $tipoModal = 0;
@@ -36,9 +37,8 @@ class EntidadController extends AweController {
         $this->render('view', array(
             'model' => $this->loadModel($id),
             'modelDireccion' => $modelDireccion,
-            'archivos' => $archivos,
             'direccion_id' => $direccion_id,
-            'tipoModal' => $tipoModal
+            'tipoModal' => $tipoModal,
         ));
     }
 
