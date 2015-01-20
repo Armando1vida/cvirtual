@@ -54,63 +54,23 @@ class DireccionController extends AweController {
         }
     }
 
-    public function actionCreateSubincidencia($id, $cuenta_id = null, $contacto_id = null) {
-
-        $result = array();
-        $model = new Incidencia;
-        $model->incidencia_id = $id;
-        $model->cuenta_id = $cuenta_id ? $cuenta_id : null;
-        $model->contacto_id = $contacto_id ? $contacto_id : null;
-        $model->permisos = Incidencia::PERMISOS_ALL;
-        $model->usuario_creacion_id = Yii::app()->user->id;
-        $model->estado = Incidencia::ESTADO_ACTIVO;
-
-        $model->owner_id = Yii::app()->user->id;
-//        $this->performAjaxValidation($model, 'incidencia-form');
-
-        if (Yii::app()->request->isAjaxRequest) {
-            $validadorPartial = false;
-            $this->ajaxValidation($model);
-            if (isset($_POST['Incidencia'])) {
-
-                $model->attributes = $_POST['Incidencia'];
-                $result = $this->Crear($model);
-                if (!$result['success']) {
-                    $result['mensage'] = "Error al actualizar la fecha de la Incidencia";
-                } else if ($result['success']) {
-                    $result['id'] = $model->id;
-//                    $result['producto'] = $model->incidenciaSubmotivo->producto;
-                    Alerta::registrarAlertaA($model, Alerta::ASIGNADO);
-                }
-                $validadorPartial = TRUE;
-                echo json_encode($result);
-            }
-
-            if (!$validadorPartial) {
-                $this->renderPartial('_form_subincidencia_modal', array('model' => $model
-                        ), false, true);
-            }
-        }
-    }
-
     public function actionCreateDireccionEmpresa($entidad_id = null) {
         $model = new Direccion;
         $model->entidad_id = $entidad_id;
         $result = array();
-        $this->performAjaxValidation($model, 'direccion-form');
+        $this->ajaxValidation($model);
         $validadorPartial = false;
         if (Yii::app()->request->isAjaxRequest) {
             $validadorPartial = false;
             if (isset($_POST['Direccion'])) {
                 $model->attributes = $_POST['Direccion'];
-                var_dump($model->errors);
-                var_dump($model->attributes);
-                die();
+
                 $result['success'] = $model->save();
                 if (!$result['success']) {
                     $result['mensage'] = "Error al crear la direccion.";
                 } else if ($result['success']) {
                     $result['mensage'] = "Agregada  la direccion.";
+                    $result['model'] = $model->attributes;
                     $validadorPartial = true;
                 }
                 echo json_encode($result);
@@ -119,6 +79,48 @@ class DireccionController extends AweController {
             if (!$validadorPartial) {
                 $this->renderPartial('_form_modal_entidad', array('model' => $model
                         ), false, true);
+            }
+        }
+    }
+
+    public function actionUpdateDireccionEmpresa($id) {
+        $model = $this->loadModel($id);
+        $result = array();
+        $this->ajaxValidation($model);
+        $validadorPartial = false;
+        if (Yii::app()->request->isAjaxRequest) {
+            $validadorPartial = false;
+            if (isset($_POST['Direccion'])) {
+                $model->attributes = $_POST['Direccion'];
+                $result['success'] = $model->save();
+                if (!$result['success']) {
+                    $result['mensage'] = "Error al actualizar la direccion.";
+                } else if ($result['success']) {
+                    $result['mensage'] = "Actualizada  la direccion.";
+                    $result['model'] = $model->attributes;
+                    $validadorPartial = true;
+                }
+                echo json_encode($result);
+            }
+
+            if (!$validadorPartial) {
+                $this->renderPartial('_form_modal_entidad', array('model' => $model
+                        ), false, true);
+            }
+        }
+    }
+
+    protected function ajaxValidation($model, $form_id = "direccion-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
             }
         }
     }

@@ -24,18 +24,21 @@ class EntidadController extends AweController {
         //Modelo de la 
         Yii::import("xupload.models.XUploadForm");
         $archivos = new XUploadForm;
-        $tipoMostrar = false;
+        $tipoModal = false;
         $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
         if ($modelDireccion == NULL) {
-            $tipoMostrar = false;
+            $tipoModal = 0;
+            $direccion_id = 0;
         } else {
-            $tipoMostrar = true;
+            $tipoModal = 1;
+            $direccion_id = $modelDireccion->id;
         }
         $this->render('view', array(
             'model' => $this->loadModel($id),
             'modelDireccion' => $modelDireccion,
             'archivos' => $archivos,
-            'tipoMostrar' => $tipoMostrar
+            'direccion_id' => $direccion_id,
+            'tipoModal' => $tipoModal
         ));
     }
 
@@ -239,55 +242,6 @@ class EntidadController extends AweController {
 //
 //            echo json_encode($result);
 //        }
-    }
-
-    public function actionCreateSubentidad($id) {
-        $model = new Entidad;
-        $model->direccion = New Direccion;
-//        die(var_dump($model->direccion));
-        $model->estado = Entidad::ESTADO_ACTIVO;
-        $model->matriz = 0;
-        $model->entidad_id = $id;
-        $modelEntidad = Entidad::model()->findByPk($id);
-        $modelEntidad->max_entidad = $modelEntidad->max_entidad - 1;
-        $modelEntidad->max_foto = $modelEntidad->max_foto - 1;
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'entidad-form') {
-            echo CActiveForm::validate($model);
-
-            Yii::app()->end();
-        }
-//        $this->performAjaxValidation($model, 'entidad-form');
-        if (Yii::app()->request->isAjaxRequest) {
-
-            $validadorPartial = false;
-            $result = array();
-            if (isset($_POST['Entidad'])) {
-                $model->attributes = $_POST['Entidad'];
-
-                if ($model->validate()) {//CAPTURAR LOS ERRRORES
-                    $result['success'] = $model->save();
-                    if (!$result['success']) {
-                        $result['mensage'] = "Error al actualizar ";
-                    }
-                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
-                        $result['id'] = $model->id;
-                        $modelEntidad->save();
-                        $validadorPartial = TRUE;
-                        $result['success'] = true;
-                    }
-                    echo json_encode($result);
-                } else {
-                    $result['success'] = false;
-                    $result['errors'] = $model->getErrors();
-                    $validadorPartial = true;
-                    echo json_encode($result);
-                }
-            }
-
-            if (!$validadorPartial) {
-                $this->renderPartial('_form_modal_subentidad', array('model' => $model), false, true);
-            }
-        }
     }
 
     /**

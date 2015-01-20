@@ -33,3 +33,14 @@ function MostrarDetalleDireccion() {
         event.preventDefault();
     });
 }
+function getModalDireccion() {
+    if (!tipoModal) {
+        $url = "crm/direccion/createDireccionEmpresa/entidad_id/" + entidad_id;
+    } else {
+        $url = "crm/direccion/updateDireccionEmpresa/id/" + direccion_id;
+    }
+
+    viewModal($url, function() {
+        maskAttributes();
+    }, true);
+}
