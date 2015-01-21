@@ -2,7 +2,7 @@
 var dataFile = {success: false};
 //var btn_save_modal;btn_save_modal
 $(function() {
-     $('#direccion-form').attr('action','/cvirtua');
+    $('#direccion-form').attr('action', '/cvirtua');
     initcomponents();
 });
 function initcomponents() {
@@ -77,9 +77,6 @@ function ajaxSaveEntidadFoto($form_id) {
         },
         successCall: function(data) {
             if (data.success) {
-                $("#" + $('.modal.fade.in').attr('id')).modal("hide");
-                direccion_id = data.model.id;
-                tipoModal = 1;
             }
         },
         errorCall: function(data) {

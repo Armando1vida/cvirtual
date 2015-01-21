@@ -42,34 +42,23 @@ class EntidadFotoController extends AweController {
         }
     }
 
-    public function actionAjaxCreateEntidadFoto() {
+    public function actionAjaxCreateEntidadFoto($entidad_id) {
         $model = new EntidadFoto;
+        $model->entidad_id = $entidad_id;
         $result = array();
         $this->ajaxValidation($model);
         if (Yii::app()->request->isAjaxRequest) {
             if (isset($_POST['EntidadFoto'])) {
                 $model->attributes = $_POST['EntidadFoto'];
-                if ($model->validate()) {//CAPTURAR LOS ERRRORES
-                    $result['success'] = $model->save();
-                    if (!$result['success']) {
-                        $result['mensage'] = "Error al actualizar ";
-                    }
-                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
-                        $result['id'] = $model->id;
-                        $validadorPartial = TRUE;
-                        $result['success'] = true;
-                    }
-                    echo json_encode($result);
-                } else {
-                    $result['success'] = false;
-                    $result['errors'] = $model->getErrors();
-                    $validadorPartial = true;
-                    echo json_encode($result);
+                $result['success'] = $model->save();
+                if (!$result['success']) {
+                    $result['mensage'] = "Error al actualizar ";
                 }
-            }
-
-            if (!$validadorPartial) {
-                $this->renderPartial('_form_modal', array('model' => $model), false, true);
+                if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
+                    $result['id'] = $model->id;
+                    $result['success'] = true;
+                }
+                echo json_encode($result);
             }
         }
     }
