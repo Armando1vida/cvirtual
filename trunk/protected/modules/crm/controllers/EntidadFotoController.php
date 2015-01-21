@@ -37,7 +37,6 @@ class EntidadFotoController extends AweController {
             if (isset($_GET['_method'])) {
                 if ($_GET['_method'] == 'delete') {
                     $file = $path . $_GET["file"];
-                    var_dump($file);
                     if (is_file($file)) {
                         // borrar el archivo del path correspondiente
                         unlink($file);
