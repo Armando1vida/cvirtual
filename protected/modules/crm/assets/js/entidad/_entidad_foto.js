@@ -2,6 +2,7 @@
 var dataFile = {success: false};
 //var btn_save_modal;btn_save_modal
 $(function() {
+     $('#direccion-form').attr('action','/cvirtua');
     initcomponents();
 });
 function initcomponents() {

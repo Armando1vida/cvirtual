@@ -27,6 +27,24 @@ class EntidadFotoController extends AweController {
         ));
     }
 
+    public function actionAjaxCreateEntidadFoto() {
+        $model = new Industria;
+        $model->estado = Industria::ESTADO_ACTIVO;
+
+        $this->performAjaxValidation($model, 'industria-form');
+
+        if (isset($_POST['Industria'])) {
+            $model->attributes = $_POST['Industria'];
+            if ($model->save()) {
+                $this->redirect(array('admin'));
+            }
+        }
+
+        $this->render('create', array(
+            'model' => $model,
+        ));
+    }
+
     public function actionAjaxUploadTemp() {
         if (Yii::app()->request->isAjaxRequest) {
             //nombre de la carpeta
