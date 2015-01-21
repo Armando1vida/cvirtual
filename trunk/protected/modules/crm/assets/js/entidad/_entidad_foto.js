@@ -1,88 +1,69 @@
-///* 
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//$(function() {
-////    getInfoPicture();
-//});
-//function getInfoPicture() {
-//
-//    $url = "crm/entidadFoto/ajaxGeInfoPicActual";
-//    getAjaxData(
-//            "POST",
-//            $url,
-//            "json",
-//            {entidad_id: entidad_id},
-//    function(data) {
-//        if (data.success) {
-////            width: 48 % ;
-//            $("#porcentaje_progress").attr("style", "width:" + data.porcentaje);
-//            $("#porcentaje_subidas").html(data.porcentaje);
-//            $("#num_pic_uploads").html(" " + data.num_pic_uploads);
-//        } else {
-//            alert();
-//        }
-//    }
-//    );
-//}
-//
-//function guardarImagen() {
-//    $archivos = [];
-//    $url = "/crm/entidadFoto/guardarImagenes";
-////    construyo los datos de los archivo para guardar en la base
-//    $('.archivosNota').each(function(index) {
-//        $archivos.push(
-//                {
-//                    nombreArchivo: $(this).attr('title'),
-//                    url: $(this).attr('url'),
-//                    filename: $(this).attr('filename'),
-//                }
-//        );
-//    });
-//    getAjaxData(
-//            "POST",
-//            $url,
-//            "json",
-//            {id: entidad_id, tipo: "EMPRESA", archivos: $archivos},
-//    function(data) {
-//        if (data.success) {
-//            bootbox.alert(data.informacion);
-//            $('.files').empty();
-//            $.fn.yiiGridView.update('imagenes-grid');
-//            getInfoPicture();
-//        } else {
-//            bootbox.alert(data.error);
-//        }
-//    }
-//    );
-//
-//
-//}
-//
-//function getAjaxData(type, url, dataType, data, callback) {
-//    $.ajax({
-//        type: type,
-//        url: baseUrl + url,
-//        dataType: dataType,
-//        data: data,
-//        success: function(data) {
-//            if (data.success) {
-//                callback(data);
-//            }
-//            else
-//            {
-//                callback(data);
-//            }
-//        }
-//    });
-//}
+
 var dataFile = {success: false};
 //var btn_save_modal;btn_save_modal
 $(function() {
     initcomponents();
-
 });
+function initcomponents() {
+    /****************Upload file******************/
+    //btn_actions
+    $('#btn_upload_action,#btn_change_action').click(function() {
+        if (dataFile.success) {
+            $('#file_temp').click();
+        }
+        else {
+            $('#file_temp').click();
+        }
+
+        return false;
+    });
+    //delete
+    $("#btn_delete_action").click(function() {
+        if (dataFile.success) {
+            deleted({delete_url: dataFile.data.delete_url});
+            $("#IncidenciaProducto_url_archivo").val('');
+            $("#prev_row").toggle(100, function() {
+                $("#select_row").toggle(50);
+                $("#prev_row").removeClass('view-on');
+            });
+        }
+        return false;
+    });
+    //action load
+    $("#file_temp").change(function() {
+        var file = $("#file_temp")[0].files[0];
+        if (file) {
+            //var fileName = file.name;
+            //var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+            if (file) {
+                upload({
+                    successCall: function(data) {
+                        if (data.success) {
+                            if (dataFile.success) {
+                                deleted({delete_url: dataFile.data.delete_url});
+                                $("IncidenciaProducto_url_archivo").val('');
+                            }
+                            $("#prev_file").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
+                            //valor
+                            $("#IncidenciaProducto_url_archivo").val(data.data.name);
+                            //$("#prev_file").attr('href', data.data.src)
+                            if (!$("#prev_row").hasClass('view-on')) {
+                                $("#prev_row").toggle(100, function() {
+                                    $("#select_row").toggle(50);
+                                    $("#prev_row").addClass('view-on');
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                $("#file_temp").val(null);
+                bootbox.alert('El archivo seleccionado no es una imagen')
+            }
+        }
+    });
+}
 function ajaxSaveImagen($form_id) {
 
     ajaxValidarFormulario({
@@ -106,70 +87,6 @@ function ajaxSaveImagen($form_id) {
     });
 }
 
-function initcomponents() {
-    $("#btn_save_imagen").click(function(e) {
-        e.preventDefault();
-        btn_save_modal = Ladda.create(this);
-        var form_id = "#imagen-form";
-        btn_save_modal.start();
-        ajaxSaveImagen(form_id);
-        return false;
-    });
-    $('#btn_upload_action,#btn_upload_change').click(function() {
-        if (dataFile.success) {
-            $('#logo_imagen').click();
-        }
-        else {
-            $('#logo_imagen').click();
-        }
-
-        return false;
-    });
-    $("#logo_imagen").change(function() {
-        var file = $("#logo_imagen")[0].files[0];
-        if (file) {
-            var fileName = file.name;
-            var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
-            if (file && isImage(fileExtension)) {
-                mostrarImagen(this, "#img_prev");
-                upload({
-                    successCall: function(data) {
-                        if (dataFile.success) {
-                            deleted({delete_url: dataFile.data.delete_url});
-                            $("#url_archivo").val('');
-                        }
-                        $("#url_archivo").val(data.data.name);
-                        if ($("#content_prev").attr('hidden')) {
-                            $("#content_prev").toggle(200, function() {
-                                $("#content_action").toggle(200);
-                                $("#content_prev").removeAttr('hidden');
-                            });
-                        }
-                    }
-                });
-            }
-            else {
-                $("#url_archivo").val(null);
-                bootbox.alert('El archivo seleccionado no es una imagen');
-            }
-        }
-    });
-
-
-    $('#popover2').on('show.bs.popover', function() {
-        abrirpopover($(this).attr('entidad'));
-    });
-    $('#popover2').popover({
-        html: true,
-        placement: 'left',
-        title: function() {
-            return $("#popover-head-ElencoRepresentante").html();
-        },
-        content: function() {
-            return $("#popover-content-ElencoRepresentante").html();
-        }
-    });
-}
 /************* Upload archivo ****************/
 /**
  * previsualización de la imagen
@@ -209,6 +126,15 @@ function isDocument(extension) {
             break;
     }
 }
+
+
+
+/*******************Upload file**********************/
+/**
+ * upload de archivos
+ * @autor Alex Yépez <alex.Yepez@outlook.com>
+ * @param input
+ */
 function deleted(options) {
     $.ajax({
         url: options.delete_url,
@@ -226,14 +152,14 @@ function deleted(options) {
 }
 function upload(options) {
     //información del formulario
-    var inputFileImage = document.getElementById('logo_imagen');
+    var inputFileImage = document.getElementById('file_temp');
     if (inputFileImage.files[0]) {
         var file = inputFileImage.files[0];
         var formData = new FormData();
         formData.append('file', file);
         //hacemos la petición ajax
         $.ajax({
-            url: baseUrl + 'galeria/multimedia/ajaxUploadTemp',
+            url: baseUrl + 'crm/entidadFoto/ajaxUploadTemp',
             type: 'POST',
             // Form data
             //datos del formulario
@@ -247,6 +173,7 @@ function upload(options) {
                 var json = JSON.parse(data);
                 if (options.successCall)
                     options.successCall(json);
+
                 dataFile = json;
             },
             //si ha ocurrido un error
@@ -255,13 +182,17 @@ function upload(options) {
         });
     }
 }
-function cerrarpopover() {
-
-    $('#popover2').popover('hide');
-//    $('#elenco-representante-form').trigger("reset");
-//    $('#produccion-categoria-form').trigger("reset");
-}
-function abrirpopover(entidad_tipo) {
-    $('#' + entidad_tipo + '_nombre_em_').attr('style', 'display:none;');
-//    $('#Proyecto_nombre_em_').attr('style', 'display:none;');
+function formUnset() {
+    dataFile = {success: false};
+    $("#costoProducto").val('');
+    if ($("#prev_row").hasClass('view-on')) {
+        $("#IncidenciaProducto_url_archivo").val('');
+        $("#prev_row").toggle(100, function() {
+            $("#select_row").toggle(50);
+            $("#prev_row").removeClass('view-on');
+        });
+    }
+//    $("#OportunidadProducto_subtotal").val('');
+    $("#IncidenciaProducto_producto_id").select2("val", "");
+    //$("#incidencia-producto-form").trigger('reset');
 }

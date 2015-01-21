@@ -9,7 +9,7 @@ $(function() {
 function mostrarMapa() {
     $("#Direccion_coord_x").val(latitudX);
     $("#Direccion_coord_y").val(longitudY);
-    initializeMap(latitudX, longitudY, 'map-canvas-agregarDireccion', ("#Direccion_coord_x"), ("#Direccion_coord_y"), true);
+    initializeMapDiv(latitudX, longitudY, 'map-canvas-agregarDireccion', ("#Direccion_coord_x"), ("#Direccion_coord_y"), true);
 }
 function init() {
     pais_id.select2({
