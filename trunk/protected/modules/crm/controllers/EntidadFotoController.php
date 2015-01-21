@@ -27,22 +27,51 @@ class EntidadFotoController extends AweController {
         ));
     }
 
-    public function actionAjaxCreateEntidadFoto() {
-        $model = new Industria;
-        $model->estado = Industria::ESTADO_ACTIVO;
-
-        $this->performAjaxValidation($model, 'industria-form');
-
-        if (isset($_POST['Industria'])) {
-            $model->attributes = $_POST['Industria'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
+    protected function ajaxValidation($model, $form_id = "entidad-foto-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
             }
         }
+    }
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+    public function actionAjaxCreateEntidadFoto() {
+        $model = new EntidadFoto;
+        $result = array();
+        $this->ajaxValidation($model);
+        if (Yii::app()->request->isAjaxRequest) {
+            if (isset($_POST['EntidadFoto'])) {
+                $model->attributes = $_POST['EntidadFoto'];
+                if ($model->validate()) {//CAPTURAR LOS ERRRORES
+                    $result['success'] = $model->save();
+                    if (!$result['success']) {
+                        $result['mensage'] = "Error al actualizar ";
+                    }
+                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
+                        $result['id'] = $model->id;
+                        $validadorPartial = TRUE;
+                        $result['success'] = true;
+                    }
+                    echo json_encode($result);
+                } else {
+                    $result['success'] = false;
+                    $result['errors'] = $model->getErrors();
+                    $validadorPartial = true;
+                    echo json_encode($result);
+                }
+            }
+
+            if (!$validadorPartial) {
+                $this->renderPartial('_form_modal', array('model' => $model), false, true);
+            }
+        }
     }
 
     public function actionAjaxUploadTemp() {
