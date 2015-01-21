@@ -60,7 +60,7 @@ Util::checkAccess(array("action_entidadFoto_guardarImagenes")) ?
                     'label' => Yii::t('AweCrud.app', 'Subir Imagenes'),
                     'htmlOptions' => array(
 //                                'onclick' => 'js:guardarImgetAjaxData(type, url, dataType, data, callback)agen("' . CController::createUrl('/crm/entidadFoto/guardarImagenes') . '")',
-                        'onclick' => 'js:guardarImagen()',
+                        'onclick' => 'js:ajaxSaveEntidadFoto()',
                     ),
                 )) : '';
 ?>
