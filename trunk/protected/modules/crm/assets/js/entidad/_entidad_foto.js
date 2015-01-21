@@ -35,7 +35,11 @@ function initcomponents() {
         if (file) {
             //var fileName = file.name;
             //var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
-            if (file) {
+            var fileName = file.name;
+            var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+
+            if (file && isImage(fileExtension)) {
+                mostrarImagen(this, "#img_prev");
                 upload({
                     successCall: function(data) {
                         if (data.success) {
