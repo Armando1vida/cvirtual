@@ -42,7 +42,7 @@ $modelEntidadFoto->entidad_id = $model->id;
 $formFoto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'vertical',
     'id' => 'entidad-foto-form',
-    'action' => Yii::app()->createUrl('/crm/entidadFoto/ajaxCreateEntidadFoto'),
+    'action' => Yii::app()->createUrl('/crm/entidadFoto/ajaxCreateEntidadFoto',array('entidad_id' => $model->id)),
     'enableAjaxValidation' => true,
     'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
     'enableClientValidation' => false,
