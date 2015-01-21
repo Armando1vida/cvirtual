@@ -10,9 +10,10 @@
  * @returns {undefined}
  */
 var latitudX = (0.346024);
-var longitudY = -78.119574;
-function initializeMap(lat, long, map_div_id, elementXid, elementYid, draggable) {
+var longitudY = (-78.119574);
+function initializeMapDiv(lat, long, map_div_id, elementXid, elementYid, draggable) {
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
+    console.log("entro");
     var mapOptions = {
         center: coordenaEmpresa,
         zoom: 14,
