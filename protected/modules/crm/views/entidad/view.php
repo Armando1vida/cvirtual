@@ -46,62 +46,7 @@ $this->pageTitle = $model->nombre;
 </div>
 </div>
 <div class="row-fluid">
-
-    <div class="span7">
-        <div class="widget orange">
-            <div class="widget-title">
-                <h4><i class="icon-info"></i> Direccion</h4>
-                <span class="tools">
-                    <a href="javascript:;" class="icon-chevron-down"></a>
-                </span>
-            </div>
-
-            <div class="widget-body">
-                <div id="portlet_informacion">
-                    <?php
-                    if ($modelDireccion != null):
-                        ?>
-                        <?php $this->renderPartial('portlets/_direccion', array('modelDireccion' => $modelDireccion)); ?>
-
-                    <?php endif; ?>
-                    <?php
-                    if ($modelDireccion == null):
-                        ?>
-                        <?php
-                        $this->widget('bootstrap.widgets.TbButton', array(
-                            'id' => 'add-subentidad',
-                            'label' => "Agregar Direccion",
-                            'encodeLabel' => false,
-                            'icon' => 'tag',
-                            'htmlOptions' => array(
-                                'onClick' => 'js:getModalDireccion();',
-                                'class' => 'empty-portlet',
-                            ),
-                        ))
-                        ?>
-
-                    <?php endif; ?>
-                    <?php
-                    if ($modelDireccion != null):
-                        $this->widget('bootstrap.widgets.TbButton', array(
-                            'id' => 'add-subentidad',
-                            'label' => "Actualizar Direccion",
-                            'encodeLabel' => false,
-                            'icon' => 'tag',
-                            'htmlOptions' => array(
-                                'onClick' => 'js:getModalDireccion();',
-                                'class' => 'empty-portlet',
-                            ),
-                        ))
-                        ?>
-                    <?php endif; ?>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-    <div class="span5">
+    <div class="span4">
         <!-- BEGIN CALENDAR PORTLET-->
         <div class="widget ">
             <div class="widget-title">
@@ -111,11 +56,16 @@ $this->pageTitle = $model->nombre;
                 </span>
             </div>
             <div class="widget-body">
-                <?php $this->renderPartial('portlets/_entidad_foto', array('model' =>$model)); ?>
+                <?php $this->renderPartial('portlets/_entidad_foto', array('model' => $model)); ?>
             </div>
         </div>
 
     </div>
+    <div class="span7">
+    
+
+    </div>
+
 </div>
 
 
