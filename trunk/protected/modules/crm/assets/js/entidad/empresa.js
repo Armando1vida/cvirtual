@@ -30,14 +30,14 @@ function obtenerInformacionEmpresa()
             if (data.length > 0) {
                 var latitudX = data[0].latitud;
                 var longitudY = data[0].longitud;
-                initializeMap(latitudX, longitudY, 'map-canvas', null, null, false);
+                initializeMapDiv(latitudX, longitudY, 'map-canvas', null, null, false);
             }
             else
             {
 //                alert("no hay datos");
                 var latitudX = (0.346024);
                 var longitudY = -78.119574;
-                initializeMap(latitudX, longitudY, 'map-canvas', null, null, false);
+                initializeMapDiv(latitudX, longitudY, 'map-canvas', null, null, false);
             }
 
 
@@ -46,7 +46,7 @@ function obtenerInformacionEmpresa()
         error: function(data) {
             var latitudX = (0.346024);
             var longitudY = -78.119574;
-            initializeMap(latitudX, longitudY, 'map-canvas', null, null, false);
+            initializeMapDiv(latitudX, longitudY, 'map-canvas', null, null, false);
         }
 
     }

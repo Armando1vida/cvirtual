@@ -5,9 +5,9 @@ class UsuariosController extends Controller {
     /**
      * Declares class-based actions.
      */
-       public $admin = false;
-
+    public $admin = false;
     public $layout = '//layouts/column1';
+
     public function actions() {
         return array(
             // captcha action renders the CAPTCHA image displayed on the contact page
@@ -30,6 +30,7 @@ class UsuariosController extends Controller {
     public function actionIndex() {
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
+        $this->layout='//layouts/column2';
         $this->render('index');
     }
 
@@ -188,6 +189,7 @@ class UsuariosController extends Controller {
 //                , array('elencos' => $elencos)
         );
     }
+
     public function actionSlider() {
 
 //        $elencos = Elenco::model()->findAll();
