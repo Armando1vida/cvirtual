@@ -42,6 +42,7 @@ $modelEntidadFoto->entidad_id = $model->id;
 $formFoto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'vertical',
     'id' => 'entidad-foto-form',
+    'action' => Yii::app()->createUrl('/crm/campaniaTareaProgramada/update', array('id' => $model->id)),
     'enableAjaxValidation' => true,
     'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
     'enableClientValidation' => false,
@@ -60,7 +61,7 @@ Util::checkAccess(array("action_entidadFoto_guardarImagenes")) ?
                     'label' => Yii::t('AweCrud.app', 'Subir Imagenes'),
                     'htmlOptions' => array(
 //                                'onclick' => 'js:guardarImgetAjaxData(type, url, dataType, data, callback)agen("' . CController::createUrl('/crm/entidadFoto/guardarImagenes') . '")',
-                        'onclick' => 'js:ajaxSaveEntidadFoto()',
+                        'onclick' => 'js:ajaxSaveEntidadFoto("#entidad-foto-form")',
                     ),
                 )) : '';
 ?>
