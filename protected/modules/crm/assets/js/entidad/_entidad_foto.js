@@ -68,28 +68,46 @@ function initcomponents() {
         }
     });
 }
-function ajaxSaveImagen($form_id) {
-
+function ajaxSaveEntidadFoto($form_id) {
     ajaxValidarFormulario({
         formId: $form_id,
         beforeCall: function() {
-            btn_save_modal.setProgress(0.6);
+            BloquearBotonesModal($form_id);
         },
         successCall: function(data) {
             if (data.success) {
-                btn_save_modal.setProgress(1);
-                btn_save_modal.stop();
-                $url = "/galeria/imagen/ajaxCreate/id_album/" + id_album;
-                updateGrid("imagen-modal-grid", $url);
+                $("#" + $('.modal.fade.in').attr('id')).modal("hide");
+                direccion_id = data.model.id;
+                tipoModal = 1;
             }
         },
         errorCall: function(data) {
-            btn_save_modal.setProgress(1);
-            btn_save_modal.stop();
-//            DesBloquearBotonesModal($form_id, ' Crear', 'ajaxSaveImagen');
+            DesBloquearBotonesModal($form_id, ' Crear', 'ajaxSaveEntidadFoto');
         }
     });
 }
+//function ajaxSaveImagen($form_id) {
+//
+//    ajaxValidarFormulario({
+//        formId: $form_id,
+//        beforeCall: function() {
+//            btn_save_modal.setProgress(0.6);
+//        },
+//        successCall: function(data) {
+//            if (data.success) {
+//                btn_save_modal.setProgress(1);
+//                btn_save_modal.stop();
+//                $url = "/galeria/imagen/ajaxCreate/id_album/" + id_album;
+//                updateGrid("imagen-modal-grid", $url);
+//            }
+//        },
+//        errorCall: function(data) {
+//            btn_save_modal.setProgress(1);
+//            btn_save_modal.stop();
+////            DesBloquearBotonesModal($form_id, ' Crear', 'ajaxSaveImagen');
+//        }
+//    });
+//}
 
 /************* Upload archivo ****************/
 /**
