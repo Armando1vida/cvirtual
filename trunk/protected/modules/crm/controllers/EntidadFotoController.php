@@ -47,15 +47,18 @@ class EntidadFotoController extends AweController {
         $model->entidad_id = $id;
         $result = array();
         $this->ajaxValidation($model);
+        $int=0;
         if (Yii::app()->request->isAjaxRequest) {
             if (isset($_POST['EntidadFoto'])) {
                 $model->attributes = $_POST['EntidadFoto'];
+                $int++;
                 $result['success'] = $model->save();
                 if (!$result['success']) {
                     $result['mensage'] = "Error al actualizar ";
                 }
                 if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
                     $result['id'] = $model->id;
+                    $result['cont'] =$int;
                     $result['success'] = true;
                 }
                 echo json_encode($result);

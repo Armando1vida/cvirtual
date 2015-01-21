@@ -2,7 +2,6 @@
 var dataFile = {success: false};
 //var btn_save_modal;btn_save_modal
 $(function() {
-    $('#direccion-form').attr('action', '/cvirtua');
     initcomponents();
 });
 function initcomponents() {
@@ -77,6 +76,7 @@ function ajaxSaveEntidadFoto($form_id) {
         },
         successCall: function(data) {
             if (data.success) {
+                console.log(data);
                 DesBloquearBotonesModal($form_id, ' Subir Imagenes', 'ajaxSaveEntidadFoto');
 
             }
