@@ -77,6 +77,8 @@ function ajaxSaveEntidadFoto($form_id) {
         },
         successCall: function(data) {
             if (data.success) {
+                DesBloquearBotonesModal($form_id, ' Subir Imagenes', 'ajaxSaveEntidadFoto');
+
             }
         },
         errorCall: function(data) {

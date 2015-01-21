@@ -2,7 +2,6 @@
 <?php
 Util::tsRegisterAssetJs('_entidad_foto.js');
 $modelEntidadFoto = new EntidadFoto;
-$modelEntidadFoto->entidad_id = $model->id;
 ?>
 
 <form class="form-vertical" id="entidad-imagen">
@@ -42,7 +41,7 @@ $modelEntidadFoto->entidad_id = $model->id;
 $formFoto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'vertical',
     'id' => 'entidad-foto-form',
-    'action' => Yii::app()->createUrl('/crm/entidadFoto/ajaxCreateEntidadFoto',array('entidad_id' => $model->id)),
+    'action' => Yii::app()->createUrl('/crm/entidadFoto/ajaxCreateEntidadFoto',array('id' => $model->id)),
     'enableAjaxValidation' => true,
     'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
     'enableClientValidation' => false,

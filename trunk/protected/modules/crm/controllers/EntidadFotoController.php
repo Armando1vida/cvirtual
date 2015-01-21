@@ -42,9 +42,9 @@ class EntidadFotoController extends AweController {
         }
     }
 
-    public function actionAjaxCreateEntidadFoto($entidad_id) {
+    public function actionAjaxCreateEntidadFoto($id) {
         $model = new EntidadFoto;
-        $model->entidad_id = $entidad_id;
+        $model->entidad_id = $id;
         $result = array();
         $this->ajaxValidation($model);
         if (Yii::app()->request->isAjaxRequest) {
