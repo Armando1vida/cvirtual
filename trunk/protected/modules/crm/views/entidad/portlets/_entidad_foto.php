@@ -35,8 +35,22 @@ $modelEntidadFoto->entidad_id = $model->id;
         </div>
     </div>
 </form>
+<?php
+/** @var EntidadFotoController $this */
+/** @var EntidadFoto $model */
+/** @var AweActiveForm $form */
+$formFoto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+    'type' => 'vertical',
+    'id' => 'entidad-foto-form',
+    'enableAjaxValidation' => true,
+    'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
+    'enableClientValidation' => false,
+        ));
+?>
 
+<?php echo $formFoto->textFieldRow($modelEntidadFoto, 'nombre', array('maxlength' => 256)) ?>
 
+<?php echo $formFoto->textFieldRow($modelEntidadFoto, 'ruta', array('maxlength' => 512)) ?>
 <?php
 Util::checkAccess(array("action_entidadFoto_guardarImagenes")) ?
                 $this->widget('bootstrap.widgets.TbButton', array(
@@ -50,6 +64,10 @@ Util::checkAccess(array("action_entidadFoto_guardarImagenes")) ?
                     ),
                 )) : '';
 ?>
+
+<?php $this->endWidget(); ?>
+
+
 <div class="space10"></div>
 
 <div style='overflow-x:auto'> 
@@ -90,4 +108,4 @@ Util::checkAccess(array("action_entidadFoto_guardarImagenes")) ?
             )
     );
     ?>
- 
+</div > 
