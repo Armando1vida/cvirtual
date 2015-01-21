@@ -5,7 +5,7 @@ $modelEntidadFoto = new EntidadFoto;
 $modelEntidadFoto->entidad_id = $model->id;
 ?>
 
-<form class="form-vertical" id="entidad-foto-form">
+<form class="form-vertical" id="entidad-imagen">
     <div class="control-group">
         <div class="control-label"><i class="icon icon-paper-clip"></i> Agregar Imagen</div>
         <div class="controls">
@@ -42,7 +42,7 @@ $modelEntidadFoto->entidad_id = $model->id;
 $formFoto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'vertical',
     'id' => 'entidad-foto-form',
-    'action' => Yii::app()->createUrl('/crm/campaniaTareaProgramada/update', array('id' => $model->id)),
+    'action' => Yii::app()->createUrl('/crm/entidadFoto/ajaxCreateEntidadFoto'),
     'enableAjaxValidation' => true,
     'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
     'enableClientValidation' => false,

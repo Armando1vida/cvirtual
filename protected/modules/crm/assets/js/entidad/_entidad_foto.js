@@ -83,7 +83,7 @@ function ajaxSaveEntidadFoto($form_id) {
             }
         },
         errorCall: function(data) {
-            DesBloquearBotonesModal($form_id, ' Crear', 'ajaxSaveEntidadFoto');
+            DesBloquearBotonesModal($form_id, ' Subir Imagenes', 'ajaxSaveEntidadFoto');
         }
     });
 }
