@@ -10,7 +10,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'horizontal',
     'id' => 'entidad-foto-form',
     'enableAjaxValidation' => true,
-    'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
+    'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => false,),
     'enableClientValidation' => false,
         ));
 
@@ -35,7 +35,9 @@ Util::tsRegisterAssetJs('_form_modal.js');
             </div>
             <div id="prev_row" hidden>
                 <div class="row-fluid">
-                    <a id="prev_file" href="#"></a>
+                    <img id="img_prev" data-src="holder.js/100%x200" alt="100%x300" src="#">
+
+                    <!--<a id="prev_file" href="#"></a>-->
                 </div>
                 <div class="row-fluid">
                     <button id="btn_change_action" class="btn btn-mini btn-primary">

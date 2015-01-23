@@ -49,7 +49,7 @@ function initcomponents() {
                             }
                             $("#prev_file").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
                             //valor
-                            $("#IncidenciaProducto_url_archivo").val(data.data.name);
+                            $("#IncidenciaProducto_ruta").val(data.data.name);
                             //$("#prev_file").attr('href', data.data.src)
                             if (!$("#prev_row").hasClass('view-on')) {
                                 $("#prev_row").toggle(100, function() {
@@ -86,28 +86,10 @@ function ajaxSaveEntidadFoto($form_id) {
         }
     });
 }
-//function ajaxSaveImagen($form_id) {
-//
-//    ajaxValidarFormulario({
-//        formId: $form_id,
-//        beforeCall: function() {
-//            btn_save_modal.setProgress(0.6);
-//        },
-//        successCall: function(data) {
-//            if (data.success) {
-//                btn_save_modal.setProgress(1);
-//                btn_save_modal.stop();
-//                $url = "/galeria/imagen/ajaxCreate/id_album/" + id_album;
-//                updateGrid("imagen-modal-grid", $url);
-//            }
-//        },
-//        errorCall: function(data) {
-//            btn_save_modal.setProgress(1);
-//            btn_save_modal.stop();
-////            DesBloquearBotonesModal($form_id, ' Crear', 'ajaxSaveImagen');
-//        }
-//    });
-//}
+function ajaxSaveImagen($form_id) {
+
+  
+}
 
 /************* Upload archivo ****************/
 /**
