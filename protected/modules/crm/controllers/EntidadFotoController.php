@@ -51,8 +51,17 @@ class EntidadFotoController extends AweController {
         if (Yii::app()->request->isAjaxRequest) {
             if (isset($_POST['EntidadFoto'])) {
                 $model->attributes = $_POST['EntidadFoto'];
-                $int++;
-                $result['success'] = $model->save();
+                $nombreUpload = $model->ruta;
+                if (!file_exists('uploads/entidad/' . EntidadFoto::TIPO_EMPRESA . '/' . $entidad_id)) {
+                    mkdir('uploads/entidad/' . EntidadFoto::TIPO_EMPRESA . '/' . $entidad_id, 0777, true);
+                }
+                $path = realpath(Yii::app()->getBasePath() . "/../uploads/entidad/" . EntidadFoto::TIPO_EMPRESA . "/" . $entidad_id) . "/";
+                $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                $publicPath = Yii::app()->getBaseUrl() . "/uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $entidad_id . '/';
+                $model->ruta = $publicPath . $model->nombre;
+                if (rename($pathorigen . $nombreUpload, $path . $nombreUpload)) {
+                    $result['success'] = $model->save();
+                }
                 if (!$result['success']) {
                     $validadorPartial = false;
                     $result['mensage'] = "Error al actualizar ";
@@ -165,6 +174,7 @@ class EntidadFotoController extends AweController {
                         $path = realpath(Yii::app()->getBasePath() . "/../uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id']) . "/";
                         $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
                         $publicPath = Yii::app()->getBaseUrl() . "/uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $_POST['id'] . '/';
+
                         foreach ($_POST['archivos'] as $value) {
 
 //                        var_dump("entro creo foreach arhivos:", $value['nombreArchivo']);

@@ -12,6 +12,7 @@ class EntidadFoto extends BaseEntidadFoto {
 
     const TIPO_EMPRESA = 'EMPRESA';
     const TIPO_USUARIO = 'USUARIO';
+    const Num_Fotos = 3;
 
     public static function model($className = __CLASS__) {
         return parent::model($className);
