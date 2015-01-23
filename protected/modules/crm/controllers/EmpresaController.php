@@ -50,10 +50,52 @@ class EmpresaController extends AweController {
                 $result['message'] = 'Error al registrar empresa.';
             }
             if ($result['success']) {//envio del id de la empresa creada
+                //Creacion de la Cuenta Empresa para que la empresa pueda 
+                $modelCuentaEmpresa = Yii::app()->user->um->createBlankUser();
+                $msj = "";
+                $owner_id = Yii::app()->user->id;
+                $rolname = Util::getFirstRolUser($owner_id);
+                $rbac = Yii::app()->user->rbac;
+                $rolAsignar = Cruge_Constants::getAsignarRolUsuario($rolname);
+//                 * @property integer $iduser
+// * @property string $username
+// * @property string $email
+// * @property string $password
+//                 * @property string $apellido
+// * @property string $nombre
+// * @property string $fecha_nacimiento
+// * @property string $documento
+                $modelCuentaEmpresa->username = $model->documento;
+                $modelCuentaEmpresa->fecha_nacimiento = Util::FechaActual();
+                $modelCuentaEmpresa->terminosYCondiciones = true;
+                $modelCuentaEmpresa->scenario = 'manualcreate';
+                $modelCuentaEmpresa->newPassword = "123456";
+                $modelCuentaEmpresa->nombre = $model->nombre;
+                $modelCuentaEmpresa->documento = $model->documento;
+                $newPwd = trim($modelCuentaEmpresa->newPassword);
+                Yii::app()->user->um->changePassword($modelCuentaEmpresa, $newPwd);
+                Yii::app()->user->um->generateAuthenticationKey($modelCuentaEmpresa);
+                var_dump($modelCuentaEmpresa);
+                die();
+                if (Yii::app()->user->um->save($modelCuentaEmpresa, 'insert')) {
+                    $this->onNewUser($modelCuentaEmpresa, $newPwd);
+                    $userId = $modelCuentaEmpresa->getPrimaryKey();
+                    $modelUsuarioAsignados = new UsuariosAsignados;
+                    $modelUsuarioAsignados->iduser = $owner_id;
+                    $modelUsuarioAsignados->iduser_asignado = $userId;
+                    $save = $modelUsuarioAsignados->save();
+                    if (!$rbac->assign($rolAsignar, $userId)) {
+                        $msj = "No se agrego al rol";
+                    } else {
+                        $msj = "Se agrego al rol";
+                    }
+                    if (!$save) {
+                        $msj+="Error al Agregar el Usuario.";
+                    }
+                }
                 $result['id'] = $model->id;
             }
             $enable_form = false;
-
             echo json_encode($result);
         }
         $categoria = Categoria::model()->activos()->findAll();

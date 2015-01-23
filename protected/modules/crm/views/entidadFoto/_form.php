@@ -2,7 +2,6 @@
 /** @var EntidadFotoController $this */
 /** @var EntidadFoto $model */
 /** @var AweActiveForm $form */
-$modelEntidadFoto = new Entidad;
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'horizontal',
     'id' => 'entidad-foto-form',

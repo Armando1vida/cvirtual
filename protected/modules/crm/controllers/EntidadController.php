@@ -25,7 +25,7 @@ class EntidadController extends AweController {
 //        Yii::import("xupload.models.XUploadForm");
 //        $archivos = new XUploadForm;
         $tipoModal = false;
-        
+
         $modelDireccion = Direccion::model()->findByAttributes(array('entidad_id' => $id));
         if ($modelDireccion == NULL) {
             $tipoModal = 0;
@@ -63,6 +63,51 @@ class EntidadController extends AweController {
                 $result['message'] = 'Error al registrar empresa.';
             }
             if ($result['success']) {//envio del id de la empresa creada
+                //Creacion de la Cuenta Empresa para que la empresa pueda 
+                $modelCuentaEmpresa = Yii::app()->user->um->createBlankUser();
+                $msj = "";
+                $owner_id = Yii::app()->user->id;
+                $rolname = Util::getFirstRolUser($owner_id);
+                $rbac = Yii::app()->user->rbac;
+                $rolAsignar = Cruge_Constants::getAsignarRolUsuario($rolname);
+//                 * @property integer $iduser
+// * @property string $username
+// * @property string $email
+// * @property string $password
+//                 * @property string $apellido
+// * @property string $nombre
+// * @property string $fecha_nacimiento
+// * @property string $documento
+                $modelCuentaEmpresa->username = $model->documento;
+                $modelCuentaEmpresa->fecha_nacimiento = Util::FechaActual();
+                $modelCuentaEmpresa->terminosYCondiciones = true;
+                $modelCuentaEmpresa->scenario = 'manualcreate';
+                $modelCuentaEmpresa->password = "123456";
+                $modelCuentaEmpresa->newPassword = "123456";
+                $modelCuentaEmpresa->nombre = $model->nombre;
+                $modelCuentaEmpresa->apellido = "empresa";
+                $modelCuentaEmpresa->codigo = "codigo";
+                $modelCuentaEmpresa->email = "dadyalex777@hotmail.com";
+                $modelCuentaEmpresa->documento = $model->documento;
+                $newPwd = trim($modelCuentaEmpresa->password);
+                Yii::app()->user->um->generateAuthenticationKey($modelCuentaEmpresa);
+                if (Yii::app()->user->um->save($modelCuentaEmpresa, 'insert')) {
+                    $this->onNewUser($modelCuentaEmpresa, $newPwd);
+                    $userId = $modelCuentaEmpresa->getPrimaryKey();
+                    $modelUsuarioAsignados = new UsuariosAsignados;
+                    $modelUsuarioAsignados->iduser = $owner_id;
+                    $modelUsuarioAsignados->iduser_asignado = $userId;
+                    $save = $modelUsuarioAsignados->save();
+                    if (!$rbac->assign($rolAsignar, $userId)) {
+                        $msj = "No se agrego al rol";
+                    } else {
+                        $msj = "Se agrego al rol";
+                    }
+                    if (!$save) {
+                        $msj+="Error al Agregar el Usuario.";
+                    }
+                }
+                die();
                 $result['id'] = $model->id;
             }
             $enable_form = false;
@@ -255,6 +300,38 @@ class EntidadController extends AweController {
 //        $this->performAjaxValidation($model, 'entidad-foto-form');
         if (Yii::app()->request->isAjaxRequest) {
             $this->renderPartial('_form_modal_Informacion', array('model' => $model), false, true);
+        }
+    }
+
+    private function onNewUser(ICrugeStoredUser $model, $newPwd = "") {
+        Yii::log(__METHOD__ . "\n", "info");
+
+        $opt = Yii::app()->user->um->getDefaultSystem()->getn("registerusingactivation");
+
+        $role = Yii::app()->user->um->getDefaultSystem()->get("defaultroleforregistration");
+        Yii::log(__METHOD__ . "\n role: " . $role, "info");
+        if (Yii::app()->user->rbac->getAuthItem($role) != null) {
+            Yii::log(
+                    __METHOD__ . "\n asignando role: " . $role . " a userid:"
+                    . $model->getPrimaryKey(), "info"
+            );
+            Yii::app()->user->rbac->assign($role, $model->getPrimaryKey());
+        }
+
+        if ($opt == CRUGE_ACTIVATION_OPTION_INMEDIATE) {
+            // lo activa inmediatamente y le manda la clave al usuario
+            $model->state = CRUGEUSERSTATE_ACTIVATED;
+            Yii::app()->user->um->save($model);
+            Yii::app()->crugemailer->sendPasswordTo($model, $newPwd);
+        }
+        if ($opt == CRUGE_ACTIVATION_OPTION_EMAIL) {
+            // queda en estado no activado, pero envia un email para que
+            // el usuario lo active
+            Yii::app()->crugemailer->sendRegistrationEmail($model, $newPwd);
+        }
+        if ($opt == CRUGE_ACTIVATION_OPTION_MANUAL) {
+            // lo activa manualmente, envia un email de espera por activacion manual
+            Yii::app()->crugemailer->sendWaitForActivation($model, $newPwd);
         }
     }
 

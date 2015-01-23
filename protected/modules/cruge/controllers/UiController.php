@@ -352,7 +352,6 @@ class UiController extends Controller {
         Yii::app()->user->um->loadUserFields($model);
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
-
             $model->terminosYCondiciones = true;
 
             $model->scenario = 'manualcreate';
@@ -417,11 +416,10 @@ class UiController extends Controller {
 //                    var_dump($userId);
 //                    var_dump($rolAsignar);
 //                    $rbac->assign($authitemName, $userId)
-                    $model = new UsuariosAsignados;
-                    $model->iduser = $owner_id;
-                    $model->iduser_asignado = $userId;
-                    $model->validate();
-                    $save = $model->save();
+                    $modelUsuarioAsignados = new UsuariosAsignados;
+                    $modelUsuarioAsignados->iduser = $owner_id;
+                    $modelUsuarioAsignados->iduser_asignado = $userId;
+                    $save = $modelUsuarioAsignados->save();
 //                    UsuariosAsignados::model()->saveManyMany($relationName, $data);
 //                    var_dump("sasd");        $model = new Cuenta;
 
@@ -431,7 +429,7 @@ class UiController extends Controller {
                         $msj = "Se agrego al rol";
                     }
                     if (!$save) {
-                        $msj+="Error";
+                        $msj+="Error al Agregar el Usuario.";
                     }
 //                    die();
 //                    Mailer::enviarEmail($model->email, "Bienvenido: " . $model->username, "<b>HOLA</b>");
