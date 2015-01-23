@@ -107,7 +107,6 @@ class EntidadController extends AweController {
                         $msj+="Error al Agregar el Usuario.";
                     }
                 }
-                die();
                 $result['id'] = $model->id;
             }
             $enable_form = false;
@@ -125,11 +124,9 @@ class EntidadController extends AweController {
     public function actionGetPerfilEntidad($id) {
         $model = $this->loadModel($id);
         $points = Entidad::model()->getPointEmpresa($id);
-//        die(var_dump($points));
         $this->render('_perfil_entidad', array(
             'model' => $model,
             'points' => $points
-//                'categoria' => $categoria,
         ));
     }
 
