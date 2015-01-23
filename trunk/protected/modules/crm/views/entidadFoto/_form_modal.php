@@ -61,7 +61,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
         'icon' => 'ok',
         'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
         'htmlOptions' => array(
-            'onClick' => 'js:ajaxSaveImagen("#entidad-foto-form)')
+            'onClick' => 'js:ajaxSaveImagen("#entidad-foto-form")')
     ));
     ?>
     <?php

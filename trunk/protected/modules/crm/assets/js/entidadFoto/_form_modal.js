@@ -87,6 +87,22 @@ function ajaxSaveEntidadFoto($form_id) {
     });
 }
 function ajaxSaveImagen($form_id) {
+    ajaxValidarFormulario({
+        formId: $form_id,
+        beforeCall: function() {
+            BloquearBotonesModal($form_id);
+        },
+        successCall: function(data) {
+            if (data.success) {
+                $("#" + $('.modal.fade.in').attr('id')).modal("hide");
+//                direccion_id = data.model.id;
+//                tipoModal = 1;
+            }
+        },
+        errorCall: function(data) {
+            DesBloquearBotonesModal($form_id, ' Crear', 'ajaxSaveImagen');
+        }
+    });
 
 
 }
