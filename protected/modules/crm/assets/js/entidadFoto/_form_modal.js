@@ -45,11 +45,11 @@ function initcomponents() {
                         if (data.success) {
                             if (dataFile.success) {
                                 deleted({delete_url: dataFile.data.delete_url});
-                                $("IncidenciaProducto_url_archivo").val('');
+                                $("EntidadFoto_ruta").val('');
                             }
-                            $("#prev_file").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
+//                            $("#prev_file").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
                             //valor
-                            $("#IncidenciaProducto_ruta").val(data.data.name);
+                            $("#EntidadFoto_ruta").val(data.data.name);
                             //$("#prev_file").attr('href', data.data.src)
                             if (!$("#prev_row").hasClass('view-on')) {
                                 $("#prev_row").toggle(100, function() {
@@ -88,7 +88,7 @@ function ajaxSaveEntidadFoto($form_id) {
 }
 function ajaxSaveImagen($form_id) {
 
-  
+
 }
 
 /************* Upload archivo ****************/
