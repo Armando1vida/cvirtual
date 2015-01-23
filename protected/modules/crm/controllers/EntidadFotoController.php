@@ -44,7 +44,7 @@ class EntidadFotoController extends AweController {
 
     public function actionAjaxCreateEntidadFoto($entidad_id) {
         $model = new EntidadFoto;
-        $model->entidad_id = $id;
+        $model->entidad_id = $entidad_id;
         $validadorPartial = false;
         $result = array();
         $this->ajaxValidation($model);

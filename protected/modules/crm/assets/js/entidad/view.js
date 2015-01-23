@@ -44,3 +44,21 @@ function getModalDireccion() {
         maskAttributes();
     }, true);
 }
+function getModal($tipo) {
+    switch ($tipo) {
+        case 'entidad_foto':
+            $url = "crm/entidadFoto/ajaxCreateEntidadFoto/entidad_id/" + entidad_id;
+            break;
+//        case '#pieIncidenciaProductos':
+//            //Grafico Pie Productos
+//            $url = "incidencias/incidenciaProducto/ajaxPieIncidenciaProducto";
+//            $incidenciaMotivoId = $("#Producto_incidenciaMotivoId").val() ? $("#Producto_incidenciaMotivoId").val() : null;
+//            $incidenciaSubmotivoId = $("#Producto_incidenciaSubmotivoId ").val() ? $("#Producto_incidenciaSubmotivoId").val() : null;
+//            parametros = {fechas: dataFecha, incidenciaMotivoId: $incidenciaMotivoId, incidenciaSubmotivoId: $incidenciaSubmotivoId, categoria_id: $categoria_id, zona_id: $zona_id, producto: $producto};
+//            break;
+
+    }
+    viewModal($url, function() {
+        maskAttributes();
+    }, true);
+}

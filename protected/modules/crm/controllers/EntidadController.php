@@ -50,7 +50,7 @@ class EntidadController extends AweController {
         $model = new Entidad;
         $model->direccion = New Direccion;
 //        die(var_dump($model->direccion));
-        $model->estado = Empresa::ESTADO_ACTIVO;
+        $model->estado = Entidad::ESTADO_ACTIVO;
         $this->performAjaxValidation($model, 'entidad-form');
         $enable_form = true;
 
@@ -78,7 +78,7 @@ class EntidadController extends AweController {
 // * @property string $nombre
 // * @property string $fecha_nacimiento
 // * @property string $documento
-                $modelCuentaEmpresa->username = $model->documento;
+                $modelCuentaEmpresa->username = "meetclic" . $model->documento;
                 $modelCuentaEmpresa->fecha_nacimiento = Util::FechaActual();
                 $modelCuentaEmpresa->terminosYCondiciones = true;
                 $modelCuentaEmpresa->scenario = 'manualcreate';
@@ -87,7 +87,7 @@ class EntidadController extends AweController {
                 $modelCuentaEmpresa->nombre = $model->nombre;
                 $modelCuentaEmpresa->apellido = "empresa";
                 $modelCuentaEmpresa->codigo = "codigo";
-                $modelCuentaEmpresa->email = "dadyalex777@hotmail.com";
+                $modelCuentaEmpresa->email = $model->email;
                 $modelCuentaEmpresa->documento = $model->documento;
                 $newPwd = trim($modelCuentaEmpresa->password);
                 Yii::app()->user->um->generateAuthenticationKey($modelCuentaEmpresa);
@@ -141,10 +141,7 @@ class EntidadController extends AweController {
         $this->performAjaxValidation($model, 'entidad-form');
 
         $enable_form = true;
-
-
         if (Yii::app()->request->isAjaxRequest) {
-
             $validadorPartial = false;
             $result = array();
             if (isset($_POST['Entidad'])) {

@@ -1,8 +1,12 @@
-<div style='overflow-x:auto'> 
+<?php
+$modelImagen = new EntidadFoto('search');
+$modelImagen->unsetAttributes();
 
+$numentidad_fotos = $modelImagen->searchArchivosByEntidad($model->id)->itemCount;
+?>
+
+<div id="divfotografia_entidad" style='overflow:auto'  class='grid <?php echo($numentidad_fotos > 0) ? '' : 'hidden'; ?>'>
     <?php
-    $modelImagen = new EntidadFoto('search');
-    $modelImagen->unsetAttributes();
     $this->widget('bootstrap.widgets.TbGridView', array(
         'id' => 'imagenes-grid',
         'type' => 'striped bordered hover advance',
@@ -36,4 +40,21 @@
             )
     );
     ?>
+
+</div>
+<?php
+$this->widget('bootstrap.widgets.TbButton', array(
+    'id' => 'add-subentidad',
+    'label' => "Agregar Direccion",
+    'label' => ($numentidad_fotos > 0 ? 'Gestionar Imagenes  ' : '<br>Agregar Imagenes'),
+    'encodeLabel' => false,
+    'icon' => $numentidad_fotos > 0 ? 'plus-sign' : 'icon-fire-extinguisher',
+    'htmlOptions' => array(
+        'onClick' => 'js:getModal("entidad_foto");',
+        'class' => $numentidad_fotos > 0 ? '' : 'empty-portlet',
+    ),
+))
+?>
+
+
 </div > 
