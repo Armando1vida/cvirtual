@@ -87,7 +87,6 @@ function ajaxSaveImagen($form_id) {
             BloquearBotonesModal($form_id);
         },
         successCall: function(data) {
-            console.log(data);
             if (data.success) {
 //                var url = baseUrl + "incidencias/incidenciaProducto/ajaxCargarForm/incidencia_id/" + incidencia_id;
 //                $.fn.yiiGridView.update('images-producto-grid', {url: baseUrl + 'incidencias/incidenciaProducto/create/incidencia_id/' + incidencia_id + '/cco/' + cco});
@@ -96,6 +95,7 @@ function ajaxSaveImagen($form_id) {
 
             }
             else {
+                console.log("ss", data);
                 bootbox.alert(data.msj);
             }
         },

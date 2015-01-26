@@ -25,7 +25,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
     'label' => "Agregar Direccion",
     'label' => ($modelDireccion ? 'Actualizar Direccion  ' : '<br>Agregar Direccion'),
     'encodeLabel' => false,
-    'icon' => $modelDireccion ? 'plus-sign' : 'icon-fire-extinguisher',
+    'icon' => $modelDireccion ? 'plus-sign' : 'icon-screenshot',
     'htmlOptions' => array(
         'onClick' => 'js:getModalDireccion();',
         'class' => $modelDireccion ? '' : 'empty-portlet',
