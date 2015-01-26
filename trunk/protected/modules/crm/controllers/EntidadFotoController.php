@@ -50,26 +50,49 @@ class EntidadFotoController extends AweController {
         $this->ajaxValidation($model);
         if (Yii::app()->request->isAjaxRequest) {
             if (isset($_POST['EntidadFoto'])) {
+
                 $model->attributes = $_POST['EntidadFoto'];
                 $nombreUpload = $model->ruta;
-                if (!file_exists('uploads/entidad/' . EntidadFoto::TIPO_EMPRESA . '/' . $entidad_id)) {
-                    mkdir('uploads/entidad/' . EntidadFoto::TIPO_EMPRESA . '/' . $entidad_id, 0777, true);
-                }
-                $path = realpath(Yii::app()->getBasePath() . "/../uploads/entidad/" . EntidadFoto::TIPO_EMPRESA . "/" . $entidad_id) . "/";
-                $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
-                $publicPath = Yii::app()->getBaseUrl() . "/uploads/crm/" . EntidadFoto::TIPO_EMPRESA . "/" . $entidad_id . '/';
-                $model->ruta = $publicPath . $model->nombre;
-                if (rename($pathorigen . $nombreUpload, $path . $nombreUpload)) {
-                    $result['success'] = $model->save();
-                }
-                if (!$result['success']) {
-                    $validadorPartial = false;
-                    $result['mensage'] = "Error al actualizar ";
-                }
-                if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
-                    $result['id'] = $model->id;
-                    $validadorPartial = false;
-                    $result['success'] = true;
+                $modelEntidadFoto = EntidadFoto::model()->findByAttributes(array('entidad_id'=>$model->entidad_id)); //Recuperar informacion modelo  Entidad: fotos  agregadas 
+                $num_picsEntidad = $modelEntidadFoto->count();
+                if ($num_picsEntidad<=EntidadFoto::Num_Fotos) { //solo si tiene items para fotos
+                    /**
+                     * Creacion de la Carpeta donde se guardara las fotos
+                     * de dicha entidad
+                     */
+                    if (!file_exists('uploads/entidad/' . EntidadFoto::TIPO_EMPRESA . '/' . $entidad_id)) {
+                        mkdir('uploads/entidad/' . EntidadFoto::TIPO_EMPRESA . '/' . $entidad_id, 0777, true);
+                    }
+                    /**
+                     * $path=ubicacion nueva dond se agregara la foto guardada
+                     * $pathorigen=ubicacion donde se encuentra la foto temporalmente
+                     * $publicPath=ubicacion la cual s guardara en la bdd 
+                     * $nombreUpload= nombre del archivo como s guardo en la carpeta temporal
+                     */
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/entidad/" . EntidadFoto::TIPO_EMPRESA . "/" . $entidad_id) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/entidad/" . EntidadFoto::TIPO_EMPRESA . "/" . $entidad_id . '/';
+                    $model->ruta = $publicPath . $nombreUpload;
+                    /**
+                     * Cambiar el lugar de posicion de la imagen al lugar adecuado
+                     */
+                    if (rename($pathorigen . $nombreUpload, $path . $nombreUpload)) {
+                        $save = $model->save();
+                        $result['success'] = $save;
+                    }
+                    if (!$result['success']) {
+                        $validadorPartial = true;
+                        $result['mensage'] = "Error al actualizar ";
+                    }
+                    if ($result['success']) {//envio del id de la empresa actualizada para poder agregar la direecion
+                        $result['id'] = $model->id;
+                        $validadorPartial = true;
+                        $result['success'] = true;
+                    }
+                } else {
+                    $result['msj'] = "Ya no puede Agregar más fotos.";
+                    $validadorPartial = true;
+                    $result['success'] = false;
                 }
                 echo json_encode($result);
             }

@@ -21,7 +21,7 @@ function initcomponents() {
     $("#btn_delete_action").click(function() {
         if (dataFile.success) {
             deleted({delete_url: dataFile.data.delete_url});
-            $("#IncidenciaProducto_url_archivo").val('');
+            $('#EntidadFoto_ruta').val('')
             $("#prev_row").toggle(100, function() {
                 $("#select_row").toggle(50);
                 $("#prev_row").removeClass('view-on');
@@ -63,28 +63,22 @@ function initcomponents() {
             }
             else {
                 $("#file_temp").val(null);
-                bootbox.alert('El archivo seleccionado no es una imagen')
+                bootbox.alert('El archivo seleccionado no es una imagen');
             }
         }
     });
 }
-function ajaxSaveEntidadFoto($form_id) {
-    ajaxValidarFormulario({
-        formId: $form_id,
-        beforeCall: function() {
-            BloquearBotonesModal($form_id);
-        },
-        successCall: function(data) {
-            if (data.success) {
-                console.log(data);
-                DesBloquearBotonesModal($form_id, ' Subir Imagenes', 'ajaxSaveEntidadFoto');
 
-            }
-        },
-        errorCall: function(data) {
-            DesBloquearBotonesModal($form_id, ' Subir Imagenes', 'ajaxSaveEntidadFoto');
-        }
-    });
+function formUnset() {
+    dataFile = {success: false};
+    if ($("#prev_row").hasClass('view-on')) {
+        $("#EntidadFoto_ruta").val('');
+        $("#prev_row").toggle(100, function() {
+            $("#select_row").toggle(50);
+            $("#prev_row").removeClass('view-on');
+        });
+    }
+    $("#entidad-foto-form").trigger('reset');
 }
 function ajaxSaveImagen($form_id) {
     ajaxValidarFormulario({
@@ -93,14 +87,20 @@ function ajaxSaveImagen($form_id) {
             BloquearBotonesModal($form_id);
         },
         successCall: function(data) {
+            console.log(data);
             if (data.success) {
-                $("#" + $('.modal.fade.in').attr('id')).modal("hide");
-//                direccion_id = data.model.id;
-//                tipoModal = 1;
+//                var url = baseUrl + "incidencias/incidenciaProducto/ajaxCargarForm/incidencia_id/" + incidencia_id;
+//                $.fn.yiiGridView.update('images-producto-grid', {url: baseUrl + 'incidencias/incidenciaProducto/create/incidencia_id/' + incidencia_id + '/cco/' + cco});
+                formUnset();
+                DesBloquearBotonesModal($form_id, 'Agregar', 'ajaxSaveImagen');
+
+            }
+            else {
+                bootbox.alert(data.msj);
             }
         },
         errorCall: function(data) {
-            DesBloquearBotonesModal($form_id, ' Crear', 'ajaxSaveImagen');
+            DesBloquearBotonesModal($form_id, 'Agregar', 'ajaxSaveImagen');
         }
     });
 
@@ -160,12 +160,16 @@ function deleted(options) {
         url: options.delete_url,
         success: function(data) {
             if (data.success) {
-                if (options.successCall)
+                if (options.successCall) {
                     options.successCall(data);
+                }
+
             }
             else {
-                if (options.successCall)
+                if (options.successCall) {
                     options.errorCall(data);
+                }
+
             }
         }
     });
@@ -204,7 +208,6 @@ function upload(options) {
 }
 function formUnset() {
     dataFile = {success: false};
-    $("#costoProducto").val('');
     if ($("#prev_row").hasClass('view-on')) {
         $("#IncidenciaProducto_url_archivo").val('');
         $("#prev_row").toggle(100, function() {
@@ -213,6 +216,6 @@ function formUnset() {
         });
     }
 //    $("#OportunidadProducto_subtotal").val('');
-    $("#IncidenciaProducto_producto_id").select2("val", "");
-    //$("#incidencia-producto-form").trigger('reset');
+//    $("#IncidenciaProducto_producto_id").select2("val", "");
+    $("#entidad-foto-form").trigger('reset');
 }
