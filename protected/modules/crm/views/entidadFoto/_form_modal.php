@@ -24,14 +24,16 @@ Util::tsRegisterAssetJs('_form_modal.js');
 </div>
 <div class="modal-body">
     <div class="control-group">
-        <div class="control-label"><i class="icon icon-paper-clip"></i> Archivo adjunto</div>
+<!--        <div class="control-label"><i class="icon icon-paper-clip"></i> Archivo adjunto</div>-->
+        <label class="control-label required" for="EntidadFoto_ruta">Foto <span class="required">*</span></label>
+
         <div class="controls">
+            <?php echo $form->hiddenField($model, 'ruta') ?>
             <div id="select_row">
                 <button id="btn_upload_action" class="btn btn-mini">
                     <i class="icon icon-plus"></i> Seleccione
                 </button>
                 <input type="file" id="file_temp" class="hidden">
-                <?php echo $form->hiddenField($model, 'ruta') ?>
             </div>
             <div id="prev_row" hidden>
                 <div class="row-fluid">
@@ -48,6 +50,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                     </button>
                 </div>
             </div>
+            <span class="help-inline error" id="EntidadFoto_ruta_em_" style="display: none"></span>
         </div>
     </div>
     <?php echo $form->textFieldRow($model, 'nombre', array('maxlength' => 256)) ?>
