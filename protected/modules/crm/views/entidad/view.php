@@ -50,7 +50,7 @@ $this->pageTitle = $model->nombre;
         <!-- BEGIN CALENDAR PORTLET-->
         <div class="widget ">
             <div class="widget-title">
-                <h4><i class="icon-screenshot"></i> Fotos</h4>
+                <h4><i class=" icon-picture"></i> Fotos</h4>
                 <span class="tools">
                     <a href="javascript:;" class="icon-chevron-down"></a>
                 </span>

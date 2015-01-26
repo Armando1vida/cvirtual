@@ -111,4 +111,22 @@ class EntidadFoto extends BaseEntidadFoto {
 //            $detalle .= "<b>$this->numero_garage</b> Garages<br>";
 //        return $detalle;
 //    }
+    public function getNumberFotos($entidad_id) {
+//SELECT count(*)FROM entidad_foto t
+//where  t.entidad_id=4
+//
+//;
+        $result = array();
+        $command = Yii::app()->db->createCommand()
+                ->select('count(*) as num')
+                ->from('entidad_foto t')
+                ->where('t.entidad_id=:entidad_id')
+        ;
+        $command->params = array(
+            ':entidad_id' => $entidad_id,
+        );
+        $result = $command->queryAll();
+        return $result[0];
+    }
+
 }

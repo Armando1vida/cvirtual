@@ -48,7 +48,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
     'label' => "Agregar Direccion",
     'label' => ($numentidad_fotos > 0 ? 'Gestionar Imagenes  ' : '<br>Agregar Imagenes'),
     'encodeLabel' => false,
-    'icon' => $numentidad_fotos > 0 ? 'plus-sign' : 'icon-fire-extinguisher',
+    'icon' => $numentidad_fotos > 0 ? 'plus-sign' : ' icon-picture',
     'htmlOptions' => array(
         'onClick' => 'js:getModal("entidad_foto");',
         'class' => $numentidad_fotos > 0 ? '' : 'empty-portlet',

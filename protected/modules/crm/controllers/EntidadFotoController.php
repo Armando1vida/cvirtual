@@ -53,9 +53,10 @@ class EntidadFotoController extends AweController {
 
                 $model->attributes = $_POST['EntidadFoto'];
                 $nombreUpload = $model->ruta;
-                $modelEntidadFoto = EntidadFoto::model()->findByAttributes(array('entidad_id'=>$model->entidad_id)); //Recuperar informacion modelo  Entidad: fotos  agregadas 
-                $num_picsEntidad = $modelEntidadFoto->count();
-                if ($num_picsEntidad<=EntidadFoto::Num_Fotos) { //solo si tiene items para fotos
+                $modelEntidadFoto = new EntidadFoto;
+
+                $num_picsEntidadArray = $modelEntidadFoto->getNumberFotos($model->entidad_id);
+                if ($num_picsEntidadArray['num'] < EntidadFoto::Num_Fotos) { //solo si tiene items para fotos
                     /**
                      * Creacion de la Carpeta donde se guardara las fotos
                      * de dicha entidad
