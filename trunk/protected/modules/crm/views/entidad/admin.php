@@ -1,6 +1,8 @@
 <?php
 /** @var EntidadController $this */
 /** @var Entidad $model */
+Util::tsRegisterAssetJs('admin.js');
+
 $this->menu = array(
     array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'),
     //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
@@ -23,7 +25,8 @@ $this->menu = array(
         $this->widget('bootstrap.widgets.TbGridView', array(
             'id' => 'entidad-grid',
             'type' => 'striped bordered hover advance',
-            'afterAjaxUpdate' => 'js:function() { dzRatyUpdate(); }',
+//            'afterAjaxUpdate' => 'js:function() { dzRatyUpdate(); }',
+            'afterAjaxUpdate' => 'function(id,data){ $(\'span.star-rating > input\').rating(); $(\'div .rating-cancel\').hide(); ratingCargaGrid();}',
             'dataProvider' => $model->search(),
             'columns' => array(
                 array(
@@ -34,22 +37,42 @@ $this->menu = array(
                 'razon_social',
                 'documento',
                 'website',
+//                array(
+//                    'name' => 'raking',
+//                    'class' => 'ext.dzRaty.DzRatyDataColumn', // #2 - Add a jQuery Raty data column
+//                    'options' => array(//      Custom options for jQuery Raty data column
+//                        'space' => FALSE
+//                    ),
+//                    'filter' => array('ext.dzRaty.DzRaty', array(// #3 - Add a jQuery Raty filter column
+//                            'model' => $model,
+//                            'attribute' => 'raking',
+//                            'options' => array(//      Custom options for jQuery Raty filter column
+//                                'cancel' => TRUE,
+//                                'cancelPlace' => 'right'
+//                            ),
+//                        ))
+//                    ,
+//                    'header' => 'Valoracion',
+//                ),
                 array(
                     'name' => 'raking',
-                    'class' => 'ext.dzRaty.DzRatyDataColumn', // #2 - Add a jQuery Raty data column
-                    'options' => array(//      Custom options for jQuery Raty data column
-                        'space' => FALSE
-                    ),
-                    'filter' => array('ext.dzRaty.DzRaty', array(// #3 - Add a jQuery Raty filter column
-                            'model' => $model,
-                            'attribute' => 'raking',
-                            'options' => array(//      Custom options for jQuery Raty filter column
-                                'cancel' => TRUE,
-                                'cancelPlace' => 'right'
-                            ),
-                        ))
-                    ,
-                    'header' => 'Valoracion',
+                    'type' => 'raw',
+                    'value' => '$this->grid->controller->widget("CStarRating", array (
+                        "name" => $data->id,
+                        "id" => "rating_".$data->id,
+                        "value" => $data->raking,
+                        "allowEmpty" => false,
+                        "maxRating" => 5,
+                        "htmlOptions" => array("class"=>"star-rating"),
+                        "callback"=>"js:function(){
+                            rating($data->id);
+                        }"
+                    ), true)',
+                    'headerHtmlOptions' => array('style' => 'width:85px;'),
+                    'filter' => false,
+                    'sortable' => true,
+                    'header' => '<i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i>',
+//                    'visible' => Util::checkAccess(array("action_cuenta_rating"))
                 ),
                 'telefono',
                 /*
