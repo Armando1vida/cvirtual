@@ -119,8 +119,6 @@ class DireccionController extends AweController {
             $result['success'] = $model->validate();
             if (!$result['success']) {
                 $result['errors'] = $model->errors;
-                var_dump($result );
-                die();
                 echo json_encode($result);
                 Yii::app()->end();
             }

@@ -100,6 +100,11 @@ function ajaxSaveImagen($form_id) {
             }
         },
         errorCall: function(data) {
+
+            if (!data.success) {
+                formUnset();
+                bootbox.alert(data.msj);
+            }
             DesBloquearBotonesModal($form_id, 'Agregar', 'ajaxSaveImagen');
         }
     });

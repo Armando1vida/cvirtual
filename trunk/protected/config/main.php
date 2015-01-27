@@ -86,8 +86,9 @@ return array(
             //		'afterLoginUrl'=>array('/site/welcome'),  ( !!! no olvidar el slash inicial / )
             //		'afterLogoutUrl'=>array('/site/page','view'=>'about'),
             //
-            'afterLoginUrl' => null,
-            'afterLogoutUrl' => null,
+//            'afterLoginUrl' => null,
+            'afterLoginUrl' => array('/crm/entidad'),
+            'afterLogoutUrl' => array('/site'),
             'afterSessionExpiredUrl' => null,
             // manejo del layout con cruge.
             //
@@ -133,7 +134,7 @@ return array(
             ),
         ),
         // uncomment the following to use a MySQL database
-       'db' => array(
+        'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=cvirtual',
             'emulatePrepare' => true,
             'username' => 'root',
@@ -167,8 +168,7 @@ return array(
         'authManager' => array(
             'class' => 'application.modules.cruge.components.CrugeAuthManager',
         ),
-        
-          'crugemailer' => array(
+        'crugemailer' => array(
             'class' => 'application.modules.cruge.components.CrugeMailer',
             'mailfrom' => 'dadyalex777@hotmail.com',
             'subjectprefix' => 'Tu Encabezado del asunto - ',
@@ -179,7 +179,6 @@ return array(
             'pathViews' => 'application.views.email',
             'pathLayouts' => 'application.views.email.layouts'
         ),
-        
         'format' => array(
             'datetimeFormat' => "d M, Y h:m:s a",
         ),
