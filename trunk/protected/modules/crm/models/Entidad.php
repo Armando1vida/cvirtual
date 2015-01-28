@@ -21,10 +21,16 @@ class Entidad extends BaseEntidad {
     public function scopes() {
         return array(
             'activos' => array(
-                'condition' => 't.estado = :estado',
-                'params' => array(
+                'condition' => (Yii::app()->user->isSuperAdmin) ? 't.estado = :estado' : 't.estado = :estado and (t.owner_id = :owner_id)',
+                'params' => (Yii::app()->user->isSuperAdmin) ?
+                        array(
+                    ':estado' => self::ESTADO_ACTIVO,) : array(
                     ':estado' => self::ESTADO_ACTIVO,
-                ),
+                    ':owner_id' => Yii::app()->user->id,
+                        ),
+            ),
+            'ordenPorNombre' => array(
+                'order' => 't.nombre ASC',
             ),
         );
     }
@@ -38,6 +44,45 @@ class Entidad extends BaseEntidad {
     public function relations() {
         return array_merge(parent::relations(), array(
             'direccion' => array(self::HAS_ONE, 'Direccion', 'entidad_id',)
+        ));
+    }
+
+    public function searchEmpresasUsersAsignados() {
+        $criteria = new CDbCriteria;
+        $sort = new CSort;
+        $criteria->join = 'LEFT JOIN cruge_user ON cruge_user.iduser = t.owner_id';
+        $criteria->compare('id', $this->id);
+        $criteria->compare('nombre', $this->nombre, true);
+        $criteria->compare('razon_social', $this->razon_social, true);
+        $criteria->compare('documento', $this->documento, true);
+        $criteria->compare('website', $this->website, true);
+        $criteria->compare('raking', $this->raking);
+        $criteria->compare('telefono', $this->telefono, true);
+        $criteria->compare('celular', $this->celular, true);
+        $criteria->compare('email', $this->email, true);
+        $criteria->compare('max_entidad', $this->max_entidad);
+        $criteria->compare('estado', $this->estado, true);
+        $criteria->compare('matriz', $this->matriz);
+        $criteria->compare('categoria_id', $this->categoria_id);
+        $criteria->compare('industria_id', $this->industria_id);
+        $criteria->compare('entidad_id', $this->entidad_id);
+        $criteria->compare('max_foto', $this->max_foto);
+        $criteria->compare('descripcion', $this->descripcion, true);
+        $criteria->compare('cruge_user.username', $this->owner_id, true, 'OR');
+
+        /* Sort criteria */
+
+        $sort->attributes = array(
+            'nombre' => array(
+                'asc' => 't.nombre asc',
+                'desc' => 't.nombre desc',
+            ),
+            '*',
+        );
+//        $sort->defaultOrder = 't.nombre asc';
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria, 'sort' => $sort,
         ));
     }
 
