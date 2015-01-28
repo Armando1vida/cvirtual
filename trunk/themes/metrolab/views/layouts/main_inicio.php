@@ -19,8 +19,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/jquery.selectBox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/kanban.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/custom-fixes.css" />
-        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;          ?>/css/bootstrap-modal.css" />-->
-        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;                     ?>/css/reports.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;            ?>/css/bootstrap-modal.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;                       ?>/css/reports.css" />-->
 
         <script>
             var baseUrl = "<?php print Yii::app()->baseUrl . '/'; ?>";
@@ -39,9 +39,9 @@
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <!--BEGIN SIDEBAR TOGGLE-->
-<!--                    <div class="sidebar-toggle-box hidden-phone">
-                        <div class="icon-reorder"></div>
-                    </div>-->
+                    <!--                    <div class="sidebar-toggle-box hidden-phone">
+                                            <div class="icon-reorder"></div>
+                                        </div>-->
                     <!--END SIDEBAR TOGGLE-->
                     <!-- BEGIN LOGO -->
                     <a class="brand" href="<?php echo Yii::app()->homeUrl ?>">
@@ -57,7 +57,12 @@
                     </a>
 
                     <div class="top-nav">
-
+                        <?php
+                        $owner_id = Yii::app()->user->id;
+                        $rolname = Util::getFirstRolUser($owner_id);
+                        $mostrarAdminRoles = Cruge_Constants::getMenuAdministracionCuentas($rolname);
+                        $mostrarAdminClientes = Cruge_Constants::getMenuAdministracionClientes($rolname);
+                        ?>
                         <ul class="nav pull-right top-menu notify-row">
                             <!-- BEGIN USER LOGIN DROPDOWN -->
                             <li class="dropdown">
@@ -68,14 +73,22 @@
                                 </a>
                                 <ul class="dropdown-menu extended logout">
                                     <?php if (!Yii::app()->user->isGuest): ?>
+
                                         <li><?php echo CHtml::link('<i class="icon-user"></i>&nbsp;&nbsp;Mi Cuenta', array('/cruge/ui/editprofile')) ?></a></li>
                                         <?php if (Yii::app()->user->checkAccess('admin')): ?>
                                             <li><?php echo CHtml::link('<i class="icon-cog"></i>&nbsp;&nbsp;Administración', Yii::app()->user->ui->userManagementAdminUrl) ?></li>
+                                        <?php endif; ?>
+                                        <?php if ($mostrarAdminRoles): ?>
+                                            <li><?php echo CHtml::link('<i class="icon-cog"></i>&nbsp;&nbsp;Administración', Yii::app()->user->ui->UserManagementAdminRolesUrl) ?></li>
+                                        <?php endif; ?>
+                                        <?php if ($mostrarAdminClientes): ?>
+                                            <li><?php echo CHtml::link('<i class="icon-tasks"></i>&nbsp;&nbsp;Clientes', array('/crm/entidad/admin')) ?></li>
                                         <?php endif; ?>
                                         <li><?php echo CHtml::link('<i class="icon-key"></i>&nbsp;&nbsp;Cerrar Sesión', Yii::app()->user->ui->logoutUrl) ?></a></li>
                                     <?php else: ?>
                                         <li><?php echo CHtml::link('<i class="icon-key"></i>&nbsp;&nbsp;Iniciar Sesión', Yii::app()->user->ui->loginUrl) ?></a></li>
                                     <?php endif; ?>
+
                                 </ul>
                             </li>
                             <!-- END USER LOGIN DROPDOWN -->
@@ -157,10 +170,10 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.nicescroll.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.selectBox.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.mask.min.js" type="text/javascript"></script>
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;          ?>/js/bootstrap-modal.js" type="text/javascript"></script>-->
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;           ?>/js/bootstrap-modalmanager.js" type="text/javascript"></script>-->
+        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;            ?>/js/bootstrap-modal.js" type="text/javascript"></script>-->
+        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;             ?>/js/bootstrap-modalmanager.js" type="text/javascript"></script>-->
         <!--scroll infinito-->
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;                     ?>/js/jquery-ias.min.js" type="text/javascript"></script>--> 
+        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;                       ?>/js/jquery-ias.min.js" type="text/javascript"></script>--> 
 
         <!--//        common script for all pages-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/common-scripts.js"></script>

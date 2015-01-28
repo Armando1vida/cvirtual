@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `max_entidad` int(11) NOT NULL,
   `max_foto` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `ciudad` (
   `provincia_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_ciudad_provincia1_idx` (`provincia_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `cruge_session` (
   `ipaddressout` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idsession`),
   KEY `crugesession_iduser` (`iduser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `cruge_system` (
   `registerusingtermslabel` varchar(100) DEFAULT NULL,
   `registrationonlogin` int(11) DEFAULT '1',
   PRIMARY KEY (`idsystem`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `cruge_user` (
   `codigo` varchar(32) NOT NULL,
   `zona_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   `entidad_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_direccion_ciudad1_idx` (`ciudad_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `entidad` (
   KEY `fk_entidad_categoria1_idx` (`categoria_id`),
   KEY `fk_entidad_industria1_idx` (`industria_id`),
   KEY `fk_entidad_entidad1_idx` (`entidad_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `entidad_foto` (
   `entidad_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_entidad_foto_entidad1_idx` (`entidad_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -343,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `industria` (
   `nombre` varchar(45) NOT NULL,
   `estado` enum('ACTIVO','INACTIVO') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
@@ -355,7 +355,7 @@ CREATE TABLE IF NOT EXISTS `pais` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
@@ -369,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `provincia` (
   `pais_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_provincia_pais1_idx` (`pais_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

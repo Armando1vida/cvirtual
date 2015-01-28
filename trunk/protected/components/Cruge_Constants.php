@@ -7,11 +7,11 @@
 class Cruge_Constants {
 
     //constantes para roles
-    const administradores_master = "administradores_master";//1
-    const usuarios_administradores = "usuarios_administradores";//2
-    const usuarios_vendedores = "usuarios_vendedores";//3
-    const usuarios_clientes = "usuarios_clientes";//4
-    const usuarios_registrados = "usuarios_registrados";//NULL
+    const administradores_master = "administradores_master"; //1
+    const usuarios_administradores = "usuarios_administradores"; //2
+    const usuarios_vendedores = "usuarios_vendedores"; //3
+    const usuarios_clientes = "usuarios_clientes"; //4
+    const usuarios_registrados = "usuarios_registrados"; //NULL
     const admin = "admin";
     const admin_rol = "";
 
@@ -61,23 +61,30 @@ class Cruge_Constants {
         return $rolAsignado;
     }
 
-//    public static function getNameLabelRolUsuario($nameRol) {
-//        $rolAsignado = "";
-//        switch ($nameRol) {
-//            case self::usuarios_master:
-//                $rolAsignado = self::usuarios_administradores;
-//                break;
-//            case self::usuarios_administradores:
-//                $rolAsignado = self::vendedores;
-//                break;
-//            case self::vendedores:
-//                $rolAsignado = self::gestionar_empresas;
-//                break;
-//            case self::admin_rol:
-//                $rolAsignado = self::admin;
-//                break;
-//        }
-//        return $rolAsignado;
-//    }
+    public static function getMenuAdministracionCuentas($nameRol) {
+        $rolAsignado = false;
+        switch ($nameRol) {
+            case self::administradores_master:
+                $rolAsignado = true;
+                break;
+            case self::usuarios_administradores:
+                $rolAsignado = true;
+                break;
+            case self::usuarios_vendedores:
+                $rolAsignado = true;
+                break;
+        }
+        return $rolAsignado;
+    }
+
+    public static function getMenuAdministracionClientes($nameRol) {
+        $rolAsignado = false;
+          switch ($nameRol) {
+            case self::usuarios_vendedores:
+                $rolAsignado = true;
+                break;
+        }
+        return $rolAsignado;
+    }
 
 }
