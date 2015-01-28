@@ -27,7 +27,7 @@ $this->menu = array(
             'type' => 'striped bordered hover advance',
 //            'afterAjaxUpdate' => 'js:function() { dzRatyUpdate(); }',
             'afterAjaxUpdate' => 'function(id,data){ $(\'span.star-rating > input\').rating(); $(\'div .rating-cancel\').hide(); ratingCargaGrid();}',
-            'dataProvider' => $model->search(),
+            'dataProvider' => $model->activos()->searchEmpresasUsersAsignados(),
             'columns' => array(
                 array(
                     'name' => 'nombre',
@@ -54,26 +54,26 @@ $this->menu = array(
 //                    ,
 //                    'header' => 'Valoracion',
 //                ),
-                array(
-                    'name' => 'raking',
-                    'type' => 'raw',
-                    'value' => '$this->grid->controller->widget("CStarRating", array (
-                        "name" => $data->id,
-                        "id" => "rating_".$data->id,
-                        "value" => $data->raking,
-                        "allowEmpty" => false,
-                        "maxRating" => 5,
-                        "htmlOptions" => array("class"=>"star-rating"),
-                        "callback"=>"js:function(){
-                            rating($data->id);
-                        }"
-                    ), true)',
-                    'headerHtmlOptions' => array('style' => 'width:85px;'),
-                    'filter' => false,
-                    'sortable' => true,
-                    'header' => '<i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i>',
-//                    'visible' => Util::checkAccess(array("action_cuenta_rating"))
-                ),
+//                array(
+//                    'name' => 'raking',
+//                    'type' => 'raw',
+//                    'value' => '$this->grid->controller->widget("CStarRating", array (
+//                        "name" => $data->id,
+//                        "id" => "rating_".$data->id,
+//                        "value" => $data->raking,
+//                        "allowEmpty" => false,
+//                        "maxRating" => 5,
+//                        "htmlOptions" => array("class"=>"star-rating"),
+//                        "callback"=>"js:function(){
+//                            rating($data->id);
+//                        }"
+//                    ), true)',
+//                    'headerHtmlOptions' => array('style' => 'width:85px;'),
+//                    'filter' => false,
+//                    'sortable' => true,
+//                    'header' => '<i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i>',
+////                    'visible' => Util::checkAccess(array("action_cuenta_rating"))
+//                ),
                 'telefono',
                 /*
                   'celular',
@@ -101,6 +101,10 @@ $this->menu = array(
                   ),
                   'max_foto',
                  */
+                array(
+                    'name' => 'owner_id',
+                    'value' => '$data->owner_id?Yii::app()->user->um->loadUserById($data->owner_id)->username:null',
+                ),
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',
