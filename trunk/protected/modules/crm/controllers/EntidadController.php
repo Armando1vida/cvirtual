@@ -48,6 +48,7 @@ class EntidadController extends AweController {
      */
     public function actionCreate() {
         $model = new Entidad;
+        $model->owner_id = Yii::app()->user->id;
         $model->direccion = New Direccion;
 //        die(var_dump($model->direccion));
         $model->estado = Entidad::ESTADO_ACTIVO;

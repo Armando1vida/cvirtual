@@ -2,7 +2,6 @@
 /** @var FormController $this */
 /** @var Form $model */
 $this->pageTitle = Yii::t('app', 'Administrador de Usuarios');
-var_dump($owner_id);
 ?>
 
 <div class="widget blue">

@@ -14,6 +14,16 @@ class Entidad extends BaseEntidad {
         return parent::model($className);
     }
 
+    public function attributeLabels() {
+        return array_merge(parent::rules(), array(
+            'nombre' => Yii::t('app', 'Nombre de la Empresa'),
+            'razon_social' => Yii::t('app', 'Razon Social'),
+            'documento' => Yii::t('app', 'CI/RUC'),
+            'descripcion' => Yii::t('app', 'Descripcion/horarios'),
+                )
+        );
+    }
+
     public static function label($n = 1) {
         return Yii::t('app', 'Empresa|Empresas', $n);
     }
@@ -37,7 +47,8 @@ class Entidad extends BaseEntidad {
 
     public function rules() {
         return array_merge(parent::rules(), array(
-            array('industria_id, categoria_id', 'required'),
+            array('industria_id, categoria_id,documento,email,descripcion', 'required'),
+            array('email', 'email'),
         ));
     }
 
