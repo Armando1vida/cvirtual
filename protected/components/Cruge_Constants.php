@@ -79,10 +79,23 @@ class Cruge_Constants {
 
     public static function getMenuAdministracionClientes($nameRol) {
         $rolAsignado = false;
-          switch ($nameRol) {
+        switch ($nameRol) {
             case self::usuarios_vendedores:
                 $rolAsignado = true;
                 break;
+        }
+        return $rolAsignado;
+    }
+
+    public static function getMenuAdministracionCrudUsers($nameRol) {
+        $rolAsignado = false;
+        switch ($nameRol) {
+            case self::administradores_master:
+                $rolAsignado = true;
+                break;
+            case self::usuarios_administradores:
+                $rolAsignado = true;
+          
         }
         return $rolAsignado;
     }

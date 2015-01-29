@@ -6,6 +6,7 @@
 -- Tiempo de generación: 28-01-2015 a las 14:42:54
 -- Versión del servidor: 5.6.12-log
 -- Versión de PHP: 5.4.12
+SET FOREIGN_KEY_CHECKS=0;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -276,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `cruge_session` (
   `ipaddressout` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idsession`),
   KEY `crugesession_iduser` (`iduser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Volcado de datos para la tabla `cruge_session`
@@ -639,3 +640,4 @@ ALTER TABLE `usuarios_asignados`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET FOREIGN_KEY_CHECKS=1;
