@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `cvirtual`
 --
-CREATE DATABASE IF NOT EXISTS `cvirtual` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `cvirtual`;
+CREATE DATABASE IF NOT EXISTS `u660213063_meet` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `u660213063_meet`;
 
 -- --------------------------------------------------------
 
