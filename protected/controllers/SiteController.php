@@ -27,9 +27,11 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
+        $points = Entidad::model()->getPointEmpresa();
+//        die(var_dump($points));
+        $this->render('index', array('points' => $points));
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
-        $this->render('index');
     }
 
     /**
@@ -40,9 +42,38 @@ class SiteController extends Controller {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
             else
+            if ($error['code'] == 404) {
+                $this->layout = '//layouts/error';
+                $this->render('404', $error);
+            } else if ($error['code'] == 401) {
+                $this->layout = '//layouts/error';
+                $this->render('401', $error);
+            } else {
                 $this->render('error', $error);
+            }
         }
     }
+
+//    public function actionError() {
+//        if (Yii::app()->user->isGuest) {
+//            $this->redirect(Yii::app()->user->ui->loginUrl);
+//        }
+//        if ($error = Yii::app()->errorHandler->error) {
+//            if (Yii::app()->request->isAjaxRequest) {
+//                echo $error['message'];
+//            } else {
+//                if ($error['code'] == 404) {
+//                    $this->layout = '//layouts/error';
+//                    $this->render('404', $error);
+//                } else if ($error['code'] == 401) {
+//                    $this->layout = '//layouts/error';
+//                    $this->render('401', $error);
+//                } else {
+//                    $this->render('error', $error);
+//                }
+//            }
+//        }
+//    }
 
     /**
      * Displays the contact page

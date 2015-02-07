@@ -1,5 +1,7 @@
 <div class="row-fluid">
-    <label>
-        <center><img align="middle" src="/cvirtual/themes/metrolab/images/construccion.jpg" alt="some img"></center> 
-    </label>
+    <div class="row-fluid">
+        <div class="span12">
+            <?php $this->renderPartial('portlets/_mapaEmpresas', array('points' => $points)) ?>
+        </div>
+    </div>
 </div>
