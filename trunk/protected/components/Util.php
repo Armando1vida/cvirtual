@@ -287,6 +287,7 @@ class Util {
      */
     public static function tsRegisterAssetJs($jsFile, $position = CClientScript::POS_END) {
         $assetsPath = Yii::getPathOfAlias(YiiBase::app()->getController()->getModule()->getId() . '.assets');
+       
         $assetsUrl = Yii::app()->assetManager->publish($assetsPath, false, -1, true);
         Yii::app()->getClientScript()->registerScriptFile($assetsUrl . "/js/" . YiiBase::app()->getController()->getId() . "/" . $jsFile, $position);
     }
