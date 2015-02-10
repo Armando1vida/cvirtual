@@ -1,0 +1,90 @@
+<html lang="es"><head><script>
+        </script>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta charset="UTF-8">
+        <title> Prender Led </title>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="http://192.168.0.103:3000/socket.io/socket.io.js"></script>
+        <script src="http://192.168.0.103/arduino_led/funciones.js"></script>
+        <!--Highcharts-->
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    <h3  class="panel-title">Reporte  Usuarios  <span id="usuariosLogeadosT" ></span></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!--ESTE DIV EVITA Q S SALGA DELOS DEMAS DIV SIEMPRE PONDRAS XFA-->
+                                    <div style="overflow:auto"> 
+                                        <div class="col-md-12">
+                                            <div class = "row-fluid">
+                                                <div id="content_repo_usersColumn">
+                                                    <div id='usersColumn' class="row-fluid">
+                                                    </div>
+                                                    <div id="usersColumnEmpty" class = "hidden alert alert-block alert-info fade in">
+                                                        <center>
+                                                            <h4 class = "alert-heading">Alerta!</h4>
+                                                            <p>
+                                                                Sin Informacion
+                                                            </p>
+                                                        </center>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>                        
+                                </div>                        
+                            </div>
+
+                        </div>                        
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    <h3   class="panel-title">Reporte Usuarios Olvido Datos <span id="usuariosLogeadosF" ></span></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!--ESTE DIV EVITA Q S SALGA DELOS DEMAS DIV SIEMPRE PONDRAS XFA-->
+                                    <div style="overflow:auto"> 
+                                        <div class="col-md-12">
+                                            <div class = "row-fluid">
+                                                <div id="content_repo_usersErrorsColumn">
+                                                    <div id='usersErrorsColumn' class="row-fluid">
+                                                    </div>
+                                                    <div id="usersErrorsColumnEmpty" class = "hidden alert alert-block alert-info fade in">
+                                                        <center>
+                                                            <h4 class = "alert-heading">Alerta!</h4>
+                                                            <p>
+                                                                Sin Informacion
+                                                            </p>
+                                                        </center>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>                        
+                                </div>                        
+                            </div>
+
+                        </div>                        
+                    </div>                        
+                </div>                        
+
+
+
+            </div>       
+        </div>
+
