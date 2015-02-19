@@ -11,14 +11,14 @@
  */
 var latitudX = (0.346024);
 var longitudY = (-78.119574);
-function initializeMapDiv(lat, long, map_div_id, elementXid, elementYid, draggable) {
+var scrollwheel = false;
+function initializeMapDiv(lat, long, map_div_id, elementXid, elementYid, draggable, scrollwheel) {
     var coordenaEmpresa = new google.maps.LatLng(lat, long);
-    console.log("entro");
     var mapOptions = {
         center: coordenaEmpresa,
         zoom: 14,
         panControl: true,
-        zoomControl: true,
+        scrollwheel: scrollwheel,
         mapTypeControl: false,
         scaleControl: false,
         streetViewControl: false,
@@ -39,16 +39,14 @@ function initializeMapDiv(lat, long, map_div_id, elementXid, elementYid, draggab
             var new_position = marker.getPosition();
             //asignacion de las coordenadas en cada elemento de dirrecion
             $(elementXid).val(new_position.lat());
-//        console.log($("#Direccion_coord_x").val());
             $(elementYid).val(new_position.lng());
-//        console.log($("#Direccion_coord_y").val());
         });
     }
 
 
 //    }
 }
-
+var marker;
 
 var map = null;
 /**
@@ -57,12 +55,14 @@ var map = null;
  * @param {json} point_position
  * @returns {undefined}
  */
-function initializeMultiplesPointMaps(map_div_id, point_position) {
+
+function initializeMultiplesPointMaps(map_div_id, point_position, scrollwheel) {
     var mapOptions = {
         center: new google.maps.LatLng(0.346024, -78.119574),
         zoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         panControl: true,
+        scrollwheel: scrollwheel,
         zoomControl: true,
         mapTypeControl: false,
         scaleControl: false,
@@ -70,19 +70,80 @@ function initializeMultiplesPointMaps(map_div_id, point_position) {
         overviewMapControl: false
     };
     map = new google.maps.Map($(map_div_id).get(0), mapOptions);
+    //Siempre pondra al centro del div 
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+    });
+//    google.maps.event.addListener(map, 'center_changed', function() {
+//        // 3 seconds after the center of the map has changed, pan back to the
+//        // marker.
+//        console.log("center");
+//        window.setTimeout(function() {
+//            map.panTo(marker.getPosition());
+//        }, 3000);
+//    });
+
     loadPoints(point_position);
 }
 
 function loadPoints(json) {
+//       var iconoMarca = new GIcon(G_DEFAULT_ICON);
+//      iconoMarca.image = "/images/bandera-roja.png"; 
+//      var tamanoIcono = new GSize(17,17);
+//      iconoMarca.iconSize = tamanoIcono;
+//      iconoMarca.shadow = "/images/sombra-bandera2.png"; 
+//      var tamanoSombra = new GSize(22,18);
+//      iconoMarca.shadowSize = tamanoSombra;
+//      iconoMarca.iconAnchor = new GPoint(11, 16);
+
+
+    var image = {
+        url: 'images/papagallo.png',
+        // This marker is 20 pixels wide by 32 pixels tall.
+        size: new google.maps.Size(50, 50),
+        // The origin for this image is 0,0.
+        origin: new google.maps.Point(0, 0),
+        // The anchor for this image is the base of the flagpole at 0,32.
+        anchor: new google.maps.Point(0, 32)
+    };
+    // Shapes define the clickable region of the icon.
+    // The type defines an HTML &lt;area&gt; element 'poly' which
+    // traces out a polygon as a series of X,Y points. The final
+    // coordinate closes the poly by connecting to the first
+    // coordinate.
+    var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+    };
+    var mc = null;
+    var markers = [];
     for (var i = 0; i < json.length; i++) {
         var point = json[i];
-        var marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
             position: new google.maps.LatLng(point.coord_x, point.coord_y),
             map: map,
-            title: point.nombre
+            title: point.nombre,
+            icon: image,
+//            shape: shape,
         });
+        markers.push(marker);
         attachMensajeWindows(marker, point);
+//        mc = new MarkerClusterer(map, markers);
     }
+}
+// The five markers show a secret message when clicked
+// but that message is not within the marker's instance data.
+function attachSecretMessage(marker, number) {
+    var message = ["This", "is", "the", "secret", "message"];
+    var infowindow = new google.maps.InfoWindow(
+            {content: message[number],
+                size: new google.maps.Size(50, 50)
+            });
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+    });
 }
 function attachMensajeWindows(marker, empresa) {
 
@@ -101,7 +162,7 @@ function attachMensajeWindows(marker, empresa) {
 function crearVentanaInformacion(empresa)
 {
     var telefono = empresa.celular ? empresa.celular : "Sin Informacion.";
-    var nombre = empresa.nombre;
+    var nombre = empresa.empresa;
     var calle_secundaria = empresa.calle_secundaria ? empresa.calle_secundaria : " ";
     var calles = empresa.calle_principal + calle_secundaria;
     var correo = empresa.email ? empresa.email : "Sin Informacion.";

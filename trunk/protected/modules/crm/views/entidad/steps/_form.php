@@ -28,6 +28,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
             <?php echo $form->textFieldRow($model, 'documento', array('maxlength' => 20)) ?>
 
             <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45)) ?>
+                <?php echo $form->textAreaRow($model, 'atencion', array('rows' => 3, 'class' => 'span10')) ?>
 
             <?php echo $form->textFieldRow($model, 'telefono', array('maxlength' => 45)) ?>
 

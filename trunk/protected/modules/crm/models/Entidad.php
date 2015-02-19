@@ -47,7 +47,7 @@ class Entidad extends BaseEntidad {
 
     public function rules() {
         return array_merge(parent::rules(), array(
-            array('industria_id, categoria_id,documento,email,descripcion', 'required'),
+            array('industria_id, categoria_id,email,descripcion', 'required'),
             array('email', 'email'),
         ));
     }
@@ -97,28 +97,38 @@ class Entidad extends BaseEntidad {
         ));
     }
 
-    public function getPointEmpresa($id = null) {
-        //select t.id,t.nombre,t.razon_social,t.website,t.telefono,t.celular,t.email,d.calle_principal,d.calle_secundaria,d.numero,d.coord_x,d.coord_y,d.referencia 
-        //from empresa t
-        //    inner join direccion d on t.id=d.entidad_id  and d.coord_x is not null and d.coord_y is not null and d.tipo_entidad='EMPRESA'
-        //where t.estado='ACTIVO' ;
+    /**
+     * Obtiene todas las empresas registradas 
+     * Unicamente las q tienen puntos de referencia en google maps
+     * @param type $id
+     * @return type
+     */
+    public function getPointEmpresas($id = null) {
+//        select t.id,t.nombre,t.razon_social,t.website,t.telefono,t.celular,t.email,d.calle_principal,d.calle_secundaria,d.numero,d.coord_x,d.coord_y,d.referencia 
+//        from entidad t
+//            inner join direccion d on t.id=d.entidad_id  and d.coord_x is not null and d.coord_y is not null and d.tipo_entidad='EMPRESA'
+//        where t.estado='ACTIVO' ;
 //        Direccion::TIPO_EMPRESA
         $command = Yii::app()->db->createCommand()
                 ->select('t.id,
-                    t.nombre,
+                    t.nombre as empresa,
                     t.razon_social,
                     t.website,
                     t.telefono,
                     t.celular,
                     t.email,
+                    t.atencion as horario,
                     d.calle_principal,
                     d.calle_secundaria,
                     d.numero,
                     d.coord_x,
                     d.coord_y,
-                    d.referencia')
+                    d.referencia,
+                   ind.nombre as industria
+')
                 ->from('entidad t')
                 ->join('direccion d', "t.id=d.entidad_id  AND d.coord_x is not null AND d.coord_y is not null")
+                ->join('industria ind', "t.industria_id=ind.id")
                 ->where('t.estado=:estado')
         ;
         if ($id) {
@@ -133,6 +143,48 @@ class Entidad extends BaseEntidad {
         } else {
             $command->params = array(
                 'estado' => self::ESTADO_ACTIVO
+                    )
+            ;
+        }
+
+        return $command->queryAll();
+    }
+
+    public function getLogosEmpresas($id = null) {
+        $command = Yii::app()->db->createCommand()
+                ->select('t.id,
+                    t.nombre as empresa,
+                    t.razon_social,
+                    t.celular,
+                    t.email,
+                    t.atencion as horario,
+                    d.calle_principal,
+                    d.calle_secundaria,
+                    d.numero,
+                    d.referencia,
+                    efo.ruta as src,
+                    efo.nombre as titulo
+                    ')
+                ->from('entidad t')
+                ->join('direccion d', "t.id=d.entidad_id  AND d.coord_x is not null AND d.coord_y is not null")
+                ->join('industria ind', "t.industria_id=ind.id")
+                ->join('entidad_foto efo', "t.id=efo.entidad_id")
+                ->where('t.estado=:estado and  efo.nombre=:tipo')
+        ;
+        if ($id) {
+            $command->andWhere('t.id=:entidad_id');
+
+            $command->params = array(
+                'estado' => self::ESTADO_ACTIVO,
+                'entidad_id' => $id,
+                'tipo' => EntidadFoto::tipo_logo_imagen,
+                    )
+
+            ;
+        } else {
+            $command->params = array(
+                'estado' => self::ESTADO_ACTIVO,
+                'tipo' => EntidadFoto::tipo_logo_imagen,
                     )
             ;
         }

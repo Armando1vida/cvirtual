@@ -26,6 +26,7 @@
  * @property integer $entidad_id
  * @property integer $max_foto
  * @property string $descripcion
+ * @property string $atencion
  * @property integer $owner_id
  *
  * @property Categoria $categoria
@@ -50,17 +51,18 @@ abstract class BaseEntidad extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('nombre, celular, estado, owner_id', 'required'),
+            array('nombre, celular, estado, atencion, owner_id', 'required'),
             array('raking, max_entidad, matriz, categoria_id, industria_id, entidad_id, max_foto, owner_id', 'numerical', 'integerOnly'=>true),
             array('email', 'email'),
             array('nombre, razon_social', 'length', 'max'=>64),
             array('documento', 'length', 'max'=>20),
             array('website, telefono, celular, email', 'length', 'max'=>45),
             array('estado', 'length', 'max'=>8),
+            array('atencion', 'length', 'max'=>150),
             array('descripcion', 'safe'),
             array('estado', 'in', 'range' => array('ACTIVO','INACTIVO')), // enum,
             array('razon_social, documento, website, raking, telefono, email, max_entidad, matriz, categoria_id, industria_id, entidad_id, max_foto, descripcion', 'default', 'setOnEmpty' => true, 'value' => null),
-            array('id, nombre, razon_social, documento, website, raking, telefono, celular, email, max_entidad, estado, matriz, categoria_id, industria_id, entidad_id, max_foto, descripcion, owner_id', 'safe', 'on'=>'search'),
+            array('id, nombre, razon_social, documento, website, raking, telefono, celular, email, max_entidad, estado, matriz, categoria_id, industria_id, entidad_id, max_foto, descripcion, atencion, owner_id', 'safe', 'on'=>'search'),
         );
     }
 
@@ -96,6 +98,7 @@ abstract class BaseEntidad extends AweActiveRecord {
                 'entidad_id' => Yii::t('app', 'Entidad'),
                 'max_foto' => Yii::t('app', 'Max Foto'),
                 'descripcion' => Yii::t('app', 'Descripcion'),
+                'atencion' => Yii::t('app', 'Atencion'),
                 'owner_id' => Yii::t('app', 'Owner'),
                 'categoria' => null,
                 'entidad' => null,
@@ -125,6 +128,7 @@ abstract class BaseEntidad extends AweActiveRecord {
         $criteria->compare('entidad_id', $this->entidad_id);
         $criteria->compare('max_foto', $this->max_foto);
         $criteria->compare('descripcion', $this->descripcion, true);
+        $criteria->compare('atencion', $this->atencion, true);
         $criteria->compare('owner_id', $this->owner_id);
 
         return new CActiveDataProvider($this, array(

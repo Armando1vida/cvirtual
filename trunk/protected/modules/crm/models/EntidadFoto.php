@@ -10,6 +10,8 @@ class EntidadFoto extends BaseEntidadFoto {
     public $picture;
     public $foto;
 
+    const tipo_logo_imagen = 'logo';
+    const tipo_galeria_imagen = 'galeria';
     const TIPO_EMPRESA = 'EMPRESA';
     const TIPO_USUARIO = 'USUARIO';
     const Num_Fotos = 3;
