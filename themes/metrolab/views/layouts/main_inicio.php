@@ -15,13 +15,22 @@
         <!-- CSS FILES -->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/front_end/css/fonts/font-awesome.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/front_end/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/front_end/css/style-box.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/front_end//css/style-responsive.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/front_end/css/jquery.selectBox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/front_end/css/kanban.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/front_end/css/custom-fixes.css" />
-        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;             ?>/css/bootstrap-modal.css" />-->
-        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;                        ?>/css/reports.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;                          ?>/css/bootstrap-modal.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->theme->baseUrl;                                     ?>/css/reports.css" />-->
+        <!--CARROUSEL-->
+        <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/owl-carousel/owl.carousel.css">
+        <!-- Default Theme -->
+        <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/owl-carousel/owl.theme.css">
+        <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/owl-carousel/custom-owl.css">
+        <!--  jQuery 1.7+  -->
+        <!--<script src="jquery-1.9.1.min.js"></script>-->
 
+        <!-- Include js plugin -->
         <script>
             var baseUrl = "<?php print Yii::app()->baseUrl . '/'; ?>";
             var themeUrl = "<?php print Yii::app()->theme->baseUrl . '/'; ?>";
@@ -63,8 +72,10 @@
                         $mostrarAdminRoles = Cruge_Constants::getMenuAdministracionCuentas($rolname);
                         $mostrarAdminClientes = Cruge_Constants::getMenuAdministracionClientes($rolname);
                         ?>
+
                         <ul class="nav pull-right top-menu notify-row">
                             <!-- BEGIN USER LOGIN DROPDOWN -->
+                       
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle link-current-user" data-toggle="dropdown">
                                     <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/demo/avatar1_small.jpg" alt="">
@@ -170,11 +181,8 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.nicescroll.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.selectBox.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.mask.min.js" type="text/javascript"></script>
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;             ?>/js/bootstrap-modal.js" type="text/javascript"></script>-->
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;              ?>/js/bootstrap-modalmanager.js" type="text/javascript"></script>-->
-        <!--scroll infinito-->
-        <!--<script src="<?php // echo Yii::app()->theme->baseUrl;                        ?>/js/jquery-ias.min.js" type="text/javascript"></script>--> 
-
+        <!--CARROUSEL-->
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/owl-carousel/owl.carousel.js"></script>
         <!--//        common script for all pages-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/common-scripts.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.validateAjax.js"></script>

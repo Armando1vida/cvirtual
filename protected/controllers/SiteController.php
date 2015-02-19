@@ -27,9 +27,10 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        $points = Entidad::model()->getPointEmpresa();
+        $points = Entidad::model()->getPointEmpresas();
+        $logos_empresas = Entidad::model()->getLogosEmpresas();
 //        die(var_dump($points));
-        $this->render('index', array('points' => $points));
+        $this->render('index', array('points' => $points, 'imagenes_empresas' => $logos_empresas));
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
     }

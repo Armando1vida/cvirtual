@@ -26,6 +26,7 @@ $mensaje = $model->isNewRecord ? "Nueva" . " " . $model->label(1) : "Actualizar"
     <?php echo $form->textFieldRow($model, 'razon_social', array('maxlength' => 64)) ?>
 
     <?php echo $form->textFieldRow($model, 'documento', array('maxlength' => 20)) ?>
+    <?php echo $form->textAreaRow($model, 'atencion', array('rows' => 3, 'class' => 'span10')) ?>
 
     <?php echo $form->textFieldRow($model, 'website', array('maxlength' => 45)) ?>
 

@@ -79,7 +79,7 @@ class EntidadController extends AweController {
 // * @property string $nombre
 // * @property string $fecha_nacimiento
 // * @property string $documento
-                $modelCuentaEmpresa->username = "meetclic" . $model->documento;
+                $modelCuentaEmpresa->username = "meetcli" .$model->celular;
                 $modelCuentaEmpresa->fecha_nacimiento = Util::FechaActual();
                 $modelCuentaEmpresa->terminosYCondiciones = true;
                 $modelCuentaEmpresa->scenario = 'manualcreate';
@@ -88,8 +88,8 @@ class EntidadController extends AweController {
                 $modelCuentaEmpresa->nombre = $model->nombre;
                 $modelCuentaEmpresa->apellido = "empresa";
                 $modelCuentaEmpresa->codigo = "codigo";
-                $modelCuentaEmpresa->email = $model->email;
-                $modelCuentaEmpresa->documento = $model->documento;
+                $modelCuentaEmpresa->email = "meetcli".$model->celular."@gmail.com";
+                $modelCuentaEmpresa->documento = $model->celular;
                 $newPwd = trim($modelCuentaEmpresa->password);
                 Yii::app()->user->um->generateAuthenticationKey($modelCuentaEmpresa);
                 if (Yii::app()->user->um->save($modelCuentaEmpresa, 'insert')) {
